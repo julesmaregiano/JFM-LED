@@ -6,9 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Availability.destroy_all
+Booking.destroy_all
 User.destroy_all
-Availabilities.destroy_all
-Bookings.destroy_all
 
 particulier = User.create!(email: "particulier@led.fr", password: "123soleil", first_name: "Parti", last_name: "Culier", phone:"06 11 22 33 44", role:0)
 pro = User.create!(email: "pro@led.fr", password: "123soleil", first_name: "Pro", last_name: "Fessionnel", phone:"06 11 22 33 44", role:1)
@@ -20,10 +20,12 @@ puts "#{User.all.size} Users créés."
 
 next_25 = (1..25).to_a
 next_25.each do |numero|
-  User.all.where(role: 1).each do |user|
+  User.all.where(role: 2).each do |user|
     date = numero.business_days.from_now
-    hours = [8, 14]
-    Availability.find_or_create_by(user_id: user.id, date: Time.new(date.year, date.month, date.day, hours[0], 0, 0, 0) )
-    Availability.find_or_create_by(user_id: user.id, date: Time.new(date.year, date.month, date.day, hours[1], 0, 0, 0) )
+    Availability.find_or_create_by(user_id: technician.id, date: Date.new(date.year, date.month, date.day), status: true, half: 1 )
+    Availability.find_or_create_by(user_id: technician.id, date: Date.new(date.year, date.month, date.day), status: true, half: 1 )
   end
-puts "#{Availabilities.all.size} Availabilities créées."
+end
+puts "#{Availability.all.size} Availabilities créées."
+
+clients = [particulier, pro]
