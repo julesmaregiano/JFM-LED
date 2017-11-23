@@ -28,13 +28,11 @@ ActiveRecord::Schema.define(version: 20171123095939) do
   create_table "bookings", force: :cascade do |t|
     t.bigint "user_id"
     t.string "address"
-    t.bigint "availabilities_id"
     t.datetime "confirmed_at"
     t.text "comment"
     t.string "surface"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["availabilities_id"], name: "index_bookings_on_availabilities_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
@@ -61,6 +59,5 @@ ActiveRecord::Schema.define(version: 20171123095939) do
   end
 
   add_foreign_key "availabilities", "users"
-  add_foreign_key "bookings", "availabilities", column: "availabilities_id"
   add_foreign_key "bookings", "users"
 end

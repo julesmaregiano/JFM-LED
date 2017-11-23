@@ -18,12 +18,12 @@ admin = User.create!(email: "admin@led.fr", password: "123soleil", first_name: "
 puts "#{User.all.size} Users créés."
 
 
-next_25 = (1..25).to_a
+next_25 = (1..2).to_a
 next_25.each do |numero|
   User.all.where(role: 2).each do |user|
     date = numero.business_days.from_now
-    Availability.find_or_create_by(user_id: technician.id, date: Date.new(date.year, date.month, date.day), status: true, half: 1 )
-    Availability.find_or_create_by(user_id: technician.id, date: Date.new(date.year, date.month, date.day), status: true, half: 1 )
+    Availability.find_or_create_by(user_id: user.id, date: Date.new(date.year, date.month, date.day), status: true, half: 0 )
+    Availability.find_or_create_by(user_id: user.id, date: Date.new(date.year, date.month, date.day), status: true, half: 1 )
   end
 end
 puts "#{Availability.all.size} Availabilities créées."
