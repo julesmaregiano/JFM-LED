@@ -1,0 +1,14 @@
+.dashboard-wrap {
+  background-color: $light-gray;
+  min-width: 100%;
+  min-height: calc(100vh);
+}
+.dashboard-content{
+  position: relative;
+  left: 200px;
+  width: calc(100% - 200px);
+  min-height: calc(100vh - 70px);
+}
+.with_right_sidebar {
+  width: calc(100% - 450px);
+}
