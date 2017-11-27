@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Particulier::UsersController < ApplicationController
 
   def show
     @user = current_user
@@ -6,5 +6,4 @@ class UsersController < ApplicationController
 
   def index
   end
-
 end
