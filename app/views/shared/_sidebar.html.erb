@@ -1,0 +1,7 @@
+<div class="sidebar">
+  <%= render "shared/sidebar-button", text: "Vue d'ensemble", icon: "eye", link: particulier_user_path(@user) %>
+  <% if current_user.technician? %>
+    <%= render "shared/sidebar-button", text: "Diagnostiques", icon: "list", link: particulier_user_path(@user)%>
+  <% end %>
+  <%= render "shared/sidebar-button", text: "Mon profil", icon: "user", link: particulier_user_path(@user)%>
+</div>

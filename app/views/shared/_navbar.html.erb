@@ -5,13 +5,6 @@
 
   <div class="navbar-wagon-right hidden-xs hidden-sm">
     <% if user_signed_in? %>
-<!--       <% if current_user.diagnostician? %>
-        <%= link_to "+ Ajouter un nouveau diagnostique", "#", class: "btn-slim flexbox" %>
-        <%= link_to "#", class: "navbar-wagon-item navbar-wagon-link" do %>
-          <i class="fa fa-bell"></i>
-        <% end %>
-      <% end %> -->
-
       <%= link_to t(".profile", default: "profil"), user_path(current_user), class: "navbar-wagon-item navbar-wagon-link" %>
       <%= link_to t(".sign_out", default: "déconnexion"), destroy_user_session_path, method: :delete, class: "navbar-wagon-item navbar-wagon-link" %>
     <% else %>
