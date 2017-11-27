@@ -14,10 +14,4 @@ class User < ApplicationRecord
   has_many :availabilities
 
   enum role: [:particulier, :pro, :technician, :manager, :admin]
-  after_initialize :init
-
-  def init
-    self.role  ||= 0
-  end
-
 end

@@ -5,19 +5,24 @@ Rails.application.routes.draw do
 
   namespace :pro do
     resources :users
-    # resources :bookings
-    # resources :availabilities
+    resources :bookings
+    resources :availabilities
   end
 
   namespace :particulier do
     resources :users
+    resources :bookings
   end
 
-  namespace :tech do
+  namespace :technician do
+    resources :users
+    resources :bookings
+    resources :availabilities
   end
 
   namespace :manager do
-    resources :users, :bookings, :availabilities
+    resources :users
+    resources :bookings
   end
 
   resources :users, only: [:show]
