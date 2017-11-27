@@ -8,8 +8,12 @@
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
   </head>
-  <body>
-    <%= yield %>
+  <body id="page-top">
+    <%= render 'shared/navbar' %>
+    <%= render 'shared/flashes' %>
+    <div>
+      <%= yield %>
+    </div>
     <%= javascript_include_tag 'application' %>
   </body>
 </html>
