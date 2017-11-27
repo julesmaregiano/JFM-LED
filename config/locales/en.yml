@@ -1,0 +1,111 @@
+fr:
+  landing:
+    title_html: "Détectez vos réseaux enterrés <br /> Prenez rendez-vous en ligne."
+    subtitle: ""
+    placeholder: "Entrez l’adresse où faire la détection"
+    button_text: "Rechercher"
+  page_text1:
+    signal: "Informations"
+    title: "Sécurisez et accélérez vos travaux"
+    column1: "La détection des réseaux enterrés permet de savoir en phase pré-chantier ce qui se trouve sur votre parcelle. Une fois marqués au sol, vous pouvez évoluer plus rapidement dans vos travaux et en toute sécurité."
+    column2: "Obligatoire depuis 2012, la détection des réseaux enterrés permet d'éviter les accidents et de travailler en sécurité. Nos techniciens sont experts dans les détections de réseaux enterrés avec des centaines d'opérations réalisées chaque année."
+    image: "http://res.cloudinary.com/doodlid/image/upload/v1507544547/Save%20images/diago/diago_bg02.jpg"
+  page_card2:
+    title: "Lorem ipsom dolor information"
+    icon1: "tint"
+    icon2: "binoculars"
+    icon3: "map-marker"
+    card1: "Sit amet consectetuer adipiscing elit sed diam nonummy. Zzril delenit augue duis dolore te feugait nulla facilisi nam liber. Esse molestie."
+    card2: "Sit amet consectetuer adipiscing elit sed diam nonummy. Zzril delenit augue duis dolore te feugait nulla facilisi nam liber. Esse molestie."
+    card3: "Sit amet consectetuer adipiscing elit sed diam nonummy. Zzril delenit augue duis dolore te feugait nulla facilisi nam liber. Esse molestie."
+    image: "http://res.cloudinary.com/doodlid/image/upload/v1507544547/Save%20images/diago/diago_bg03.jpg"
+  buttons:
+    button1:
+      text: "Vue d'ensemble"
+      icon: "eye"
+    button2:
+      text: "Diagnostiques"
+      icon: "list"
+    button3:
+      text: "Agenda"
+      icon: "calendar"
+    button4:
+      text: "Messagerie"
+      icon: "envelope-o"
+    button5:
+      text: "Particuliers"
+      icon: "users"
+    button6:
+      text: "Mon profil"
+      icon: "user"
+      titre: "Mise à jour des informations"
+    button7:
+      text: "Évaluation"
+      icon: "home"
+  tooltip:
+    confirmation: "RDV confirmé"
+    annulation: "Supprimer le RDV"
+    deconfirmation: "Annuler la confirmation"
+  agenda:
+  inscription:
+    breadcrumb1: "Choix des disponibilités"
+    breadcrumb2: "Enregistrement"
+    breadcrumb3: "Validation"
+    disponibility1: "Choisissez la date et l'heure du rendez-vous."
+    disponibility2: "Le diagnostique prend un peu moins d'une demi-journée."
+    disponibility3:
+    signup1: "Enregistrez vos informations"
+    signup2: "La prise de rendez-vous requiert vos coordonnées."
+    confirmation1: "Récapitulatif de votre rendez-vous"
+    validation: "Réserver le rendez-vous"
+    confirmation: "Votre rendez-vous est confirmé, un diagnosticien vous appelera sous peu."
+  metas:
+    titles:
+      home: "L'ED | Détection de câbles et réseaux enterrés."
+      eligilibity: "Rapport d'éligibilité"
+      diagnostics: "Vos diagnostics"
+    description:
+      google-result: "Diag-o facilite la prévention contre le risque inondation."
+      facebook-card: "Diag-o permet une meilleure prévention des risques d'inondation grâce à une prise de rendez-vous facilité, des diagnostics automatisés et un suivi par la collectivité."
+    site_name: "Diag-o"
+  pundit:
+    rescue: "Vous n'êtes pas authorisé à effectuer cette action."
+  commons:
+    issue: "Une erreur s'est produite, si cela se reproduit, contactez l'administration du site"
+  valuation:
+    form_rescue: "Remplissez les champs nécessaires à l'évaluation"
+    form_title: "Évaluation de bien"
+  diagnostic:
+    placeholder: "Renseigner l'ID du plan, ex: 51010669"
+    button_text: "Ajouter le plan"
+    address: "Adresse du rendez-vous:"
+    pending: "En cours"
+  flash:
+    booking_save_error: "Horaires non réservé, veuillez contacter l'administration du service."
+    booking_save_ok: "Votre rendez-vous est confirmé, un diagnosticien vous appelera sous peu."
+  booking:
+    confirmed: "RDV confirmé"
+    pending: "À confirmer"
+    selfbook: "Indispo"
+    comment:
+      button: "Valider"
+  sections:
+    infos: "infos générales"
+    plans: "plans"
+    inhabitant: "habitant"
+    risk_awarness: "notion du risque"
+    works_against_inondation: "actions préventives"
+    place: "terrain"
+    history: "historique"
+    accessibility: "accessibilité"
+    history_references: "références historiques"
+    housing: "habitation"
+    structure: "structure"
+    shelter: "refuge"
+    furniture: "meubles"
+    exit: "sortie"
+    airflow: "ventilation"
+    sanitation: "assainissement"
+    electricity: "électricité"
+    warming: "chauffage"
+
