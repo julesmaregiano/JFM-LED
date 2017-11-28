@@ -2,6 +2,6 @@ class Technician::BookingsController < ApplicationController
 
   def index
     @user = current_user
-    @bookings =
+    @bookings = Booking.all
   end
 end
