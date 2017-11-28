@@ -1,0 +1,24 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Date</th>
+      <th scope="col">Adresse</th>
+      <th scope="col">Client</th>
+      <th scope="col">Durée</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% bookings.each do |booking| %>
+      <tr>
+        <th scope="row">1</th>
+        <td><%= booking.created_at %></td>
+        <td><%= booking.address %></td>
+        <td><%= booking.user.first_name + ' ' + booking.user.last_name %></td>
+        <td><%= booking.availabilities.size %> demi-journée</td>
+        <td><%= booking.availabilities.first.date %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

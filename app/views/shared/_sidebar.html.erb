@@ -1,9 +1,20 @@
 <div class="sidebar">
-  <% if current_user.technician? %>
-    <%= render "shared/sidebar-button", text: "Vue d'ensemble", icon: "eye", link: particulier_user_path(@user) %>
-    <%= render "shared/sidebar-button", text: "Diagnostiques", icon: "list", link: particulier_user_path(@user)%>
-  <% elsif current_user.particulier? %>
-    <%= render "shared/sidebar-button", text: "Ma commande", icon: "eye", link:particulier_user_path(@user) %>
+  <% if current_user.particulier? %>
+    <%= render "shared/sidebar-button", text: "Ma détection", icon: "eye", link: particulier_user_path(@user) %>
+    <%= render "shared/sidebar-button", text: "Mon profil", icon: "user", link: particulier_user_path(@user)%>
+  <% elsif current_user.pro? %>
+    <%= render "shared/sidebar-button", text: "Mon profil", icon: "user", link: pro_user_path(@user) %>
+  <% elsif current_user.technician? %>
+    <%= render "shared/sidebar-button", text: "Dashboard", icon: "eye", link: technician_user_path(@user) %>
+    <%= render "shared/sidebar-button", text: "Disponibilités", icon: "calendar", link: technician_availabilities_path %>
+    <%= render "shared/sidebar-button", text: "Bookings", icon: "list", link: technician_bookings_path%>
+    <%= render "shared/sidebar-button", text: "Rapports", icon: "folder-open", link: technician_user_path(@user)%>
+    <%= render "shared/sidebar-button", text: "Clients", icon: "group", link: technician_user_path(@user)%>
+    <%= render "shared/sidebar-button", text: "Profil", icon: "user", link: technician_user_path(@user)%>
+  <% elsif current_user.manager? %>
+    <%= render "shared/sidebar-button", text: "Clients", icon: "eye", link: manager_user_path(@user) %>
+    <%= render "shared/sidebar-button", text: "Détections", icon: "eye", link: manager_user_path(@user) %>
+    <%= render "shared/sidebar-button", text: "Techniciens", icon: "group", link: manager_user_path(@user) %>
+    <%= render "shared/sidebar-button", text: "Mon profil", icon: "user", link: manager_user_path(@user)%>
   <% end %>
-  <%= render "shared/sidebar-button", text: "Mon profil", icon: "user", link: particulier_user_path(@user)%>
 </div>
