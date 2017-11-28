@@ -8,14 +8,6 @@
         <%= link_to(content_tag(:i, nil, class: 'fa fa-eye'), technician_report_path(@report))%>
       </h1>
 
-      <!-- INFOS -->
-      <div class="tabcontent" id="tab-info">
-        <%= render "shared/card_line" %>
-        <div class="card-note card-line text-center">
-          <%= render "shared/map"%>
-        </div>
-      </div>
-
       <!-- FORM -->
       <% @sections.each do |section| %>
         <div id="Section-<%= section.id %>" class="tabcontent card-note card-line text-center">

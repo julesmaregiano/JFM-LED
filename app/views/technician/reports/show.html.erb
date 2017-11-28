@@ -13,14 +13,16 @@
       <!-- FORM -->
       <% @sections.each do |section| %>
         <div id="Section-<%= section.id %>" class="tabcontent card-note card-line text-center">
-          <h3 class="underline"><%= t('sections.'+section.name).capitalize %></h3>
+          <h3 class="underline"><%= section.name.capitalize %></h3>
           <% section.questions.each do |q| %>
             <div class="text-left">
-              <p><%= q.name %></p>
+              <h5><%= q.name %></h5>
               <% if q.answers.nil? %>
                 <p>-------</p>
+              <% elsif q.answers.where(report_id: @report.id).first.string %>
+                <p><%= q.answers.where(report_id: @report.id).first.string %></p>
               <% else %>
-                <p>-------</p>
+                <p><%= q.answers.where(report_id: @report.id).first.string %></p>
               <% end %>
             </div>
           <% end %>

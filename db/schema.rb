@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 20171128130658) do
     t.bigint "section_id"
     t.string "information"
     t.bigint "option_group_id"
-    t.string "input_type"
+    t.integer "input_type"
     t.string "slug"
     t.bigint "unit_id"
     t.datetime "created_at", null: false

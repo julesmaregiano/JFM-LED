@@ -2,7 +2,6 @@ class AnswersController < ApplicationController
   after_action :verify_authorized, except: [:create, :update]
 
   def create
-    raise
     @report = Report.find(params[:answer][:report_id])
     @answer = Answer.create(answer_params)
       if @answer.save!
