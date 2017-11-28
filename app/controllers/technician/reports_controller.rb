@@ -3,22 +3,16 @@ class Technician::ReportsController < ApplicationController
   before_action :params_report, only: [:show, :edit]
 
   def index
-    @reports = @user.reports # car un seul diagnosticien pour l'instant
-    @housings = Housing.all
+    @reports = Report.all # car un seul diagnosticien pour l'instant
   end
 
   def show
     @sections = Section.all
     @booking = @report.booking
-    draw_marker(@booking.housing)
-    if params[:query]
-      @plan_id = params[:query][:address]
-    end
   end
 
   def edit
     @booking = @report.booking
-    draw_marker(@booking.housing)
     @sections = Section.all
   end
 
@@ -28,7 +22,7 @@ class Technician::ReportsController < ApplicationController
     @user = current_user
   end
 
-  def params_diagnostic
+  def params_report
     @report = Report.find(params[:id])
   end
 end

@@ -6,9 +6,16 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Answer.destroy_all
 Availability.destroy_all
 Booking.destroy_all
 User.destroy_all
+OptionChoice.destroy_all
+OptionGroup.destroy_all
+Section.destroy_all
+User.destroy_all
+Report.destroy_all
+
 
 particulier = User.create!(email: "particulier@led.fr", password: "123soleil", first_name: "Parti", last_name: "Culier", phone:"06 11 22 33 44", role:0)
 pro = User.create!(email: "pro@led.fr", password: "123soleil", first_name: "Pro", last_name: "Fessionnel", phone:"06 11 22 33 44", role:1)
@@ -29,3 +36,7 @@ end
 puts "#{Availability.all.size} Availabilities créées."
 
 clients = [particulier, pro]
+
+Report.create
+Booking.create!(user_id: particulier.id, address: "108bis Avenue de la Dimancherie 91440 Bures sur Yvette", confirmed_at: Date.today, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id)
+puts "#{Booking.all.size} Bookings crées. (avec #{Report.all.size} report qui lui est adjoint.)"
