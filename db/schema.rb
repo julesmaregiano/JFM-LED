@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171123095658) do
+ActiveRecord::Schema.define(version: 20171128130658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answers", force: :cascade do |t|
+    t.bigint "question_id"
+    t.bigint "option_choice_id"
+    t.bigint "report_id"
+    t.integer "numeric"
+    t.string "string"
+    t.string "boolean"
+    t.string "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["option_choice_id"], name: "index_answers_on_option_choice_id"
+    t.index ["question_id"], name: "index_answers_on_question_id"
+    t.index ["report_id"], name: "index_answers_on_report_id"
+  end
 
   create_table "availabilities", force: :cascade do |t|
     t.bigint "user_id"
@@ -35,7 +50,55 @@ ActiveRecord::Schema.define(version: 20171123095658) do
     t.string "surface"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "report_id"
+    t.index ["report_id"], name: "index_bookings_on_report_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
+
+  create_table "option_choices", force: :cascade do |t|
+    t.string "name"
+    t.bigint "option_group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["option_group_id"], name: "index_option_choices_on_option_group_id"
+  end
+
+  create_table "option_groups", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string "name"
+    t.bigint "section_id"
+    t.string "information"
+    t.bigint "option_group_id"
+    t.string "input_type"
+    t.string "slug"
+    t.bigint "unit_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["option_group_id"], name: "index_questions_on_option_group_id"
+    t.index ["section_id"], name: "index_questions_on_section_id"
+    t.index ["unit_id"], name: "index_questions_on_unit_id"
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sections", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "units", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -60,7 +123,15 @@ ActiveRecord::Schema.define(version: 20171123095658) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "answers", "option_choices"
+  add_foreign_key "answers", "questions"
+  add_foreign_key "answers", "reports"
   add_foreign_key "availabilities", "bookings"
   add_foreign_key "availabilities", "users"
+  add_foreign_key "bookings", "reports"
   add_foreign_key "bookings", "users"
+  add_foreign_key "option_choices", "option_groups"
+  add_foreign_key "questions", "option_groups"
+  add_foreign_key "questions", "sections"
+  add_foreign_key "questions", "units"
 end
