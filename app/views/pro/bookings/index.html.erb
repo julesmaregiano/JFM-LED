@@ -1,0 +1,10 @@
+<div class="dashboard-wrap">
+  <%= render "/shared/sidebar"%>
+
+  <div class="dashboard-content">
+    <div class="padding-box">
+      <h3 class="text-center">Pro#Bookings#index</h3>
+    </div>
+    <%= render "shared/bookings_table", bookings: @bookings %>
+  </div>
+</div>

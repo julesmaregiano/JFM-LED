@@ -3,6 +3,7 @@ class BookingsController < ApplicationController
   def index
     @availabilities = Availability.all
     @bookings = Bookings.all
+
   end
 
   def new
@@ -11,8 +12,8 @@ class BookingsController < ApplicationController
   end
 
   def create
+    @user = current_user
     @booking = Booking.new(booking_params)
-    @booking.user = current_user
     if @booking.save
       render :new
     else

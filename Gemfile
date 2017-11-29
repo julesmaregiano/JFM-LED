@@ -9,7 +9,6 @@ gem 'rails', '5.1.3'
 gem 'redis'
 gem 'devise-i18n'
 
-
 gem 'devise'
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass'
@@ -19,6 +18,13 @@ gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'business_time'
+gem "coffee-rails"
+gem "gmaps4rails"
+gem "geocoder"
+
+source 'https://rails-assets.org' do
+  gem "rails-assets-underscore"
+end
 
 
 group :development, :test do
