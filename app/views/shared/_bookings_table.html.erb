@@ -17,7 +17,7 @@
         <td><%= booking.address %></td>
         <td><%= booking.user.first_name + ' ' + booking.user.last_name %></td>
         <td><%= booking.availabilities.size %> demi-journée</td>
-        <td><%= booking.availabilities.first.date %></td>
+        <td><%= booking.availabilities %></td>
       </tr>
     <% end %>
   </tbody>

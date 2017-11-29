@@ -6,9 +6,16 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Answer.destroy_all
 Availability.destroy_all
 Booking.destroy_all
 User.destroy_all
+OptionChoice.destroy_all
+OptionGroup.destroy_all
+Section.destroy_all
+User.destroy_all
+Report.destroy_all
+
 
 particulier = User.create!(email: "particulier@led.fr", password: "123soleil", first_name: "Parti", last_name: "Culier", phone:"06 11 22 33 44", role:0)
 pro = User.create!(email: "pro@led.fr", password: "123soleil", first_name: "Pro", last_name: "Fessionnel", phone:"06 11 22 33 44", role:1)
@@ -29,3 +36,67 @@ end
 puts "#{Availability.all.size} Availabilities créées."
 
 clients = [particulier, pro]
+
+Report.create
+Booking.create!(user_id: particulier.id, address: "108bis Avenue de la Dimancherie 91440 Bures sur Yvette", confirmed_at: Date.today, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id)
+puts "#{Booking.all.size} Bookings crées. (avec #{Report.all.size} report qui lui est adjoint.)"
+
+sections = ["Désignation du chantier", "Contexte du chantier", "Recommandations et localisations des ouvrages", "Signataires"]
+sections.each do |section|
+  Section.create(name: section)
+end
+puts "Création des #{Section.count} sections"
+
+units = ["cm", "m", "m^2", "km", "€", "jours", "années"]
+units.each do |unit|
+  Unit.create(name: unit)
+end
+puts "Création des #{Unit.all.size} unités de mesure"
+
+
+option_groups = ["groupe 0", "groupe 1", "groupe 2", "groupe 3"]
+option_groups.each do |option|
+  OptionGroup.create(name: option)
+end
+puts "Création des #{OptionGroup.count} option groups"
+
+option_choices = {
+  "groupe 0" => [],
+  "groupe 1" => ["Oui", "Non"],
+  "groupe 2" => ["Vrai", "Faux"],
+  "groupe 3" => ["Electricité (BT, HTA, HTB)", "Eclairage", "Feux tricolores et signalisation routière", "Gaz", "Hydrocarbures", "Produits chimiques", "Eau potable", "Assainissement (EU-EP)", "Chauffage/Clim", "Télécommunications", "Zone d'emprise multiréseaux"],
+}
+
+option_choices.each { |key, value|
+  value.each {|choix|
+    OptionChoice.create(option_group: OptionGroup.find_by(name: key), name: choix)
+  }
+}
+
+# RAPPEL enum input_type: {option_choice_id: 0, numeric: 1, string: 2, boolean: 3}
+
+puts "Création des #{OptionChoice.count} option choices"
+
+question1 = Question.create!( section: Section.find_by(name: "Désignation du chantier"), name: "Désignation du chantier", information: "designation_chantier", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: 2)
+question2 = Question.create!( section: Section.find_by(name: "Désignation du chantier"), name: "Nom du maître d'oeuvre", information: "nom_maitre_oeuvre", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: 2)
+question3 = Question.create!( section: Section.find_by(name: "Désignation du chantier"), name: "Numéro de DICT", information: "numero_dict", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: 2)
+question4 = Question.create!( section: Section.find_by(name: "Désignation du chantier"), name: "Date de génération du DICT", information: "date_dict", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: 2)
+question5 = Question.create!( section: Section.find_by(name: "Désignation du chantier"), name: "Personnes présentes", information: "personnes_presentes", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: 2)
+question6 = Question.create!( section: Section.find_by(name: "Contexte du chantier"), name: "Adresse des travaux", information: "adresse_travaux", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: 2)
+question7 = Question.create!( section: Section.find_by(name: "Contexte du chantier"), name: "Nature des travaux et techniques utilisées", information: "nature_travaux", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: 2)
+question8 = Question.create!( section: Section.find_by(name: "Contexte du chantier"), name: "Date prévisionelle de démarrage", information: "date_demarrage_previsionelle", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: 2)
+question9 = Question.create!( section: Section.find_by(name: "Contexte du chantier"), name: "Durée prévisionelle des travaux", information: "duree_previsionelle", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: 2)
+question10 = Question.create!( section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "Identifie la présence des réseaux suivants ?", information: "reseaux_presents", option_group: OptionGroup.find_by(name: "groupe 3"), input_type: 0)
+question11 = Question.create!( section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "S'appuie sur des investigations complémentaires ?", information: "presence_ic", option_group: OptionGroup.find_by(name: "groupe 1"), input_type: 0)
+question12 = Question.create!( section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "Identifie des zones de doutes, à risques (coudes, croisements, branchements) ?", information: "presence_doutes", option_group: OptionGroup.find_by(name: "groupe 1"), input_type: 0)
+question13 = Question.create!( section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "Suit le code couleur règlementaire ?", information: "couleurs_reglementaires", option_group: OptionGroup.find_by(name: "groupe 1"), input_type: 0)
+question14 = Question.create!( section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "Matérialise l'axe présumé des ouvrages ?", information: "axe", option_group: OptionGroup.find_by(name: "groupe 1"), input_type: 0)
+question15 = Question.create!( section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "Matérialise la zone d'emprise d'un ou plusieurs ouvrages ?", information: "emprise", option_group: OptionGroup.find_by(name: "groupe 1"), input_type: 0)
+question16 = Question.create!( section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "Identifie les profondeurs de l'ouvrage ?", information: "profondeur", option_group: OptionGroup.find_by(name: "groupe 1"), input_type: 0)
+question17 = Question.create!( section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "Matérialse la classe de précision ?", information: "precision", option_group: OptionGroup.find_by(name: "groupe 1"), input_type: 0)
+question18 = Question.create!( section: Section.find_by(name: "Signataires"), name: "Remarques du rédacteur :", information: "remarques_mp", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: 2)
+question19 = Question.create!( section: Section.find_by(name: "Signataires"), name: "Durée de l'intervention", information: "duree_mp", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: 2)
+question20 = Question.create!( section: Section.find_by(name: "Signataires"), name: "Observations des parties", information: "observations_mp", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: 2)
+
+
+puts "Questions créées: #{Question.count}"

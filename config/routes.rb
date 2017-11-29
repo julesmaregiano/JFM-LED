@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :users
     resources :bookings
     resources :availabilities
+    resources :reports, only: [ :index, :show, :new, :create, :edit]
   end
 
   namespace :manager do
@@ -26,5 +27,6 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:show]
+  resources :answers
 
 end

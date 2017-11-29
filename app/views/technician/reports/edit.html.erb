@@ -1,0 +1,66 @@
+<div class="dashboard-wrap">
+  <%= render "shared/sidebar"%>
+  <%= render "shared/sidebar_forjs"%>
+
+  <div class="dashboard-content with_right_sidebar">
+    <div class="padding-box">
+      <h1 class="text-center">Rapport de MP <%= @report.id %>
+        <%= link_to(content_tag(:i, nil, class: 'fa fa-eye'), technician_report_path(@report))%>
+      </h1>
+
+      <!-- FORM -->
+      <% @sections.each do |section| %>
+        <div id="Section-<%= section.id %>" class="tabcontent card-note card-line text-center">
+          <h3 class="margin-bottom-medium"><%= section.name.capitalize %></h3>
+            <% section.questions.each do |q| %>
+              <div class="margin-bottom-small text-left">
+                <%= simple_form_for q.answers.find_or_create_by(report: @report) do |f| %>
+                  <%= f.input q.input_type.to_sym, { label: q.name }.merge( q.option_choice_id? ? {collection: q.option_choices} : {}) %>
+                <% end %>
+              </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(window).load(function(){
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+      }
+      document.getElementById('tab-info').style.display = "block";
+      document.getElementById('tab-btn-info').className += " active";
+    });
+  <% end %>
+<% end %>
+
+<script>
+ function openTab(event, elementId) {
+  // Declare all variables
+  var i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(elementId).style.display = "block";
+  event.currentTarget.className += " active";
+  }
+
+   // Get the element with id="defaultOpen" and click on it
+  document.getElementById("Section1").click();
+
+</script>

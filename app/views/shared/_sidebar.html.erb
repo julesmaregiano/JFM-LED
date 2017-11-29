@@ -8,7 +8,7 @@
     <%= render "shared/sidebar-button", text: "Dashboard", icon: "eye", link: technician_user_path(@user) %>
     <%= render "shared/sidebar-button", text: "Disponibilités", icon: "calendar", link: technician_availabilities_path %>
     <%= render "shared/sidebar-button", text: "Bookings", icon: "list", link: technician_bookings_path%>
-    <%= render "shared/sidebar-button", text: "Rapports", icon: "folder-open", link: technician_user_path(@user)%>
+    <%= render "shared/sidebar-button", text: "Rapports", icon: "folder-open", link: technician_reports_path%>
     <%= render "shared/sidebar-button", text: "Clients", icon: "group", link: technician_user_path(@user)%>
     <%= render "shared/sidebar-button", text: "Profil", icon: "user", link: technician_user_path(@user)%>
   <% elsif current_user.manager? %>
