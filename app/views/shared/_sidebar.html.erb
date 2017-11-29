@@ -4,6 +4,11 @@
     <%= render "shared/sidebar-button", text: "Mon profil", icon: "user", link: particulier_user_path(@user)%>
   <% elsif current_user.pro? %>
     <%= render "shared/sidebar-button", text: "Mon profil", icon: "user", link: pro_user_path(@user) %>
+    <%= render "shared/sidebar-button", text: "Bookings", icon: "list", link: pro_bookings_path%>
+    <%= render "shared/sidebar-button", text: "Rapports", icon: "folder-open", link: pro_reports_path%>
+    <%= render "shared/sidebar-button", text: "Profil", icon: "user", link: pro_user_path(@user)%>
+
+
   <% elsif current_user.technician? %>
     <%= render "shared/sidebar-button", text: "Dashboard", icon: "eye", link: technician_user_path(@user) %>
     <%= render "shared/sidebar-button", text: "Disponibilités", icon: "calendar", link: technician_availabilities_path %>
