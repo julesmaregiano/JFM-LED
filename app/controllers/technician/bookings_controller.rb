@@ -5,8 +5,8 @@ class Technician::BookingsController < ApplicationController
     @bookings = Booking.all
     @bookings_for_map = Booking.where.not(latitude: nil, longitude: nil)
     @markers = Gmaps4rails.build_markers(@bookings_for_map) do |booking, marker|
-      marker.lat flat.latitude
-      marker.lng flat.longitude
+      marker.lat booking.latitude
+      marker.lng booking.longitude
     end
   end
 end

@@ -4,6 +4,7 @@ class Booking < ApplicationRecord
   validates :user_id, presence: :true
   belongs_to :user
   geocoded_by :address
+  after_create :geocode
   after_validation :geocode, if: :address_changed?
 
   def booker
