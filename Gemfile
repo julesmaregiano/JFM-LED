@@ -22,6 +22,8 @@ gem "coffee-rails"
 gem "gmaps4rails"
 gem "geocoder"
 gem 'country_select'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"
