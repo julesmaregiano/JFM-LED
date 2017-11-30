@@ -21,10 +21,10 @@ class Technician::ReportsController < ApplicationController
     @report = params_report
     @sections = Section.all
     @booking = @report.booking
-    if @report.update(report_params)
+    if @report.update(params[:report])
       render :edit
     else
-      render :edit
+      raise
     end
   end
 
@@ -40,6 +40,6 @@ class Technician::ReportsController < ApplicationController
   end
 
   def report_params
-    params.require(:report).permit(:photo)
+    params.require(:report).permit(:photos)
   end
 end
