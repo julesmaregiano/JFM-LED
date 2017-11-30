@@ -16,6 +16,19 @@ class Technician::ReportsController < ApplicationController
     @sections = Section.all
   end
 
+  def update
+    @user = params_user
+    @report = params_report
+    @sections = Section.all
+    @booking = @report.booking
+    if @report.update(report_params)
+      render :edit
+    else
+      render :edit
+    end
+  end
+
+
   private
 
   def params_user
@@ -24,5 +37,9 @@ class Technician::ReportsController < ApplicationController
 
   def params_report
     @report = Report.find(params[:id])
+  end
+
+  def report_params
+    params.require(:report).permit(:photo)
   end
 end

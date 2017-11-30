@@ -18,7 +18,6 @@ gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'business_time'
-gem "coffee-rails"
 gem "gmaps4rails"
 gem "geocoder"
 gem 'country_select'
@@ -27,6 +26,7 @@ gem 'wkhtmltopdf-binary'
 gem 'cloudinary', '1.1.7'
 gem 'attachinary', github: 'assembler/attachinary'
 gem 'jquery-fileupload-rails'
+gem "coffee-rails"
 
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"

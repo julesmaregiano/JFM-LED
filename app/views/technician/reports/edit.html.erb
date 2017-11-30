@@ -21,6 +21,10 @@
           <% end %>
         </div>
       <% end %>
+    <%= simple_form_for [@user.role, @report] do |f| %>
+      <%= f.input :photos, as: :attachinary %>
+      <%= f.button :submit %>
+    <% end %>
     </div>
   </div>
 </div>

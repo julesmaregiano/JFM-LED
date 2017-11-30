@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: 'pages#home'
-  mount Attachinary::Engine => "/attachinary"
   get '/eligibility', to: 'pages#eligibility'
+  mount Attachinary::Engine => "/attachinary"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   namespace :pro do
@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     resources :users
     resources :bookings
     resources :availabilities
-    resources :reports, only: [ :index, :show, :new, :create, :edit]
+    resources :reports
   end
 
   namespace :manager do
