@@ -12,13 +12,13 @@ Rails.application.routes.draw do
   end
 
   namespace :particulier do
-    resources :users
+    resources :users, only: [:show]
     resources :bookings
   end
 
   namespace :technician do
-    resources :users
-    resources :bookings
+    resources :users, only: [:show, :index]
+    resources :bookings, only: [:show, :index]
     resources :availabilities
     resources :reports
   end

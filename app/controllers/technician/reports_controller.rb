@@ -22,7 +22,7 @@ class Technician::ReportsController < ApplicationController
     @sections = Section.all
     @booking = @report.booking
     if @report.update(photos_params)
-      render :show
+      redirect_to([@user.role, @report])
     else
       render :edit
     end
