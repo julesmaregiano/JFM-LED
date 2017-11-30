@@ -21,6 +21,7 @@ gem 'business_time'
 gem "coffee-rails"
 gem "gmaps4rails"
 gem "geocoder"
+gem 'country_select'
 
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"

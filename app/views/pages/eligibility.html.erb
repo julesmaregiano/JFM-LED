@@ -1,0 +1,31 @@
+<div class="container padded-top">
+  <div class="row">
+
+    <div class="col-md-4" id="map" style="width: 50%; height: 600px;"></div>
+    <div class="col-md-4">
+      <%= simple_form_for(:query, url: '/eligibility') do |f| %>
+        <%= f.input :address %>
+        <%= f.input :zip_code %>
+        <%= f.input :city %>
+        <%= f.input :country, priority: [ 'FR' ] %>
+        <%= f.submit class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    var handler = Gmaps.build('Google');
+    handler.buildMap({ internal: { id: 'map' } }, function() {
+      markers = handler.addMarkers(<%= raw @markers.to_json %>);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+      if (markers.length == 0) {
+        handler.getMap().setZoom(2);
+      } else if (markers.length == 1) {
+        handler.getMap().setZoom(14);
+      }
+    });
+  <% end %>
+<% end %>
