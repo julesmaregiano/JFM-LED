@@ -25,11 +25,6 @@
       <%= f.input :photos, as: :attachinary %>
       <%= f.button :submit %>
     <% end %>
-    <% if @report.photos? %>
-      <%= @report.photos.each do |photo| %>
-        <%= cl_image_tag @report.photo.path, width: 200, height: 300, crop: :fill %>
-      <% end %>
-    <% end %>
     </div>
   </div>
 </div>
