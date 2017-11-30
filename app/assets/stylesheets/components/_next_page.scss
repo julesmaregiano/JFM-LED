@@ -6,3 +6,12 @@ a.next_page {
     font-size: 36px;
     color: white;
 }
+
+a.next_page_inverted {
+    position: absolute;
+    left: 50%;
+    margin-left: -18px;
+    bottom: 50px;
+    font-size: 36px;
+    color: $dark-gray;
+}

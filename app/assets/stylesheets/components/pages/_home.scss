@@ -60,3 +60,35 @@
   position: absolute;
   bottom: 5px;
 }
+
+// Page Détection
+
+#detection1 {
+  height: 100vh;
+  padding-top: 70px;
+  background-width: auto;
+  background-repeat: no-repeat;
+  background-image: url("http://res.cloudinary.com/zanzibar/image/upload/c_scale,w_2200/v1512061504/dina-lydia-328569_ftjp0t.jpg")
+}
+
+#detection2, #detection3 {
+  height: 80vh;
+  padding-top: 70px;
+}
+
+.bandeau {
+  height: 20vh;
+  background-image: url("http://res.cloudinary.com/doodlid/image/upload/v1507544547/Save%20images/diago/diago_bg01.jpg");
+  position: relative;
+}
+
+.horizontal-line {
+  margin: 20px
+}
+
+.medium-image {
+  width: 300px;
+  height: 200px;
+  opacity: 0.8;
+  border-radius: 2px;
+}
