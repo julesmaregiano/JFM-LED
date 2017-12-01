@@ -2,6 +2,13 @@
   <div class="banner" id="page1" >
     <div class="banner-call">
       <h1>Détection de réseaux enterrés ? <br> Réservez une intervention </h1>
+      <div class="form-fake-wrap flex-vertical">
+        <%= simple_form_for :query, url: '/eligibility' , method: :get do |f| %>
+            <%= f.input :address, label: false, placeholder: "Entrez l'adresse du chantier" %>
+            <%= f.button :submit, class: 'btn btn-green', id: "button-search", value: "btn_text" %>
+        <% end %>
+      </div>
+
       <p class="invert text-on-image">Nos équipes interviennent dans toute l'Ile-de-France.</p>
     </div>
     <%= render 'shared/next_page', icon: "arrow-circle-down", target_page: "#page2" %>
