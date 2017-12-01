@@ -7,8 +7,6 @@
     <%= render "shared/sidebar-button", text: "Bookings", icon: "list", link: pro_bookings_path%>
     <%= render "shared/sidebar-button", text: "Rapports", icon: "folder-open", link: pro_reports_path%>
     <%= render "shared/sidebar-button", text: "Profil", icon: "user", link: pro_user_path(@user)%>
-
-
   <% elsif current_user.technician? %>
     <%= render "shared/sidebar-button", text: "Dashboard", icon: "eye", link: technician_user_path(@user) %>
     <%= render "shared/sidebar-button", text: "Disponibilités", icon: "calendar", link: technician_availabilities_path %>
@@ -17,9 +15,11 @@
     <%= render "shared/sidebar-button", text: "Clients", icon: "group", link: technician_user_path(@user)%>
     <%= render "shared/sidebar-button", text: "Profil", icon: "user", link: technician_user_path(@user)%>
   <% elsif current_user.manager? %>
-    <%= render "shared/sidebar-button", text: "Clients", icon: "eye", link: manager_user_path(@user) %>
-    <%= render "shared/sidebar-button", text: "Détections", icon: "eye", link: manager_user_path(@user) %>
-    <%= render "shared/sidebar-button", text: "Techniciens", icon: "group", link: manager_user_path(@user) %>
-    <%= render "shared/sidebar-button", text: "Mon profil", icon: "user", link: manager_user_path(@user)%>
+    <%= render "shared/sidebar-button", text: "Dashboard", icon: "eye", link: manager_user_path(@user) %>
+    <%= render "shared/sidebar-button", text: "Disponibilités", icon: "calendar", link: manager_availabilities_path %>
+    <%= render "shared/sidebar-button", text: "Bookings", icon: "list", link: manager_bookings_path%>
+    <%= render "shared/sidebar-button", text: "Rapports", icon: "folder-open", link: manager_reports_path%>
+    <%= render "shared/sidebar-button", text: "Clients", icon: "group", link: manager_user_path(@user)%>
+    <%= render "shared/sidebar-button", text: "Profil", icon: "user", link: manager_user_path(@user)%>
   <% end %>
 </div>

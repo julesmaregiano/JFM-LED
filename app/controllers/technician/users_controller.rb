@@ -11,6 +11,6 @@ class Technician::UsersController < ApplicationController
 
   def index
     @user = current_user
-    @users = User.all
+    @users = User.where(role: [0, 1])
   end
 end

@@ -8,4 +8,8 @@ class Report < ApplicationRecord
   def booker
     self.booking.users.first
   end
+
+  def done?
+    self.answers.size > 0
+  end
 end
