@@ -30,6 +30,8 @@ Rails.application.routes.draw do
   namespace :manager do
     resources :users
     resources :bookings
+    resources :availabilities
+    resources :reports
   end
 
   resources :users, only: [:show]

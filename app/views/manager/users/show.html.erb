@@ -1,0 +1,35 @@
+<div class="dashboard-wrap">
+  <%= render "/shared/sidebar"%>
+  <div class="dashboard-content">
+    <div class="padding-box">
+      <h3 class="text-center">Technician#Dashboard (Users#show)</h3>
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4">
+          <div id="map" style="width: 100%; height: 600px;"></div>
+            <% content_for(:after_js) do %>
+              <%= javascript_tag do %>
+                var handler = Gmaps.build('Google');
+                handler.buildMap({ internal: { id: 'map' } }, function() {
+                  markers = handler.addMarkers(<%= raw @markers.to_json %>);
+                  handler.bounds.extendWith(markers);
+                  handler.fitMapToBounds();
+                  if (markers.length == 0) {
+                    handler.getMap().setZoom(2);
+                  } else if (markers.length == 1) {
+                    handler.getMap().setZoom(14);
+                  }
+                });
+              <% end %>
+            <% end %>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+          <%= render "manager/users/today_planning", bookings: @todays_bookings %>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+          <%= render "manager/users/stat", bookings: @todays_bookings %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

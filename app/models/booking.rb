@@ -7,10 +7,19 @@ class Booking < ApplicationRecord
   after_create :geocode
   after_validation :geocode, if: :address_changed?
 
+  scope :of_the_day, -> { joins(:availabilities).where("date = ?", Date.today) }
+
   def booker
   end
 
-  def technician
+  def technicians
+    self.availabilities.map do |availability|
+      availability.user
+    end
+  end
+
+  def tech_of_the_day
+    self.availabilities.of_the_day.first.user
   end
 
   private
