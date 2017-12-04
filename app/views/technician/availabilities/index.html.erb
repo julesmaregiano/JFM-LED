@@ -17,7 +17,7 @@
           <%= availability.status %>
         </div>
         <%= simple_form_for([@user.role, availability]) do |f| %>
-          <%= f.input :status %>
+          <%= f.hidden_field :status, value: !availability.status %>
           <%= f.submit %>
         <% end %>
       <% end %>
