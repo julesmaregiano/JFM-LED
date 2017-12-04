@@ -1,0 +1,18 @@
+<%= month_calendar(attribute: :date, events: @availabilities) do |date, availabilities| %>
+  <div class="date-day"><%= date.day %></div>
+
+
+  <% availabilities.each do |availability| %>
+    <div>
+      <%= availability.date %>
+      <%= availability.half %>
+      <%= availability.status %>
+    </div>
+    <% if user.technician? %>
+      <%= simple_form_for([user.role, availability]) do |f| %>
+        <%= f.hidden_field :status, value: !availability.status %>
+        <%= f.submit %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
