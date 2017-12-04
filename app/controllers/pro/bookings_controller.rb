@@ -13,6 +13,7 @@ class Pro::BookingsController < ApplicationController
 
   def new
     @user = current_user
+    @availabilities = Availability.all
     @booking = Booking.new
   end
 
