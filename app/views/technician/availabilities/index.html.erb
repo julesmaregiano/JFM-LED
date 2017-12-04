@@ -7,13 +7,20 @@
     </div>
 
     <%= month_calendar(attribute: :date, events: @availabilities) do |date, availabilities| %>
-      <%= date %>
-        <% availabilities.each do |availability| %>
-          <div>
-            <%= availability.date %>
-            <%= availability.status %>
-          </div>
+      <div class="date-day"><%= date.day %></div>
+
+
+      <% availabilities.each do |availability| %>
+        <div>
+          <%= availability.date %>
+          <%= availability.half %>
+          <%= availability.status %>
+        </div>
+        <%= simple_form_for([@user.role, availability]) do |f| %>
+          <%= f.input :status %>
+          <%= f.submit %>
         <% end %>
+      <% end %>
     <% end %>
 
   </div>
