@@ -6,8 +6,15 @@
       <h3 class="text-center">Technician#Availabilities#index</h3>
     </div>
 
-  <% today = Date.today %>
-  <% month = Date.today.month %>
+    <%= month_calendar(attribute: :date, events: @availabilities) do |date, availabilities| %>
+      <%= date %>
+        <% availabilities.each do |availability| %>
+          <div>
+            <%= availability.date %>
+            <%= availability.status %>
+          </div>
+        <% end %>
+    <% end %>
 
   </div>
 </div>
