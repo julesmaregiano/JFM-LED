@@ -6,6 +6,8 @@
 //= require jquery-fileupload/basic
 //= require cloudinary/jquery.cloudinary
 //= require attachinary
+//= require Chart.bundle.js
+//= require chartkick
 //= require_tree .
 
 $(document).ready(function() {
