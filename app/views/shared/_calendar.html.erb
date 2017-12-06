@@ -1,19 +1,22 @@
 <%= month_calendar(attribute: :date, events: @availabilities) do |date, availabilities| %>
   <div class="date-day"><%= date.day %></div>
+  <div class="cell-content">
+    <div class="btn-container">
+      <% availabilities.each do |availability| %>
 
-
-  <% availabilities.each do |availability| %>
-    <div class="<%= availability.status? ? "btn-calendar-tobook" : "btn-calendar-booked" %>">
-      <%= availability.half == 0 ? "matin" : "aprem" %>
-      <%= availability.status %>
-      <% if user.technician? %>
-        <% if availability.booking_id.nil? %>
-          <%= simple_form_for([user.role, availability]) do |f| %>
-            <%= f.hidden_field :status, value: !availability.status %>
-            <%= f.submit %>
+        <div class="btn-calendar <%= availability.status? ? "btn-calendar-tobook" : "btn-calendar-booked" %>">
+          <%= availability.half == 0 ? "matin" : "aprem" %>
+          <%= availability.status %>
+          <% if user.technician? %>
+            <% if availability.booking_id.nil? %>
+              <%= simple_form_for([user.role, availability]) do |f| %>
+                <%= f.hidden_field :status, value: !availability.status %>
+                <%= f.submit %>
+              <% end %>
+            <% end %>
           <% end %>
-        <% end %>
+          </div>
       <% end %>
-      </div>
+    </div>
   <% end %>
-<% end %>
+</div>
