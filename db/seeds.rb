@@ -10,10 +10,10 @@ Answer.destroy_all
 Availability.destroy_all
 Booking.destroy_all
 User.destroy_all
-OptionChoice.destroy_all
 OptionGroup.destroy_all
+OptionChoice.destroy_all
 Section.destroy_all
-User.destroy_all
+Unit.destroy_all
 Report.destroy_all
 Answer.destroy_all
 Question.destroy_all
