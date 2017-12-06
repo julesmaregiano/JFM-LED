@@ -11,7 +11,7 @@
             <% if availability.booking_id.nil? %>
               <%= simple_form_for([user.role, availability]) do |f| %>
                 <%= f.hidden_field :status, value: !availability.status %>
-                <%= f.submit %>
+                <%= f.submit "Modifier" %>
               <% end %>
             <% end %>
           <% end %>

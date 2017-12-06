@@ -2,7 +2,7 @@ class Technician::AvailabilitiesController < ApplicationController
 
   def index
     @user = current_user
-    @availabilities = Availability.all.where(user: @user)
+    @availabilities = Availability.of(@user)
   end
 
   def update
