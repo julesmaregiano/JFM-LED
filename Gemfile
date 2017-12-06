@@ -28,6 +28,9 @@ gem 'attachinary', github: 'assembler/attachinary'
 gem 'jquery-fileupload-rails'
 gem "coffee-rails"
 gem "simple_calendar", "~> 2.0"
+gem 'chartkick', '~> 2.2.0'
+gem 'groupdate'
+
 
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"

@@ -61,6 +61,7 @@ GEM
       activesupport (>= 3.2.0)
       tzinfo
     byebug (9.1.0)
+    chartkick (2.2.5)
     cloudinary (1.1.7)
       aws_cf_signer
       rest-client
@@ -103,6 +104,8 @@ GEM
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     gmaps4rails (2.1.2)
+    groupdate (3.2.0)
+      activesupport (>= 3)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     i18n (0.9.1)
@@ -254,6 +257,7 @@ DEPENDENCIES
   autoprefixer-rails
   bootstrap-sass
   business_time
+  chartkick (~> 2.2.0)
   cloudinary (= 1.1.7)
   coffee-rails
   country_select
@@ -263,6 +267,7 @@ DEPENDENCIES
   font-awesome-sass
   geocoder
   gmaps4rails
+  groupdate
   jbuilder (~> 2.0)
   jquery-fileupload-rails
   jquery-rails
