@@ -15,6 +15,8 @@ OptionGroup.destroy_all
 Section.destroy_all
 User.destroy_all
 Report.destroy_all
+Answer.destroy_all
+Question.destroy_all
 
 
 particulier = User.create!(email: "particulier@led.fr", password: "123soleil", first_name: "Parti", last_name: "Culier", phone:"06 11 22 33 44", role:0)
