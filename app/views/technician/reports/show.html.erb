@@ -17,10 +17,8 @@
           <% section.questions.each do |q| %>
             <div class="text-left">
               <h5><%= q.name %></h5>
-              <% if q.answers.nil? %>
+              <% if q.answers.where(report_id: @report.id).first.nil? %>
                 <p>-------</p>
-              <% elsif q.answers.where(report_id: @report.id).first.string %>
-                <p><%= q.answers.where(report_id: @report.id).first.string %></p>
               <% else %>
                 <p><%= q.answers.where(report_id: @report.id).first.string %></p>
               <% end %>

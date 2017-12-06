@@ -6,15 +6,15 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Answer.destroy_all
-Availability.destroy_all
 Booking.destroy_all
-User.destroy_all
+Report.destroy_all
+Question.destroy_all
 OptionChoice.destroy_all
 OptionGroup.destroy_all
 Section.destroy_all
+Answer.destroy_all
+Availability.destroy_all
 User.destroy_all
-Report.destroy_all
 
 
 particulier = User.create!(email: "particulier@led.fr", password: "123soleil", first_name: "Parti", last_name: "Culier", phone:"06 11 22 33 44", role:0)
@@ -25,8 +25,8 @@ admin = User.create!(email: "admin@led.fr", password: "123soleil", first_name: "
 puts "#{User.all.size} Users créés."
 
 
-next_25 = (1..2).to_a
-next_25.each do |numero|
+next_90 = (1..90).to_a
+next_90.each do |numero|
   User.all.where(role: 2).each do |user|
     date = numero.business_days.from_now
     Availability.find_or_create_by(user_id: user.id, date: Date.new(date.year, date.month, date.day), status: true, half: 0 )
@@ -37,8 +37,12 @@ puts "#{Availability.all.size} Availabilities créées."
 
 clients = [particulier, pro]
 
-Report.create
-Booking.create!(user_id: particulier.id, address: "108bis Avenue de la Dimancherie 91440 Bures sur Yvette", confirmed_at: Date.today, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id)
+addresses = ["108bis avenue de la dimancherie, Bures sur yvette", "6 rue du docteur collé, bures sur yvette", "gare de massy palaiseau", "166 avenue de suffren paris", "37 villa gaudelet paris", "12 rue de Montmartre Paris", "Maire de Clichy sous Bois"]
+dates = [Date.today, Date.today+1, Date.today+2, Date.today+10, Date.today+20]
+10.times do
+  Report.create
+  Booking.create!(user_id: [particulier.id, pro.id].sample, address: addresses.sample, confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id)
+end
 puts "#{Booking.all.size} Bookings crées. (avec #{Report.all.size} report qui lui est adjoint.)"
 
 sections = ["Désignation du chantier", "Contexte du chantier", "Recommandations et localisations des ouvrages", "Signataires"]
@@ -100,3 +104,7 @@ question20 = Question.create!( section: Section.find_by(name: "Signataires"), na
 
 
 puts "Questions créées: #{Question.count}"
+
+Availability.where(booking_id: nil).first(10).each do |availability|
+  availability.update(booking_id: Booking.all.sample.id)
+end
