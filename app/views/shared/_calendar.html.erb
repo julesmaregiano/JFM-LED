@@ -3,16 +3,17 @@
 
 
   <% availabilities.each do |availability| %>
-    <div>
-      <%= availability.date %>
-      <%= availability.half %>
+    <div class="<%= availability.status? ? "btn-calendar-tobook" : "btn-calendar-booked" %>">
+      <%= availability.half == 0 ? "matin" : "aprem" %>
       <%= availability.status %>
-    </div>
-    <% if user.technician? %>
-      <%= simple_form_for([user.role, availability]) do |f| %>
-        <%= f.hidden_field :status, value: !availability.status %>
-        <%= f.submit %>
+      <% if user.technician? %>
+        <% if availability.booking_id.nil? %>
+          <%= simple_form_for([user.role, availability]) do |f| %>
+            <%= f.hidden_field :status, value: !availability.status %>
+            <%= f.submit %>
+          <% end %>
+        <% end %>
       <% end %>
-    <% end %>
+      </div>
   <% end %>
 <% end %>

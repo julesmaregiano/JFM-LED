@@ -1,0 +1,10 @@
+.card {
+  background-color: white;
+  max-width: 350px;
+  max-height: 200px;
+  margin: 2px;
+}
+
+.card-top > * {
+  height: 70px;
+}
