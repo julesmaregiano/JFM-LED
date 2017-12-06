@@ -7,7 +7,7 @@
 //= require cloudinary/jquery.cloudinary
 //= require attachinary
 //= require Chart.bundle
-//= require chartkick
+//= require chartkick.js
 //= require_tree .
 
 $(document).ready(function() {

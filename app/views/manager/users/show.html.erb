@@ -1,3 +1,7 @@
+<% content_for(:charts_js) do %>
+  <%= javascript_include_tag 'application' %>
+<% end %>
+
 <div class="dashboard-wrap">
   <%= render "/shared/sidebar"%>
   <div class="dashboard-content">
@@ -27,10 +31,12 @@
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4">
           <%= render "manager/users/stat", bookings: @todays_bookings %>
-          <%= line_chart User.group_by_day(:created_at).count %>
+
+          <%= line_chart Availability.group_by_day(:created_at).count %>
         </div>
 
       </div>
     </div>
   </div>
 </div>
+
