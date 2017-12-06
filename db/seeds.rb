@@ -11,7 +11,12 @@ Report.destroy_all
 Question.destroy_all
 OptionChoice.destroy_all
 OptionGroup.destroy_all
+OptionChoice.destroy_all
 Section.destroy_all
+Unit.destroy_all
+Report.destroy_all
+Answer.destroy_all
+Question.destroy_all
 Answer.destroy_all
 Availability.destroy_all
 User.destroy_all
@@ -38,7 +43,7 @@ puts "#{Availability.all.size} Availabilities créées."
 clients = [particulier, pro]
 
 addresses = ["108bis avenue de la dimancherie, Bures sur yvette", "6 rue du docteur collé, bures sur yvette", "gare de massy palaiseau", "166 avenue de suffren paris", "37 villa gaudelet paris", "12 rue de Montmartre Paris", "Maire de Clichy sous Bois"]
-dates = [Date.today, Date.today+1, Date.today+2, Date.today+10, Date.today+20]
+dates = next_90.business_days.from_now
 10.times do
   Report.create
   Booking.create!(user_id: [particulier.id, pro.id].sample, address: addresses.sample, confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id)
