@@ -86,7 +86,6 @@
   .btn-container{
     width: 80%;
     height: 100%;
-    padding-right: 5%;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -96,11 +95,15 @@
     position: relative;
     margin: 4% 0 4% 0;
     text-align: center;
+    min-height: 50px;
     width: 100%;
     background-color: white;
     display: flex;
     align-items: center;
     justify-content: center;
+    input {
+      font-size: 12px;
+    }
     i {
       color: $dark-gray;
       margin-right: 5px;

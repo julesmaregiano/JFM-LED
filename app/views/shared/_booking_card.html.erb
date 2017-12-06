@@ -1,0 +1,29 @@
+<div class="card">
+  <div class="card-top flex-horizontal flex-space-between">
+    <div class="card-logo">
+      <img style="height: 100%" src="https://www.fillmurray.com/50/50" alt="">
+    </div>
+    <div class="card-top-right no-margin">
+      <h5 class="no-margin">Entreprise</h5>
+      <h7><%= booking.user.first_name %> <%= booking.user.last_name %></h7>
+    </div>
+    <div class="card-date">
+      <p><%= booking.availabilities.first.date %></p>
+      <p><%= booking.availabilities.first.half == 0 ? "matin" : "aprem" %></p>
+
+    </div>
+  </div>
+  <div class="card-middle flex-horizontal flex-space-between">
+    <div class="card-bottom-left">
+      <%= booking.address %>
+    </div>
+    <div class="card-bottom-right">
+      <%= link_to "http://waze.to/?ll=#{booking.latitude},#{booking.longitude}&navigate=yes" do %>
+        <i class="fa fa-car" aria-hidden="true"></i>
+      <% end %>
+      <%= link_to "tel:#{booking.user.phone}" do %>
+        <i class="fa fa-mobile" aria-hidden="true"></i>
+      <% end %>
+    </div>
+  </div>
+</div>

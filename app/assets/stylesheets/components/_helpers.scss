@@ -43,6 +43,7 @@ $white-space: 20px;
   justify-content: center;
   align-items: center;
 }
+
 .flex-horizontal {
   display: flex;
   justify-content: center;
@@ -58,6 +59,15 @@ $white-space: 20px;
 .flex-wrap {
   flex-wrap: wrap;
 }
+
+.flex-space-between {
+  justify-content: space-between;
+}
+
+.flex-start {
+  justify-content: flex-start;
+}
+
 .fixed-top {
   position: fixed;
   top: 0px;
@@ -117,4 +127,8 @@ input, select {
   border-radius: 13px;
   color: $dark-gray;
   margin-left: -136px;
+}
+
+.no-margin * h1, h2, h3, h4, h5, h6 {
+  margin: 0px !important;
 }

@@ -4,22 +4,30 @@
   <div class="dashboard-content">
     <div class="padding-box">
       <h3 class="text-center">Technician#Dashboard (Users#show)</h3>
-    <div id="map" style="width: 100%; height: 600px;"></div>
-      <% content_for(:after_js) do %>
-        <%= javascript_tag do %>
-          var handler = Gmaps.build('Google');
-          handler.buildMap({ internal: { id: 'map' } }, function() {
-            markers = handler.addMarkers(<%= raw @markers.to_json %>);
-            handler.bounds.extendWith(markers);
-            handler.fitMapToBounds();
-            if (markers.length == 0) {
-              handler.getMap().setZoom(2);
-            } else if (markers.length == 1) {
-              handler.getMap().setZoom(14);
-            }
-          });
+      <div class="row">
+        <div class= "col-xs-12 col-md-6" id="map" style="height: 600px;"></div>
+        <div class="col-xs-12 col-md-6">
+        <h3>Vos 5 prochains bookings </h3>
+        <% unless @bookings.nil? %>
+          <% @bookings.each do |booking| %>
+          <%= render "shared/booking_card", booking: booking %>
+          <% end %>
         <% end %>
-      <% end %>
+
+        </div>
+      </div>
     </div>
+<h1>Lorem ipsum dolor sit amet</h1>
+<h2>Lorem ipsum dolor sit amet</h2>
+<h3>Lorem ipsum dolor sit amet</h3>
+<h4>Lorem ipsum dolor sit amet</h4>
+<h5>Lorem ipsum dolor sit amet</h5>
+<h6>Lorem ipsum dolor sit amet</h6>
+<h7>Lorem ipsum dolor sit amet</h7>
   </div>
 </div>
+
+
+<%= render "shared/map", markers: @markers %>
+
+

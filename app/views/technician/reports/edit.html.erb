@@ -15,7 +15,7 @@
             <% section.questions.each do |q| %>
               <div class="margin-bottom-small text-left">
                 <%= simple_form_for q.answers.find_or_create_by(report: @report) do |f| %>
-                  <%= f.input q.input_type.to_sym, { label: q.name }.merge( q.option_choice_id? ? {collection: q.option_choices} : {}) %>
+                  <%= f.input q.input_type.to_sym, { label: q.name }.merge( q.option_choice_id? ? {collection: q.option_choices} : {}), as %>
                 <% end %>
               </div>
           <% end %>
