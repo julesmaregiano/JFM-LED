@@ -41,7 +41,7 @@ addresses = ["108bis avenue de la dimancherie, Bures sur yvette", "6 rue du doct
 dates = [Date.today, Date.today+1, Date.today+2, Date.today+10, Date.today+20]
 10.times do
   Report.create
-  Booking.create!(user_id: particulier.id || pro.id, address: addresses.sample, confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id)
+  Booking.create!(user_id: [particulier.id, pro.id].sample, address: addresses.sample, confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id)
 end
 puts "#{Booking.all.size} Bookings crées. (avec #{Report.all.size} report qui lui est adjoint.)"
 
