@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   namespace :particulier do
     resources :users, only: [:show]
     resources :bookings
+    get '/infos', to: "pages#informations"
   end
 
   namespace :technician do
