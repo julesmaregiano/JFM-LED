@@ -25,6 +25,7 @@ User.destroy_all
 particulier = User.create!(email: "particulier@led.fr", password: "123soleil", first_name: "Parti", last_name: "Culier", phone:"06 11 22 33 44", role:0)
 pro = User.create!(email: "pro@led.fr", password: "123soleil", first_name: "Pro", last_name: "Fessionnel", phone:"06 11 22 33 44", role:1)
 technician = User.create!(email: "tech@led.fr", password: "123soleil", first_name: "Tech", last_name: "Nician", phone:"06 11 22 33 44", role:2)
+technician2 = User.create!(email: "tech2@led.fr", password: "123soleil", first_name: "Tech2", last_name: "Nician2", phone:"06 11 22 33 44", role:2)
 manager = User.create!(email: "manager@led.fr", password: "123soleil", first_name: "Ma", last_name: "Nager", phone:"06 11 22 33 44", role:3)
 admin = User.create!(email: "admin@led.fr", password: "123soleil", first_name: "Ad", last_name: "Min", phone:"06 11 22 33 44", role:4)
 puts "#{User.all.size} Users créés."
@@ -43,7 +44,7 @@ puts "#{Availability.all.size} Availabilities créées."
 clients = [particulier, pro]
 
 addresses = ["108bis avenue de la dimancherie, Bures sur yvette", "6 rue du docteur collé, bures sur yvette", "gare de massy palaiseau", "166 avenue de suffren paris", "37 villa gaudelet paris", "12 rue de Montmartre Paris", "Maire de Clichy sous Bois"]
-dates = next_90.business_days.from_now
+dates =[Date.today, Date.today + 1, Date.today + 4,Date.today + 5, Date.today + 7, Date.today + 12 ]
 10.times do
   Report.create
   Booking.create!(user_id: [particulier.id, pro.id].sample, address: addresses.sample, confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id)
