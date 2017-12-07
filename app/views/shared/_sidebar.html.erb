@@ -1,6 +1,8 @@
 <div class="sidebar">
   <% if current_user.particulier? %>
     <%= render "shared/sidebar-button", text: "Ma détection", icon: "eye", link: particulier_user_path(@user) %>
+    <%= render "shared/sidebar-button", text: "Bookings", icon: "list", link: particulier_bookings_path%>
+    <%= render "shared/sidebar-button", text: "Informations", icon: "info", link: particulier_infos_path %>
     <%= render "shared/sidebar-button", text: "Mon profil", icon: "user", link: particulier_user_path(@user)%>
   <% elsif current_user.pro? %>
     <%= render "shared/sidebar-button", text: "Mon profil", icon: "user", link: pro_user_path(@user) %>
