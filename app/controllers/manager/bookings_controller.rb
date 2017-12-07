@@ -11,6 +11,18 @@ class Manager::BookingsController < ApplicationController
     end
   end
 
+  def show
+    @user = current_user
+    @booking = Booking.find(params[:id])
+    @availabilities = @booking.availabilities.order(date: 'ASC')
+    unless @booking.latitude.nil?
+      @markers = Gmaps4rails.build_markers(@booking) do |booking, marker|
+        marker.lat booking.latitude
+        marker.lng booking.longitude
+      end
+    end
+  end
+
   def new
     @user = current_user
     @booking = Booking.new

@@ -1,4 +1,4 @@
 <h4>Availabilities per day</h4>
-<%= area_chart Availability.group_by_day(:date).count, colors: ["#B2D430", "#B2D430"], library: {backgroundColor: "#FFFFFF"}, download: true %> %>
+<%= area_chart Availability.group_by_day(:date).count, colors: ["#B2D430", "#B2D430"], download: true, width: "800px", height: "300px" %>
 <h4>Booking per day of the week</h4>
-<%= column_chart Booking.group_by_day_of_week(:created_at, format: "%a").count %>
+<%= column_chart Booking.group_by_day_of_week(:confirmed_at, format: "%a").count, colors: ["#B2D430", "#B2D430"], width: "800px", height: "300px" %>

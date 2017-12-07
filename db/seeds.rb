@@ -31,7 +31,7 @@ admin = User.create!(email: "admin@led.fr", password: "123soleil", first_name: "
 puts "#{User.all.size} Users créés."
 
 
-next_90 = (1..90).to_a
+next_90 = (0..90).to_a
 next_90.each do |numero|
   User.all.where(role: 2).each do |user|
     date = numero.business_days.from_now

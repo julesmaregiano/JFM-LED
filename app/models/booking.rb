@@ -10,7 +10,7 @@ class Booking < ApplicationRecord
   scope :of_the_day, -> { joins(:availabilities).where("date = ?", Date.today) }
   scope :to_come, -> { joins(:availabilities).where("date > ?", Date.yesterday) }
   scope :soon, -> { joins(:availabilities).where("date < ?", Date.today + 7) }
-  # scope :for, -> (user) { joins(:availabilities).where("user_id = ?", user.id) }
+  scope :for, -> (user) { joins(:availabilities).where(user_id: user.id) }
   # Ce scope ne marche pas. Comment faire pour trouver tous les Bookings appartenant à un tech ?
 
   def self.for_next_week

@@ -8,7 +8,7 @@ class Technician::AvailabilitiesController < ApplicationController
   def update
     @user = current_user
     @availability = Availability.find(params[:id])
-    if @availability.update(params_availability) && user.manager?
+    if @availability.update(params_availability)
       redirect_to technician_availabilities_path
     else
       render :edit

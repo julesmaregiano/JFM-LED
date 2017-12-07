@@ -7,7 +7,6 @@ class Manager::UsersController < ApplicationController
       marker.lat booking.latitude
       marker.lng booking.longitude
     end
-
   end
 
   def index
