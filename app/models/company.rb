@@ -1,3 +1,3 @@
 class Company < ApplicationRecord
-  belongs_to :branch
+  has_many :branches
 end
