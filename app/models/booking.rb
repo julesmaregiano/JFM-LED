@@ -6,7 +6,7 @@ class Booking < ApplicationRecord
   belongs_to :user
   geocoded_by :address
   after_create :geocode
-  after_validation :geocode, if: :address_changed?
+  after_validation :geocode, if: :address1_changed?
 
   scope :of_the_day, -> { joins(:availabilities).where("date = ?", Date.today) }
   scope :to_come, -> { joins(:availabilities).where("date > ?", Date.yesterday) }
@@ -29,6 +29,11 @@ class Booking < ApplicationRecord
     self.availabilities.of_the_day.first.user
   end
 
+  def address
+    [address1, address2, city, zipcode, country].compact.join(', ')
+  end
+
   private
+
 
 end
