@@ -4,15 +4,18 @@
   <div class="dashboard-content">
     <div class="padding-box">
       <h3 class="text-center">Technician#Bookings#index</h3>
-    </div>
       <h4>Disponibilités</h4>
-    <%= render "shared/calendar", availabilities: @availabilities, user: @user %>
+
+    <%= render "shared/calendar", availabilities: @availabilities, user: @user, tech: User.find(3) %>
+
       <h4>Infos chantier</h4>
     <%= simple_form_for [@user.role, @booking] do |f| %>
+      <div class="availabilities-fields"> <%# div pour injecter les avaialbilities via le JS %></div>
       <%= f.input :address %>
       <%= f.input :surface %>
       <%= f.input :comment %>
       <%= f.button :submit %>
     <% end %>
+    </div>
   </div>
 </div>

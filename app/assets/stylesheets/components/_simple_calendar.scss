@@ -117,6 +117,16 @@
       background-color: $anis;
     }
   }
+
+  .btn-calendar-selected  {
+    border: 1px solid $anis;
+    border-left: 8px solid $anis;
+    background-color: blue;
+    &:hover {
+      background-color: $anis;
+    }
+  }
+
   .btn-calendar-doneinpast {
     border: 1px solid $medium-gray;
     border-left: 8px solid $medium-gray;

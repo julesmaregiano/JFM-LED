@@ -22,15 +22,17 @@ class Pro::BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
     @booking.user_id = @user.id
     @booking.report = Report.new
+
     if @booking.save
-      render :new
+      @booking.availabilities.update(status: false)
+      redirect_to pro_user_path(@user)
     else
       render :new
     end
   end
 
   def booking_params
-    params.require(:booking).permit(:comment, :address, :surface)
+    params.require(:booking).permit(:comment, :address, :surface, availability_ids: [])
   end
 
 end
