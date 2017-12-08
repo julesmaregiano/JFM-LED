@@ -6,6 +6,7 @@ class User < ApplicationRecord
   validates :last_name, presence: :true
   validates :phone, presence: :true
   validates :role, presence: :true
+  has_one :company
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
