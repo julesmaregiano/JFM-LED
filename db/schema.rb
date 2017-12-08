@@ -80,20 +80,20 @@ ActiveRecord::Schema.define(version: 20171208130047) do
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
-  create_table "branches", force: :cascade do |t|
+  create_table "companies", force: :cascade do |t|
     t.string "name"
-    t.string "city"
-    t.string "zipcode"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "companies", force: :cascade do |t|
+  create_table "branches", force: :cascade do |t|
     t.string "name"
-    t.bigint "branch_id"
+    t.string "city"
+    t.string "zipcode"
+    t.bigint "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["branch_id"], name: "index_companies_on_branch_id"
+    t.index ["company_id"], name: "index_branches_on_company_id"
   end
 
   create_table "foremen", force: :cascade do |t|
@@ -181,7 +181,7 @@ ActiveRecord::Schema.define(version: 20171208130047) do
   add_foreign_key "availabilities", "users"
   add_foreign_key "bookings", "reports"
   add_foreign_key "bookings", "users"
-  add_foreign_key "companies", "branches"
+  add_foreign_key "branches", "companies"
   add_foreign_key "foremen", "branches"
   add_foreign_key "option_choices", "option_groups"
   add_foreign_key "questions", "option_groups"
