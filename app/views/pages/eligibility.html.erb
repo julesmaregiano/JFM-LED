@@ -6,33 +6,41 @@
     </div>
     <div class="flexbox">
 
-        <div class="col-md-6" id="map" style="width: 50%; height: 720px;"></div>
-        <div class="col-md-6">
+        <div class="col-md-4" id="map" style="width: 50%; height: 720px;"></div>
+        <div class="col-md-4">
           <%= simple_form_for(:booking, url: eligibility_path) do |f| %>
-            <h4>Entre votre addresse : </h4>
-            <%= f.input :full_address, input_html: {value: params[:query][:address]}, label: false %>
-            <%= f.input :street, input_html: {value: "#{@address_details[:street_number]} #{@address_details[:street]}"} %>
-            <%= f.input :zip_code, input_html: {value: @address_details[:zip_code]} %>
-            <%= f.input :city, input_html: {value: @address_details[:city]} %>
-            <%= f.input :country, priority: [ 'FR' ], input_html: {value: @address_details[:country]} %>
-
-            <div class="eligible-banner <%= 'hidden' unless @eligible %>">
-              <% if @user.nil? %>
-                <h3>Vous êtes éligibiles !</h3>
-                <%= link_to "Inscrivez-vous!", new_user_registration_path, class: 'btn btn-primary btn-eligibility' %>
-                <%= link_to "Ou connectez-vous.", new_user_session_path, class: 'btn btn-primary btn-eligibility' %>
-              <% elsif @user.pro? %>
-                <%= link_to "Réserver", new_pro_booking_path, class: 'btn btn-primary btn-eligibility' %>
-              <% else %>
-              <% end %>
+            <h4>Entrez l'addresse du chantier: </h4>
+            <div class="form-inputs input-eligibility">
+              <%= f.input :full_address, input_html: {value: params[:query][:address]}, label: false, placeholder: "Adresse du chantier" %>
             </div>
-
-            <div class="non-eligible-banner <%= 'hidden' if @eligible %>">
-              <h3>Votre adresse n'est pas en zone d'éligibilité.. </h3>
-              <p>Appellez-nous au 01.23.45.67.89 et nous essaierons de vous rediriger.</p>
+            <div class="form-details">
+              <%= f.input :street, label: "Rue", input_html: {value: "#{@address_details[:street_number]} #{@address_details[:street]}"} %>
+              <%= f.input :zip_code, label: "Code Postal", input_html: {value: @address_details[:zip_code]} %>
+              <%= f.input :city, label: "Ville", input_html: {value: @address_details[:city]} %>
+              <%= f.input :country, label: "Pays", priority: [ 'FR' ], input_html: {value: @address_details[:country]} %>
             </div>
-
           <% end %>
+        </div>
+
+        <div class="col-md-4">
+          <div class="text-center eligible-banner <%= 'hidden' unless @eligible %>">
+            <% if @user.nil? %>
+              <h3><strong>Vous êtes éligibiles !</strong></h3>
+              <div>
+                <p><%= link_to "Inscrivez-vous", new_user_registration_path, class: 'btn btn-primary btn-eligibility' %></p>
+                <p>ou</p>
+                <p><%= link_to "Connectez-vous", new_user_session_path, class: 'btn btn-primary btn-eligibility' %></p>
+              </div>
+            <% elsif @user.pro? %>
+              <%= link_to "Réserver", new_pro_booking_path, class: 'btn btn-primary btn-eligibility' %>
+            <% else %>
+            <% end %>
+          </div>
+
+          <div class="non-eligible-banner <%= 'hidden' if @eligible %>">
+            <h3>Votre adresse n'est pas en zone d'éligibilité.. </h3>
+            <p>Appellez-nous au 01.23.45.67.89 et nous essaierons de vous rediriger.</p>
+          </div>
         </div>
     </div>
   </div>
