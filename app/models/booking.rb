@@ -1,5 +1,6 @@
 class Booking < ApplicationRecord
   has_many :availabilities
+  has_one :foreman
   belongs_to :report
   validates :user_id, presence: :true
   validates :availabilities, presence: :true

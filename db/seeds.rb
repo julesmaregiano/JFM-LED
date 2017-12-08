@@ -20,8 +20,24 @@ Foreman.destroy_all
 Branch.destroy_all
 Company.destroy_all
 
+prenoms = ["Jean", "James", "Jamel", "Jin"]
+noms = ["Carambolin", "Plastrouier", "Dimitrius", "Robert"]
+companies = ["Colas", "Vinci", "EDF"]
+companies.each_with_index do |company, index|
+  new_company = Company.create(name: company)
+  2.times do
+    new_branch = Branch.create(company_id: new_company.id, name: "Branche #{index + 1}")
+    3.times do
+      Foreman.create(first_name: prenoms.sample, last_name: noms.sample, branch_id: new_branch.id, phone: "06 47 05 11 44")
+    end
+  end
+end
+
+puts "#{Company.count} entreprises crées avec un total de #{Branch.count} branches et #{Foreman.count} Chefs de chantier."
 particulier = User.create!(email: "particulier@led.fr", password: "123soleil", first_name: "Parti", last_name: "Culier", phone:"06 11 22 33 44", role:0)
-pro = User.create!(email: "pro@led.fr", password: "123soleil", first_name: "Pro", last_name: "Fessionnel", phone:"06 11 22 33 44", role:1)
+pro = User.create!(email: "pro@led.fr", password: "123soleil", first_name: "Pro", last_name: "Fessionnel", phone:"06 11 22 33 44", role:1, company_id: Company.first)
+pro2 = User.create!(email: "pro2@led.fr", password: "123soleil", first_name: "Pro2", last_name: "Fessionnel2", phone:"06 11 22 33 44", role:1, company_id: Company.second)
+pro3 = User.create!(email: "pro3@led.fr", password: "123soleil", first_name: "Pro3", last_name: "Fessionnel3", phone:"06 11 22 33 44", role:1, company_id: Company.third)
 technician = User.create!(email: "tech@led.fr", password: "123soleil", first_name: "Tech", last_name: "Nician", phone:"06 11 22 33 44", role:2)
 technician2 = User.create!(email: "tech2@led.fr", password: "123soleil", first_name: "Tech2", last_name: "Nician2", phone:"06 11 22 33 44", role:2)
 manager = User.create!(email: "manager@led.fr", password: "123soleil", first_name: "Ma", last_name: "Nager", phone:"06 11 22 33 44", role:3)
@@ -31,7 +47,7 @@ puts "#{User.all.size} Users créés."
 
 next_90 = (0..90).to_a
 next_90.each do |numero|
-  User.all.where(role: 3).each do |user|
+  User.all.where(role: 2).each do |user|
     date = numero.business_days.from_now
     Availability.find_or_create_by(user_id: user.id, date: Date.new(date.year, date.month, date.day), status: true, half: 0 )
     Availability.find_or_create_by(user_id: user.id, date: Date.new(date.year, date.month, date.day), status: true, half: 1 )
@@ -39,27 +55,27 @@ next_90.each do |numero|
 end
 puts "#{Availability.all.size} Availabilities créées."
 
-clients = [particulier, pro]
+clients = [particulier, pro, pro2, pro3]
 
 dates =[Date.today, Date.today + 1, Date.today + 4,Date.today + 5, Date.today + 7, Date.today + 12 ]
 
 
 Report.create!
-Booking.create!(user_id: [particulier.id, pro.id].sample, address1: "108 avenue de la Dimancherie", zipcode: "91440", city: "Bures sur Yvette", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, availabilities: Availability.where(status: true).first(2).to_a)
+Booking.create!(user_id: [particulier.id, pro.id].sample, address1: "108 avenue de la Dimancherie", zipcode: "91440", city: "Bures sur Yvette", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.where(status: true).first(2).to_a)
 Report.create!
-Booking.create!(user_id: [particulier.id, pro.id].sample, address1: "5 avenue de la Dimancherie", zipcode: "91440", city: "Bures sur Yvette", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, availabilities: Availability.where(status: true).first(2).to_a)
+Booking.create!(user_id: [particulier.id, pro.id].sample, address1: "5 avenue de la Dimancherie", zipcode: "91440", city: "Bures sur Yvette", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.where(status: true).first(2).to_a)
 Report.create!
-Booking.create!(user_id: [particulier.id, pro.id].sample, address1: "10 avenue de la Dimancherie", zipcode: "91440", city: "Bures sur Yvette", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, availabilities: Availability.where(status: true).first(2).to_a)
+Booking.create!(user_id: [particulier.id, pro.id].sample, address1: "10 avenue de la Dimancherie", zipcode: "91440", city: "Bures sur Yvette", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.where(status: true).first(2).to_a)
 Report.create!
-Booking.create!(user_id: [particulier.id, pro.id].sample, address1: "166 avenue de Suffren", zipcode: "75015", city: "Paris", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, availabilities: Availability.where(status: true).first(2).to_a)
+Booking.create!(user_id: [particulier.id, pro.id].sample, address1: "166 avenue de Suffren", zipcode: "75015", city: "Paris", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.where(status: true).first(2).to_a)
 Report.create!
-Booking.create!(user_id: [particulier.id, pro.id].sample, address1: "55 avenue de Suffren", zipcode: "75015", city: "Paris", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, availabilities: Availability.where(status: true).first(2).to_a)
+Booking.create!(user_id: [particulier.id, pro.id].sample, address1: "55 avenue de Suffren", zipcode: "75015", city: "Paris", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.where(status: true).first(2).to_a)
 Report.create!
-Booking.create!(user_id: [particulier.id, pro.id].sample, address1: "11 avenue de Suffren", zipcode: "75015", city: "Paris", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, availabilities: Availability.where(status: true).first(2).to_a)
+Booking.create!(user_id: [particulier.id, pro.id].sample, address1: "11 avenue de Suffren", zipcode: "75015", city: "Paris", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.where(status: true).first(2).to_a)
 Report.create!
-Booking.create!(user_id: [particulier.id, pro.id].sample, address1: "16 villa gaudelet", zipcode: "75011", city: "Paris", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, availabilities: Availability.where(status: true).first(2).to_a)
+Booking.create!(user_id: [particulier.id, pro.id].sample, address1: "16 villa gaudelet", zipcode: "75011", city: "Paris", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.where(status: true).first(2).to_a)
 Report.create!
-Booking.create!(user_id: [particulier.id, pro.id].sample, address1: "1 villa gaudelet", zipcode: "75011", city: "Paris", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, availabilities: Availability.where(status: true).first(2).to_a)
+Booking.create!(user_id: [particulier.id, pro.id].sample, address1: "1 villa gaudelet", zipcode: "75011", city: "Paris", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.where(status: true).first(2).to_a)
 
 puts "#{Booking.all.size} Bookings crées. (avec #{Report.all.size} report qui lui est adjoint.)"
 
@@ -127,17 +143,3 @@ Availability.where(booking_id: nil).first(10).each do |availability|
   availability.update(booking_id: Booking.all.sample.id)
 end
 
-prenoms = ["Jean", "James", "Jamel", "Jin"]
-noms = ["Carambolin", "Plastrouier", "Dimitrius", "Robert"]
-companies = ["Colas", "Vinci", "EDF"]
-companies.each_with_index do |company, index|
-  new_company = Company.create(name: company)
-  2.times do
-    new_branch = Branch.create(company_id: new_company.id, name: "Branche #{index + 1}")
-    3.times do
-      Foreman.create(first_name: prenoms.sample, last_name: noms.sample, branch_id: new_branch.id, phone: "06 47 05 11 44")
-    end
-  end
-end
-
-puts "#{Company.count} entreprises crées avec un total de #{Branch.count} branches et #{Foreman.count} Chefs de chantier."
