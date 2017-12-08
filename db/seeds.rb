@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Availability.destroy_all
 Booking.destroy_all
 Report.destroy_all
 Question.destroy_all
@@ -18,7 +19,6 @@ Report.destroy_all
 Answer.destroy_all
 Question.destroy_all
 Answer.destroy_all
-Availability.destroy_all
 User.destroy_all
 
 
@@ -43,12 +43,26 @@ puts "#{Availability.all.size} Availabilities créées."
 
 clients = [particulier, pro]
 
-addresses = ["108bis avenue de la dimancherie, Bures sur yvette", "6 rue du docteur collé, bures sur yvette", "gare de massy palaiseau", "166 avenue de suffren paris", "37 villa gaudelet paris", "12 rue de Montmartre Paris", "Maire de Clichy sous Bois"]
 dates =[Date.today, Date.today + 1, Date.today + 4,Date.today + 5, Date.today + 7, Date.today + 12 ]
-10.times do
-  Report.create
-  Booking.create!(user_id: [particulier.id, pro.id].sample, address: addresses.sample, confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id)
-end
+
+
+Report.create!
+Booking.create!(user_id: [particulier.id, pro.id].sample, address1: "108 avenue de la Dimancherie", zipcode: "91440", city: "Bures sur Yvette", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, availabilities: Availability.where(status: true).first(2).to_a)
+Report.create!
+Booking.create!(user_id: [particulier.id, pro.id].sample, address1: "5 avenue de la Dimancherie", zipcode: "91440", city: "Bures sur Yvette", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, availabilities: Availability.where(status: true).first(2).to_a)
+Report.create!
+Booking.create!(user_id: [particulier.id, pro.id].sample, address1: "10 avenue de la Dimancherie", zipcode: "91440", city: "Bures sur Yvette", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, availabilities: Availability.where(status: true).first(2).to_a)
+Report.create!
+Booking.create!(user_id: [particulier.id, pro.id].sample, address1: "166 avenue de Suffren", zipcode: "75015", city: "Paris", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, availabilities: Availability.where(status: true).first(2).to_a)
+Report.create!
+Booking.create!(user_id: [particulier.id, pro.id].sample, address1: "55 avenue de Suffren", zipcode: "75015", city: "Paris", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, availabilities: Availability.where(status: true).first(2).to_a)
+Report.create!
+Booking.create!(user_id: [particulier.id, pro.id].sample, address1: "11 avenue de Suffren", zipcode: "75015", city: "Paris", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, availabilities: Availability.where(status: true).first(2).to_a)
+Report.create!
+Booking.create!(user_id: [particulier.id, pro.id].sample, address1: "16 villa gaudelet", zipcode: "75011", city: "Paris", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, availabilities: Availability.where(status: true).first(2).to_a)
+Report.create!
+Booking.create!(user_id: [particulier.id, pro.id].sample, address1: "1 villa gaudelet", zipcode: "75011", city: "Paris", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, availabilities: Availability.where(status: true).first(2).to_a)
+
 puts "#{Booking.all.size} Bookings crées. (avec #{Report.all.size} report qui lui est adjoint.)"
 
 sections = ["Désignation du chantier", "Contexte du chantier", "Recommandations et localisations des ouvrages", "Signataires"]
