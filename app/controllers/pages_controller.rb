@@ -5,6 +5,7 @@ class PagesController < ApplicationController
   end
 
   def eligibility
+    @user = current_user
     address = Geocoder.search(params[:query][:address]).first
 
     @address_details = {}
@@ -31,7 +32,7 @@ class PagesController < ApplicationController
     end
 
     unless @address_details.empty?
-      @eligible = @address_details[:zip_code].start_with?('75', '91')
+      @eligible = @address_details[:zip_code].start_with?('75', '91', '92', '93', '94', '95')
     end
 
   end

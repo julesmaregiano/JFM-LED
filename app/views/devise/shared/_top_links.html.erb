@@ -3,6 +3,6 @@
 <% end -%>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "S'enregistrer", "#" %><br />
+  <%= link_to "S'enregistrer", new_user_registration_path %><br />
 <% end -%>
 

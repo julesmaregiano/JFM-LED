@@ -11,14 +11,21 @@
         <%= f.input :country, priority: [ 'FR' ], input_html: {value: @address_details[:country]} %>
 
           <div class="eligible-banner <%= 'hidden' unless @eligible %>">
-            YAY
+            <% if @user.nil? %>
+              <h3>Vous êtes éligibiles !</h3>
+              <%= link_to "Inscrivez-vous!", new_user_registration_path, class: 'btn btn-primary btn-eligibility' %>
+              <%= link_to "Ou connectez-vous.", new_user_session_path, class: 'btn btn-primary btn-eligibility' %>
+            <% elsif @user.pro? %>
+              <%= link_to "Réserver", new_pro_booking_path, class: 'btn btn-primary btn-eligibility' %>
+            <% else %>
+            <% end %>
           </div>
 
           <div class="non-eligible-banner <%= 'hidden' if @eligible %>">
-            NOPE NOPE
+            <h3>Votre adresse n'est pas en zone d'éligibilité.. </h3>
+            <p>Appellez-nous au 01.23.45.67.89 et nous essaierons de vous rediriger.</p>
           </div>
 
-        <%= f.submit class: 'btn btn-primary btn-eligibility', label: "Booker", disabled: !@eligible %>
       <% end %>
     </div>
   </div>
