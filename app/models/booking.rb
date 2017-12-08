@@ -2,6 +2,7 @@ class Booking < ApplicationRecord
   has_many :availabilities
   belongs_to :report
   validates :user_id, presence: :true
+  validates :availabilities, presence: :true
   belongs_to :user
   geocoded_by :address
   after_create :geocode

@@ -8,7 +8,6 @@ class Pro::UsersController < ApplicationController
       marker.lat booking.latitude
       marker.lng booking.longitude
     end
-    binding.pry
   end
 
   def index

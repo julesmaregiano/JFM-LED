@@ -22,7 +22,6 @@ class Pro::BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
     @booking.user_id = @user.id
     @booking.report = Report.new
-
     if @booking.save
       @booking.availabilities.update(status: false)
       redirect_to pro_user_path(@user)
