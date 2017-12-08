@@ -12,15 +12,13 @@ Report.destroy_all
 Question.destroy_all
 OptionChoice.destroy_all
 OptionGroup.destroy_all
-OptionChoice.destroy_all
 Section.destroy_all
 Unit.destroy_all
-Report.destroy_all
-Answer.destroy_all
-Question.destroy_all
 Answer.destroy_all
 User.destroy_all
-
+Foreman.destroy_all
+Branch.destroy_all
+Company.destroy_all
 
 particulier = User.create!(email: "particulier@led.fr", password: "123soleil", first_name: "Parti", last_name: "Culier", phone:"06 11 22 33 44", role:0)
 pro = User.create!(email: "pro@led.fr", password: "123soleil", first_name: "Pro", last_name: "Fessionnel", phone:"06 11 22 33 44", role:1)
@@ -128,3 +126,18 @@ puts "Questions créées: #{Question.count}"
 Availability.where(booking_id: nil).first(10).each do |availability|
   availability.update(booking_id: Booking.all.sample.id)
 end
+
+prenoms = ["Jean", "James", "Jamel", "Jin"]
+noms = ["Carambolin", "Plastrouier", "Dimitrius", "Robert"]
+companies = ["Colas", "Vinci", "EDF"]
+companies.each_with_index do |company, index|
+  new_company = Company.create(name: company)
+  2.times do
+    new_branch = Branch.create(company_id: new_company.id, name: "Branche #{index + 1}")
+    3.times do
+      Foreman.create(first_name: prenoms.sample, last_name: noms.sample, branch_id: new_branch.id, phone: "06 47 05 11 44")
+    end
+  end
+end
+
+puts "#{Company.count} entreprises crées avec un total de #{Branch.count} branches et #{Foreman.count} Chefs de chantier."
