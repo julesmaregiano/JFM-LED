@@ -13,12 +13,15 @@ class Pro::BookingsController < ApplicationController
 
   def new
     @user = current_user
+    @tech = User.where(role: 3).first
     @availabilities = Availability.all
     @booking = Booking.new
   end
 
   def create
     @user = current_user
+    @tech = User.where(role: 3).first
+    @availabilities = Availability.all
     @booking = Booking.new(booking_params)
     @booking.user_id = @user.id
     @booking.report = Report.new
@@ -31,7 +34,7 @@ class Pro::BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit(:comment, :address, :surface, availability_ids: [])
+    params.require(:booking).permit(:comment, :address1, :address2, :zipcode, :city, :country, :surface, availability_ids: [])
   end
 
 end
