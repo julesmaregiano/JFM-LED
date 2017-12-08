@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171208115522) do
+ActiveRecord::Schema.define(version: 20171208130047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,8 +74,36 @@ ActiveRecord::Schema.define(version: 20171208115522) do
     t.string "city"
     t.string "zipcode"
     t.string "country"
+    t.bigint "foreman_id"
+    t.index ["foreman_id"], name: "index_bookings_on_foreman_id"
     t.index ["report_id"], name: "index_bookings_on_report_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
+
+  create_table "branches", force: :cascade do |t|
+    t.string "name"
+    t.string "city"
+    t.string "zipcode"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.string "name"
+    t.bigint "branch_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["branch_id"], name: "index_companies_on_branch_id"
+  end
+
+  create_table "foremen", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone"
+    t.bigint "branch_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["branch_id"], name: "index_foremen_on_branch_id"
   end
 
   create_table "option_choices", force: :cascade do |t|
@@ -153,6 +181,8 @@ ActiveRecord::Schema.define(version: 20171208115522) do
   add_foreign_key "availabilities", "users"
   add_foreign_key "bookings", "reports"
   add_foreign_key "bookings", "users"
+  add_foreign_key "companies", "branches"
+  add_foreign_key "foremen", "branches"
   add_foreign_key "option_choices", "option_groups"
   add_foreign_key "questions", "option_groups"
   add_foreign_key "questions", "sections"
