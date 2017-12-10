@@ -14,14 +14,14 @@
   <tbody>
     <% bookings.each do |booking| %>
       <tr>
-        <th scope="row">1</th>
+        <th scope="row">#<%= booking.id %></th>
         <td><%= booking.created_at.strftime("%a %d %b") %></td>
         <td><%= booking.address %></td>
         <td><%= booking.user.first_name + ' ' + booking.user.last_name %></td>
         <td><%= booking.user.pro? ? booking.user.company.name : "Particulier" %></td>
         <td><%= booking.availabilities.size.odd? ? "#{booking.availabilities.size} demi-journées" : "#{booking.availabilities.size} journées" %></td>
         <td><% booking.availabilities.each do |availability| %>
-              <%= availability.date.strftime("%a %d %b") %>
+              <p><%= availability.date.strftime("%a %d %b") %></p>
             <% end %>
         </td>
         <td><%= @user.manager? ? link_to("Voir", manager_booking_path(booking)) : link_to("Voir", technician_booking_path(booking)) %></td>
