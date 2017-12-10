@@ -1,7 +1,15 @@
+.card-container {
+  background-color: white;
+  border-top: 2px solid $diago;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.07),0 2px 0 0 rgba(0,0,0,0.03);
+}
+
 .card {
   background-color: white;
   max-height: 200px;
   margin: 2px;
+
 }
 
 .card-top > * {

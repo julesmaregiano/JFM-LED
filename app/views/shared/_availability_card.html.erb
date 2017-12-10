@@ -1,3 +1,5 @@
+<% booking = availability.booking %>
+
 <div class="card">
   <div class="card-top flex-horizontal flex-space-between">
     <div class="card-logo">
@@ -8,10 +10,7 @@
       <h7><%= booking.user.first_name %> <%= booking.user.last_name %></h7>
     </div>
     <div class="card-date">
-      <% booking.availabilities.each do |availability| %>
-        <p><%= availability.date %> <%= booking.availabilities.first.half == 0 ? "matin" : "aprem" %></p>
-      <% end %>
-
+      <p><%= availability.date.strftime("%a %d %b") %> <%= availability.half == 0 ? "matin" : "aprem" %></p>
     </div>
   </div>
   <div class="card-middle flex-horizontal flex-space-between">
