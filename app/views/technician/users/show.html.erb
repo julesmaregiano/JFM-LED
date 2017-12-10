@@ -3,12 +3,11 @@
 
   <div class="dashboard-content">
     <div class="padding-box">
-      <h3 class="text-center">Technician#Dashboard (Users#show)</h3>
       <div class="row">
-        <div class= "col-xs-12 col-md-6" id="map" style="height: 600px;"></div>
+        <div class= "col-xs-12 col-md-6" id="map" style="height: 90vh;"></div>
         <div class="col-xs-12 col-md-6">
         <div class="card-container">
-          <h4>Vos prochainess détections </h4>
+          <h4>Vos prochaines détections </h4>
           <% unless @availabilities.nil? %>
             <% @availabilities.each do |availability| %>
             <%= render "shared/availability_card", availability: availability %>

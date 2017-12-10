@@ -32,9 +32,9 @@ companies.each_with_index do |company, index|
     end
   end
 end
-Company.where(name: "Colas").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1512925512/COLAS_bzpr7g.jpg")
-Company.where(name: "Vinci").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1512925498/VINCI_f3kskg.png")
-Company.where(name: "EDF").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1512925498/EDF_ue9ltd.jpg")
+Company.where(name: "Colas").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1512927219/svl6igercblakdcpljyt.jpg")
+Company.where(name: "Vinci").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1512927221/vbjzv7dqzehkcfvd7pqi.png")
+Company.where(name: "EDF").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1512927222/xotiuni0ke0d16xdiv1i.jpg")
 Company.create(name: "Particulier")
 Branch.create(company_id: Company.last.id, name: "Particulier")
 Company.create(name: "JFM Conseils")
