@@ -12,7 +12,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :bookings
+  has_many :bookings, through: :availabilities
   has_many :availabilities
 
   enum role: [:particulier, :pro, :technician, :manager, :admin]

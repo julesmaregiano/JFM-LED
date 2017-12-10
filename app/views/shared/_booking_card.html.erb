@@ -4,12 +4,13 @@
       <img style="height: 100%" src="http://www.verifdiploma.com/img/lg-colas.jpg" alt="">
     </div>
     <div class="card-top-right no-margin">
-      <h5 class="no-margin">Colas</h5>
+      <h5 class="no-margin"><%= booking.user.pro? ? booking.user.company.name : "Particulier" %></h5>
       <h7><%= booking.user.first_name %> <%= booking.user.last_name %></h7>
     </div>
     <div class="card-date">
-      <p><%= booking.availabilities.first.date %></p>
-      <p><%= booking.availabilities.first.half == 0 ? "matin" : "aprem" %></p>
+      <% booking.availabilities.each do |availability| %>
+        <p><%= availability.date %> <%= booking.availabilities.first.half == 0 ? "matin" : "aprem" %></p>
+      <% end %>
 
     </div>
   </div>
