@@ -6,7 +6,8 @@ class User < ApplicationRecord
   validates :last_name, presence: :true
   validates :phone, presence: :true
   validates :role, presence: :true
-  has_one :company
+  belongs_to :company
+  belongs_to :branch
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -15,4 +16,5 @@ class User < ApplicationRecord
   has_many :availabilities
 
   enum role: [:particulier, :pro, :technician, :manager, :admin]
+
 end

@@ -32,8 +32,8 @@ companies.each_with_index do |company, index|
     end
   end
 end
-
 puts "#{Company.count} entreprises crées avec un total de #{Branch.count} branches et #{Foreman.count} Chefs de chantier."
+
 particulier = User.create!(email: "particulier@led.fr", password: "123soleil", first_name: "Parti", last_name: "Culier", phone:"06 11 22 33 44", role:0)
 pro = User.create!(email: "pro@led.fr", password: "123soleil", first_name: "Pro", last_name: "Fessionnel", phone:"06 11 22 33 44", role:1, company_id: Company.first.id, branch_id: Company.first.branches.first.id)
 pro2 = User.create!(email: "pro2@led.fr", password: "123soleil", first_name: "Pro2", last_name: "Fessionnel2", phone:"06 11 22 33 44", role:1, company_id: Company.second.id, branch_id: Company.second.branches.first.id)
