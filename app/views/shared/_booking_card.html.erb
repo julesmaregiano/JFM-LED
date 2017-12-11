@@ -16,8 +16,8 @@
   </div>
 
   <div class="card-right">
-    <% booking.availabilities.each do |availability| %>
-      <p class="card-date"><%= availability.date.strftime("%a %d %b") %> <%= availability.half == 0 ? "matin" : "aprem" %></p>
+    <% booking.availabilities.order(:date).each do |availability| %>
+      <span><p class="card-date"><%= availability.date.strftime("%d %b") %> <%= availability.half == 0 ? "matin" : "aprem" %></p></span>
     <% end %>
     <div class="card-links flex-horizontal">
       <%= link_to "tel:#{booking.foreman_id}" do %>

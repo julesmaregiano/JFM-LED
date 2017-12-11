@@ -19,7 +19,7 @@
         <td><%= booking.address %></td>
         <td><%= booking.user.first_name + ' ' + booking.user.last_name %></td>
         <td><%= booking.user.pro? ? booking.user.company.name : "Particulier" %></td>
-        <td><%= booking.availabilities.size.odd? ? "#{booking.availabilities.size} demi-journées" : "#{booking.availabilities.size} journées" %></td>
+        <td><%= booking.availabilities.size.odd? ? "#{booking.availabilities.size} demi-journées" : "#{booking.availabilities.size / 2} journées" %></td>
         <td><% booking.availabilities.each do |availability| %>
               <p><%= availability.date.strftime("%a %d %b") %></p>
             <% end %>
