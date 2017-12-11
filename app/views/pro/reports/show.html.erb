@@ -32,7 +32,7 @@
       <% end %>
       <% if @report.photos? %>
         <%= "Le rapport contient #{@report.photos.size} photo" %>
-        <%= @report.photos.each do |photo| %>
+        <% @report.photos.each do |photo| %>
           <%= cl_image_tag photo.path, width: 200, height: 300, crop: :fill %>
         <% end %>
       <% end %>

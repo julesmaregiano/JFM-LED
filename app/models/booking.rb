@@ -1,8 +1,11 @@
 class Booking < ApplicationRecord
   has_many :availabilities
+  has_many :users, through: :availabilities
+
+  has_many :foremen
   belongs_to :report
   validates :user_id, presence: :true
-  validates :availabilities, presence: :true
+  validates :availabilities, presence: true
   belongs_to :user
   geocoded_by :address
   after_create :geocode
@@ -17,6 +20,10 @@ class Booking < ApplicationRecord
   def self.for_next_week
     self.to_come.soon
       # .for(user)
+  end
+
+  def has_foreman
+    Foreman.find(self.foreman_id)
   end
 
   def technicians

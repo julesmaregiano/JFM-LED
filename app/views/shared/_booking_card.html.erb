@@ -1,29 +1,29 @@
-<div class="card">
-  <div class="card-top flex-horizontal flex-space-between">
+<% technician = booking.availabilities.first.user %>
+<div class="card flexbox">
+  <div class="flexbox card-left">
     <div class="card-logo">
-      <img style="height: 100%" src="http://www.verifdiploma.com/img/lg-colas.jpg" alt="">
+      <% unless technician.company.photo.nil? %>
+        <%= cl_image_tag technician.company.photo.public_id, height: 110, width: 110, crop: :pad, class: "card-logo" %>
+      <% end %>
     </div>
-    <div class="card-top-right no-margin">
-      <h5 class="no-margin">Entreprise</h5>
-      <h7><%= booking.user.first_name %> <%= booking.user.last_name %></h7>
-    </div>
-    <div class="card-date">
-      <p><%= booking.availabilities.first.date %></p>
-      <p><%= booking.availabilities.first.half == 0 ? "matin" : "aprem" %></p>
 
+    <div class="card-middle no-margin flexbox-vertical align-center">
+      <h3 class="no-margin"><%= technician.company.name %></h3>
+      <p><strong><%= booking.address1 %> - <%= booking.city %></strong></p>
+      <p>Technicien: <%= technician.first_name %> <%= technician.last_name %></p>
+      <p>Chef de Chantier: <%= booking.has_foreman.first_name %> <%= booking.has_foreman.last_name %></p>
     </div>
   </div>
-  <div class="card-middle flex-horizontal flex-space-between">
-    <div class="card-bottom-left">
-      <%= booking.address %>
-    </div>
-    <div class="card-bottom-right">
-      <%= link_to "http://waze.to/?ll=#{booking.latitude},#{booking.longitude}&navigate=yes" do %>
-        <i class="fa fa-car" aria-hidden="true"></i>
-      <% end %>
-      <%= link_to "tel:#{booking.user.phone}" do %>
-        <i class="fa fa-mobile" aria-hidden="true"></i>
+
+  <div class="card-right">
+    <% booking.availabilities.each do |availability| %>
+      <p class="card-date"><%= availability.date.strftime("%a %d %b") %> <%= availability.half == 0 ? "matin" : "aprem" %></p>
+    <% end %>
+    <div class="card-links flex-horizontal">
+      <%= link_to "tel:#{booking.foreman_id}" do %>
+        <i class="card-icon fa fa-phone" aria-hidden="true"></i>
       <% end %>
     </div>
   </div>
+
 </div>

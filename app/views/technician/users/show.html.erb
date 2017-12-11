@@ -3,17 +3,17 @@
 
   <div class="dashboard-content">
     <div class="padding-box">
-      <h3 class="text-center">Technician#Dashboard (Users#show)</h3>
       <div class="row">
-        <div class= "col-xs-12 col-md-6" id="map" style="height: 600px;"></div>
+        <div class= "col-xs-12 col-md-6" id="map" style="height: calc(100vh - 90px);"></div>
         <div class="col-xs-12 col-md-6">
-        <h3>Vos 5 prochains bookings </h3>
-        <% unless @bookings.nil? %>
-          <% @bookings.each do |booking| %>
-          <%= render "shared/booking_card", booking: booking %>
+        <div class="card-container">
+          <h4>Vos prochaines détections </h4>
+          <% unless @availabilities.nil? %>
+            <% @availabilities.each do |availability| %>
+            <%= render "shared/availability_card", availability: availability %>
+            <% end %>
           <% end %>
-        <% end %>
-
+        </div>
         </div>
       </div>
     </div>

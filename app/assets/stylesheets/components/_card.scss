@@ -1,10 +1,45 @@
-.card {
+.card-container {
   background-color: white;
-  max-width: 350px;
-  max-height: 200px;
-  margin: 2px;
+  border-top: 2px solid $blue-gray;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.07),0 2px 0 0 rgba(0,0,0,0.03);
 }
 
-.card-top > * {
-  height: 70px;
+.card {
+  max-height: 200px;
+  margin: 5px 10px;
+  border-left: 5px solid $light-gray;
+  box-shadow: 0 1px 7px 0 rgba(0,0,0,0.07),0 2px 0 0 rgba(0,0,0,0.03);
+  justify-content: space-between;
+  & .card:hover {
+    border-left: 5px solid $anis;
+  }
+}
+
+.card-logo {
+  padding: 5px;
+}
+
+.card-right {
+  height: 100%
+}
+
+.card-icon {
+  color: $diago;
+  font-size: 30px;
+  margin: 5px;
+  padding: 2px;
+  & :hover {
+    color: $diago;
+    font-size: 32px
+  }
+}
+
+.card-date {
+  background-color: $light-gray;
+  border: 1px solid $medium-gray;
+  color: $dark-gray;
+  padding: 5px;
+  border-radius: 3px;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.07),0 2px 0 0 rgba(0,0,0,0.03);
 }

@@ -1,0 +1,33 @@
+<% booking = availability.booking %>
+
+<div class="card flexbox">
+  <div class="flexbox card-left">
+    <div class="card-logo">
+      <% if booking.user.pro? %>
+        <%= cl_image_tag booking.user.company.photo.public_id, height: 110, width: 110, crop: :pad, class: "card-logo" %>
+      <% else %>
+        <img class="card-logo", style="height: 110px, width: 110px" src="http://via.placeholder.com/110x110" alt="">
+      <% end %>
+    </div>
+
+    <div class="card-middle no-margin flexbox-vertical align-center">
+      <h3 class="no-margin"><%= booking.user.pro? ? booking.user.company.name : "Particulier" %></h3>
+      <p><%= booking.user.first_name %> <%= booking.user.last_name %></p>
+      <p><%= booking.address1 %> - <%= booking.city %></p>
+    </div>
+  </div>
+
+  <div class="card-right">
+    <p class="card-date"><%= availability.date.strftime("%a %d %b") %> <%= availability.half == 0 ? "matin" : "aprem" %></p>
+    <div class="card-links flex-horizontal">
+      <%= link_to "http://waze.to/?ll=#{booking.latitude},#{booking.longitude}&navigate=yes" do %>
+        <i class="card-icon fa fa-car" aria-hidden="true"></i>
+      <% end %>
+      <%= link_to "tel:#{booking.user.phone}" do %>
+        <i class="card-icon fa fa-phone" aria-hidden="true"></i>
+      <% end %>
+    </div>
+  </div>
+
+</div>
+

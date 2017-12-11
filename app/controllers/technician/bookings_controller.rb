@@ -5,4 +5,10 @@ class Technician::BookingsController < ApplicationController
     @bookings = Booking.all
   end
 
+  def show
+    @user = current_user
+    @booking = Booking.find(params[:id])
+    @availabilities = @booking.availabilities
+  end
+
 end
