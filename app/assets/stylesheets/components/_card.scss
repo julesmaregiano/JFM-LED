@@ -2,11 +2,12 @@
   background-color: white;
   border-top: 2px solid $blue-gray;
   border-radius: 2px;
+  padding: 8px 4px;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.07),0 2px 0 0 rgba(0,0,0,0.03);
 }
 
 .card {
-  max-height: 200px;
+  max-height: 400px;
   margin: 5px 10px;
   border-left: 5px solid $light-gray;
   box-shadow: 0 1px 7px 0 rgba(0,0,0,0.07),0 2px 0 0 rgba(0,0,0,0.03);
@@ -40,6 +41,7 @@
   border: 1px solid $medium-gray;
   color: $dark-gray;
   padding: 5px;
+  width: 120px;
   border-radius: 3px;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.07),0 2px 0 0 rgba(0,0,0,0.03);
 }

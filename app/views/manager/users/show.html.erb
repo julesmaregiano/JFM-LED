@@ -2,7 +2,6 @@
   <%= render "/shared/sidebar"%>
   <div class="dashboard-content">
     <div class="padding-box">
-      <h3 class="text-center">Manager#Dashboard (Users#show)</h3>
       <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-4">
           <div id="map" style="width: 100%; height: 600px;"></div>
@@ -23,7 +22,14 @@
             <% end %>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4">
-          <%= render "manager/users/today_planning", bookings: @todays_bookings %>
+          <div class="card-container">
+            <h4>Détections du jour</h4>
+            <% unless @todays_bookings.nil? %>
+              <% @todays_bookings.each do |booking| %>
+              <%= render "shared/booking_card", booking: booking %>
+              <% end %>
+            <% end %>
+          </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4">
           <%= render "manager/users/stat", bookings: @todays_bookings %>
