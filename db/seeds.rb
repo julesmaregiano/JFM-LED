@@ -37,8 +37,8 @@ Company.where(name: "Vinci").update(photo_url: "http://res.cloudinary.com/zanzib
 Company.where(name: "EDF").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1512927222/xotiuni0ke0d16xdiv1i.jpg")
 Company.create(name: "Particulier")
 Branch.create(company_id: Company.last.id, name: "Particulier")
-Company.create(name: "JFM Conseils")
-Branch.create(company_id: Company.last.id, name: "Les Ulis", photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1512978766/bojawagxesmanf9kefbd.png")
+Company.create(name: "JFM Conseils", photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1512978766/bojawagxesmanf9kefbd.png")
+Branch.create(company_id: Company.last.id, name: "Les Ulis")
 
 puts "#{Company.count} entreprises crées avec un total de #{Branch.count} branches et #{Foreman.count} Chefs de chantier."
 

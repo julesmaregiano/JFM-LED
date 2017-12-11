@@ -18,7 +18,7 @@
               <%= f.input :zipcode %>
               <%= f.input :country %>
               <%= f.input :surface %>
-              <%= f.input :foreman_id, collection: @foremen %>
+              <%= f.input :foreman_id, collection: Foreman.where(branch_id: @user.branch_id).to_a %>
               <%= f.input :comment %>
               <%= f.button :submit %>
             <% end %>
