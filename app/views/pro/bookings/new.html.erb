@@ -18,6 +18,7 @@
               <%= f.input :zipcode %>
               <%= f.input :country %>
               <%= f.input :surface %>
+              <%= f.input :foreman_id, collection: @foremen %>
               <%= f.input :comment %>
               <%= f.button :submit %>
             <% end %>

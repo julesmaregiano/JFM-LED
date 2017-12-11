@@ -38,17 +38,17 @@ Company.where(name: "EDF").update(photo_url: "http://res.cloudinary.com/zanzibar
 Company.create(name: "Particulier")
 Branch.create(company_id: Company.last.id, name: "Particulier")
 Company.create(name: "JFM Conseils")
-Branch.create(company_id: Company.last.id, name: "Les Ulis")
+Branch.create(company_id: Company.last.id, name: "Les Ulis", photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1512978766/bojawagxesmanf9kefbd.png")
 
 puts "#{Company.count} entreprises crées avec un total de #{Branch.count} branches et #{Foreman.count} Chefs de chantier."
 
-particulier = User.create!(email: "particulier@led.fr", password: "123soleil", first_name: "Parti", last_name: "Culier", phone:"06 11 22 33 44", role:0, company: Company.where(name: "Particulier").first, branch: Branch.where(name: "Particulier").first)
-pro = User.create!(email: "pro@led.fr", password: "123soleil", first_name: "Pro", last_name: "Fessionnel", phone:"06 11 22 33 44", role:1, company: Company.first, branch: Company.first.branches.first)
-pro2 = User.create!(email: "pro2@led.fr", password: "123soleil", first_name: "Pro2", last_name: "Fessionnel2", phone:"06 11 22 33 44", role:1, company: Company.second, branch: Company.second.branches.first)
-pro3 = User.create!(email: "pro3@led.fr", password: "123soleil", first_name: "Pro3", last_name: "Fessionnel3", phone:"06 11 22 33 44", role:1, company: Company.third, branch: Company.third.branches.first)
-technician = User.create!(email: "tech@led.fr", password: "123soleil", first_name: "Tech", last_name: "Nician", phone:"06 11 22 33 44", role:2, company: Company.last, branch: Branch.last)
-technician2 = User.create!(email: "tech2@led.fr", password: "123soleil", first_name: "Tech2", last_name: "Nician2", phone:"06 11 22 33 44", role:2, company: Company.last, branch: Branch.last)
-manager = User.create!(email: "manager@led.fr", password: "123soleil", first_name: "Ma", last_name: "Nager", phone:"06 11 22 33 44", role:3, company: Company.last, branch: Branch.last)
+particulier = User.create!(email: "particulier@led.fr", password: "123soleil", first_name: "Sarah", last_name: "Particulier", phone:"06 11 22 33 44", role:0, company: Company.where(name: "Particulier").first, branch: Branch.where(name: "Particulier").first)
+pro = User.create!(email: "pro@led.fr", password: "123soleil", first_name: "Marcel", last_name: "Pro", phone:"06 11 22 33 44", role:1, company: Company.first, branch: Company.first.branches.first)
+pro2 = User.create!(email: "pro2@led.fr", password: "123soleil", first_name: "Alexandra", last_name: "Pro", phone:"06 11 22 33 44", role:1, company: Company.second, branch: Company.second.branches.first)
+pro3 = User.create!(email: "pro3@led.fr", password: "123soleil", first_name: "Ivan", last_name: "Pro", phone:"06 11 22 33 44", role:1, company: Company.third, branch: Company.third.branches.first)
+technician = User.create!(email: "tech@led.fr", password: "123soleil", first_name: "Marie", last_name: "Tech", phone:"06 11 22 33 44", role:2, company: Company.last, branch: Branch.last)
+technician2 = User.create!(email: "tech2@led.fr", password: "123soleil", first_name: "Tom", last_name: "Tech", phone:"06 11 22 33 44", role:2, company: Company.last, branch: Branch.last)
+manager = User.create!(email: "manager@led.fr", password: "123soleil", first_name: "Fabrice", last_name: "Manager", phone:"06 11 22 33 44", role:3, company: Company.last, branch: Branch.last)
 admin = User.create!(email: "admin@led.fr", password: "123soleil", first_name: "Ad", last_name: "Min", phone:"06 11 22 33 44", role:4, company: Company.last, branch: Branch.last)
 puts "#{User.all.size} Users créés."
 
