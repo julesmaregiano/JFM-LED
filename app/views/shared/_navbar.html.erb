@@ -5,13 +5,15 @@
 
   <div class="navbar-wagon-right hidden-xs hidden-sm">
     <% if user_signed_in? %>
-      <%= current_user.role %>
       <% if current_user.technician? %>
-        <%= link_to t(".profile", default: "profil"), technician_user_path(current_user), class: "navbar-wagon-item navbar-wagon-link" %>
+        <%= link_to "Tableau de bord", technician_user_path(current_user), class: "navbar-wagon-item navbar-wagon-link" %>
       <% elsif current_user.particulier? %>
-        <%= link_to t(".profile", default: "profil"), particulier_user_path(current_user), class: "navbar-wagon-item navbar-wagon-link" %>
+        <%= link_to "Tableau de bord", particulier_user_path(current_user), class: "navbar-wagon-item navbar-wagon-link" %>
       <% elsif current_user.pro? %>
+        <%= link_to "Tableau de bord", pro_user_path(current_user), class: "navbar-wagon-item navbar-wagon-link" %>
         <%= link_to "+ Réserver une détection", new_pro_booking_path, class: "btn-slim flexbox" %>
+      <% elsif current_user.manager? %>
+        <%= link_to "Tableau de bord", manager_user_path(current_user), class: "navbar-wagon-item navbar-wagon-link" %>
       <% end %>
       <%= link_to t(".sign_out", default: "déconnexion"), destroy_user_session_path, method: :delete, class: "navbar-wagon-item navbar-wagon-link" %>
     <% else %>
