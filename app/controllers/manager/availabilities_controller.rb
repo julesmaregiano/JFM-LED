@@ -3,7 +3,7 @@ class Manager::AvailabilitiesController < ApplicationController
   def index
     @user = current_user
     @techs = User.all.where(role: 2)
-    @availabilities = Availability.all
+    @availabilities = Availability.all.to_come
   end
 
   def update

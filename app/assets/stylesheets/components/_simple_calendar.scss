@@ -54,7 +54,7 @@
   .calendar-heading {
     font-weight: bold;
     font-size: $dashboard-title;
-    margin: 20px 0 20px 0;
+    margin: 10px 0px;
     text-align: center;
 
   }
@@ -90,12 +90,22 @@
     justify-content: space-between;
     flex-direction: column;
   }
+  .calendar-submit {
+    height: 100%;
+    width: 100%;
+    padding: 0px;
+    border-radius: none;
+    background-color: transparent;
+    & p {
+      color: $dark-gray;
+    }
+  }
   .btn-calendar {
     color: $dark-gray;
     position: relative;
     margin: 4% 0 4% 0;
     text-align: center;
-    min-height: 50px;
+    height: 50px;
     width: 100%;
     background-color: white;
     display: flex;
@@ -103,6 +113,7 @@
     justify-content: center;
     input {
       font-size: 12px;
+      border: 0px;
     }
     i {
       color: $dark-gray;
@@ -121,7 +132,7 @@
   .btn-calendar-selected  {
     border: 1px solid $anis;
     border-left: 8px solid $anis;
-    background-color: blue;
+    background-color: $diago;
     &:hover {
       background-color: $anis;
     }
