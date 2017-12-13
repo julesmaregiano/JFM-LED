@@ -12,6 +12,8 @@
             <h4>Infos chantier</h4>
             <%= simple_form_for [@user.role, @booking] do |f| %>
               <div class="availabilities-fields"> <%# div pour injecter les avaialbilities via le JS %></div>
+              <%= f.input :address %>
+
               <%= f.input :address1 %>
               <%= f.input :address2 %>
               <%= f.input :city %>

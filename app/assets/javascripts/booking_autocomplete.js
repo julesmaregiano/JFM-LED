@@ -1,39 +1,35 @@
-function onPlaceChanged() {
+function onPlaceChanged2() {
   var place = this.getPlace();
-  var components = getAddressComponents(place);
+  var components = getAddressComponents2(place);
 
   var bookingAddress = document.getElementById('booking_full_address');
   // bookingAddress.value = components.address;
 
-  document.getElementById('booking_zip_code').value = components.zip_code;
+  console.log(components);
+
+  var haha = document.getElementById('booking_city').value;
+  console.log(haha);
+  document.getElementById('booking_address1').value = components.address;
   document.getElementById('booking_city').value = components.city;
-  document.getElementById('booking_street').value = components.address;
+  document.getElementById('booking_zipcode').value = components.zip_code;
+
+
 
   if (components.country_code) {
     var selector = '#booking_country option[value="' + components.country_code + '"]';
     document.querySelector(selector).selected = true;
   }
 
-  if (components.zip_code.startsWith("75")) {
-    $('.eligible-banner').removeClass('hidden');
-    $('.non-eligible-banner').addClass('hidden');
-    $('.btn-eligibility').prop('disabled', true);
-  } else {
-    $('.eligible-banner').addClass('hidden');
-    $('.non-eligible-banner').removeClass('hidden');
-    $('.btn-eligibility').prop('disabled', false);
-  }
-
   bookingAddress.blur();
 }
 
-function getAddressComponents(place) {
+function getAddressComponents2(place) {
   // If you want lat/lng, you can look at:
   // - place.geometry.location.lat()
   // - place.geometry.location.lng()
 
   if (window.console && typeof console.log === "function") {
-    console.log(place);
+
   }
 
   var street_number = null;
@@ -61,7 +57,7 @@ function getAddressComponents(place) {
     }
   }
 
-    console.log(zip_code + country_code);
+
   return {
     address: street_number === null ? route : (street_number + ' ' + route),
     zip_code: zip_code,
@@ -72,11 +68,11 @@ function getAddressComponents(place) {
 
 
 document.addEventListener("DOMContentLoaded", function() {
-  var bookingAddress = document.getElementById('booking_full_address');
+  var bookingAddress = document.getElementById('booking_address');
 
   if (bookingAddress) {
     var autocomplete = new google.maps.places.Autocomplete(bookingAddress, { types: ['geocode'] });
-    google.maps.event.addListener(autocomplete, 'place_changed', onPlaceChanged);
+    google.maps.event.addListener(autocomplete, 'place_changed', onPlaceChanged2);
     google.maps.event.addDomListener(bookingAddress, 'keydown', function(e) {
       if (e.key === "Enter") {
         e.preventDefault(); // Do not submit the form on Enter.
