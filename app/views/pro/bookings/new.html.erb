@@ -14,11 +14,10 @@
               <div class="availabilities-fields"> <%# div pour injecter les avaialbilities via le JS %></div>
               <%= f.input :address %>
 
-              <%= f.input :address1 %>
-              <%= f.input :address2 %>
-              <%= f.input :city %>
-              <%= f.input :zipcode %>
-              <%= f.input :country %>
+              <%= f.hidden_field :address1 %>
+              <%= f.hidden_field :city %>
+              <%= f.hidden_field :zipcode %>
+              <%= f.hidden_field :country %>
               <%= f.input :surface %>
               <%= f.input :foreman_id, collection: Foreman.where(branch_id: @user.branch_id).to_a %>
               <%= f.input :comment %>
