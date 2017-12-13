@@ -3,6 +3,7 @@ function onPlaceChanged() {
   var components = getAddressComponents(place);
 
   var bookingAddress = document.getElementById('booking_full_address');
+  var bookingAddress = document.getElementById('booking_address1');
   // bookingAddress.value = components.address;
 
   document.getElementById('booking_zip_code').value = components.zip_code;
@@ -73,6 +74,7 @@ function getAddressComponents(place) {
 
 document.addEventListener("DOMContentLoaded", function() {
   var bookingAddress = document.getElementById('booking_full_address');
+  var bookingAddress = document.getElementById('booking_address1');
 
   if (bookingAddress) {
     var autocomplete = new google.maps.places.Autocomplete(bookingAddress, { types: ['geocode'] });
