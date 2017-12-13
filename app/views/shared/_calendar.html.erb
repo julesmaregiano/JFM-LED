@@ -6,7 +6,7 @@
 
         <div class="btn-calendar <%= availability.status? ? "btn-calendar-tobook" : "btn-calendar-booked" %>" data-availability-id="<%= availability.id %>" >
           <%= availability.half == 0 ? "matin" : "aprem" %>
-          <%= availability.status == false ? "Occupé" : "libre" %>
+          <%= availability.status == 0 ? "Occupé" : "libre" %>
 
           <% if user.technician? %>
             <% if availability.booking_id.nil? %>

@@ -4,7 +4,7 @@ class CreateAvailabilities < ActiveRecord::Migration[5.1]
       t.references :user, foreign_key: true
       t.references :booking, foreign_key: true
       t.date :date
-      t.integer :status
+      t.integer :status, default: 1
       t.integer :half
 
       t.timestamps

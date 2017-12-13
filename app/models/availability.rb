@@ -11,8 +11,9 @@ class Availability < ApplicationRecord
   scope :booked, -> { where.not(booking_id: nil) }
   scope :oldest_to_new, -> { order(created_at: :asc)}
 
+  enum role: [:booked, :free, :pending, :leave]
 
   def init
-    self.status  ||= 0
+    self.update(status: 1)
   end
 end
