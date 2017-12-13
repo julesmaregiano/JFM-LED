@@ -9,6 +9,12 @@ class Technician::BookingsController < ApplicationController
     @user = current_user
     @booking = Booking.find(params[:id])
     @availabilities = @booking.availabilities
+    unless @booking.latitude.nil? || @booking.latitude.nil?
+      @markers = Gmaps4rails.build_markers(@booking) do |booking, marker|
+        marker.lat booking.latitude
+        marker.lng booking.longitude
+      end
+    end
   end
 
 end
