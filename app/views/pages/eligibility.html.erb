@@ -19,6 +19,7 @@
               <%= f.input :city, label: "Ville", input_html: {value: @address_details[:city]} %>
               <%= f.input :country, label: "Pays", priority: [ 'FR' ], input_html: {value: @address_details[:country]} %>
             </div>
+              <%= f.button :submit, class: 'btn btn-green', value: "Go !" %>
           <% end %>
         </div>
 

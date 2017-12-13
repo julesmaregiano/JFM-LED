@@ -1,4 +1,4 @@
-class Booking < ApplicationRecord
+  class Booking < ApplicationRecord
   has_many :availabilities
   has_many :users, through: :availabilities
 
