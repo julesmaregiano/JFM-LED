@@ -13,6 +13,6 @@ class Availability < ApplicationRecord
 
 
   def init
-    self.status  ||= true
+    self.status  ||= 0
   end
 end

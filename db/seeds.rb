@@ -57,8 +57,8 @@ next_90 = (-2..90).to_a
 next_90.each do |numero|
   User.all.where(role: 2).each do |user|
     date = numero.business_days.from_now
-    Availability.find_or_create_by(user_id: user.id, date: Date.new(date.year, date.month, date.day), status: true, half: 0 )
-    Availability.find_or_create_by(user_id: user.id, date: Date.new(date.year, date.month, date.day), status: true, half: 1 )
+    Availability.find_or_create_by(user_id: user.id, date: Date.new(date.year, date.month, date.day), half: 0 )
+    Availability.find_or_create_by(user_id: user.id, date: Date.new(date.year, date.month, date.day), half: 1 )
   end
 end
 puts "#{Availability.all.size} Availabilities créées."
