@@ -3,9 +3,8 @@ class Technician::UsersController < ApplicationController
   def show
     @user = current_user
     @availabilities = Availability.to_come.of_the_week.of(@user).booked.oldest_to_new
-    @bookings = Booking.for_next_week.uniq
-    @bookings_for_map = Booking.for_next_week.where.not(latitude: nil, longitude: nil).uniq
-    @markers = Gmaps4rails.build_markers(@bookings_for_map) do |booking, marker|
+    @bookings = Booking.for_next_week_for(@user)
+    @markers = Gmaps4rails.build_markers(@bookings) do |booking, marker|
       marker.lat booking.latitude
       marker.lng booking.longitude
     end

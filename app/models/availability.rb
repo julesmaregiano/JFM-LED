@@ -8,7 +8,7 @@ class Availability < ApplicationRecord
   scope :to_come, -> { where("date >= ?", Date.today) }
   scope :not_today, -> { where.not("date = ?", Date.today) }
   scope :of, -> (user) {where("user_id = ? ", user.id)}
-  scope :booked, -> { where(status: 0) }
+  scope :booked, -> { where(status: "booked") }
   scope :oldest_to_new, -> { order(created_at: :asc)}
 
   enum status: [:booked, :free, :pending, :leave]
