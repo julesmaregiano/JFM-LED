@@ -13,6 +13,14 @@ class Availability < ApplicationRecord
 
   enum status: [:booked, :free, :pending, :leave]
 
+  def self.of_the_week_for(user)
+    self.to_come
+        .of_the_week
+        .of(user)
+        .booked
+        .oldest_to_new
+  end
+
   def init
     self.update(status: 1)
   end
