@@ -1,2 +1,2 @@
 <h4>Détections par jour</h4>
-<%= area_chart Availability.where(status: false).group_by_day(:date).count, colors: ["#B2D430", "#B2D430"], width: "800px", height: "300px" %>
+<%= area_chart Availability.where(status: 0).group_by_day(:date).count, colors: ["#B2D430", "#B2D430"], width: "800px", height: "300px" %>
