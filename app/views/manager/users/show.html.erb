@@ -26,7 +26,7 @@
             <h4>Détections du jour</h4>
             <% unless @todays_bookings.nil? %>
               <% @todays_bookings.each do |booking| %>
-              <%= render "shared/booking_card", booking: booking %>
+                <%= render "shared/booking_card", booking: booking %>
               <% end %>
             <% end %>
           </div>
