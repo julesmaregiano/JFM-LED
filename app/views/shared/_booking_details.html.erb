@@ -1,0 +1,85 @@
+  <div class="card-container">
+    <div class="flexbox flex-left">
+
+      <% if booking.user.pro? %>
+        <%= cl_image_tag booking.user.company.photo.public_id, height: 110, width: 110, crop: :pad, class: "card-logo" %>
+      <% else %>
+        <img class="card-logo", style="height: 110px, width: 110px" src="http://via.placeholder.com/110x110" alt="">
+      <% end %>
+
+      <div>
+        <h3><strong><%= booking.user.company.name %></strong> <h4><%= booking.user.branch.name %></h4></h3>
+        <div class="flex-left align-center">
+          <h4>Référent : <%= booking.user.first_name %> <%= booking.user.last_name %></h4>
+          <%= link_to "tel:#{booking.user.phone}" do %>
+            <i class="card-icon fa fa-phone" aria-hidden="true"></i>
+          <% end %>
+          <%= link_to "tel:#{booking.user.email}" do %>
+            <i class="card-icon fa fa-at" aria-hidden="true"></i>
+          <% end %>
+        </div>
+        <p>créée le <%= booking.created_at.strftime("%a %d %b")%></p>
+      </div>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col-xs-12 col-md-6">
+    <div class="card-container">
+        <h4><strong>Intervention</strong></h4>
+        <p><i class="fa fa-globe"></i><%= booking.address %></p>
+        <p>Chef de Chantier : <strong><%= booking.has_foreman.first_name %> <%= booking.has_foreman.last_name %></strong></p>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-md-6">
+    <div class="card-container">
+      <h4><strong>Infos techniques</strong></h4>
+      <p>Longueur à détecter : <strong><%= booking.surface %></strong></p>
+      <p>Elements à détecter : <strong></strong></p>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-6">
+    <div class="card-container">
+      <h4><strong>Documents</strong></h4>
+      <p>DT/DICT</p>
+      <p>Bon de commande</p>
+      <div class="flex-left align-center">
+        <p>Rapport</p>
+        <% if current_user.technician? %>
+          <%= link_to(content_tag(:i, nil, class: 'fa card-icon fa-eye'), technician_report_path(booking.report))%>
+          <%= link_to(content_tag(:i, nil, class: 'fa card-icon fa-pencil'), edit_technician_report_path(booking.report)) %>
+        <% elsif current_user.pro? %>
+          <%= link_to(content_tag(:i, nil, class: 'fa card-icon fa-eye'), pro_report_path(booking.report))%>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-md-6">
+    <div class="card-container">
+      <h4><strong>Techniciens</strong></h4>
+      <% booking.technicians.uniq.each do |tech| %>
+        <div>
+          <p><%= tech.first_name %> <%= tech.last_name %></p>
+          <div class="flex-left">
+            <% booking.availabilities.where(user: tech).each do |availability| %>
+              <div class="card-date">
+                <p><%= availability.date %> <%= availability.half == 0 ? "matin" : "aprem" %></p>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+</div>

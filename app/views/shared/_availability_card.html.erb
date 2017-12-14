@@ -19,7 +19,10 @@
 
   <div class="card-right">
     <p class="card-date"><%= availability.date.strftime("%a %d %b") %> <%= availability.half == 0 ? "matin" : "aprem" %></p>
-    <div class="card-links flex-horizontal">
+    <div class="card-links flex-horizontal align-center">
+      <%= link_to technician_booking_path(booking) do %>
+        <i class="card-icon fa fa-eye" aria-hidden="true"></i>
+      <% end %>
       <%= link_to "http://waze.to/?ll=#{booking.latitude},#{booking.longitude}&navigate=yes" do %>
         <i class="card-icon fa fa-car" aria-hidden="true"></i>
       <% end %>

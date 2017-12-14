@@ -3,16 +3,9 @@
 
   <div class="dashboard-content">
     <div class="padding-box">
-      <h3 class="text-center">Détails du Booking <%= @booking.id %></h3>
-        <div class= "col-xs-12 col-md-6" id="map" style="height: 600px;"></div>
+        <div class= "col-xs-12 col-md-6" id="map" style="height: calc(100vh - 90px);"></div>
         <div class="col-xs-12 col-md-6">
-          <h3><%= @booking.address %></h3>
-          <h4><%= @booking.user %></h4>
-          Techs chargés de la mission
-          <% @availabilities.each do |availability| %>
-            <h5><%= availability.date %></h5>
-            <h4><%= availability.user.first_name %> <%= availability.user.last_name %></h4>
-          <% end %>
+          <%= render "shared/booking_details", booking: @booking %>
         </div>
     </div>
   </div>

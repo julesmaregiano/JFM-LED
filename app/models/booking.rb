@@ -15,11 +15,14 @@
   scope :to_come, -> { joins(:availabilities).where("date > ?", Date.yesterday) }
   scope :soon, -> { joins(:availabilities).where("date < ?", Date.today + 7) }
   scope :for, -> (user) { joins(:availabilities).where(user_id: user.id) }
-  # Ce scope ne marche pas. Comment faire pour trouver tous les Bookings appartenant à un tech ?
 
-  def self.for_next_week
-    self.to_come.soon
-      # .for(user)
+  def self.for_next_week_for(user)
+    bookings = self.to_come.soon.map do |booking|
+      if booking.technicians.include?(user)
+        booking
+      end
+    end
+    bookings.uniq
   end
 
   def has_foreman
