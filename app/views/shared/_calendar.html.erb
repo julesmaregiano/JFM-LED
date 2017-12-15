@@ -2,49 +2,36 @@
   <div class="date-day"><%= date.day %></div>
   <div class="cell-content">
     <div class="btn-container">
-
-      <!-- Journée -->
       <% availabilities.each do |availability| %>
-        <div class="btn-calendar <%= availability.status? ? "btn-calendar-tobook" : "btn-calendar-booked" %>" data-availability-id="<%= availability.id %>" >
-          <!-- Technician -->
+
+        <div class="btn-calendar <%= availability.free? ? "btn-calendar-tobook" : "btn-calendar-booked" %>" data-availability-id="<%= availability.id %>" >
+          <%= availability.half == 0 ? "matin" : "aprem" %>
+          <%= availability.status %>
+
           <% if user.technician? %>
-            <% if availability.status? %>
+            <% if availability.booking_id.nil? %>
               <%= simple_form_for([user.role, availability]) do |f| %>
-                <%= f.hidden_field :status, value: !availability.status %>
-                <%= f.button :button do %>
-                  <i class="fa fa-search target-search-icon" aria-hidden="true"></i>
+                <% if availability.free? %>
+                  <%= f.hidden_field :status, value: "leave" %>
+                <% else %>
+                  <%= f.hidden_field :status, value: "free" %>
                 <% end %>
-              <% end %>
-            <% elsif availability.status == false && availability.booking_id.nil? %>
-              <p>Autre</p>
-            <% else %>
-              <%= link_to technician_booking_path(availability.booking.id) do %>
-                <i class="fa fa-eye"></i>
+                <%= f.submit "Modifier" %>
               <% end %>
             <% end %>
 
-          <!-- Manager -->
           <% elsif user.manager? %>
             <% if availability.booking_id.nil? %>
               <%= simple_form_for([user.role, availability]) do |f| %>
                 <%= f.hidden_field :user_id, value: tech.id %>
                 <%= f.hidden_field :status, value: !availability.status %>
-                <%= f.button :button, class: "calendar-submit" do %>
-                  <p>
-                    <%= availability.half == 0 ? "matin" : "aprem" %>
-                    <%= availability.status == false ? "Occupé" : "libre" %>
-                  </p>
-                  <i class="fa fa-refresh" aria-hidden="true"></i>
-                <% end %>
+                <%= f.submit "Modifier" %>
               <% end %>
-
             <% end %>
 
-          <!-- Client -->
-          <% elsif user.pro? || user.particulier? %>
-            <%= availability.status == false ? "Complet" : "Réserver" %>
           <% end %>
         </div>
+
       <% end %>
     </div>
   <% end %>

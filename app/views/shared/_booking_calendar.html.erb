@@ -1,0 +1,31 @@
+<%= month_calendar(attribute: :date, events: @availabilities) do |date, availabilities| %>
+  <div class="date-day"><%= date.day %></div>
+  <div class="cell-content">
+    <div class="btn-container">
+
+      <% availabilities.each do |availability| %>
+        <% if availability.half == 0 %>
+          <% morning_array = [] %>
+          <% availability.free? ? morning_array.insert(0, availability) %>
+          <% availability.not.free? ? morning_array.insert(-1, availability) %>
+          <% morning_availability = morning_array.first %>
+        <% else %>
+          <% afternoon_array = [] %>
+          <% availability.free? && availability.user == morning_availability.user ? afternoon_array.insert(0, availability) %>
+          <% availability.free? ? afternoon_array.insert(1, availability) %>
+          <% availability.not.free? ? afternoon_array.insert(-1, availability) %>
+        <% end %>
+      <% end %>
+        <% after %>
+        <div class="btn-calendar <%= morning_availability.free? ? "btn-calendar-tobook" : "btn-calendar-booked" %>" data-availability-id="<%= morning_availability.id %>" >
+          <%= morning_availability.half == 0 ? "matin" : "aprem" %>
+          <%= morning_availability.status %>
+        </div>
+        <div class="btn-calendar <%= afternoon_availability.free? ? "btn-calendar-tobook" : "btn-calendar-booked" %>" data-availability-id="<%= afternoon_availability.id %>" >
+          <%= afternoon_availability.half == 0 ? "matin" : "aprem" %>
+          <%= afternoon_availability.status %>
+        </div>
+        <% raise %>
+    </div>
+  <% end %>
+</div>
