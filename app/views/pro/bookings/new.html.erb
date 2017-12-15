@@ -9,6 +9,9 @@
             <%= render "shared/calendar", availabilities: @availabilities, user: @user, tech: User.where(role: 2).first %>
           </div>
           <div class="col-xs-12 col-md-6">
+            <%= render "shared/booking_calendar", availabilities: @availabilities, user: @user, tech: User.where(role: 2).first %>
+          </div>
+          <div class="col-xs-12 col-md-6">
             <h4>Infos chantier</h4>
             <%= simple_form_for [@user.role, @booking] do |f| %>
               <div class="availabilities-fields"> <%# div pour injecter les avaialbilities via le JS %></div>
