@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20171208173143) do
     t.bigint "user_id"
     t.bigint "booking_id"
     t.date "date"
-    t.boolean "status"
+    t.integer "status"
     t.integer "half"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
