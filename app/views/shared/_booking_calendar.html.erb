@@ -2,42 +2,19 @@
   <div class="date-day"><%= date.day %></div>
   <div class="cell-content">
     <div class="btn-container">
-
-        <% morning_array = [] %>
-        <% afternoon_array = [] %>
-
-        <% availabilities.each do |availability| %>
-          <% unless availabilities.empty? %>
-            <% if availability.half == 0 %>
-              <% availability.free? ? morning_array.insert(0, availability) : morning_array.insert(-1, availability) %>
-              <% morning_availability = morning_array.first %>
-            <% elsif availability.half == 1 %>
-              <% if availability.free? && availability.user == morning_array.first.user %>
-                <% afternoon_array.insert(0, availability) %>
-              <% else %>
-                <% availability.free? ? afternoon_array.insert(1, availability) : afternoon_array.insert(-1, availability) %>
-              <% end %>
-            <% end %>
-          <% end %>
-        <% end %>
-
-          <% morning_availability = morning_array.first %>
-          <% afternoon_availability = afternoon_array.first  %>
-
-        <% unless morning_availability.nil? %>
+      <% unless availabilities.empty? %>
+        <% morning_availability = availabilities.find { |availability| availability.half == 0 } %>
           <div class="btn-calendar <%= morning_availability.free? ? "btn-calendar-tobook" : "btn-calendar-booked" %>" data-availability-id="<%= morning_availability.id %>" >
             <%= morning_availability.half == 0 ? "matin" : "aprem" %>
             <%= morning_availability.status %>
           </div>
-        <% end %>
 
-        <% unless morning_availability.nil? %>
+        <% afternoon_availability = availabilities.find { |availability| availability.half == 1 } %>
           <div class="btn-calendar <%= afternoon_availability.free? ? "btn-calendar-tobook" : "btn-calendar-booked" %>" data-availability-id="<%= afternoon_availability.id %>" >
             <%= afternoon_availability.half == 0 ? "matin" : "aprem" %>
             <%= afternoon_availability.status %>
           </div>
-        <% end %>
-
+      <% end %>
     </div>
   <% end %>
 </div>

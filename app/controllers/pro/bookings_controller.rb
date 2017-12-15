@@ -26,7 +26,7 @@ class Pro::BookingsController < ApplicationController
   def new
     @user = current_user
     @tech = User.where(role: 3).first
-    @availabilities = Availability.to_come.not_today
+    @availabilities = Availability.to_come.not_today.free_first
     @booking = Booking.new
   end
 
@@ -39,7 +39,7 @@ class Pro::BookingsController < ApplicationController
     @booking.user_id = @user.id
     @booking.report = Report.new
     if @booking.save
-      @booking.availabilities.update(status: 0)
+      @booking.availabilities.update(status: "booked")
       redirect_to pro_user_path(@user)
     else
       render :new
