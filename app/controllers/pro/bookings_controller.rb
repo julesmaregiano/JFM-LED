@@ -11,6 +11,18 @@ class Pro::BookingsController < ApplicationController
     end
   end
 
+  def show
+    @user = current_user
+    @booking = Booking.find(params[:id])
+    @availabilities = @booking.availabilities
+    unless @booking.latitude.nil? || @booking.latitude.nil?
+      @markers = Gmaps4rails.build_markers(@booking) do |booking, marker|
+        marker.lat booking.latitude
+        marker.lng booking.longitude
+      end
+    end
+  end
+
   def new
     @user = current_user
     @tech = User.where(role: 3).first
