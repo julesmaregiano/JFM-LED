@@ -7,6 +7,7 @@ class Manager::UsersController < ApplicationController
       marker.lat booking.latitude
       marker.lng booking.longitude
     end
+    @availabilities = Availability.of_the_week.of_last_week
   end
 
   def index
