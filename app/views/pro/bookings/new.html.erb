@@ -19,7 +19,7 @@
               <%= f.hidden_field :zipcode %>
               <%= f.hidden_field :country %>
               <%= f.input :surface %>
-              <%= f.input :foreman_id, collection: Foreman.where(branch_id: @user.branch_id).to_a %>
+              <%= f.input :foreman_id, label: "Chef de chantier", collection: Foreman.where(branch_id: @user.branch_id).to_a, label_method: lambda { |foreman| "#{foreman.first_name} #{foreman.last_name}" } %>
               <%= f.input :comment %>
               <%= f.button :submit %>
             <% end %>

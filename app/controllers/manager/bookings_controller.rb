@@ -2,13 +2,7 @@ class Manager::BookingsController < ApplicationController
 
   def index
     @user = current_user
-    @bookings = Booking.all
-    @bookings_map = @bookings.where.not(latitude: nil, longitude: nil)
-
-    @markers = Gmaps4rails.build_markers(@bookings_map) do |booking, marker|
-      marker.lat booking.latitude
-      marker.lng booking.longitude
-    end
+    @bookings = Booking.all.order(created_at: 'DESC')
   end
 
   def show
@@ -23,25 +17,26 @@ class Manager::BookingsController < ApplicationController
     end
   end
 
-  def new
+  def edit
     @user = current_user
-    @booking = Booking.new
+    @booking = Booking.find(params[:id])
+    @availabilities = @booking.availabilities
   end
 
-  def create
+  def update
     @user = current_user
-    @booking = Booking.new(booking_params)
-    @booking.user_id = @user.id
-    @booking.report = Report.new
+    @booking = Booking.find(params[:id])
+    selected = booking_params[:availability_ids].reject(&:empty?)
     if @booking.save
-      render :new
+      @booking.availabilities.each { |a| selected.include?(a.id.to_s) ? a.update(status: "booked") : a.update(status: "free", booking_id: nil) }
+      redirect_to manager_booking_path(@booking)
     else
-      render :new
+      render :edit
     end
   end
 
   def booking_params
-    params.require(:booking).permit(:comment, :address, :surface)
+    params.require(:booking).permit(availability_ids: [])
   end
 
 end

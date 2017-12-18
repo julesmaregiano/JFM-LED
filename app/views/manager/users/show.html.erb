@@ -3,7 +3,7 @@
   <div class="dashboard-content">
     <div class="padding-box">
       <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="col-xs-12 col-md-6 col-lg-4">
           <div id="map" style="width: 100%; height: 600px;"></div>
             <% content_for(:after_js) do %>
               <%= javascript_tag do %>
@@ -21,7 +21,7 @@
               <% end %>
             <% end %>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="col-xs-12 col-md-6 col-lg-4">
           <div class="card-container">
             <h4>Détections du jour</h4>
             <% unless @todays_bookings.nil? %>
@@ -31,7 +31,7 @@
             <% end %>
           </div>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="col-xs-12 col-md-6 col-lg-4">
           <%= render "manager/users/stat", bookings: @todays_bookings %>
         </div>
 

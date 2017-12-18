@@ -3,17 +3,23 @@
   <div class="cell-content">
     <div class="btn-container">
       <% unless availabilities.empty? %>
-        <% morning_availability = availabilities.find { |availability| availability.half == 0 } %>
-          <div class="btn-calendar <%= morning_availability.free? ? "btn-calendar-tobook" : "btn-calendar-booked" %>" data-availability-id="<%= morning_availability.id %>" >
-            <%= morning_availability.half == 0 ? "matin" : "aprem" %>
+        <% morning_availability = availabilities.find { |availability| availability.half == "matin" } %>
+
+        <% unless morning_availability.nil? %>
+          <div class="btn-calendar btn-calendar-<%= morning_availability.status %>" data-availability-id="<%= morning_availability.id %>" >
+            <%= morning_availability.half %>
             <%= morning_availability.status %>
           </div>
+        <% end %>
 
-        <% afternoon_availability = availabilities.find { |availability| availability.half == 1 } %>
-          <div class="btn-calendar <%= afternoon_availability.free? ? "btn-calendar-tobook" : "btn-calendar-booked" %>" data-availability-id="<%= afternoon_availability.id %>" >
-            <%= afternoon_availability.half == 0 ? "matin" : "aprem" %>
+        <% afternoon_availability = availabilities.find { |availability| availability.half == "aprem" } %>
+
+        <% unless afternoon_availability.nil? %>
+          <div class="btn-calendar btn-calendar-<%= afternoon_availability.status %>" data-availability-id="<%= afternoon_availability.id %>" >
+            <%= afternoon_availability.half %>
             <%= afternoon_availability.status %>
           </div>
+        <% end %>
       <% end %>
     </div>
   <% end %>

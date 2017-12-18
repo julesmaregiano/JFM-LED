@@ -1,11 +1,11 @@
 $(document).ready(function(){
-  $('.btn-calendar-tobook').click(function(){
+  $('.btn-calendar-free').click(function(){
     console.log('lala')
-    if ($(this).hasClass('btn-calendar-tobook')){
+    if ($(this).hasClass('btn-calendar-free')){
     $(this).addClass('btn-calendar-selected')
-    $(this).removeClass('btn-calendar-tobook')
+    $(this).removeClass('btn-calendar-free')
   } else {
-    $(this).addClass('btn-calendar-tobook')
+    $(this).addClass('btn-calendar-free')
     $(this).removeClass('btn-calendar-selected')
   }
 

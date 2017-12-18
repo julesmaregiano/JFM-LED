@@ -11,11 +11,12 @@ class Availability < ApplicationRecord
   scope :of, -> (user) {where("user_id = ? ", user.id)}
   scope :oldest_to_new, -> { order(created_at: :asc)}
   scope :free_first, -> { order(status: :asc) }
-  scope :morning, -> { where(half: 0) }
-  scope :afternoon, -> { where(half: 1) }
+  scope :morning, -> { where(half: "matin") }
+  scope :afternoon, -> { where(half: "aprem") }
 
 
   enum status: [:free, :pending, :leave, :booked]
+  enum half:[:matin, :aprem]
 
   def self.of_the_week_for(user)
     self.to_come
@@ -33,7 +34,7 @@ class Availability < ApplicationRecord
     self.morning.free_first
   end
 
-  def best_for_afternoon_booking
+  def self.best_for_afternoon_booking
     # De l'aprem, et en plus les free first.
     self.afternoon.free_first.order("user_id ASC")
     # Si le technicien de free_first le matin est libre, je propose ce technicien l'apres-midi en premier
