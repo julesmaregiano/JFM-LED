@@ -12,10 +12,16 @@
             <h4>Infos chantier</h4>
             <%= simple_form_for [@user.role, @booking] do |f| %>
               <div class="availabilities-fields"> <%# div pour injecter les avaialbilities via le JS %></div>
+              <div class="gridtypes-fields"> <%# div pour injecter les gridtypes via le JS %></div>
               <%= f.input :address %>
 
               <%= f.hidden_field :address1 %>
               <%= f.hidden_field :city %>
+              <div>
+                <% GridType.all.each do |gridtype| %>
+                  <p class="grid-type" data-gridtype-id="<%= gridtype.id %>"><%= gridtype.name %></p>
+                <% end %>
+              </div>
               <%= f.hidden_field :zipcode %>
               <%= f.hidden_field :country %>
               <%= f.input :surface %>

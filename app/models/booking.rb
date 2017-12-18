@@ -1,6 +1,8 @@
   class Booking < ApplicationRecord
   has_many :availabilities
   has_many :users, through: :availabilities
+  has_many :grid_types, through: :booking_grids
+  has_many :booking_grids
 
   has_many :foremen
   belongs_to :report
