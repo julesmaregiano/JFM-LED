@@ -1,5 +1,4 @@
 .simple-calendar {
-  padding-top: 20px;
   table {
     -webkit-border-horizontal-spacing: 0px;
     -webkit-border-vertical-spacing: 0px;
@@ -147,7 +146,9 @@
   .btn-calendar-selected  {
     border: 1px solid $anis;
     border-left: 8px solid $anis;
-    background-color: $diago;
+    background-color: $anis;
+    font-color: white;
+    font-weight: bold;
     &:hover {
       background-color: $anis;
     }
@@ -175,4 +176,8 @@
 
 .calendar-card {
   margin-top: 10px !important;
+}
+
+.grid-type-selected {
+  color: red;
 }

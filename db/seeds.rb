@@ -7,18 +7,35 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Availability.destroy_all
+puts "Availability destroyed"
 Answer.destroy_all
+puts "Answer destroyed"
 Question.destroy_all
+puts "Question destroyed"
+GridType.destroy_all
+puts "GridType destroyed"
+BookingGrid.destroy_all
+puts "BookingGrid destroyed"
 Booking.destroy_all
+puts "Booking destroyed"
 OptionChoice.destroy_all
+puts "OptionChoice destroyed"
 OptionGroup.destroy_all
+puts "OptionGroup destroyed"
 Section.destroy_all
+puts "Section destroyed"
 Unit.destroy_all
+puts "Unit destroyed"
 Report.destroy_all
+puts "Report destroyed"
 User.destroy_all
+puts "User destroyed"
 Foreman.destroy_all
+puts "Foreman destroyed"
 Branch.destroy_all
+puts "Branch destroyed"
 Company.destroy_all
+puts "Company destroyed"
 
 prenoms = ["Jean", "James", "Jamel", "Jin"]
 noms = ["Carambolin", "Plastrouier", "Dimitrius", "Robert"]
@@ -34,7 +51,7 @@ companies.each_with_index do |company, index|
 end
 Company.where(name: "Colas").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1512927219/svl6igercblakdcpljyt.jpg")
 Company.where(name: "Vinci").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1512927221/vbjzv7dqzehkcfvd7pqi.png")
-Company.where(name: "EDF").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1512927222/xotiuni0ke0d16xdiv1i.jpg")
+Company.where(name: "EDF").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513346869/dwb3llvaztsfnag9xbkn.jpg")
 Company.create(name: "Particulier")
 Branch.create(company_id: Company.last.id, name: "Particulier")
 Company.create(name: "JFM Conseils", photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1512978766/bojawagxesmanf9kefbd.png")
@@ -67,6 +84,9 @@ clients = [particulier, pro, pro2, pro3]
 
 dates =[Date.today, Date.today + 1, Date.today + 4,Date.today + 5, Date.today + 7, Date.today + 12 ]
 
+grid_types = ["Tous", "Electricité", "Eclairage", "Signalisation routière", "Gaz", "Hydrocarbures", "Produits chimiques", "Eau potable", "Assainissement", "Chauffage/Clim", "Télécommunications"]
+grid_types.each { |gt| GridType.create(name: gt)}
+puts "#{GridType.count} GridTypes créés"
 
 Report.create
 Booking.create(user_id: clients.sample.id, address1: "108 avenue de la Dimancherie", zipcode: "91440", city: "Bures sur Yvette", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.to_come.where(status: "free").first(rand(1..5)).to_a)
@@ -154,4 +174,6 @@ Booking.all.each do |booking|
       availability.update(booking_id: booking.id, status: "booked")
     end
   end
+  3.times { BookingGrid.create(booking_id: booking.id, grid_type_id: GridType.all.to_a.sample.id) }
 end
+

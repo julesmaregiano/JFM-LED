@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171208173143) do
+ActiveRecord::Schema.define(version: 20171218145745) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,15 @@ ActiveRecord::Schema.define(version: 20171208173143) do
     t.datetime "updated_at", null: false
     t.index ["booking_id"], name: "index_availabilities_on_booking_id"
     t.index ["user_id"], name: "index_availabilities_on_user_id"
+  end
+
+  create_table "booking_grids", force: :cascade do |t|
+    t.bigint "grid_type_id"
+    t.bigint "booking_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_booking_grids_on_booking_id"
+    t.index ["grid_type_id"], name: "index_booking_grids_on_grid_type_id"
   end
 
   create_table "bookings", force: :cascade do |t|
@@ -104,6 +113,12 @@ ActiveRecord::Schema.define(version: 20171208173143) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["branch_id"], name: "index_foremen_on_branch_id"
+  end
+
+  create_table "grid_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "option_choices", force: :cascade do |t|
@@ -183,6 +198,8 @@ ActiveRecord::Schema.define(version: 20171208173143) do
   add_foreign_key "answers", "reports"
   add_foreign_key "availabilities", "bookings"
   add_foreign_key "availabilities", "users"
+  add_foreign_key "booking_grids", "bookings"
+  add_foreign_key "booking_grids", "grid_types"
   add_foreign_key "bookings", "reports"
   add_foreign_key "bookings", "users"
   add_foreign_key "branches", "companies"

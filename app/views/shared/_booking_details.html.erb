@@ -8,9 +8,9 @@
       <% end %>
 
       <div>
-        <h3><strong><%= booking.user.company.name %></strong> <h4><%= booking.user.branch.name %></h4></h3>
+        <h4><strong><%= booking.user.company.name %></strong> <%= booking.user.branch.name %></h4>
         <div class="flex-left align-center">
-          <h4>Référent : <%= booking.user.first_name %> <%= booking.user.last_name %></h4>
+          <h6><%= booking.user.first_name %> <%= booking.user.last_name %></h6>
           <%= link_to "tel:#{booking.user.phone}" do %>
             <i class="card-icon fa fa-phone" aria-hidden="true"></i>
           <% end %>
@@ -29,17 +29,22 @@
 
   <div class="col-xs-12 col-md-6">
     <div class="card-container">
-        <h4><strong>Intervention</strong></h4>
-        <p><i class="fa fa-globe"></i><%= booking.address %></p>
+        <h4><strong><i class="fa fa-globe"></i>  Intervention</strong></h4>
+        <p>Addresse : <strong><%= booking.address %></strong></p>
         <p>Chef de Chantier : <strong><%= booking.has_foreman.first_name %> <%= booking.has_foreman.last_name %></strong></p>
+        <p>Téléphone : <strong><%= booking.has_foreman.phone %></strong></p>
     </div>
   </div>
 
   <div class="col-xs-12 col-md-6">
     <div class="card-container">
-      <h4><strong>Infos techniques</strong></h4>
+      <h4><strong><i class="fa fa-info"></i>  Infos techniques</strong></h4>
       <p>Longueur à détecter : <strong><%= booking.surface %></strong></p>
-      <p>Elements à détecter : <strong></strong></p>
+      <p>Elements à détecter : </p>
+      <% booking.grids.each do |grid| %>
+        <p>• <%= grid.name %></p>
+      <% end %>
+
     </div>
   </div>
 
@@ -48,8 +53,7 @@
 <div class="row">
   <div class="col-xs-12 col-md-6">
     <div class="card-container">
-      <h4><strong>Documents</strong></h4>
-      <p>DT/DICT</p>
+      <h4><strong><i class="fa fa-file-text-o"></i>  Documents</strong></h4>
       <p>Bon de commande</p>
       <div class="flex-left align-center">
         <p>Rapport</p>
@@ -66,14 +70,14 @@
 
   <div class="col-xs-12 col-md-6">
     <div class="card-container">
-      <h4><strong>Techniciens</strong></h4>
+      <h4><strong><i class="fa fa-truck"></i>  Techniciens</strong></h4>
       <% booking.technicians.uniq.each do |tech| %>
         <div>
           <p><%= tech.first_name %> <%= tech.last_name %></p>
           <div class="flex-left flex-wrap">
             <% booking.availabilities.where(user: tech).each do |availability| %>
               <div class="card-date">
-                <p><%= availability.date %> <%= availability.half == 0 ? "matin" : "aprem" %></p>
+                <p><%= availability.date.strftime("%a %d %b") %> <%= availability.half %></p>
               </div>
             <% end %>
           </div>

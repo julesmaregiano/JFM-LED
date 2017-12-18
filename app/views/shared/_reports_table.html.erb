@@ -13,7 +13,7 @@
   <tbody>
     <% reports.each do |report| %>
       <tr>
-        <th scope="row">1</th>
+        <td><%= report.id %></td>
         <td><%= report.created_at %></td>
         <td><%= report.booking.address %></td>
         <td><%= report.user.first_name + ' ' + report.user.last_name %></td>

@@ -38,7 +38,9 @@ class Pro::BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
     @booking.user_id = @user.id
     @booking.report = Report.new
+    binding.pry
     if @booking.save
+      params[:booking][:gridtypes_ids].each { |gt| BookingGrid.create(booking_id: @booking.id, grid_type_id: gt.to_i)}
       @booking.availabilities.update(status: "pending")
       redirect_to pro_user_path(@user)
     else

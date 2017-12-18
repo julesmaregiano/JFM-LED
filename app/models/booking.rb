@@ -1,6 +1,8 @@
   class Booking < ApplicationRecord
   has_many :availabilities
   has_many :users, through: :availabilities
+  has_many :grid_types, through: :booking_grids
+  has_many :booking_grids, dependent: :destroy
 
   has_many :foremen
   belongs_to :report
@@ -39,11 +41,12 @@
     self.availabilities.of_the_day.first.user
   end
 
+  def grids
+   self.booking_grids.map { |bg| GridType.find(bg.grid_type_id) }
+  end
+
   def address
     [address1, address2, city, zipcode, country].compact.join(', ')
   end
-
-  private
-
 
 end
