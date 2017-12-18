@@ -39,7 +39,7 @@ class Pro::BookingsController < ApplicationController
     @booking.user_id = @user.id
     @booking.report = Report.new
     if @booking.save
-      @booking.availabilities.update(status: "booked")
+      @booking.availabilities.update(status: "pending")
       redirect_to pro_user_path(@user)
     else
       render :new
