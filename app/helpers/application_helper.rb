@@ -1,5 +1,10 @@
 module ApplicationHelper
 
+
+  def date_in_futur(date)
+    (Date.today <=> date) < 1
+  end
+
   def role_to(user, destination)
     if user.manager?
       link_to manager_destination_path(destination)
@@ -18,6 +23,7 @@ module ApplicationHelper
     elsif current_user.pro?
       pro_destination_path(destination)
     end
+
   end
 
 end

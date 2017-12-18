@@ -1,0 +1,20 @@
+<%= month_calendar(attribute: :date, events: @availabilities) do |date, availabilities| %>
+  <div class="date-day"><%= date.day %></div>
+  <div class="cell-content">
+    <div class="btn-container">
+      <% unless availabilities.empty? %>
+        <% morning_availability = availabilities.find { |availability| availability.half == 0 } %>
+          <div class="btn-calendar <%= morning_availability.free? ? "btn-calendar-tobook" : "btn-calendar-booked" %>" data-availability-id="<%= morning_availability.id %>" >
+            <%= morning_availability.half == 0 ? "matin" : "aprem" %>
+            <%= morning_availability.status %>
+          </div>
+
+        <% afternoon_availability = availabilities.find { |availability| availability.half == 1 } %>
+          <div class="btn-calendar <%= afternoon_availability.free? ? "btn-calendar-tobook" : "btn-calendar-booked" %>" data-availability-id="<%= afternoon_availability.id %>" >
+            <%= afternoon_availability.half == 0 ? "matin" : "aprem" %>
+            <%= afternoon_availability.status %>
+          </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

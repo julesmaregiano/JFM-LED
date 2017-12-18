@@ -24,7 +24,11 @@
             <% if availability.booking_id.nil? %>
               <%= simple_form_for([user.role, availability]) do |f| %>
                 <%= f.hidden_field :user_id, value: tech.id %>
-                <%= f.hidden_field :status, value: !availability.status %>
+                <% if availability.free? %>
+                  <%= f.hidden_field :status, value: "leave" %>
+                <% else %>
+                  <%= f.hidden_field :status, value: "free" %>
+                <% end %>
                 <%= f.submit "Modifier" %>
               <% end %>
             <% end %>
