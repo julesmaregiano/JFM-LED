@@ -41,11 +41,12 @@
     self.availabilities.of_the_day.first.user
   end
 
+  def grids
+   self.booking_grids.map { |bg| GridType.find(bg.grid_type_id) }
+  end
+
   def address
     [address1, address2, city, zipcode, country].compact.join(', ')
   end
-
-  private
-
 
 end
