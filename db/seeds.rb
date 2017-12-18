@@ -67,7 +67,7 @@ clients = [particulier, pro, pro2, pro3]
 
 dates =[Date.today, Date.today + 1, Date.today + 4,Date.today + 5, Date.today + 7, Date.today + 12 ]
 
-grid_types = ["Electricité (BT, HTA, HTB)", "Eclairage", "Feux tricolores et signalisation routière", "Gaz", "Hydrocarbures", "Produits chimiques", "Eau potable", "Assainissement (EU-EP)", "Chauffage/Clim", "Télécommunications"]
+grid_types = ["Tous", "Electricité", "Eclairage", "Signalisation routière", "Gaz", "Hydrocarbures", "Produits chimiques", "Eau potable", "Assainissement", "Chauffage/Clim", "Télécommunications"]
 grid_types.each { |gt| GridType.create(name: gt)}
 
 Report.create
