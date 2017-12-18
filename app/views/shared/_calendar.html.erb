@@ -5,7 +5,7 @@
       <% availabilities.each do |availability| %>
 
         <div class="btn-calendar btn-calendar-<%= availability.status %>" data-availability-id="<%= availability.id %>" >
-          <%= availability.half == 0 ? "matin" : "aprem" %>
+          <%= availability.half %>
           <%= availability.status %>
 
           <% if user.technician? %>

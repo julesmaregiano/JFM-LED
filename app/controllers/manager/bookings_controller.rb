@@ -3,8 +3,6 @@ class Manager::BookingsController < ApplicationController
   def index
     @user = current_user
     @bookings = Booking.all.order(created_at: 'DESC')
-    @availabilities = Availability.to_come.not_today.free_first
-
   end
 
   def show
@@ -28,17 +26,17 @@ class Manager::BookingsController < ApplicationController
   def update
     @user = current_user
     @booking = Booking.find(params[:id])
-    selected = params[:booking][:availability_ids].reject(&:empty?)
+    selected = booking_params[:availability_ids].reject(&:empty?)
     if @booking.save
       @booking.availabilities.each { |a| selected.include?(a.id.to_s) ? a.update(status: "booked") : a.update(status: "free", booking_id: nil) }
-      redirect_to manager_bookings_path
+      redirect_to manager_booking_path(@booking)
     else
-      render :new
+      render :edit
     end
   end
 
   def booking_params
-    params.require(:booking).permit(:availabilities, availability_ids: [])
+    params.require(:booking).permit(availability_ids: [])
   end
 
 end
