@@ -70,7 +70,7 @@
       <% booking.technicians.uniq.each do |tech| %>
         <div>
           <p><%= tech.first_name %> <%= tech.last_name %></p>
-          <div class="flex-left">
+          <div class="flex-left flex-wrap">
             <% booking.availabilities.where(user: tech).each do |availability| %>
               <div class="card-date">
                 <p><%= availability.date %> <%= availability.half == 0 ? "matin" : "aprem" %></p>

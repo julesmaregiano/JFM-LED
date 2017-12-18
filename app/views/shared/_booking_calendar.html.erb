@@ -4,16 +4,22 @@
     <div class="btn-container">
       <% unless availabilities.empty? %>
         <% morning_availability = availabilities.find { |availability| availability.half == "matin" } %>
+
+        <% unless morning_availability.nil? %>
           <div class="btn-calendar btn-calendar-<%= morning_availability.status %>" data-availability-id="<%= morning_availability.id %>" >
             <%= morning_availability.half %>
             <%= morning_availability.status %>
           </div>
+        <% end %>
 
         <% afternoon_availability = availabilities.find { |availability| availability.half == "aprem" } %>
+
+        <% unless afternoon_availability.nil? %>
           <div class="btn-calendar btn-calendar-<%= afternoon_availability.status %>" data-availability-id="<%= afternoon_availability.id %>" >
             <%= afternoon_availability.half %>
             <%= afternoon_availability.status %>
           </div>
+        <% end %>
       <% end %>
     </div>
   <% end %>

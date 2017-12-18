@@ -4,7 +4,7 @@
     <div class="btn-container">
       <% availabilities.each do |availability| %>
 
-        <div class="btn-calendar <%= availability.free? ? "btn-calendar-tobook" : "btn-calendar-booked" %>" data-availability-id="<%= availability.id %>" >
+        <div class="btn-calendar btn-calendar-<%= availability.status %>" data-availability-id="<%= availability.id %>" >
           <%= availability.half == 0 ? "matin" : "aprem" %>
           <%= availability.status %>
 

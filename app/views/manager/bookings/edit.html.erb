@@ -1,0 +1,20 @@
+<div class="dashboard-wrap">
+  <%= render "/shared/sidebar"%>
+
+  <div class="dashboard-content">
+    <div class="padding-box">
+      <div class="col-xs-12 col-md-6">
+        <%= render "shared/booking_calendar", availabilities: @availabilities, user: @user %>
+      </div>
+      <div class="col-xs-12 col-md-6">
+        <h4>Le client souhaite /x/ dates parmis les suivantes</h4>
+
+        <%= simple_form_for [@user.role, @booking] do |f| %>
+          <%= f.input :availability_ids, label: "Validez les dates", collection: @availabilities, as: :check_boxes, label_method: lambda { |availability| "#{availability.date.strftime("%a %d %b")} (#{availability.user.first_name} #{availability.user.last_name})" }  %>
+          <%= f.button :submit %>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>
