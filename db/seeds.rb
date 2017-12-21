@@ -82,23 +82,24 @@ dates =[Date.today, Date.today + 1, Date.today + 4,Date.today + 5, Date.today + 
 
 
 Report.create
-Booking.create(user_id: clients.sample.id, address1: "108 avenue de la Dimancherie", zipcode: "91440", city: "Bures sur Yvette", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.to_come.where(status: "free").first(rand(1..5)).to_a)
+Booking.create(user_id: clients.sample.id, address1: "108 avenue de la Dimancherie", zipcode: "91440", city: "Bures sur Yvette", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.to_come.where(status: "free").first(rand(2..5)).to_a)
 Report.create
-Booking.create(user_id: clients.sample.id, address1: "5 avenue de la Dimancherie", zipcode: "91440", city: "Bures sur Yvette", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.to_come.where(status: "free").first(rand(1..5)).to_a)
+Booking.create(user_id: clients.sample.id, address1: "5 avenue de la Dimancherie", zipcode: "91440", city: "Bures sur Yvette", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.to_come.where(status: "free").first(rand(2..5)).to_a)
 Report.create
-Booking.create(user_id: clients.sample.id, address1: "10 avenue de la Dimancherie", zipcode: "91440", city: "Bures sur Yvette", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.to_come.where(status: "free").first(rand(1..5)).to_a)
+Booking.create(user_id: clients.sample.id, address1: "10 avenue de la Dimancherie", zipcode: "91440", city: "Bures sur Yvette", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.to_come.where(status: "free").first(rand(2..5)).to_a)
 Report.create
-Booking.create(user_id: clients.sample.id, address1: "166 avenue de Suffren", zipcode: "75015", city: "Paris", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.to_come.where(status: "free").first(rand(1..5)).to_a)
+Booking.create(user_id: clients.sample.id, address1: "166 avenue de Suffren", zipcode: "75015", city: "Paris", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.to_come.where(status: "free").first(rand(2..5)).to_a)
 Report.create
-Booking.create(user_id: clients.sample.id, address1: "55 avenue de Suffren", zipcode: "75015", city: "Paris", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.to_come.where(status: "free").first(rand(1..5)).to_a)
+Booking.create(user_id: clients.sample.id, address1: "55 avenue de Suffren", zipcode: "75015", city: "Paris", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.to_come.where(status: "free").first(rand(2..5)).to_a)
 Report.create
-Booking.create(user_id: clients.sample.id, address1: "11 avenue de Suffren", zipcode: "75015", city: "Paris", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.to_come.where(status: "free").first(rand(1..5)).to_a)
+Booking.create(user_id: clients.sample.id, address1: "11 avenue de Suffren", zipcode: "75015", city: "Paris", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.to_come.where(status: "free").first(rand(2..5)).to_a)
 Report.create
-Booking.create(user_id: clients.sample.id, address1: "16 villa gaudelet", zipcode: "75011", city: "Paris", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.to_come.where(status: "free").first(rand(1..5)).to_a)
+Booking.create(user_id: clients.sample.id, address1: "16 villa gaudelet", zipcode: "75011", city: "Paris", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.to_come.where(status: "free").first(rand(2..5)).to_a)
 Report.create
-Booking.create(user_id: clients.sample.id, address1: "1 villa gaudelet", zipcode: "75011", city: "Paris", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.to_come.where(status: "free").first(rand(1..5)).to_a)
+Booking.create(user_id: clients.sample.id, address1: "1 villa gaudelet", zipcode: "75011", city: "Paris", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", report_id: Report.last.id, foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.to_come.where(status: "free").first(rand(2..5)).to_a)
 
-puts "#{Booking.all.size} Bookings crées. (avec #{Report.all.size} report qui lui est adjoint.)"
+
+puts "#{Booking.all.size} Bookings crées pour un total de #{Availability.where.not(booking_id: nil).count}. (avec #{Report.all.size} report qui lui est adjoint.)"
 
 sections = ["Désignation du chantier", "Contexte du chantier", "Recommandations et localisations des ouvrages", "Signataires"]
 sections.each do |section|
@@ -161,6 +162,10 @@ question20 = Question.create!( section: Section.find_by(name: "Signataires"), na
 puts "Questions créées: #{Question.count}"
 
 
-Availability.where.not(booking_id: nil).update(status: "booked")
-Booking.last(2).each { |b| b.availabilities.update(status: "pending") }
-
+Booking.all.each do |booking|
+    if booking.availabilities.empty?
+      Availability.where(booking_id: nil).first(3).each do |availability|
+        availability.update(booking_id: booking.id, status: "booked")
+      end
+  end
+end
