@@ -7,18 +7,31 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Availability.destroy_all
+puts "Availability destroyed"
 Answer.destroy_all
+puts "Answer destroyed"
 Question.destroy_all
+puts "Question destroyed"
 Booking.destroy_all
+puts "Booking destroyed"
 OptionChoice.destroy_all
+puts "OptionChoice destroyed"
 OptionGroup.destroy_all
+puts "OptionGroup destroyed"
 Section.destroy_all
+puts "Section destroyed"
 Unit.destroy_all
+puts "Unit destroyed"
 Report.destroy_all
+puts "Report destroyed"
 User.destroy_all
+puts "User destroyed"
 Foreman.destroy_all
+puts "Foreman destroyed"
 Branch.destroy_all
+puts "Branch destroyed"
 Company.destroy_all
+puts "Company destroyed"
 
 prenoms = ["Jean", "James", "Jamel", "Jin"]
 noms = ["Carambolin", "Plastrouier", "Dimitrius", "Robert"]
@@ -34,7 +47,7 @@ companies.each_with_index do |company, index|
 end
 Company.where(name: "Colas").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1512927219/svl6igercblakdcpljyt.jpg")
 Company.where(name: "Vinci").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1512927221/vbjzv7dqzehkcfvd7pqi.png")
-Company.where(name: "EDF").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1512927222/xotiuni0ke0d16xdiv1i.jpg")
+Company.where(name: "EDF").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513346869/dwb3llvaztsfnag9xbkn.jpg")
 Company.create(name: "Particulier")
 Branch.create(company_id: Company.last.id, name: "Particulier")
 Company.create(name: "JFM Conseils", photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1512978766/bojawagxesmanf9kefbd.png")

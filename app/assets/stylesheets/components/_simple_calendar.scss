@@ -147,7 +147,9 @@
   .btn-calendar-selected  {
     border: 1px solid $anis;
     border-left: 8px solid $anis;
-    background-color: $diago;
+    background-color: $anis;
+    font-color: white;
+    font-weight: bold;
     &:hover {
       background-color: $anis;
     }
