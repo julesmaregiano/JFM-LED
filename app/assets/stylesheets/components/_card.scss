@@ -17,7 +17,7 @@
 .card {
   max-height: 400px;
   margin: 5px 10px;
-  border-left: 5px solid $light-gray;
+  border-left: 2px solid $blue-gray;
   box-shadow: 0 1px 7px 0 rgba(0,0,0,0.07),0 2px 0 0 rgba(0,0,0,0.03);
   justify-content: space-between;
   & .card:hover {

@@ -1,42 +1,45 @@
-<%= month_calendar(attribute: :date, events: @availabilities.of(tech)) do |date, availabilities| %>
-  <div class="date-day"><%= date.day %></div>
-  <div class="cell-content">
-    <div class="btn-container">
-      <% availabilities.each do |availability| %>
+<div class="card-container">
+  <h4>Emploir du temps de <%= tech.first_name %></h4>
+  <%= month_calendar(attribute: :date, events: @availabilities.of(tech)) do |date, availabilities| %>
+    <div class="date-day"><%= date.day %></div>
+    <div class="cell-content">
+      <div class="btn-container">
+        <% availabilities.each do |availability| %>
 
-        <div class="btn-calendar btn-calendar-<%= availability.status %>" data-availability-id="<%= availability.id %>" >
-          <%= availability.half %>
-          <%= availability.status %>
+          <div class="btn-calendar btn-calendar-<%= availability.status %>" data-availability-id="<%= availability.id %>" >
+            <%= availability.half %>
+            <%= availability.status %>
 
-          <% if user.technician? %>
-            <% if availability.booking_id.nil? %>
-              <%= simple_form_for([user.role, availability]) do |f| %>
-                <% if availability.free? %>
-                  <%= f.hidden_field :status, value: "leave" %>
-                <% else %>
-                  <%= f.hidden_field :status, value: "free" %>
+            <% if user.technician? %>
+              <% if availability.booking_id.nil? %>
+                <%= simple_form_for([user.role, availability]) do |f| %>
+                  <% if availability.free? %>
+                    <%= f.hidden_field :status, value: "leave" %>
+                  <% else %>
+                    <%= f.hidden_field :status, value: "free" %>
+                  <% end %>
+                  <%= f.submit "Modifier" %>
                 <% end %>
-                <%= f.submit "Modifier" %>
               <% end %>
-            <% end %>
 
-          <% elsif user.manager? %>
-            <% if availability.booking_id.nil? %>
-              <%= simple_form_for([user.role, availability]) do |f| %>
-                <%= f.hidden_field :user_id, value: tech.id %>
-                <% if availability.free? %>
-                  <%= f.hidden_field :status, value: "leave" %>
-                <% else %>
-                  <%= f.hidden_field :status, value: "free" %>
+            <% elsif user.manager? %>
+              <% if availability.booking_id.nil? %>
+                <%= simple_form_for([user.role, availability]) do |f| %>
+                  <%= f.hidden_field :user_id, value: tech.id %>
+                  <% if availability.free? %>
+                    <%= f.hidden_field :status, value: "leave" %>
+                  <% else %>
+                    <%= f.hidden_field :status, value: "free" %>
+                  <% end %>
+                  <%= f.submit "Modifier" %>
                 <% end %>
-                <%= f.submit "Modifier" %>
               <% end %>
+
             <% end %>
+          </div>
 
-          <% end %>
-        </div>
-
-      <% end %>
-    </div>
-  <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
