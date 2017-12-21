@@ -46,7 +46,7 @@ companies.each_with_index do |company, index|
   end
 end
 Company.where(name: "Colas").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1512927219/svl6igercblakdcpljyt.jpg")
-Company.where(name: "Vinci").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1512927221/vbjzv7dqzehkcfvd7pqi.png")
+Company.where(name: "Vinci").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513621099/it12ozopccym0nsbx0rm.png")
 Company.where(name: "EDF").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513346869/dwb3llvaztsfnag9xbkn.jpg")
 Company.create(name: "Particulier")
 Branch.create(company_id: Company.last.id, name: "Particulier")
@@ -161,10 +161,6 @@ question20 = Question.create!( section: Section.find_by(name: "Signataires"), na
 puts "Questions créées: #{Question.count}"
 
 
-Booking.all.each do |booking|
-  if booking.availabilities.empty?
-    Availability.where(booking_id: nil).first(3).each do |availability|
-      availability.update(booking_id: booking.id, status: "booked")
-    end
-  end
-end
+Availability.where.not(booking_id: nil).update(status: "booked")
+Booking.last(2).each { |b| b.availabilities.update(status: "pending") }
+
