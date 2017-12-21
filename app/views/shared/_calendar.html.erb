@@ -1,5 +1,5 @@
 <div class="card-container">
-  <h4>Emploir du temps de <%= tech.first_name %></h4>
+  <h4><strong>Emploi du temps de <%= tech.first_name %></strong></h4>
   <%= month_calendar(attribute: :date, events: @availabilities.of(tech)) do |date, availabilities| %>
     <div class="date-day"><%= date.day %></div>
     <div class="cell-content">
