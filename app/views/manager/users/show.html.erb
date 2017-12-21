@@ -3,27 +3,13 @@
   <div class="dashboard-content">
     <div class="padding-box">
       <div class="row">
-        <div class="col-xs-12 col-md-6 col-lg-4">
-          <div id="map" style="width: 100%; height: 600px;"></div>
-            <% content_for(:after_js) do %>
-              <%= javascript_tag do %>
-                var handler = Gmaps.build('Google');
-                handler.buildMap({ internal: { id: 'map' } }, function() {
-                  markers = handler.addMarkers(<%= raw @markers.to_json %>);
-                  handler.bounds.extendWith(markers);
-                  handler.fitMapToBounds();
-                  if (markers.length == 0) {
-                    handler.getMap().setZoom(2);
-                  } else if (markers.length == 1) {
-                    handler.getMap().setZoom(14);
-                  }
-                });
-              <% end %>
-            <% end %>
+
+        <div class="col-xs-12 col-md-6 col-lg-4 card-container">
+          <div id="map" style="width: 100%; height: calc(100vh - 110px);"></div>
         </div>
         <div class="col-xs-12 col-md-6 col-lg-4">
           <div class="card-container">
-            <h4>Détections du jour</h4>
+            <h4><strong>Détections du jour</strong></h4>
             <% unless @todays_bookings.nil? %>
               <% @todays_bookings.each do |booking| %>
                 <%= render "shared/booking_card", booking: booking %>
@@ -40,3 +26,4 @@
   </div>
 </div>
 
+<%= render "shared/map", markers: @markers %>

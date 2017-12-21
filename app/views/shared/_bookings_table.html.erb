@@ -1,36 +1,39 @@
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Commandé le</th>
-      <th scope="col">Adresse</th>
-      <th scope="col">Client</th>
-      <th scope="col"> Entreprise </th>
-      <th scope="col">Durée</th>
-      <th scope="col">Date</th>
-      <th scope="col">Liens</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% bookings.each do |booking| %>
+<div class="card-container">
+  <table class="table table-hover">
+    <thead>
+      <h4><strong>Liste de vos interventions</strong></h4>
       <tr>
-        <th scope="row">#<%= booking.id %></th>
-        <td><%= booking.created_at.strftime("%a %d %b") %></td>
-        <td><%= booking.address %></td>
-        <td><%= booking.user.first_name + ' ' + booking.user.last_name %></td>
-        <td><%= booking.user.pro? ? booking.user.company.name : "Particulier" %></td>
-        <td><%= booking.availabilities.size.odd? ? "#{booking.availabilities.size} demi-journées" : "#{booking.availabilities.size / 2} journées" %></td>
-        <td>
-          <% if @user.manager? && booking.availabilities.first.pending? %>
-            <%= link_to "Valider dates", edit_manager_booking_path(booking) %>
-          <% else %>
-            <% booking.availabilities.each do |availability| %>
-              <p><%= availability.date.strftime("%a %d %b") %></p>
-            <% end %>
-          <% end %>
-        </td>
-        <td><%= @user.manager? ? link_to("Voir", manager_booking_path(booking)) : link_to("Voir", technician_booking_path(booking)) %></td>
+        <th scope="col">#</th>
+        <th scope="col">Commandé le</th>
+        <th scope="col">Adresse</th>
+        <th scope="col">Client</th>
+        <th scope="col"> Entreprise </th>
+        <th scope="col">Durée</th>
+        <th scope="col">Date</th>
+        <th scope="col">Liens</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% bookings.each do |booking| %>
+        <tr>
+          <th scope="row">#<%= booking.id %></th>
+          <td><%= booking.created_at.strftime("%a %d %b") %></td>
+          <td><%= booking.address %></td>
+          <td><%= booking.user.first_name + ' ' + booking.user.last_name %></td>
+          <td><%= booking.user.pro? ? booking.user.company.name : "Particulier" %></td>
+          <td><%= booking.availabilities.size.odd? ? "#{booking.availabilities.size} demi-journées" : "#{booking.availabilities.size / 2} journées" %></td>
+          <td>
+            <% if @user.manager? && booking.availabilities.first.pending? %>
+              <%= link_to "Valider dates", edit_manager_booking_path(booking) %>
+            <% else %>
+              <% booking.availabilities.each do |availability| %>
+                <p><%= availability.date.strftime("%a %d %b") %></p>
+              <% end %>
+            <% end %>
+          </td>
+          <td><%= @user.manager? ? link_to("Voir", manager_booking_path(booking)) : link_to("Voir", technician_booking_path(booking)) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

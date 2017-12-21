@@ -8,7 +8,7 @@
     </div>
 
     <div class="card-middle no-margin flexbox-vertical align-center">
-      <h3 class="no-margin"><%= technician.company.name %></h3>
+      <h5 class="no-margin"><%= technician.company.name %></h5>
       <p><strong><%= booking.address1 %> - <%= booking.city %></strong></p>
       <p>Technicien: <%= technician.first_name %> <%= technician.last_name %></p>
       <p>Chef de Chantier: <%= booking.has_foreman.first_name %> <%= booking.has_foreman.last_name %></p>
@@ -18,7 +18,7 @@
 
   <div class="card-right">
     <% booking.availabilities.order(:date).each do |availability| %>
-      <span><p class="card-date"><%= availability.date.strftime("%d %b") %> <%= availability.half == 0 ? "matin" : "aprem" %></p></span>
+      <span><p class="card-date"><%= availability.date.strftime("%d %b") %> <%= availability.half %></p></span>
     <% end %>
     <div class="card-links flex-horizontal">
       <%= link_to "tel:#{booking.foreman_id}" do %>

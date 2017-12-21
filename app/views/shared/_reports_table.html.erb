@@ -1,33 +1,36 @@
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Date</th>
-      <th scope="col">Adresse</th>
-      <th scope="col">Client</th>
-      <th scope="col">Durée</th>
-      <th scope="col">Statut</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% reports.each do |report| %>
+<div class="card-container">
+  <table class="table table-hover">
+    <thead>
+      <h4><strong>Liste des rapports</strong></h4>
       <tr>
-        <th scope="row">1</th>
-        <td><%= report.created_at %></td>
-        <td><%= report.booking.address %></td>
-        <td><%= report.user.first_name + ' ' + report.user.last_name %></td>
-        <td><%= report.booking.availabilities.count %> demi-journées</td>
-        <td><%= report.answers.count > 0 ? "Terminé" : "En cours" %></td>
-        <td>
-          <% if current_user.technician? %>
-            <%= link_to(content_tag(:i, nil, class: 'fa fa-eye'), technician_report_path(report))%>
-            <%= link_to(content_tag(:i, nil, class: 'fa fa-pencil'), edit_technician_report_path(report)) %>
-          <% elsif current_user.pro? %>
-            <%= link_to(content_tag(:i, nil, class: 'fa fa-eye'), pro_report_path(report))%>
-          <% end %>
-        </td>
+        <th scope="col">#id</th>
+        <th scope="col">Date</th>
+        <th scope="col">Adresse</th>
+        <th scope="col">Client</th>
+        <th scope="col">Durée</th>
+        <th scope="col">Statut</th>
+        <th scope="col">Actions</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% reports.each do |report| %>
+        <tr>
+          <th scope="row"><%= report.id %></th>
+          <td><%= report.created_at %></td>
+          <td><%= report.booking.address %></td>
+          <td><%= report.user.first_name + ' ' + report.user.last_name %></td>
+          <td><%= report.booking.availabilities.count %> demi-journées</td>
+          <td><%= report.answers.count > 0 ? "Terminé" : "En cours" %></td>
+          <td>
+            <% if current_user.technician? %>
+              <%= link_to(content_tag(:i, nil, class: 'fa fa-eye'), technician_report_path(report))%>
+              <%= link_to(content_tag(:i, nil, class: 'fa fa-pencil'), edit_technician_report_path(report)) %>
+            <% elsif current_user.pro? %>
+              <%= link_to(content_tag(:i, nil, class: 'fa fa-eye'), pro_report_path(report))%>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
