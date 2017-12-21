@@ -3,8 +3,7 @@
 
   <div class="dashboard-content">
     <div class="padding-box">
-      <h3 class="text-center">Pro#Reports#index</h3>
+      <%= render "shared/reports_table", reports: @reports %>
     </div>
-    <%= render "shared/reports_table", reports: @reports %>
   </div>
 </div>
