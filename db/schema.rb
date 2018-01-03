@@ -74,7 +74,6 @@ ActiveRecord::Schema.define(version: 20180103080906) do
     t.string "surface"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "report_id"
     t.float "latitude"
     t.float "longitude"
     t.string "address2"
@@ -87,7 +86,6 @@ ActiveRecord::Schema.define(version: 20180103080906) do
     t.bigint "product_id"
     t.index ["foreman_id"], name: "index_bookings_on_foreman_id"
     t.index ["product_id"], name: "index_bookings_on_product_id"
-    t.index ["report_id"], name: "index_bookings_on_report_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
@@ -187,8 +185,10 @@ ActiveRecord::Schema.define(version: 20180103080906) do
   end
 
   create_table "reports", force: :cascade do |t|
+    t.bigint "booking_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_reports_on_booking_id"
   end
 
   create_table "sections", force: :cascade do |t|
@@ -237,7 +237,7 @@ ActiveRecord::Schema.define(version: 20180103080906) do
   add_foreign_key "booked_product_options", "bookings"
   add_foreign_key "booked_product_options", "option_values"
   add_foreign_key "bookings", "products"
-  add_foreign_key "bookings", "reports"
+  add_foreign_key "reports", "bookings"
   add_foreign_key "bookings", "users"
   add_foreign_key "branches", "companies"
   add_foreign_key "company_products", "companies"

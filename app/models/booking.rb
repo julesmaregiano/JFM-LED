@@ -5,7 +5,7 @@
   belongs_to :product
 
   has_many :foremen
-  belongs_to :report
+  has_one :report
   validates :user_id, presence: :true
   validates :availabilities, presence: :true
   belongs_to :user
