@@ -142,6 +142,8 @@ ActiveRecord::Schema.define(version: 20180103080906) do
 
   create_table "option_values", force: :cascade do |t|
     t.bigint "option_id"
+    t.string "label"
+    t.boolean "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["option_id"], name: "index_option_values_on_option_id"
@@ -174,7 +176,7 @@ ActiveRecord::Schema.define(version: 20180103080906) do
     t.bigint "section_id"
     t.string "information"
     t.bigint "option_group_id"
-    t.integer "input_type"
+    t.string "input_type"
     t.string "slug"
     t.bigint "unit_id"
     t.datetime "created_at", null: false
@@ -248,4 +250,6 @@ ActiveRecord::Schema.define(version: 20180103080906) do
   add_foreign_key "questions", "option_groups"
   add_foreign_key "questions", "sections"
   add_foreign_key "questions", "units"
+  add_foreign_key "users", "branches"
+  add_foreign_key "users", "companies"
 end

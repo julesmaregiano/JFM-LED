@@ -30,11 +30,23 @@ Foreman.destroy_all
 puts "Foreman destroyed"
 Branch.destroy_all
 puts "Branch destroyed"
+CompanyProduct.destroy_all
+puts "CompanyProduct destroyed"
 Company.destroy_all
 puts "Company destroyed"
+Product.destroy_all
+puts "Product destroyed"
+Option.destroy_all
+puts "Option destroyed"
+OptionValue.destroy_all
+puts "OptionValue destroyed"
+BookedProductOption.destroy_all
+puts "BookedProductOption destroyed"
+ProductOption.destroy_all
+puts "ProductOption destroyed"
 
-prenoms = ["Jean", "James", "Jamel", "Jin"]
-noms = ["Carambolin", "Plastrouier", "Dimitrius", "Robert"]
+prenoms = ["Jean", "James", "Jamel", "Michel"]
+noms = ["Carambole", "Duguesclin", "Durand", "Ramirez"]
 companies = ["Colas", "Vinci", "EDF"]
 companies.each_with_index do |company, index|
   new_company = Company.create(name: company)
@@ -45,15 +57,36 @@ companies.each_with_index do |company, index|
     end
   end
 end
-Company.where(name: "Colas").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1512927219/svl6igercblakdcpljyt.jpg")
+
+Product.create(label: "Marquage-Piquetage")
+puts "#{Product.all.size} produits créés"
+
+Company.where(name: "Colas").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513872034/cfvrnbtt3vsxmsrowdo3.jpg")
 Company.where(name: "Vinci").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513621099/it12ozopccym0nsbx0rm.png")
 Company.where(name: "EDF").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513346869/dwb3llvaztsfnag9xbkn.jpg")
 Company.create(name: "Particulier")
 Branch.create(company_id: Company.last.id, name: "Particulier")
-Company.create(name: "JFM Conseils", photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1512978766/bojawagxesmanf9kefbd.png")
+Company.create(name: "JFM Conseils", photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513872039/vcekpepvnrcjqtqfmgno.png")
 Branch.create(company_id: Company.last.id, name: "Les Ulis")
 
-puts "#{Company.count} entreprises crées avec un total de #{Branch.count} branches et #{Foreman.count} Chefs de chantier."
+puts "#{Company.all.count} entreprises crées avec un total de #{Branch.count} branches et #{Foreman.count} Chefs de chantier."
+
+Company.first(3).each do |company|
+  CompanyProduct.create(product_id: Product.first.id, company_id: company.id)
+end
+puts "#{CompanyProduct.all.size} CompanyProducts créés"
+
+option_labels = ["Types de réseaux"]
+option_labels.each do |option|
+  Option.create(label: option)
+end
+puts "#{Option.all.size} options créées"
+
+types_reseaux = ["Tout", "Electricité", "Eclairage", "Signalisation routière", "Gaz", "Hydrocarbures", "Produits chimiques", "Eau potable", "Assainissement (EU-EP)", "Chauffage/Clim", "Télécommunications", "Zone d'emprise multiréseaux"]
+types_reseaux.each do |type|
+  OptionValue.create(option_id: Option.where(label: "Types de réseaux").first.id, label: type, active: true)
+end
+puts "#{OptionValue.all.size} OptionValues créées"
 
 particulier = User.create!(email: "particulier@led.fr", password: "123soleil", first_name: "Sarah", last_name: "Particulier", phone:"06 11 22 33 44", role:0, company: Company.where(name: "Particulier").first, branch: Branch.where(name: "Particulier").first)
 pro = User.create!(email: "pro@led.fr", password: "123soleil", first_name: "Marcel", last_name: "Pro", phone:"06 11 22 33 44", role:1, company: Company.first, branch: Company.first.branches.first)
