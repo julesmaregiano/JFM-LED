@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171208173143) do
+ActiveRecord::Schema.define(version: 20180103080906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,15 @@ ActiveRecord::Schema.define(version: 20171208173143) do
     t.index ["user_id"], name: "index_availabilities_on_user_id"
   end
 
+  create_table "booked_product_options", force: :cascade do |t|
+    t.bigint "booking_id"
+    t.bigint "option_value_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_booked_product_options_on_booking_id"
+    t.index ["option_value_id"], name: "index_booked_product_options_on_option_value_id"
+  end
+
   create_table "bookings", force: :cascade do |t|
     t.bigint "user_id"
     t.string "address1"
@@ -65,7 +74,6 @@ ActiveRecord::Schema.define(version: 20171208173143) do
     t.string "surface"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "report_id"
     t.float "latitude"
     t.float "longitude"
     t.string "address2"
@@ -75,8 +83,9 @@ ActiveRecord::Schema.define(version: 20171208173143) do
     t.string "zipcode"
     t.string "country"
     t.bigint "foreman_id"
+    t.bigint "product_id"
     t.index ["foreman_id"], name: "index_bookings_on_foreman_id"
-    t.index ["report_id"], name: "index_bookings_on_report_id"
+    t.index ["product_id"], name: "index_bookings_on_product_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
@@ -94,6 +103,15 @@ ActiveRecord::Schema.define(version: 20171208173143) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "company_products", force: :cascade do |t|
+    t.bigint "product_id"
+    t.bigint "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_company_products_on_company_id"
+    t.index ["product_id"], name: "index_company_products_on_product_id"
   end
 
   create_table "foremen", force: :cascade do |t|
@@ -120,12 +138,43 @@ ActiveRecord::Schema.define(version: 20171208173143) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "option_values", force: :cascade do |t|
+    t.bigint "option_id"
+    t.string "label"
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["option_id"], name: "index_option_values_on_option_id"
+  end
+
+  create_table "options", force: :cascade do |t|
+    t.string "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "product_options", force: :cascade do |t|
+    t.bigint "product_id"
+    t.bigint "option_id"
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["option_id"], name: "index_product_options_on_option_id"
+    t.index ["product_id"], name: "index_product_options_on_product_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "questions", force: :cascade do |t|
     t.string "name"
     t.bigint "section_id"
     t.string "information"
     t.bigint "option_group_id"
-    t.integer "input_type"
+    t.string "input_type"
     t.string "slug"
     t.bigint "unit_id"
     t.datetime "created_at", null: false
@@ -136,8 +185,10 @@ ActiveRecord::Schema.define(version: 20171208173143) do
   end
 
   create_table "reports", force: :cascade do |t|
+    t.bigint "booking_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_reports_on_booking_id"
   end
 
   create_table "sections", force: :cascade do |t|
@@ -183,12 +234,22 @@ ActiveRecord::Schema.define(version: 20171208173143) do
   add_foreign_key "answers", "reports"
   add_foreign_key "availabilities", "bookings"
   add_foreign_key "availabilities", "users"
-  add_foreign_key "bookings", "reports"
+  add_foreign_key "booked_product_options", "bookings"
+  add_foreign_key "booked_product_options", "option_values"
+  add_foreign_key "bookings", "products"
+  add_foreign_key "reports", "bookings"
   add_foreign_key "bookings", "users"
   add_foreign_key "branches", "companies"
+  add_foreign_key "company_products", "companies"
+  add_foreign_key "company_products", "products"
   add_foreign_key "foremen", "branches"
   add_foreign_key "option_choices", "option_groups"
+  add_foreign_key "option_values", "options"
+  add_foreign_key "product_options", "options"
+  add_foreign_key "product_options", "products"
   add_foreign_key "questions", "option_groups"
   add_foreign_key "questions", "sections"
   add_foreign_key "questions", "units"
+  add_foreign_key "users", "branches"
+  add_foreign_key "users", "companies"
 end

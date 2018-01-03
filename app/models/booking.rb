@@ -1,9 +1,12 @@
   class Booking < ApplicationRecord
   has_many :availabilities
   has_many :users, through: :availabilities
+  has_many :booked_product_options
+  has_many :option_values, through: :booked_product_options
+  belongs_to :product
 
   has_many :foremen
-  belongs_to :report
+  has_one :report
   validates :user_id, presence: :true
   validates :availabilities, presence: :true
   belongs_to :user
