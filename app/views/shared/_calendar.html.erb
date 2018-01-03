@@ -8,20 +8,15 @@
 
           <div class="btn-calendar btn-calendar-<%= availability.status %>" data-availability-id="<%= availability.id %>" >
             <%= availability.half %>
-            <%= availability.status %>
 
             <% if user.technician? %>
               <% if availability.booking_id.nil? %>
-                <%= simple_form_for([user.role, availability]) do |f| %>
-                  <% if availability.free? %>
-                    <%= f.hidden_field :status, value: "leave" %>
-                  <% else %>
-                    <%= f.hidden_field :status, value: "free" %>
-                  <% end %>
-                  <%= f.submit "Modifier" %>
-                <% end %>
+                <%= availability.status %>
+              <% else %>
+                <%= availability.booking.user.company.name %>
+                <%= availability.booking.address1 %> <%= availability.booking.city %>
+                <%= link_to(content_tag(:i, nil, class: 'fa card-icon fa-eye'), technician_booking_path(availability.booking_id))%>
               <% end %>
-
             <% elsif user.manager? %>
               <% if availability.booking_id.nil? %>
                 <%= simple_form_for([user.role, availability]) do |f| %>
