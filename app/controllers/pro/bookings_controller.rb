@@ -39,7 +39,6 @@ class Pro::BookingsController < ApplicationController
     @availabilities = Availability.all
     @booking = Booking.new(booking_params)
     @booking.user_id = @user.id
-    binding.pry
     if @booking.save
       @booking.availabilities.update(status: "pending")
       Report.create(booking_id: @booking.id)
