@@ -16,11 +16,17 @@
             <div class="availabilities-fields"> <%# div pour injecter les avaialbilities via le JS %></div>
             <%= f.input :address %>
             <%= f.hidden_field :product_id, value: @product.id %>
-            <% @product.options.each do |option| %>
-              <% option.option_values.each do |ov| %>
-                <%= ov.label %>
+
+            <div class="options-fields"></div>
+            <div class="form-group">
+              <label for="">Réseaux à détecter</label>
+              <% @product.options.each do |option| %>
+                <% option.option_values.each do |option_value| %>
+                  <div class="option_values-tobook" data-option-value-id="<%= option_value.id %>"><%= option_value.label %></div>
+                <% end %>
               <% end %>
-            <% end %>
+            </div>
+
             <%= f.hidden_field :address1 %>
             <%= f.hidden_field :city %>
             <%= f.hidden_field :zipcode %>
