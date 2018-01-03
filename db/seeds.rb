@@ -200,6 +200,8 @@ Booking.all.each do |booking|
       Availability.where(booking_id: nil).first(3).each do |availability|
         availability.update(booking_id: booking.id, status: "booked")
       end
+    else
+      booking.availabilities.update(booking_id: booking.id, status: "booked")
   end
 end
 
