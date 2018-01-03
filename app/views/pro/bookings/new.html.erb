@@ -14,16 +14,15 @@
           <%= simple_form_for [@user.role, @booking] do |f| %>
 
             <div class="availabilities-fields"> <%# div pour injecter les avaialbilities via le JS %></div>
-            <%= f.input :address %>
+            <%= f.input :address, label: "Adresse du chantier" %>
             <%= f.hidden_field :product_id, value: @product.id %>
 
-            <div class="options-fields"></div>
-            <div class="form-group">
-              <label for="">Réseaux à détecter</label>
-              <% @product.options.each do |option| %>
-                <% option.option_values.each do |option_value| %>
-                  <div class="option_values-tobook" data-option-value-id="<%= option_value.id %>"><%= option_value.label %></div>
-                <% end %>
+            <div class="options-fields"><%# div pour injecter les réseaux à détecter via le JS %></div>
+
+            <div class="form-group string optional">
+              <div class="control-label"><label>Réseaux à détecter</label></div>
+              <% @reseaux.option_values.each do |option_value| %>
+                <div class="col-xs-6 option_values-tobook" data-option-value-id="<%= option_value.id %>"><%= option_value.label %></div>
               <% end %>
             </div>
 
@@ -31,11 +30,14 @@
             <%= f.hidden_field :city %>
             <%= f.hidden_field :zipcode %>
             <%= f.hidden_field :country %>
-            <%= f.input :surface %>
+
+            <%= f.input :surface, label: "Surface à détecter (en m²)" %>
             <%= f.input :foreman_id, label: "Chef de chantier", collection: Foreman.where(branch_id: @user.branch_id).to_a, label_method: lambda { |foreman| "#{foreman.first_name} #{foreman.last_name}" } %>
             <%= f.input :comment %>
-            <%= f.input :pdf, label: "Bon de commande", as: :attachinary %>
-            <%= f.button :submit %>
+            <div class="form-inline">
+              <%= f.input :pdf, label: "Bon de commande", as: :attachinary %>
+              <%= f.button :submit %>
+            </div>
           <% end %>
         </div>
       </div>

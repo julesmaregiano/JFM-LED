@@ -28,6 +28,8 @@ class Pro::BookingsController < ApplicationController
     @tech = User.where(role: 3).first
     @availabilities = Availability.to_come.not_today.free_first
     @product = Product.first
+    @reseaux = Option.where(label: "Types de réseaux").first
+    @other_options = Option.where.not(label: "Types de réseaux")
     @booking = Booking.new
   end
 

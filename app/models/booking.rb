@@ -2,12 +2,12 @@
   has_many :availabilities
   has_many :users, through: :availabilities
   has_many :booked_product_options
-  has_many :option_values, through: :booked_product_options
+  has_many :option_values, through: :booked_product_options, dependent: :destroy
   belongs_to :product
   has_attachment :pdf
 
   has_many :foremen
-  has_one :report
+  has_one :report, dependent: :destroy
   validates :user_id, presence: :true
   validates :availabilities, presence: :true
   belongs_to :user

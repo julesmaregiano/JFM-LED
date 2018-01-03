@@ -76,7 +76,7 @@ Company.where(name: "JFM Conseils").each do |company|
 end
 puts "#{CompanyProduct.all.size} CompanyProducts créés"
 
-option_labels = ["Types de réseaux"]
+option_labels = ["Types de réseaux", "N° DT/DICT", "Référence interne"]
 option_labels.each do |option|
   Option.create(label: option)
 end
@@ -88,7 +88,10 @@ types_reseaux.each do |type|
 end
 puts "#{OptionValue.all.size} OptionValues créées"
 
-ProductOption.create(product_id: Product.first.id, option_id: Option.first.id)
+Option.all.each do |option|
+  ProductOption.create(product_id: Product.first.id, option_id: option.id)
+end
+
 
 particulier = User.create!(email: "particulier@led.fr", password: "123soleil", first_name: "Sarah", last_name: "Particulier", phone:"06 11 22 33 44", role:0, company: Company.where(name: "Particulier").first, branch: Branch.where(name: "Particulier").first)
 pro = User.create!(email: "pro@led.fr", password: "123soleil", first_name: "Marcel", last_name: "Pro", phone:"06 11 22 33 44", role:1, company: Company.first, branch: Company.first.branches.first)
