@@ -4,6 +4,7 @@
   has_many :booked_product_options
   has_many :option_values, through: :booked_product_options
   belongs_to :product
+  has_attachment :pdf
 
   has_many :foremen
   has_one :report

@@ -34,6 +34,7 @@
             <%= f.input :surface %>
             <%= f.input :foreman_id, label: "Chef de chantier", collection: Foreman.where(branch_id: @user.branch_id).to_a, label_method: lambda { |foreman| "#{foreman.first_name} #{foreman.last_name}" } %>
             <%= f.input :comment %>
+            <%= f.input :pdf, label: "Bon de commande", as: :attachinary %>
             <%= f.button :submit %>
           <% end %>
         </div>
