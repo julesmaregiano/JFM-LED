@@ -40,7 +40,11 @@
     <div class="card-container">
       <h4><strong><i class="fa fa-info"></i>  Infos techniques</strong></h4>
       <p>Longueur à détecter : <strong><%= booking.surface %></strong></p>
-      <p>Elements à détecter : A FAIRE</p>
+      <p>Elements à détecter :</p>
+      <% booking.option_values.each do |ov| %>
+        <p><strong><%= ov.label %></strong></p>
+      <% end %>
+
 
     </div>
   </div>
