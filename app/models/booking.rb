@@ -3,15 +3,18 @@
   has_many :users, through: :availabilities
   has_many :booked_product_options
   has_many :option_values, through: :booked_product_options, dependent: :destroy
-  belongs_to :product
-  has_attachment :pdf
-
   has_many :foremen
+
+  belongs_to :product
+  belongs_to :user
   has_one :report, dependent: :destroy
+
+  has_attachment :pdf
+  geocoded_by :address
+
   validates :user_id, presence: :true
   validates :availabilities, presence: :true
-  belongs_to :user
-  geocoded_by :address
+
   after_create :geocode
   after_validation :geocode, if: :address1_changed?
 
