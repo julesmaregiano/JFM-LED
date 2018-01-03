@@ -14,7 +14,7 @@
 
             <div class="availabilities-fields"> <%# div pour injecter les avaialbilities via le JS %></div>
             <%= f.input :address %>
-
+            <%= f.hidden_field :product_id, value: @products.first.id %>
             <%= f.hidden_field :address1 %>
             <%= f.hidden_field :city %>
             <%= f.hidden_field :zipcode %>
