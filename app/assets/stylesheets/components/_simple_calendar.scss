@@ -8,7 +8,7 @@
     border-collapse: collapse;
     box-sizing: border-box;
     width: 100%;
-    height: 580px;
+    height: 100%;
     a {
       font-size: 16px;
       color: $dark-gray;
@@ -16,6 +16,7 @@
   }
   th {
     padding: 0px;
+    height: 50px !important;
     border-collapse: collapse;
     border: 1px solid $medium-gray;
     box-sizing: border-box;
@@ -23,13 +24,14 @@
     font-size: 16px;
   }
   td {
+    width: 100px;
+    height: 100%;
     padding: 0px;
     vertical-align: top;
     font-size: 12px;
     border: 1px solid $medium-gray;
   }
   .day {
-    height: 100px;
     position: relative;
     padding: 0px;
   }
@@ -49,7 +51,10 @@
   .wday-5 {}
   .wday-6 {}
   .today {
-    background: $anis;
+    background: $diago;
+    & .date-day {
+      color: white;
+    }
   }
   .calendar-heading {
     font-weight: bold;
@@ -172,5 +177,18 @@
         color: white;
       }
     }
+  }
+
+  .week-box {
+    color: $dark-gray;
+    position: relative;
+    text-align: center;
+    height: 50px;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
   }
 }

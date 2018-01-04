@@ -6,7 +6,7 @@
   belongs_to :product
   has_attachment :pdf
 
-  has_many :foremen
+  has_one :foreman
   has_one :report
   validates :user_id, presence: :true
   validates :availabilities, presence: :true
