@@ -2,8 +2,6 @@ class Availability < ApplicationRecord
   belongs_to :user
   belongs_to :booking, optional: true
   after_create :init
-  after_commit :reset_status
-
 
   scope :of_the_day, -> { where("date = ?", Date.today) }
   scope :of_the_week, -> { where("date <= ?", Date.today + 7)}
@@ -26,12 +24,6 @@ class Availability < ApplicationRecord
         .of(user)
         .booked
         .oldest_to_new
-  end
-
-  def reset_status
-    if self.booking_id.nil? && !self.free?
-      self.update(status: "free")
-    end
   end
 
   def init

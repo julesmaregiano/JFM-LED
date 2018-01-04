@@ -126,7 +126,7 @@
       font-size: 16px;
     }
   }
-  .btn-calendar-free {
+  .btn-calendar-free, .mng-calendar-free {
     border: 1px solid $anis;
     border-left: 8px solid $anis;
     &:hover {
@@ -134,7 +134,7 @@
     }
   }
 
-.btn-calendar-pending {
+.btn-calendar-pending, .mng-calendar-pending {
     border: 1px solid $yellow;
     border-left: 8px solid $yellow;
     p, a {
@@ -149,7 +149,7 @@
     }
   }
 
-  .btn-calendar-selected  {
+  .btn-calendar-selected, .mng-calendar-selected  {
     border: 1px solid $anis;
     border-left: 8px solid $anis;
     background-color: $anis;
@@ -164,7 +164,7 @@
     border: 1px solid $medium-gray;
     border-left: 8px solid $medium-gray;
   }
-  .btn-calendar-booked, .btn-calendar-leave {
+  .btn-calendar-booked, .btn-calendar-leave, .mng-calendar-booked, .mng-calendar-leave {
     border: 1px solid $red;
     border-left: 8px solid $red;
     p, a {
