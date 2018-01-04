@@ -13,6 +13,7 @@
             <%= render "shared/small_booking_card", booking: booking %>
             <div class="text-center">
               <%= simple_form_for [@user.role, booking] do |f| %>
+                <div class="availabilities-fields"></div>
                 <%= f.button :submit %>
               <% end %>
             </div>

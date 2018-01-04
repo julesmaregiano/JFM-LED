@@ -27,16 +27,16 @@ class Manager::BookingsController < ApplicationController
   def update
     @user = current_user
     @booking = Booking.find(params[:id])
-    selected = booking_params[:availability_ids].reject(&:empty?)
-    if @booking.save
-      @booking.availabilities.each { |a| selected.include?(a.id.to_s) ? a.update(status: "booked") : a.update(status: "free", booking_id: nil) }
+    old_availabilities = @booking.availabilities
+    if old_availabilities.update(status: "free") && @booking.update(availabilities_params)
+      @booking.availabilities.update(status: "booked")
       redirect_to manager_booking_path(@booking)
     else
       render :edit
     end
   end
 
-  def booking_params
+  def availabilities_params
     params.require(:booking).permit(availability_ids: [])
   end
 

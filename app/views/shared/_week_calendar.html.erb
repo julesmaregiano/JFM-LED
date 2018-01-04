@@ -4,7 +4,6 @@
       <% availabilities.sort_by(&:half).reverse!.sort_by(&:user).each do |availability| %>
         <div class="week-box btn-calendar-<%= availability.status %>" data-availability-id="<%= availability.id %>">
           <%= availability.user.first_name %>
-          <%= availability.half %>
           <%= availability.status %>
         </div>
       <% end %>

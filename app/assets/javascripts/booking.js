@@ -21,7 +21,6 @@ $(document).ready(function(){
 
 $(document).ready(function(){
   $('.option_values-tobook').click(function(){
-    console.log('lala')
     if ($(this).hasClass('option_values-tobook')){
     $(this).addClass('option_values-booked')
     $(this).removeClass('option_values-tobook')
