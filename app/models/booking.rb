@@ -19,6 +19,11 @@
   scope :to_come, -> { joins(:availabilities).where("date > ?", Date.yesterday) }
   scope :soon, -> { joins(:availabilities).where("date < ?", Date.today + 7) }
   scope :for, -> (user) { joins(:availabilities).where(user_id: user.id) }
+  scope :status, -> (status) { joins(:availabilities).where("status = ?", status)}
+
+  def self.status_is(status)
+    self.status(status).uniq
+  end
 
   def self.for_next_week_for(user)
     bookings = self.to_come.soon.map do |booking|
