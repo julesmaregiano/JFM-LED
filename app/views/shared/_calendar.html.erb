@@ -4,7 +4,7 @@
     <h4><strong>Emploi du temps de <%= tech.first_name %></strong></h4>
   <% end %>
 
-  <%= month_calendar(attribute: :date, events: @availabilities.of(tech)) do |date, availabilities| %>
+  <%= month_calendar(start_date_param: :my_date, number_of_days: 25, partial: 'simple_calendar/month_calendar', attribute: :date, events: @availabilities.of(tech)) do |date, availabilities| %>
     <div class="date-day"><%= date.day %></div>
     <div class="cell-content">
       <div class="btn-container">
