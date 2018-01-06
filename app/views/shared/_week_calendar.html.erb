@@ -1,0 +1,10 @@
+<%= week_calendar(number_of_weeks: 1, attribute: :date, events: @availabilities) do |date, availabilities| %>
+    <div class="date-day"><%= date.day %></div>
+    <div class="">
+      <% availabilities.sort_by(&:half).reverse!.sort_by(&:user).each do |availability| %>
+        <div class="week-box mng-calendar-<%= availability.status %>" data-availability-id="<%= availability.id %>">
+          <%= availability.user.first_name %>
+          <%= availability.status %>
+        </div>
+      <% end %>
+<% end %>

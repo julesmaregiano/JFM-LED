@@ -82,7 +82,7 @@ option_labels.each do |option|
 end
 puts "#{Option.all.size} options créées"
 
-types_reseaux = ["Tout", "Electricité", "Eclairage", "Signalisation routière", "Gaz", "Hydrocarbures", "Produits chimiques", "Eau potable", "Assainissement (EU-EP)", "Chauffage/Clim", "Télécommunications", "Zone d'emprise multiréseaux"]
+types_reseaux = ["Tout", "Electricité", "Eclairage", "Signalisation routière", "Gaz", "Hydrocarbures", "Produits chimiques", "Eau potable", "Chauffage/Clim", "Télécommunications", "Zone d'emprise multiréseaux"]
 types_reseaux.each do |type|
   OptionValue.create(option_id: Option.where(label: "Types de réseaux").first.id, label: type, active: true)
 end

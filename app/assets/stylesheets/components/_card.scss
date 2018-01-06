@@ -54,3 +54,8 @@
   border-radius: 3px;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.07),0 2px 0 0 rgba(0,0,0,0.03);
 }
+
+.small-card {
+  width: calc( 30vw - 66px);
+  height: 20vh;
+}

@@ -1,0 +1,28 @@
+<div class="flexbox">
+  <div class="flexbox card-left">
+    <div class="card-logo">
+      <% unless booking.user.company.photo.nil? %>
+        <%= cl_image_tag booking.user.company.photo.public_id, height: 110, width: 110, crop: :pad, class: "card-logo" %>
+      <% end %>
+    </div>
+
+    <div class="card-middle no-margin flexbox-vertical align-center">
+      <h5 class="no-margin"><%= booking.user.company.name %></h5>
+      <p><%= booking.address1 %> - <%= booking.city %></p>
+    </div>
+  </div>
+
+  <div class="card-right">
+    <% booking.availabilities.order(:date).each do |availability| %>
+      <span><p class="card-date"><%= availability.date.strftime("%d %b") %> <%= availability.half %></p></span>
+    <% end %>
+    <div class="card-links flex-horizontal">
+      <%= link_to "tel:#{booking.foreman_id}" do %>
+        <i class="card-icon fa fa-phone" aria-hidden="true"></i>
+      <% end %>
+        <%= link_to manager_booking_path(booking) do %>
+          <i class="card-icon fa fa-eye" aria-hidden="true"></i>
+        <% end %>
+    </div>
+  </div>
+</div>
