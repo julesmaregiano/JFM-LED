@@ -20,6 +20,7 @@
                 <%= availability.booking.address1 %> <%= availability.booking.city %>
                 <%= link_to(content_tag(:i, nil, class: 'fa card-icon fa-eye'), technician_booking_path(availability.booking_id))%>
               <% end %>
+
             <% elsif user.manager? %>
               <% if availability.booking_id.nil? %>
                 <%= availability.status %>
@@ -27,23 +28,32 @@
                   <%= f.hidden_field :user_id, value: tech.id %>
                   <% if availability.free? %>
                     <%= f.hidden_field :status, value: "leave" %>
+                    <%= f.submit "Indispo" %>
                   <% else %>
                     <%= f.hidden_field :status, value: "free" %>
+                    <%= f.submit "Dispo" %>
                   <% end %>
-                  <%= f.submit "Modifier" %>
                 <% end %>
+
               <% else %>
                 <%= availability.booking.user.company.name %>
                 <%= availability.booking.city %>
                 <%= link_to(content_tag(:i, nil, class: 'fa card-icon fa-eye'), manager_booking_path(availability.booking_id))%>
               <% end %>
-
-
-
-
             <% end %>
+
           </div>
 
+        <% end %>
+
+        <!-- Si il n'y a pas d'availability -->
+        <% if availabilities.empty? && date.future? %>
+        <%= simple_form_for([user.role, Availability.new]) do |f| %>
+          <%= f.hidden_field :user_id, value: tech.id %>
+          <%= f.hidden_field :date, value: date %>
+          <%= f.hidden_field :half, value: "matin" %>
+          <%= f.submit %>
+        <% end %>
         <% end %>
       </div>
     <% end %>
