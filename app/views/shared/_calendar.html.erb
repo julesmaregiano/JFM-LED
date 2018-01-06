@@ -5,6 +5,7 @@
   <% end %>
 
   <%= month_calendar(start_date_param: :my_date, number_of_days: 25, partial: 'simple_calendar/month_calendar', attribute: :date, events: @availabilities.of(tech)) do |date, availabilities| %>
+
     <div class="date-day"><%= date.day %></div>
     <div class="cell-content">
       <div class="btn-container">
@@ -47,13 +48,26 @@
         <% end %>
 
         <!-- Si il n'y a pas d'availability -->
-        <% if availabilities.empty? && date.future? %>
-        <%= simple_form_for([user.role, Availability.new]) do |f| %>
-          <%= f.hidden_field :user_id, value: tech.id %>
-          <%= f.hidden_field :date, value: date %>
-          <%= f.hidden_field :half, value: "matin" %>
-          <%= f.submit %>
+        <% if availabilities.select { |av| av[:half] == "matin" }.empty? && date.future? %>
+          <div class="btn-calendar">
+          <%= simple_form_for([user.role, Availability.new]) do |f| %>
+            <%= f.hidden_field :user_id, value: tech.id %>
+            <%= f.hidden_field :date, value: date %>
+            <%= f.hidden_field :half, value: "matin" %>
+            <%= f.submit "Dispo Matin"  %>
+          <% end %>
+          </div>
         <% end %>
+        <% if availabilities.select { |av| av[:half] == "aprem" }.empty? && date.future? %>
+          <div class="btn-calendar">
+          <%= simple_form_for([user.role, Availability.new]) do |f| %>
+            <%= f.hidden_field :user_id, value: tech.id %>
+            <%= f.hidden_field :date, value: date %>
+            <%= f.hidden_field :half, value: "aprem" %>
+            <%= f.submit "Dispo Aprem" %>
+          <% end %>
+          </div>
+        </div>
         <% end %>
       </div>
     <% end %>
