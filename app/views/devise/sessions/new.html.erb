@@ -1,9 +1,7 @@
 <div class="full-screen-wrapper-with-navbar background-login flexbox">
   <div class="login-box">
     <div class="login-top">
-      <div class="tab active_tab"><p><%= t('.sign_in') %></p></div>
-      <div class="tab"><p><%= render "devise/shared/top_links" %></p></div>
-      <div class="tab long-tab"><p><%= render "devise/shared/links" %></p></div>
+      <%= render "devise/shared/links" %>
     </div>
     <div class="flexbox login-bottom text-center">
       <div class="login-form">
