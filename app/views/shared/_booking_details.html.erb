@@ -1,10 +1,10 @@
-  <div class="card-container">
+  <div class="card-container flexbox flex-space-between">
     <div class="flexbox flex-left">
 
       <% if booking.user.pro? %>
-        <%= cl_image_tag booking.user.company.photo.public_id, height: 110, width: 110, crop: :pad, class: "card-logo" %>
+      <%= cl_image_tag booking.user.company.photo.public_id, height: 110, width: 110, crop: :pad, class: "card-logo" %>
       <% else %>
-        <img class="card-logo", style="height: 110px, width: 110px" src="http://via.placeholder.com/110x110" alt="">
+      <img class="card-logo", style="height: 110px, width: 110px" src="http://via.placeholder.com/110x110" alt="">
       <% end %>
 
       <div>
@@ -12,87 +12,89 @@
         <div class="flex-left align-center">
           <h6><%= booking.user.first_name %> <%= booking.user.last_name %></h6>
           <%= link_to "tel:#{booking.user.phone}" do %>
-            <i class="card-icon fa fa-phone" aria-hidden="true"></i>
+          <i class="card-icon fa fa-phone" aria-hidden="true"></i>
           <% end %>
           <%= link_to "tel:#{booking.user.email}" do %>
-            <i class="card-icon fa fa-at" aria-hidden="true"></i>
+          <i class="card-icon fa fa-at" aria-hidden="true"></i>
           <% end %>
         </div>
         <p>créée le <%= booking.created_at.strftime("%a %d %b")%></p>
       </div>
-
+    </div>
+    <div class="status <%= booking.availabilities.first.status %>-color padding-box">
+      <h4><strong><%= booking.availabilities.first.status %></strong></h4>
     </div>
 
-</div>
+  </div>
 
-<div class="row">
+  <div class="row">
 
-  <div class="col-xs-12 col-md-6">
-    <div class="card-container">
+    <div class="col-xs-12 col-md-6">
+      <div class="card-container">
         <h4><strong><i class="fa fa-globe"></i>  Intervention</strong></h4>
         <p>Addresse : <strong><%= booking.address %></strong></p>
         <p>Chef de Chantier : <strong><%= booking.has_foreman.first_name %> <%= booking.has_foreman.last_name %></strong></p>
         <p>Téléphone : <strong><%= booking.has_foreman.phone %></strong></p>
+      </div>
     </div>
-  </div>
 
-  <div class="col-xs-12 col-md-6">
-    <div class="card-container">
-      <h4><strong><i class="fa fa-info"></i>  Infos techniques</strong></h4>
-      <p>Longueur à détecter : <strong><%= booking.surface %></strong></p>
-      <p>Elements à détecter :</p>
-      <% booking.option_values.each do |ov| %>
+    <div class="col-xs-12 col-md-6">
+      <div class="card-container">
+        <h4><strong><i class="fa fa-info"></i>  Infos techniques</strong></h4>
+        <p>Longueur à détecter : <strong><%= booking.surface %></strong></p>
+        <p>Elements à détecter :</p>
+        <% booking.option_values.each do |ov| %>
         <p><strong><%= ov.label %></strong></p>
-      <% end %>
-
-
-    </div>
-  </div>
-
-</div>
-
-<div class="row">
-  <div class="col-xs-12 col-md-6">
-    <div class="card-container">
-      <h4><strong><i class="fa fa-file-text-o"></i>  Documents</strong></h4>
-      <div class="flex-left align-center">
-        <p>Bon de commande</p>
-        <% if booking.pdf.nil? %>
-          <i class="fa card-icon fa-file-text-o" style="color: gray"></i>
-        <% else %>
-          <%= link_to(content_tag(:i, nil, class: 'fa card-icon fa-file-text-o'), cloudinary_url(booking.pdf.path), target: :_blank) %>
         <% end %>
 
+
       </div>
-      <div class="flex-left align-center">
-        <p>Rapport</p>
-        <% if current_user.technician? || current_user.manager? %>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <div class="card-container">
+        <h4><strong><i class="fa fa-file-text-o"></i>  Documents</strong></h4>
+        <div class="flex-left align-center">
+          <p>Bon de commande</p>
+          <% if booking.pdf.nil? %>
+          <i class="fa card-icon fa-file-text-o" style="color: gray"></i>
+          <% else %>
+          <%= link_to(content_tag(:i, nil, class: 'fa card-icon fa-file-text-o'), cloudinary_url(booking.pdf.path), target: :_blank) %>
+          <% end %>
+
+        </div>
+        <div class="flex-left align-center">
+          <p>Rapport</p>
+          <% if current_user.technician? || current_user.manager? %>
           <%= link_to(content_tag(:i, nil, class: 'fa card-icon fa-eye'), technician_report_path(booking.report))%>
           <%= link_to(content_tag(:i, nil, class: 'fa card-icon fa-pencil'), edit_technician_report_path(booking.report)) %>
-        <% elsif current_user.pro? %>
+          <% elsif current_user.pro? %>
           <%= link_to(content_tag(:i, nil, class: 'fa card-icon fa-eye'), pro_report_path(booking.report))%>
-        <% end %>
+          <% end %>
 
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="col-xs-12 col-md-6">
-    <div class="card-container">
-      <h4><strong><i class="fa fa-truck"></i>  Techniciens</strong></h4>
-      <% booking.technicians.uniq.each do |tech| %>
+    <div class="col-xs-12 col-md-6">
+      <div class="card-container">
+        <h4><strong><i class="fa fa-truck"></i>  Techniciens</strong></h4>
+        <% booking.technicians.uniq.each do |tech| %>
         <div>
           <p><%= tech.first_name %> <%= tech.last_name %></p>
           <div class="flex-left flex-wrap">
             <% booking.availabilities.where(user: tech).each do |availability| %>
-              <div class="card-date">
-                <p><%= availability.date.strftime("%a %d %b") %> <%= availability.half %></p>
-              </div>
+            <div class="card-date">
+              <p><%= availability.date.strftime("%a %d %b") %> <%= availability.half %></p>
+            </div>
             <% end %>
           </div>
         </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
-  </div>
 
-</div>
+  </div>
