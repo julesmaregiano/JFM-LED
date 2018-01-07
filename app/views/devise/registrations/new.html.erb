@@ -11,7 +11,7 @@
                 <%= f.input :email, required: true, autofocus: true %>
                 <%= f.input :first_name, label: "Prénom", required: true %>
                 <%= f.input :last_name, label: "Nom", required: true %>
-
+                <%= f.hidden_field :role, value: "pro" %>
                 <%= f.input :phone %>
                 <%= f.input :password, required: true, hint: ("#{@minimum_password_length} caractères minimum" if @minimum_password_length) %>
                 <%= f.input :password_confirmation, required: true %>
