@@ -6,9 +6,9 @@
 
         <% @techs.each do |tech| %>
           <div class="col-xs-12 col-md-6">
-
-              <%= render "shared/calendar", availabilities: @availabilities.of(tech), user: @user, tech: tech %>
-
+            <div id="events_calendar">
+              <%= render partial: "shared/calendar", locals: {availabilities: @availabilities.of(tech), user: @user, tech: tech} %>
+            </div>
           </div>
         <% end %>
 
