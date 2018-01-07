@@ -111,27 +111,6 @@ input, select {
   background-position: center center;
   background-attachment: fixed;
 }
-//SPLITSCREEN
-.splitscreen-wrapper{
-  position: relative;
-  width: 100%;
-  margin: 0px;
-}
-.splitscreen-column {
-  width: 50%;
-  height: calc(100vh - 70px);
-  float: left;
-  background-size: cover;
-}
-#splitscreen-title {
-  position: absolute;
-  left: 50%;
-  padding: 20px;
-  background-color: white;
-  border-radius: 13px;
-  color: $dark-gray;
-  margin-left: -136px;
-}
 
 .no-margin * h1, h2, h3, h4, h5, h6 {
   margin: 0px !important;
@@ -140,4 +119,14 @@ input, select {
 .option_values-booked {
   color: $anis;
   font-weight: bolder;
+}
+
+.pending-color {
+  color: $orange;
+}
+.free-color {
+
+}
+.booked-color {
+  color: $anis;
 }

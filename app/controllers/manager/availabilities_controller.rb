@@ -6,6 +6,16 @@ class Manager::AvailabilitiesController < ApplicationController
     @availabilities = Availability.all.to_come
   end
 
+  def create
+    @user = current_user
+    @availability = Availability.new(params_availability)
+    if @availability.save
+      redirect_to manager_availabilities_path
+    else
+      render :edit
+    end
+  end
+
   def update
     @user = current_user
     @availability = Availability.find(params[:id])
@@ -19,6 +29,6 @@ class Manager::AvailabilitiesController < ApplicationController
   private
 
   def params_availability
-    params.require(:availability).permit(:status, :user_id)
+    params.require(:availability).permit(:status, :user_id, :date, :half)
   end
 end

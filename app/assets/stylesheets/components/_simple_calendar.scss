@@ -86,6 +86,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    height: 100px;
     width: 100%
   }
   .btn-container{
@@ -108,7 +109,6 @@
   .btn-calendar {
     color: $dark-gray;
     position: relative;
-    margin: 4% 0 4% 0;
     text-align: center;
     height: 50px;
     width: 100%;
@@ -191,4 +191,21 @@
     align-items: center;
     justify-content: center;
   }
+}
+
+.calendar-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  & p {
+    font-size: 11px;
+  }
+}
+
+.small-icon {
+  background-color: transparent;
+  padding: 0px;
+  margin: 0px;
+  width: 30px !important;
+  height: 30px;
 }

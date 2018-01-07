@@ -13,24 +13,24 @@
           <div class="card-container">
             <h4><strong>Détections du jour</strong></h4>
             <% unless @todays_bookings.nil? %>
-              <% @todays_bookings.each do |booking| %>
-                <%= render "shared/booking_card", booking: booking %>
-              <% end %>
+            <% @todays_bookings.each do |booking| %>
+            <%= render "shared/booking_card", booking: booking %>
+            <% end %>
             <% end %>
           </div>
         </div>
 
         <div class="col-xs-12 col-md-6 col-lg-4 card-container">
           <%= link_to edit_manager_booking_path(Booking.last) do %>
-            <h4><strong>Demandes d'intervention (<%= @pending_bookings.count %>)</strong></h4>
+          <h4><strong>Demandes d'intervention (<%= @pending_bookings.count %>)</strong></h4>
           <% end %>
-            <% if @pending_bookings.empty? %>
-              <p>Aucune demande en attente</p>
-            <% else %>
-              <% @pending_bookings.each do |booking| %>
-                <%= render "shared/booking_card", booking: booking %>
-              <% end %>
-            <% end %>
+          <% if @pending_bookings.empty? %>
+          <p>Aucune demande en attente</p>
+          <% else %>
+          <% @pending_bookings.each do |booking| %>
+          <%= render "shared/booking_card", booking: booking %>
+          <% end %>
+          <% end %>
         </div>
 
       </div>
