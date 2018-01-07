@@ -1,4 +1,4 @@
-  <div class="card-container">
+  <div class="card-container flexbox flex-space-between">
     <div class="flexbox flex-left">
 
       <% if booking.user.pro? %>
@@ -20,7 +20,9 @@
         </div>
         <p>créée le <%= booking.created_at.strftime("%a %d %b")%></p>
       </div>
-
+    </div>
+    <div class="status <%= booking.availabilities.first.status %>-color padding-box">
+      <h4><strong><%= booking.availabilities.first.status %></strong></h4>
     </div>
 
 </div>
