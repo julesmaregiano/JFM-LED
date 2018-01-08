@@ -17,12 +17,14 @@ Rails.application.routes.draw do
   end
 
   namespace :particulier do
+
     resources :users, only: [:show]
     resources :bookings
     get '/infos', to: "pages#informations"
   end
 
   namespace :technician do
+    get '/dashboard', to: "dashboards#show"
     resources :users, only: [:show, :index]
     resources :bookings, only: [:show, :index]
     resources :availabilities
@@ -30,8 +32,9 @@ Rails.application.routes.draw do
   end
 
   namespace :manager do
+    get '/dashboard', to: "dashboards#show"
     get '/planning', to: "bookings#edit"
-    resources :users
+    resources :users, only: [:show, :index]
     resources :bookings, only: [:show, :index]
     resources :availabilities
     resources :reports
