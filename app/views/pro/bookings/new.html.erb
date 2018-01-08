@@ -5,7 +5,7 @@
 
     <div class="padding-box">
       <div class="col-xs-12 col-md-6">
-        <%= render "shared/booking_calendar", availabilities: @availabilities, user: @user, tech: User.where(role: 2).first %>
+        <%= render partial: "shared/booking_calendar", locals: { availabilities: @availabilities, user: @user, tech: User.where(role: "technician").first } %>
       </div>
 
       <div class="col-xs-12 col-md-6">
@@ -35,7 +35,7 @@
             <%= f.input :foreman_id, label: "Chef de chantier", collection: Foreman.where(branch_id: @user.branch_id).to_a, label_method: lambda { |foreman| "#{foreman.first_name} #{foreman.last_name}" } %>
             <%= f.input :comment %>
             <%= f.input :pdf, label: "Bon de commande", as: :attachinary %>
-            <%= f.button :submit %>
+            <%= f.button :submit, "Réserver" %>
           <% end %>
         </div>
       </div>
