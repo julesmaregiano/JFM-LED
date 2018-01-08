@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   namespace :pro do
+    get '/dashboard', to: "dashboards#show"
     resources :users, only: [:show]
     resources :bookings
     resources :reports, only: [:index, :show]
