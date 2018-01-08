@@ -185,9 +185,9 @@ ActiveRecord::Schema.define(version: 20180103080906) do
   end
 
   create_table "reports", force: :cascade do |t|
-    t.bigint "booking_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "booking_id"
     t.index ["booking_id"], name: "index_reports_on_booking_id"
   end
 
@@ -237,7 +237,6 @@ ActiveRecord::Schema.define(version: 20180103080906) do
   add_foreign_key "booked_product_options", "bookings"
   add_foreign_key "booked_product_options", "option_values"
   add_foreign_key "bookings", "products"
-  add_foreign_key "reports", "bookings"
   add_foreign_key "bookings", "users"
   add_foreign_key "branches", "companies"
   add_foreign_key "company_products", "companies"
@@ -250,6 +249,7 @@ ActiveRecord::Schema.define(version: 20180103080906) do
   add_foreign_key "questions", "option_groups"
   add_foreign_key "questions", "sections"
   add_foreign_key "questions", "units"
+  add_foreign_key "reports", "bookings"
   add_foreign_key "users", "branches"
   add_foreign_key "users", "companies"
 end
