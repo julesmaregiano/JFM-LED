@@ -28,8 +28,8 @@ Rails.application.routes.draw do
     get '/dashboard', to: "dashboards#show"
     resources :users, only: [:show, :index]
     resources :bookings, only: [:show, :index]
-    resources :availabilities
-    resources :reports
+    resources :availabilities, only: [:index]
+    resources :reports, only: [:show, :edit, :index]
   end
 
   namespace :manager do
@@ -37,11 +37,10 @@ Rails.application.routes.draw do
     get '/planning', to: "bookings#edit"
     resources :users, only: [:show, :index]
     resources :bookings, only: [:show, :index]
-    resources :availabilities
-    resources :reports
+    resources :availabilities, only: [:index]
+    resources :reports, only: [:show, :edit, :index]
   end
 
-  resources :users, only: [:show]
-  resources :answers
+  resources :answers, only: [:show]
 
 end
