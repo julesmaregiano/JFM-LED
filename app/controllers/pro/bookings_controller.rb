@@ -59,4 +59,8 @@ class Pro::BookingsController < ApplicationController
     params.require(:options).permit(option_value_ids: [])
   end
 
+  def params_foreman
+    params.require(:foreman).permit(:first_name, :last_name, :branch_id, :phone)
+  end
+
 end
