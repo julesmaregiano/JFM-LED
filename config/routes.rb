@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   end
 
   namespace :particulier do
-
+    get '/dashboard', to: "dashboards#show"
     resources :users, only: [:show]
     resources :bookings
     get '/infos', to: "pages#informations"
