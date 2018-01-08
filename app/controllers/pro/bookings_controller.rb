@@ -47,6 +47,13 @@ class Pro::BookingsController < ApplicationController
     else
       render :new
     end
+
+    @foreman = Foreman.new(params_foreman)
+    if @foreman.save
+      redirect_to new_pro_booking_path and return
+    else
+      render :new
+    end
   end
 
   private
@@ -57,6 +64,10 @@ class Pro::BookingsController < ApplicationController
 
   def option_params
     params.require(:options).permit(option_value_ids: [])
+  end
+
+  def params_foreman
+    params.require(:foreman).permit(:first_name, :last_name, :branch_id, :phone)
   end
 
 end

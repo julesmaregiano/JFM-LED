@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :users, only: [:show]
     resources :bookings
     resources :reports, only: [:index, :show]
+    resources :foremen, only: [:create]
   end
 
   namespace :particulier do
