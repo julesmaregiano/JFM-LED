@@ -76,7 +76,7 @@ Company.where(name: "JFM Conseils").each do |company|
 end
 puts "#{CompanyProduct.all.size} CompanyProducts créés"
 
-option_labels = ["Types de réseaux", "Longueur (en ml)", "Surface (en m2)", "n° DT/DICT", "Référence interne"]
+option_labels = ["Types de réseaux", "Longueur (en ml)", "Surface (en m2)", "n° DT/DICT", "N° d'affaire"]
 option_labels.each do |option|
   Option.create(label: option)
 end
