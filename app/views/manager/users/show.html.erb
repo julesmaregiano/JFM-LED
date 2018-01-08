@@ -21,7 +21,7 @@
         </div>
 
         <div class="col-xs-12 col-md-6 col-lg-4 card-container">
-          <%= link_to edit_manager_booking_path(Booking.last) do %>
+          <%= link_to manager_planning_path do %>
           <h4><strong>Demandes d'intervention (<%= @pending_bookings.count %>)</strong></h4>
           <% end %>
           <% if @pending_bookings.empty? %>

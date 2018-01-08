@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   namespace :manager do
     get '/planning', to: "bookings#edit"
     resources :users
-    resources :bookings
+    resources :bookings, only: [:show, :index]
     resources :availabilities
     resources :reports
   end
