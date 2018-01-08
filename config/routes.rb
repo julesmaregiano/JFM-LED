@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   namespace :pro do
     get '/dashboard', to: "dashboards#show"
     resources :users, only: [:show]
-    resources :bookings
+    resources :bookings, only: [:new, :show, :index]
     resources :reports, only: [:index, :show]
   end
 
@@ -37,7 +37,7 @@ Rails.application.routes.draw do
     get '/planning', to: "bookings#edit"
     resources :users, only: [:show, :index]
     resources :bookings, only: [:show, :index]
-    resources :availabilities, only: [:index]
+    resources :availabilities, only: [:index, :show]
     resources :reports, only: [:show, :edit, :index]
   end
 

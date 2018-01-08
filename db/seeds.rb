@@ -51,7 +51,7 @@ companies = ["Colas", "Vinci", "EDF"]
 companies.each_with_index do |company, index|
   new_company = Company.create(name: company)
   2.times do
-    new_branch = Branch.create(company_id: new_company.id, name: "Branche #{index + 1}")
+    new_branch = Branch.create(company_id: new_company.id, name: "Branche #{index + 1}", city: "Boulogne", zipcode: "92740")
     3.times do
       Foreman.create(first_name: prenoms.sample, last_name: noms.sample, branch_id: new_branch.id, phone: "06 47 05 11 44")
     end
