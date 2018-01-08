@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+
   root to: 'pages#home'
   get '/eligibility', to: 'pages#eligibility'
   get '/detection', to: 'pages#detection'
