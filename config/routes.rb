@@ -38,7 +38,7 @@ Rails.application.routes.draw do
     get '/planning', to: "bookings#edit"
     resources :users, only: [:show, :index]
     resources :bookings, only: [:show, :index, :update]
-    resources :availabilities, only: [:index, :show, :update]
+    resources :availabilities, only: [:index, :show, :update, :create]
     resources :reports, only: [:show, :edit, :index]
   end
 
