@@ -15,7 +15,7 @@
       <h5 class="no-margin"><%= technician.company.name %></h5>
       <p><strong><%= booking.address1 %> - <%= booking.city %></strong></p>
       <p>Technicien: <%= technician.first_name %> <%= technician.last_name %></p>
-      <p>Chef de Chantier: <%= booking.has_foreman.first_name %> <%= booking.has_foreman.last_name %></p>
+      <p>Chef de Chantier: <%= booking.foreman_id? ? "#{booking.has_foreman.first_name} #{booking.has_foreman.last_name}" : "Non précisé" %></p>
       <p>Statut de la demande : <strong><%= booking.availabilities.first.status %></strong></p>
     </div>
   </div>
