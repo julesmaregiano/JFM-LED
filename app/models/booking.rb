@@ -7,7 +7,7 @@
   has_attachment :pdf
 
   has_one :foreman
-  has_one :report
+  has_one :report, dependent: :destroy
   validates :user_id, presence: :true
   validates :availabilities, presence: :true
   belongs_to :user
