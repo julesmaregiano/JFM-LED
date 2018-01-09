@@ -8,9 +8,7 @@
    number_of_days: 20,
    partial: 'simple_calendar/month_calendar',
    attribute: :date,
-   events: @availabilities.of(tech),
-   previous_link: events_ajax_previous_link,
-   next_link: events_ajax_next_link) do |date, availabilities| %>
+   events: @availabilities.of(tech)) do |date, availabilities| %>
 
    <div class="date-day"><%= date.day %></div>
    <div class="cell-content">
