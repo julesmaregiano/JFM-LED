@@ -4,7 +4,7 @@
   <h4><strong>Emploi du temps de <%= tech.first_name %></strong></h4>
   <% end %>
 
-  <%= month_calendar(start_date_param: :my_date,
+  <%= month_calendar(start_date_param: Date.today.to_s,
    number_of_days: 20,
    attribute: :date,
    events: @availabilities.of(tech)) do |date, availabilities| %>
@@ -58,6 +58,8 @@
       <% end %>
 
       <!-- Si il n'y a pas d'availability -->
+      <% if user.manager? %>
+
       <% if availabilities.select { |av| av[:half] == "matin" }.empty? && date.future? %>
       <div class="btn-calendar">
         <%= simple_form_for([user.role, Availability.new]) do |f| %>
@@ -82,6 +84,7 @@
         <% end %>
       </div>
     </div>
+      <% end %>
     <% end %>
   </div>
   <% end %>
