@@ -6,6 +6,8 @@ Answer.destroy_all
 puts "Answer destroyed"
 Question.destroy_all
 puts "Question destroyed"
+Report.destroy_all
+puts "Report destroyed"
 Booking.destroy_all
 puts "Booking destroyed"
 OptionChoice.destroy_all
@@ -16,8 +18,6 @@ Section.destroy_all
 puts "Section destroyed"
 Unit.destroy_all
 puts "Unit destroyed"
-Report.destroy_all
-puts "Report destroyed"
 User.destroy_all
 puts "User destroyed"
 Foreman.destroy_all
@@ -28,16 +28,16 @@ CompanyProduct.destroy_all
 puts "CompanyProduct destroyed"
 Company.destroy_all
 puts "Company destroyed"
-Product.destroy_all
-puts "Product destroyed"
-Option.destroy_all
-puts "Option destroyed"
-OptionValue.destroy_all
-puts "OptionValue destroyed"
-BookedProductOption.destroy_all
-puts "BookedProductOption destroyed"
 ProductOption.destroy_all
 puts "ProductOption destroyed"
+Product.destroy_all
+puts "Product destroyed"
+OptionValue.destroy_all
+puts "OptionValue destroyed"
+Option.destroy_all
+puts "Option destroyed"
+BookedProductOption.destroy_all
+puts "BookedProductOption destroyed"
 
 Company.create(name: "Particulier", photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1515313237/house-with-garden_1f3e1_gsndth.png")
 Branch.create(company_id: Company.last.id, name: "Particulier")
@@ -125,18 +125,6 @@ question19 = Question.create!( section: Section.find_by(name: "Signataires"), na
 question20 = Question.create!( section: Section.find_by(name: "Signataires"), name: "Observations des parties", information: "observations_mp", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: 2)
 puts "Questions créées: #{Question.count}"
 
-Booking.all.each do |booking|
-    if booking.availabilities.empty?
-      Availability.where(booking_id: nil).first(3).each do |availability|
-        availability.update(booking_id: booking.id, status: "booked")
-      end
-    else
-      booking.availabilities.update(booking_id: booking.id, status: "booked")
-  end
-end
-
-puts "#{Availability.where.not(booking_id: nil).count} Availabilities assignées en booked"
-
 
 # SEPARATION DEV/PROD
 
@@ -207,6 +195,19 @@ Report.create(booking_id: Booking.last.id)
 Booking.create(user_id: clients.sample.id, address1: "1 villa gaudelet", zipcode: "75011", city: "Paris", country: "FR", confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.to_come.where(status: "free").first(rand(2..5)).to_a, product_id: Product.first.id)
 Report.create(booking_id: Booking.last.id)
 puts "#{Booking.all.size} Bookings crées pour un total de #{Availability.where.not(booking_id: nil).count} Availabilities. (avec #{Report.all.size} report qui lui est adjoint.)"
+
+
+Booking.all.each do |booking|
+    if booking.availabilities.empty?
+      Availability.where(booking_id: nil).first(3).each do |availability|
+        availability.update(booking_id: booking.id, status: "booked")
+      end
+    else
+      booking.availabilities.update(booking_id: booking.id, status: "booked")
+  end
+end
+
+puts "#{Availability.where.not(booking_id: nil).count} Availabilities assignées en booked"
 
 # ON PROD ONLY
 
