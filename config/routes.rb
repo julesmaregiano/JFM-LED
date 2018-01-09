@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :users, only: [:show]
     resources :bookings
     resources :reports, only: [:index, :show]
+    resources :availabilities, only: [:show]
   end
 
   namespace :particulier do
@@ -37,7 +38,7 @@ Rails.application.routes.draw do
     get '/planning', to: "bookings#edit"
     resources :users, only: [:show, :index]
     resources :bookings, only: [:show, :index, :update]
-    resources :availabilities, only: [:index]
+    resources :availabilities, only: [:index, :show]
     resources :reports, only: [:show, :edit, :index]
   end
 
