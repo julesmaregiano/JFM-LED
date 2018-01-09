@@ -24,7 +24,7 @@
           <td><%= booking.availabilities.size.odd? ? "#{booking.availabilities.size} demi-journées" : "#{booking.availabilities.size / 2} journées" %></td>
           <td>
             <% if @user.manager? && booking.availabilities.first.pending? %>
-              <%= link_to "Valider dates", edit_manager_booking_path(booking) %>
+              <%= link_to "Valider dates", manager_planning_path %>
             <% else %>
               <% booking.availabilities.each do |availability| %>
                 <p><%= availability.date.strftime("%a %d %b") %></p>
