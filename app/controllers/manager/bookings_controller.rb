@@ -30,7 +30,7 @@ class Manager::BookingsController < ApplicationController
     old_availabilities = @booking.availabilities
     if old_availabilities.update(status: "free") && @booking.update(availabilities_params)
       @booking.availabilities.update(status: "booked")
-      redirect_to manager_booking_path(@booking)
+      redirect_to manager_planning_path
     else
       render :edit
     end

@@ -36,7 +36,7 @@ Rails.application.routes.draw do
     get '/dashboard', to: "dashboards#show"
     get '/planning', to: "bookings#edit"
     resources :users, only: [:show, :index]
-    resources :bookings, only: [:show, :index]
+    resources :bookings, only: [:show, :index, :update]
     resources :availabilities, only: [:index]
     resources :reports, only: [:show, :edit, :index]
   end
