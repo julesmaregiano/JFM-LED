@@ -174,8 +174,8 @@ manager = User.create!(email: "manager@led.fr", password: "123soleil", first_nam
 admin = User.create!(email: "admin@led.fr", password: "123soleil", first_name: "Ad", last_name: "Min", phone:"06 11 22 33 44", role:4, company: Company.last, branch: Branch.last)
 puts "#{User.all.size} Users créés."
 
-next_90 = (-2..90).to_a
-next_90.each do |numero|
+next_30 = (0..21).to_a
+next_30.each do |numero|
   User.all.where(role: 2).each do |user|
     date = numero.business_days.from_now
     Availability.find_or_create_by(user_id: user.id, date: Date.new(date.year, date.month, date.day), half: "matin" )
