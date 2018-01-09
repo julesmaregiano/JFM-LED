@@ -6,7 +6,6 @@
 
   <%= month_calendar(start_date_param: :my_date,
    number_of_days: 20,
-   partial: 'simple_calendar/month_calendar',
    attribute: :date,
    events: @availabilities.of(tech)) do |date, availabilities| %>
 
