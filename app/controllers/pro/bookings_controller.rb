@@ -43,7 +43,7 @@ class Pro::BookingsController < ApplicationController
       @booking.availabilities.update(status: "pending")
       Report.create(booking_id: @booking.id)
       option_params[:option_value_ids].each do |ovid| BookedProductOption.create(booking_id: @booking.id, option_value_id: ovid) end
-      redirect_to pro_user_path(@user)
+      redirect_to pro_dashboard_path
     else
       render :new
     end
