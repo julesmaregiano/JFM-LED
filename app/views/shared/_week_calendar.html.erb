@@ -1,6 +1,7 @@
 <%= week_calendar(start_date_param: :my_date,
                    number_of_days: 7,
                    attribute: :date,
+                   techs: techs,
                    events: @availabilities) do |date, availabilities| %>
 
     <div class="date-day"><%= date.day %></div>

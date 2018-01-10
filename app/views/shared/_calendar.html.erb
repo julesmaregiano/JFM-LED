@@ -5,7 +5,6 @@
   <% end %>
 
   <%= month_calendar(start_date_param: :start_date,
-                     number_of_days: 20,
                      attribute: :date,
                      events: @availabilities.of(tech)) do |date, availabilities| %>
 

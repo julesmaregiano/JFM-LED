@@ -209,3 +209,16 @@
   width: 30px !important;
   height: 30px;
 }
+
+.tech-card {
+    border: 1px solid $dark-gray;
+    color: $dark-gray;
+    position: relative;
+    text-align: center;
+    height: 100px;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

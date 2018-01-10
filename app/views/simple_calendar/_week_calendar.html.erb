@@ -13,6 +13,7 @@
   <table class="table table-striped">
     <thead>
       <tr>
+        <th>Tech</th>
         <% week_days.each do |day| %>
           <% unless day == "dimanche" || day == "samedi" %>
             <th><%= day %></th>
@@ -24,6 +25,12 @@
     <tbody>
       <% date_range.each_slice(7) do |week| %>
         <tr>
+          <td class="no-padding">
+            <% @techs.to_a.sort_by(&:id).each do |t| %>
+              <div class="tech-card"><%= t.first_name %></div>
+            <% end %>
+          </td>
+
           <% week.each do |day| %>
             <% unless weekend?(day) %>
               <%= content_tag :td, class: calendar.td_classes_for(day) do %>
