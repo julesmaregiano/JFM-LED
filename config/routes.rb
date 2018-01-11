@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :users, only: [:show]
     resources :bookings, only: [:new, :show, :index]
     resources :reports, only: [:index, :show]
+    resources :availabilities, only: [:show]
   end
 
   namespace :particulier do
@@ -36,9 +37,11 @@ Rails.application.routes.draw do
     get '/dashboard', to: "dashboards#show"
     get '/planning', to: "bookings#edit"
     resources :users, only: [:show, :index]
-    resources :bookings, only: [:show, :index]
-    resources :availabilities, only: [:index, :show]
+    resources :bookings, only: [:show, :index, :update]
+    resources :availabilities, only: [:index, :show, :update, :create]
     resources :reports, only: [:show, :edit, :index]
+    resources :companies, only: [:create, :update]
+    resources :branches, only: [:create, :update]
   end
 
   resources :answers, only: [:show]

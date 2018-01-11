@@ -5,12 +5,9 @@
   <% end %>
 
   <%= month_calendar(start_date_param: :my_date,
-   number_of_days: 20,
-   partial: 'simple_calendar/month_calendar',
-   attribute: :date,
-   events: @availabilities.of(tech),
-   previous_link: events_ajax_previous_link,
-   next_link: events_ajax_next_link) do |date, availabilities| %>
+                     number_of_days: 20,
+                     attribute: :date,
+                     events: @availabilities.of(tech)) do |date, availabilities| %>
 
    <div class="date-day"><%= date.day %></div>
    <div class="cell-content">
@@ -61,6 +58,8 @@
       <% end %>
 
       <!-- Si il n'y a pas d'availability -->
+      <% if user.manager? %>
+
       <% if availabilities.select { |av| av[:half] == "matin" }.empty? && date.future? %>
       <div class="btn-calendar">
         <%= simple_form_for([user.role, Availability.new]) do |f| %>
@@ -85,6 +84,7 @@
         <% end %>
       </div>
     </div>
+      <% end %>
     <% end %>
   </div>
   <% end %>
