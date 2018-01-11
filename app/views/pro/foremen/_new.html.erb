@@ -1,0 +1,12 @@
+<%= simple_form_for [@user.role, Foreman.new] do |f|%>
+<div class="modal-body">
+    <%= f.input :first_name %>
+    <%= f.input :last_name %>
+    <%= f.input :phone %>
+    <%= f.hidden_field :branch_id, value: @user.branch_id %>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  <%= f.button :submit, "Créer" %>
+</div>
+<% end %>
