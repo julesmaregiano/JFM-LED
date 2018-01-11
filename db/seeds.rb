@@ -174,7 +174,7 @@ puts "#{Availability.all.size} Availabilities créées."
 
 clients = [particulier, pro, pro2, pro3]
 
-dates =[Date.today, Date.today + 1, Date.today + 4,Date.today + 5, Date.today + 7, Date.today + 12 ]
+dates =[Date.current, Date.current + 1, Date.current + 4,Date.current + 5, Date.current + 7, Date.current + 12 ]
 
 
 
