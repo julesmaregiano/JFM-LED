@@ -153,9 +153,9 @@ Company.where(name: "EDF").update(photo_url: "http://res.cloudinary.com/zanzibar
 puts "#{Company.all.count} entreprises crées avec un total de #{Branch.count} branches et #{Foreman.count} Chefs de chantier."
 
 particulier = User.create!(email: "particulier@led.fr", password: "123soleil", first_name: "Sarah", last_name: "Particulier", phone:"06 11 22 33 44", role:0, company: Company.where(name: "Particulier").first, branch: Branch.where(name: "Particulier").first)
-pro = User.create!(email: "pro@led.fr", password: "123soleil", first_name: "Marcel", last_name: "Pro", phone:"06 11 22 33 44", role:1, company: Company.first, branch: Company.first.branches.first)
-pro2 = User.create!(email: "pro2@led.fr", password: "123soleil", first_name: "Alexandra", last_name: "Pro", phone:"06 11 22 33 44", role:1, company: Company.second, branch: Company.second.branches.first)
-pro3 = User.create!(email: "pro3@led.fr", password: "123soleil", first_name: "Ivan", last_name: "Pro", phone:"06 11 22 33 44", role:1, company: Company.third, branch: Company.third.branches.first)
+pro = User.create!(email: "pro@led.fr", password: "123soleil", first_name: "Marcel", last_name: "Pro", phone:"06 11 22 33 44", role:1, company: Company.where(name: "Colas").first, branch: Company.where(name: "Colas").first.branches.first)
+pro2 = User.create!(email: "pro2@led.fr", password: "123soleil", first_name: "Alexandra", last_name: "Pro", phone:"06 11 22 33 44", role:1, company: Company.where(name: "EDF").first, branch: Company.where(name: "EDF").first.branches.first)
+pro3 = User.create!(email: "pro3@led.fr", password: "123soleil", first_name: "Ivan", last_name: "Pro", phone:"06 11 22 33 44", role:1, company: Company.where(name: "Vinci").first, branch: Company.where(name: "Vinci").first.branches.first)
 technician = User.create!(email: "tech@led.fr", password: "123soleil", first_name: "Marie", last_name: "Tech", phone:"06 11 22 33 44", role:2, company: Company.last, branch: Branch.last)
 technician2 = User.create!(email: "tech2@led.fr", password: "123soleil", first_name: "Tom", last_name: "Tech", phone:"06 11 22 33 44", role:2, company: Company.last, branch: Branch.last)
 manager = User.create!(email: "manager@led.fr", password: "123soleil", first_name: "Fabrice", last_name: "Manager", phone:"06 11 22 33 44", role:3, company: Company.last, branch: Branch.last)
