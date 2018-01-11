@@ -18,7 +18,8 @@
     <%= render "shared/sidebar-button", text: "Profil", icon: "user", link: technician_user_path(@user)%>
   <% elsif current_user.manager? %>
     <%= render "shared/sidebar-button", text: "Tableau de bord", icon: "eye", link: manager_dashboard_path %>
-    <%= render "shared/sidebar-button", text: "Disponibilités", icon: "calendar", link: manager_availabilities_path %>
+    <%= render "shared/sidebar-button", text: "Mon équipe", icon: "calendar", link: manager_availabilities_path %>
+    <%= render "shared/sidebar-button", text: "Planning", icon: "calendar-check-o", link: manager_planning_path %>
     <%= render "shared/sidebar-button", text: "Bookings", icon: "list", link: manager_bookings_path%>
     <%= render "shared/sidebar-button", text: "Rapports", icon: "folder-open", link: manager_reports_path%>
     <%= render "shared/sidebar-button", text: "Clients", icon: "group", link: manager_users_path%>

@@ -40,6 +40,8 @@ Rails.application.routes.draw do
     resources :bookings, only: [:show, :index, :update]
     resources :availabilities, only: [:index, :show, :update, :create]
     resources :reports, only: [:show, :edit, :index]
+    resources :companies, only: [:create, :update]
+    resources :branches, only: [:create, :update]
   end
 
   resources :answers, only: [:show]
