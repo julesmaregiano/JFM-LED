@@ -164,7 +164,7 @@ puts "#{User.all.size} Users créés."
 
 next_30 = (0..21).to_a
 next_30.each do |numero|
-  User.all.where(role: 2).each do |user|
+  User.where(role: 2).each do |user|
     date = numero.business_days.from_now
     Availability.find_or_create_by(user_id: user.id, date: Date.new(date.year, date.month, date.day), half: "matin" )
     Availability.find_or_create_by(user_id: user.id, date: Date.new(date.year, date.month, date.day), half: "aprem" )
