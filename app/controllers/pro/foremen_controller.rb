@@ -1,9 +1,10 @@
 class Pro::ForemenController < ApplicationController
 
   def create
+    @user = current_user
     @foreman = Foreman.new(params_foreman)
     if @foreman.save
-      redirect_to new_pro_booking_path and return
+      redirect_to pro_user_path(@user)
     else
       render :new
     end

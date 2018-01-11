@@ -1,12 +1,12 @@
+<h4><strong>Liste des Chefs de chantier existants</strong></h4>
+<% @foremen.each do |foreman| %>
+<div><%= foreman.first_name %> <%= foreman.last_name %> (<%= foreman.phone %>)</div>
+<% end %>
+
 <%= simple_form_for [@user.role, Foreman.new] do |f|%>
-<div class="modal-body">
-    <%= f.input :first_name %>
-    <%= f.input :last_name %>
-    <%= f.input :phone %>
-    <%= f.hidden_field :branch_id, value: @user.branch_id %>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
+  <%= f.input :phone %>
+  <%= f.hidden_field :branch_id, value: @user.branch_id %>
   <%= f.button :submit, "Créer" %>
-</div>
 <% end %>
