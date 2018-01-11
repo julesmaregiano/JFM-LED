@@ -1,0 +1,6 @@
+<h4>Créer nouvelle Entreprise</h4>
+<%= simple_form_for [@user.role, Company.new]  do |f| %>
+  <%= f.input :name %>
+  <%= f.input :photo, as: :attachinary %>
+  <%= f.submit %>
+<% end %>
