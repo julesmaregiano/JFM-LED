@@ -73,6 +73,23 @@ $white-space: 20px;
   justify-content: flex-start;
 }
 
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-stretch {
+  align-items: stretch;
+}
+
+.flex-start {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.flex-end {
+  align-items: flex-end;
+}
+
 .fixed-top {
   position: fixed;
   top: 0px;
