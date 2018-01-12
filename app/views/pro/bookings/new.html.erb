@@ -19,19 +19,29 @@
 
           <div class="options-fields"></div> <%# div pour injecter les options via le JS %>
 
-          <div class="form-group">
+          <div>
             <% @products.each do |product| %>
               <div class="options-container hidden" id="options-container-<%= product.id %>">
-
                 <% product.options.each do |option| %>
-                  <label for=""><%= option.label %></label>
+
                   <% if option.custom_value? %>
-                    <input type="text" name="custom_values[<%= option.id %>]">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <label for=""><%= option.label %></label>
+                        <input type="text" name="custom_values[<%= option.id %>]">
+                      </div>
+                    </div>
+
                   <% else %>
-                    <% option.option_values.each do |option_value| %>
-                    <div class="col-xs-4 option_values-tobook" data-option-value-id="<%= option_value.id %>"><%= option_value.label %></div>
-                    <% end %>
+                    <div class="row">
+                      <div class="col-xs-12"><label for=""><%= option.label %></label></div>
+                      <% option.option_values.each do |option_value| %>
+                      <div class="col-xs-4 option_values-tobook" data-option-value-id="<%= option_value.id %>"><%= option_value.label %></div>
+                      <% end %>
+                    </div>
+
                   <% end %>
+
                 <% end %>
 
               </div>

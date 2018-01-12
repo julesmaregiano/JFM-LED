@@ -117,14 +117,12 @@ produits.each do |produit|
     reponses5.each do |label|
       OptionValue.create(option: option5, label: label, active: true)
     end
-    option6 = Option.create(label: "Zone Privée", custom_value: true)
+    option6 = Option.create(label: "Nombre de points de sondage", custom_value: true)
     ProductOption.create(product: prod, option: option6)
-    option7 = Option.create(label: "Nombre de points de sondage", custom_value: true)
-    ProductOption.create(product: prod, option: option7)
 
   elsif prod.label == "Récolement de réseaux"
-    option8 = Option.create(label: "Longueur de réseau à récoler (en ml)", custom_value: true )
-    ProductOption.create(product: prod, option: option8)
+    option7 = Option.create(label: "Longueur de réseau à récoler (en ml)", custom_value: true )
+    ProductOption.create(product: prod, option: option7)
   end
 
 end
