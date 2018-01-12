@@ -3,7 +3,7 @@
 <% else %>
   <div class="calendar-card">
     <div class="flexbox">
-      <%= cl_image_tag availability.booking.user.company.photo.public_id, height: 50, width: 50, crop: :pad, class: "card-logo" %>
+      <%= cl_image_tag availability.booking.user.company.photo.public_id, height: 50, width: 50, crop: :pad, class: "mini-card-logo" %>
       <div class="booking-info">
         <p><strong><%= availability.booking.user.company.name %></strong><br>
         <%= availability.booking.address1 %><br>
