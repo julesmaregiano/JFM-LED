@@ -1,7 +1,7 @@
   class Booking < ApplicationRecord
   has_many :availabilities
   has_many :users, through: :availabilities
-  has_many :booked_product_options
+  has_many :booked_product_options, dependent: :destroy
   has_many :option_values, through: :booked_product_options, dependent: :destroy
   belongs_to :product
   has_attachment :pdf
