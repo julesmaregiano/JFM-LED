@@ -47,10 +47,6 @@ Branch.create(company_id: Company.last.id, name: "Particulier")
 Company.create(name: "JFM Conseils", photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513872039/vcekpepvnrcjqtqfmgno.png")
 Branch.create(company_id: Company.last.id, name: "Les Ulis", city: "Les Ulis", zipcode: "91400")
 Branch.create(company_id: Company.last.id, name: "Compiègne", city: "Compiègne", zipcode: "60200")
-puts "#{Company.all.count} entreprises crées avec un total de #{Branch.count} branches."
-Company.where(name: "Colas").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513872034/cfvrnbtt3vsxmsrowdo3.jpg")
-Company.where(name: "Vinci").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513621099/it12ozopccym0nsbx0rm.png")
-Company.where(name: "EDF").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513346869/dwb3llvaztsfnag9xbkn.jpg")
 
 prenoms = ["Jean", "James", "Jamel", "Michel"]
 noms = ["Carambole", "Duguesclin", "Durand", "Ramirez"]
@@ -64,6 +60,12 @@ companies.each_with_index do |company, index|
     end
   end
 end
+
+puts "#{Company.all.count} entreprises crées avec un total de #{Branch.count} branches."
+Company.where(name: "Colas").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513872034/cfvrnbtt3vsxmsrowdo3.jpg")
+Company.where(name: "Vinci").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513621099/it12ozopccym0nsbx0rm.png")
+Company.where(name: "EDF").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513346869/dwb3llvaztsfnag9xbkn.jpg")
+
 
 #USERS
 
@@ -101,31 +103,32 @@ produits.each do |produit|
       OptionValue.create(option: option1, label: label, active: true)
     end
     option2 = Option.create(label: "Longueur de voirie (en ml)", custom_value: true )
-    ProductOption.create(product: produit, option: option2)
+    ProductOption.create(product: prod, option: option2)
     option3 = Option.create(label: "Surface (en m2)", custom_value: true )
-    ProductOption.create(product: produit, option: option3)
+    ProductOption.create(product: prod, option: option3)
     option4 = Option.create(label: "Date de début des travaux", custom_value: true)
-    ProductOption.create(product: produit, option: option2)
+    ProductOption.create(product: prod, option: option2)
 
-  elsif prod.label == "Sécurisation de sondages"
+  elsif prod == "Sécurisation de sondages"
     option5 = Option.create(label: "Localisation", custom_value: false)
     reponses5 = ["Zone privée", "Zone publique"]
     reponses5.each do |label|
       OptionValue.create(option: option5, label: label, active: true)
     end
     option6 = Option.create(label: "Zone Privée", custom_value: true)
-    ProductOption.create(product: produit, option: option6)
+    ProductOption.create(product: prod, option: option6)
     option7 = Option.create(label: "Nombre de points de sondage", custom_value: true)
-    ProductOption.create(product: produit, option: option7)
+    ProductOption.create(product: prod, option: option7)
 
-  elsif prod.label == "Récolement de réseaux"
+  elsif prod == "Récolement de réseaux"
     option8 = Option.create(label: "Longueur de réseau à récoler (en ml)", custom_value: true )
-    ProductOption.create(product: produit, option: option8)
+    ProductOption.create(product: prod, option: option8)
+  end
 
 end
 puts "#{Product.all.size} produits créés"
-puts "#{OptionValue.size} OptionValues créées"
-puts "#{ProductOption.size} OptionValues créées"
+puts "#{OptionValue.all.size} OptionValues créées"
+puts "#{ProductOption.all.size} OptionValues créées"
 
 #COMPANY_PRODUCTS
 
@@ -161,17 +164,27 @@ Report.create(booking_id: Booking.last.id)
 
 puts "#{Booking.all.size} Bookings crées pour un total de #{Availability.where.not(booking_id: nil).count} Availabilities. (avec #{Report.all.size} report qui lui est adjoint.)"
 
+Availability.where.not(booking_id: nil).where(status: "free").update(status: "booked")
+Booking.all.each do |booking|
+  booking.availabilities.empty?
+  Availability.where(booking_id: nil).first(3).each do |availability|
+    availability.update(booking: booking)
+  end
+end
 
 #BOOKED_PRODUCT_OPTIONS
 
 Booking.all.each do |booking|
-  if booking.product.label == "Marquage-Piquetage"
-    BookedProductOption.create(booking: booking, option: Option.first, )
-  elsif booking.product.label == "Sécurisation de sondages",
-
-  elsif booking.product.label == "Récolement de réseaux"
+    booking.product.options.each do |option|
+    if option.custom_value?
+      BookedProductOption.create(booking: booking, option: option, value: (100..5000).to_a.sample)
+    else
+      BookedProductOption.create(booking: booking, option: option, option_values: OptionValue.where(option: option).first.sample.first(1..2.to_a))
+    end
+  end
 end
 
+puts "#{BookedProductOption.all.size} BookedProductOption créées"
 
 #SECTIONS
 
@@ -214,6 +227,7 @@ option_choices.each { |key, value|
   }
 }
 
+# QUESTIONS
 # RAPPEL enum input_type: {option_choice_id: 0, numeric: 1, string: 2, boolean: 3}
 
 puts "Création des #{OptionChoice.count} option choices"
@@ -242,15 +256,3 @@ puts "Questions créées: #{Question.count}"
 
 
 # SEPARATION DEV/PROD
-
-case Rails.env
-
-# ON DEV ONLY
-
-  when "development"
-
-
-# ON PROD ONLY
-
-  when "production"
-end
