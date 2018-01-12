@@ -190,9 +190,9 @@ ActiveRecord::Schema.define(version: 20180112095124) do
   end
 
   create_table "reports", force: :cascade do |t|
+    t.bigint "booking_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "booking_id"
     t.index ["booking_id"], name: "index_reports_on_booking_id"
   end
 
