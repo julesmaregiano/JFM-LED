@@ -1,0 +1,26 @@
+<div class="dashboard-wrap">
+  <%= render "/shared/sidebar"%>
+
+  <div class="dashboard-content">
+    <div class="padding-box">
+      <div class="row">
+      <div class= "col-xs-12 col-md-6 card-container" id="map" style="height: calc(100vh - 110px);"></div>
+        <div class="col-xs-12 col-md-6">
+        <div class="card-container">
+          <h4><strong>Vos prochaines détections</h4>
+          <% unless @availabilities.nil? %>
+            <% @availabilities.each do |availability| %>
+            <%= render "shared/availability_card", availability: availability %>
+            <% end %>
+          <% end %>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%= render "shared/map", markers: @markers %>
+
+

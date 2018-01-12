@@ -33,8 +33,12 @@
       <div class="card-container">
         <h4><strong><i class="fa fa-globe"></i>  Intervention</strong></h4>
         <p>Addresse : <strong><%= booking.address %></strong></p>
-        <p>Chef de Chantier : <strong><%= booking.has_foreman.first_name %> <%= booking.has_foreman.last_name %></strong></p>
-        <p>Téléphone : <strong><%= booking.has_foreman.phone %></strong></p>
+        <p>Chef de Chantier : <strong>
+          <%= booking.foreman_id? ? "#{booking.has_foreman.first_name} #{booking.has_foreman.last_name}" : "Non précisé" %>
+          </strong></p>
+        <p>Téléphone : <strong>
+        <%= booking.foreman_id? ? "#{booking.has_foreman.phone}" : "Non précisé" %>
+        </strong></p>
       </div>
     </div>
 

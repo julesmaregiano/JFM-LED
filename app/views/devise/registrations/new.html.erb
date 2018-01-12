@@ -3,27 +3,44 @@
     <div class="login-top">
       <%= render "devise/shared/links" %>
     </div>
-    <div class="flexbox text-center">
-        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-          <%= f.error_notification %>
-            <div class="row">
-                <h4><strong>Nouvel utilisateur</strong></h4>
-                <%= f.input :email, required: true, autofocus: true %>
-                <%= f.input :first_name, label: "Prénom", require: true %>
-                <%= f.input :last_name, label: "Nom", required: true %>
-                <%= f.input :role, label: "Je suis..", required: true, collection: ["pro", "particulier"] %>
-                <%= f.input :phone %>
-                <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-                <%= f.input :password_confirmation, required: true %>
-              </div>
-            </div>
-            <div class="form-actions">
-              <%= f.button :submit, "Sign up" %>
-            </div>
-          <% end %>
+    <div class="container text-center">
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= f.error_notification %>
 
+
+      <h4 class="padding-box"><strong>Nouvel utilisateur</strong></h4>
+      <div class="form-group">
+        <div class="form-inline">
+          Je suis un.. <%= f.input :role, label: false, placeholder: "pro", collection: ["particulier", "pro", "technician", "manager"] %>
+        </div>
+      </div>
+
+      <div class="col-xs-6">
+        <h4><strong>A propos de moi</strong></h4>
+        <div class="form-input"></div>
+        <%= f.input :email, required: true, autofocus: true %>
+        <%= f.input :first_name, label: "Prénom", required: true %>
+        <%= f.input :last_name, label: "Nom", required: true %>
+        <%= f.input :phone %>
+      </div>
+
+      <div class="col-xs-6">
+        <h4><strong>A propos de mon entreprise</strong></h4>
+        <%= f.input :company_id, label: "Entreprise", required: true, collection: Company.all.to_a, label_method: lambda { |company| "#{company.name}" } %>
+        <%= f.input :branch_id, label: "Branche", required: true, collection: Branch.all.to_a, label_method: lambda { |branch| "#{branch.name}" } %>
+        <%= f.input :password, required: true, label: "Mot de passe", hint: ("#{@minimum_password_length} caractères minimum" if @minimum_password_length) %>
+        <%= f.input :password_confirmation, required: true, label: "Confirmation du mot de passe" %>
+      </div>
+
+      <div class="form-actions padding-box">
+        <%= f.button :submit, "Créer mon compte" %>
+      </div>
 
     </div>
+    <% end %>
+
+
   </div>
 </div>
+
 

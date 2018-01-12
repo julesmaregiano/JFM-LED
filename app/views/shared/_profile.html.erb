@@ -1,0 +1,23 @@
+<div class="row">
+
+  <div class="col-xs-12 card-container">
+    <div class="flexbox flex-left">
+      <%= unless @user.company.photo.nil? %>
+        <%= cl_image_tag @user.company.photo.public_id, height: 250, width: 250, crop: :pad, class: "card-logo" %>
+      <% end %>
+      <div>
+        <h4><strong><%= @user.company.name %></strong></h2>
+        <h4><%= @user.branch.name %></h4>
+        <h4><%= @user.branch.city %>, <%= @user.branch.zipcode %></h4>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-xs-12 col-md-8 card-container">
+    <h6><%= @user.first_name %> <%= @user.last_name %> (<%= @user.role %>)</h6>
+    <h6><%= @user.email %></h6>
+  </div>
+</div>

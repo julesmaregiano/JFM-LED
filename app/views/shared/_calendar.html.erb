@@ -5,12 +5,9 @@
   <% end %>
 
   <%= month_calendar(start_date_param: :my_date,
-   number_of_days: 20,
-   partial: 'simple_calendar/month_calendar',
-   attribute: :date,
-   events: @availabilities.of(tech),
-   previous_link: events_ajax_previous_link,
-   next_link: events_ajax_next_link) do |date, availabilities| %>
+                     number_of_days: 20,
+                     attribute: :date,
+                     events: @availabilities.of(tech)) do |date, availabilities| %>
 
    <div class="date-day"><%= date.day %></div>
    <div class="cell-content">
@@ -29,31 +26,31 @@
         <% end %>
 
         <% elsif user.manager? %>
-        <% if availability.booking_id.nil? %>
-        <%= availability.status %>
-        <%= simple_form_for([user.role, availability]) do |f| %>
-        <%= f.hidden_field :user_id, value: tech.id %>
-        <% if availability.free? %>
-        <%= f.hidden_field :status, value: "leave" %>
-        <%= f.button :button, class: 'small-icon' do %>
-        <i class="fa fa-refresh small-icon" aria-hidden="true"></i>
-        <% end %>
-        <% else %>
-        <%= f.hidden_field :status, value: "free" %>
-        <%= f.button :button, class: 'small-icon' do %>
-        <i class="fa fa-refresh small-icon" aria-hidden="true"></i>
-        <% end %>
-        <% end %>
-        <% end %>
+          <% if availability.booking_id.nil? %>
+            <%= availability.status %>
+            <%= simple_form_for([user.role, availability]) do |f| %>
+            <%= f.hidden_field :user_id, value: tech.id %>
+              <% if availability.free? %>
+              <%= f.hidden_field :status, value: "leave" %>
+              <%= f.button :button, class: 'small-icon' do %>
+                <i class="fa fa-refresh small-icon" aria-hidden="true"></i>
+              <% end %>
+              <% else %>
+              <%= f.hidden_field :status, value: "free" %>
+              <%= f.button :button, class: 'small-icon' do %>
+                <i class="fa fa-refresh small-icon" aria-hidden="true"></i>
+              <% end %>
+              <% end %>
+          <% end %>
 
-        <% else %>
-        <%= link_to manager_booking_path(availability.booking_id) do %>
-        <div class="calendar-card">
-          <%= cl_image_tag availability.booking.user.company.photo.public_id, height: 50, width: 50, crop: :pad, class: "card-logo" %>
-          <p><%= availability.booking.city %></p>
-        </div>
-        <% end %>
-        <% end %>
+          <% else %>
+            <%= link_to manager_booking_path(availability.booking_id) do %>
+            <div class="calendar-card">
+              <%= cl_image_tag availability.booking.user.company.photo.public_id, height: 50, width: 50, crop: :pad, class: "card-logo" %>
+              <p><%= availability.booking.city %></p>
+            </div>
+            <% end %>
+          <% end %>
         <% end %>
 
       </div>
@@ -61,6 +58,8 @@
       <% end %>
 
       <!-- Si il n'y a pas d'availability -->
+      <% if user.manager? %>
+
       <% if availabilities.select { |av| av[:half] == "matin" }.empty? && date.future? %>
       <div class="btn-calendar">
         <%= simple_form_for([user.role, Availability.new]) do |f| %>
@@ -85,6 +84,7 @@
         <% end %>
       </div>
     </div>
+      <% end %>
     <% end %>
   </div>
   <% end %>

@@ -59,6 +59,7 @@ $white-space: 20px;
 .flex-vertical {
   display: flex;
   align-items: center;
+  flex-direction: vertical;
 }
 .flex-wrap {
   flex-wrap: wrap;
@@ -70,6 +71,23 @@ $white-space: 20px;
 
 .flex-start {
   justify-content: flex-start;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-stretch {
+  align-items: stretch;
+}
+
+.flex-start {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.flex-end {
+  align-items: flex-end;
 }
 
 .fixed-top {

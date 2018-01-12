@@ -1,5 +1,8 @@
 <div class="card-container">
-  <%= month_calendar(attribute: :date, events: @availabilities) do |date, availabilities| %>
+  <%= month_calendar(start_date_param: :my_date,
+                     attribute: :date,
+                     number_of_days: 20,
+                     events: @availabilities) do |date, availabilities| %>
     <div class="date-day"><%= date.day %></div>
     <div class="cell-content">
       <div class="btn-container">

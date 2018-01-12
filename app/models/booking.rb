@@ -15,9 +15,9 @@
   after_create :geocode
   after_validation :geocode, if: :address1_changed?
 
-  scope :of_the_day, -> { joins(:availabilities).where("date = ?", Date.today) }
+  scope :of_the_day, -> { joins(:availabilities).where("date = ?", Date.current) }
   scope :to_come, -> { joins(:availabilities).where("date > ?", Date.yesterday) }
-  scope :soon, -> { joins(:availabilities).where("date < ?", Date.today + 7) }
+  scope :soon, -> { joins(:availabilities).where("date < ?", Date.current + 7) }
   scope :for, -> (user) { joins(:availabilities).where(user_id: user.id) }
   scope :status, -> (status) { joins(:availabilities).where("status = ?", status)}
 

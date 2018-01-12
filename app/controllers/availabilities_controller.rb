@@ -2,7 +2,7 @@ class AvailabilitiesController < ApplicationController
 
 
   def index
-    @date = Date.today
+    @date = Date.current
   end
 
   def update
