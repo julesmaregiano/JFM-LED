@@ -58,7 +58,10 @@ companies.each_with_index do |company, index|
   end
 end
 
-Product.create(label: "Marquage-Piquetage")
+produits = ["Marquage-Piquetage", "Récolement de réseaux", "Sécurisation de Sondages"]
+produits.each do |produit|
+  Product.create(label: produit)
+end
 puts "#{Product.all.size} produits créés"
 
 Company.where(name: "Colas").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513872034/cfvrnbtt3vsxmsrowdo3.jpg")
@@ -72,7 +75,9 @@ Branch.create(company_id: Company.last.id, name: "Les Ulis")
 puts "#{Company.all.count} entreprises crées avec un total de #{Branch.count} branches et #{Foreman.count} Chefs de chantier."
 
 Company.where(name: "JFM Conseils").each do |company|
-  CompanyProduct.create(product_id: Product.first.id, company_id: company.id)
+  Product.all.each do |product|
+    CompanyProduct.create(product_id: product.id, company_id: company.id)
+  end
 end
 puts "#{CompanyProduct.all.size} CompanyProducts créés"
 
@@ -88,7 +93,7 @@ types_reseaux.each do |type|
 end
 puts "#{OptionValue.all.size} OptionValues créées"
 
-Option.first(5).each do |o|
+Option.where(label: "Types de réseaux") .each do |o|
   ProductOption.create(product_id: Product.first.id, option_id: o.id)
 end
 

@@ -27,7 +27,7 @@ class Pro::BookingsController < ApplicationController
     @user = current_user
     @tech = User.where(role: 3).first
     @availabilities = Availability.to_come.not_today.free_first
-    @product = Product.first
+    @products = Product.all
     @booking = Booking.new
   end
 
