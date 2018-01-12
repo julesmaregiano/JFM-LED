@@ -1,4 +1,4 @@
 class BookedProductOption < ApplicationRecord
   belongs_to :booking
-  belongs_to :option_value
+  belongs_to :option_value, optional: true
 end

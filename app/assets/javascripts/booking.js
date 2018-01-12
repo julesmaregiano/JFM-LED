@@ -1,6 +1,5 @@
 $(document).ready(function(){
   $('.btn-calendar-free').click(function(){
-    console.log('lala')
     if ($(this).hasClass('btn-calendar-free')){
     $(this).addClass('btn-calendar-selected')
     $(this).removeClass('btn-calendar-free')
@@ -70,4 +69,13 @@ $(document).ready(function(){
       $('.availabilities-fields').append('<input type="hidden" name="booking[availability_ids][]" value="'+ availabilityId +'" />')
     })
   })
+});
+
+$(document).ready(function(){
+  $('#booking_product_id').change(function() {
+    console.log($(this).val());
+    var productId = $(this).val();
+    $('.options-container').addClass('hidden')
+    $('#options-container-' + productId).removeClass('hidden')
+  });
 });

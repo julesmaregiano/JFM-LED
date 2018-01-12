@@ -81,11 +81,26 @@ Company.where(name: "JFM Conseils").each do |company|
 end
 puts "#{CompanyProduct.all.size} CompanyProducts créés"
 
-option_labels = ["Types de réseaux", "Longueur (en ml)", "Surface (en m2)", "n° DT/DICT", "N° d'affaire"]
+option_labels = ["Types de réseaux"]
+option_labels_custom = ["Longueur (en ml)", "Surface (en m2)", "n° DT/DICT", "N° d'affaire"]
 option_labels.each do |option|
   Option.create(label: option)
 end
+option_labels_custom.each do |label|
+  option = Option.create(label: label, custom_value: true)
+  ProductOption.create(product: Product.first, option: option)
+end
+
 puts "#{Option.all.size} options créées"
+
+opt2 = Option.create(label: "OptionProduit2")
+OptionValue.create(option: opt2, label: "OptionValuepourOption2")
+ProductOption.create(product: Product.second, option: opt2)
+
+opt3 = Option.create(label: "OptionProduit3")
+OptionValue.create(option: opt3, label: "OptionValuepourOption3")
+ProductOption.create(product: Product.third, option: opt3)
+
 
 types_reseaux = ["Tout", "Electricité", "Eclairage", "Signalisation routière", "Gaz", "Hydrocarbures", "Produits chimiques", "Eau potable", "Chauffage/Clim", "Télécommunications", "Zone d'emprise multiréseaux"]
 types_reseaux.each do |type|
