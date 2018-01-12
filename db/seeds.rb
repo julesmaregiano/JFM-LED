@@ -98,6 +98,7 @@ produits.each do |produit|
   prod = Product.create(label: produit)
   if prod.label == "Marquage-Piquetage"
     option1 = Option.create(label: "Types de réseaux", custom_value: false)
+    ProductOption.create(product: prod, option: option1)
     types_reseaux = ["Tous (sauf assainissement)", "Electricité", "Eclairage", "Signalisation routière", "Gaz", "Hydrocarbures", "Produits chimiques", "Eau potable", "Chauffage/Clim", "Télécommunications"]
     types_reseaux.each do |label|
       OptionValue.create(option: option1, label: label, active: true)
@@ -109,8 +110,9 @@ produits.each do |produit|
     option4 = Option.create(label: "Date de début des travaux", custom_value: true)
     ProductOption.create(product: prod, option: option2)
 
-  elsif prod == "Sécurisation de sondages"
+  elsif prod.label == "Sécurisation de sondages"
     option5 = Option.create(label: "Localisation", custom_value: false)
+    ProductOption.create(product: prod, option: option5)
     reponses5 = ["Zone privée", "Zone publique"]
     reponses5.each do |label|
       OptionValue.create(option: option5, label: label, active: true)
@@ -120,7 +122,7 @@ produits.each do |produit|
     option7 = Option.create(label: "Nombre de points de sondage", custom_value: true)
     ProductOption.create(product: prod, option: option7)
 
-  elsif prod == "Récolement de réseaux"
+  elsif prod.label == "Récolement de réseaux"
     option8 = Option.create(label: "Longueur de réseau à récoler (en ml)", custom_value: true )
     ProductOption.create(product: prod, option: option8)
   end
@@ -179,7 +181,7 @@ Booking.all.each do |booking|
     if option.custom_value?
       BookedProductOption.create(booking: booking, option: option, value: (100..5000).to_a.sample)
     else
-      BookedProductOption.create(booking: booking, option: option, option_values: OptionValue.where(option: option).first.sample.first(1..2.to_a))
+      BookedProductOption.create(booking: booking, option: option, option_value: OptionValue.where(option: option).first)
     end
   end
 end
