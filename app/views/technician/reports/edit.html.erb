@@ -4,7 +4,7 @@
 
   <div class="dashboard-content with_right_sidebar">
     <div class="padding-box">
-      <h1 class="text-center">Rapport de MP <%= @report.id %>
+      <h1 class="text-center">Rapport de <%= @report.booking.product.label %> #<%= @report.id %>
         <%= link_to(content_tag(:i, nil, class: 'fa fa-eye'), technician_report_path(@report))%>
       </h1>
 

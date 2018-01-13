@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180112095124) do
+ActiveRecord::Schema.define(version: 20180113092631) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -179,7 +179,7 @@ ActiveRecord::Schema.define(version: 20180112095124) do
     t.bigint "section_id"
     t.string "information"
     t.bigint "option_group_id"
-    t.string "input_type"
+    t.integer "input_type"
     t.string "slug"
     t.bigint "unit_id"
     t.datetime "created_at", null: false
