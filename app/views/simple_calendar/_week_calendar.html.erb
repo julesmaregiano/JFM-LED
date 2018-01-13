@@ -13,7 +13,7 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Tech</th>
+        <th>Technicien</th>
         <% week_days.each do |day| %>
           <% unless day == "dimanche" || day == "samedi" %>
             <th><%= day %></th>
@@ -27,7 +27,9 @@
         <tr>
           <td class="no-padding">
             <% @techs.to_a.sort_by(&:id).each do |t| %>
-              <div class="tech-card"><%= t.first_name %></div>
+              <div class="tech-card">
+                <p><strong><%= t.first_name %> <%= t.last_name %></strong></p>
+              </div>
             <% end %>
           </td>
 

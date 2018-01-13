@@ -213,7 +213,8 @@
 }
 
 .tech-card {
-    border: 1px solid $dark-gray;
+    border: 1px solid $diago;
+    border-right: 8px solid $diago;
     color: $dark-gray;
     position: relative;
     text-align: center;
@@ -223,6 +224,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    & p{
+      color: $diago;
+    }
 }
 
 .booking-info {

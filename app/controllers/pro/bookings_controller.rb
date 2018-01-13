@@ -49,7 +49,7 @@ class Pro::BookingsController < ApplicationController
         next unless @booking.product.option_ids.include?(option_id.to_i)
         BookedProductOption.create(option_id: option_id, value: value, booking: @booking, custom_value: true)
       end
-      redirect_to pro_user_path(@user)
+      redirect_to pro_dashboard_path(@user)
     else
       render :new
     end
