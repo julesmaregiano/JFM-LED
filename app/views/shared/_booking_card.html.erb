@@ -4,9 +4,9 @@
     <div class="card-logo">
       <% unless technician.company.photo.nil? %>
         <% if @user.pro? || @user.particulier? %>
-        <%= cl_image_tag technician.company.photo.public_id, height: 110, width: 110, crop: :pad, class: "card-logo" %>
+          <%= cl_image_tag technician.company.photo.public_id, height: 110, width: 110, crop: :pad, class: "card-logo" %>
         <% else %>
-
+          <%= cl_image_tag booking.user.company.photo.public_id, height: 110, width: 110, crop: :pad, class: "card-logo" %>
         <% end %>
       <% end %>
     </div>

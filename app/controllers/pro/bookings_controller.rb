@@ -27,14 +27,13 @@ class Pro::BookingsController < ApplicationController
     @user = current_user
     @tech = User.where(role: 3).first
     @availabilities = Availability.to_come.not_today.free_first
-    @product = Product.first
+    @products = Product.all
     @booking = Booking.new
   end
 
   def create
     @user = current_user
     @tech = User.where(role: 3).first
-    @product = Product.first
     @foremen = Foreman.where(branch_id: @user.branch_id).to_a
     @availabilities = Availability.all
     @booking = Booking.new(booking_params)
@@ -42,11 +41,15 @@ class Pro::BookingsController < ApplicationController
     if @booking.save
       @booking.availabilities.update(status: "pending")
       Report.create(booking_id: @booking.id)
-      binding.pry
-      unless params[:options].nil?
-        option_params[:option_value_ids].each do |ovid| BookedProductOption.create(booking_id: @booking.id, option_value_id: ovid) end
+      option_params[:option_value_ids].each do |ovid|
+        next unless @booking.product.option_value_ids.include?(ovid.to_i)
+        BookedProductOption.create(booking_id: @booking.id, option_value_id: ovid)
       end
-      redirect_to pro_dashboard_path
+      params[:custom_values].each do |option_id, value|
+        next unless @booking.product.option_ids.include?(option_id.to_i)
+        BookedProductOption.create(option_id: option_id, value: value, booking: @booking, custom_value: true)
+      end
+      redirect_to pro_user_path(@user)
     else
       render :new
     end

@@ -2,8 +2,8 @@ class Manager::AvailabilitiesController < ApplicationController
 
   def index
     @user = current_user
-    @techs = User.all.where(role: 2)
-    @availabilities = Availability.all.to_come
+    @techs = User.where(role: 2)
+    @availabilities = Availability.to_come
   end
 
   def create

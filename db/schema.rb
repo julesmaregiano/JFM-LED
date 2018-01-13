@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180103080906) do
+ActiveRecord::Schema.define(version: 20180112095124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,7 +62,11 @@ ActiveRecord::Schema.define(version: 20180103080906) do
     t.bigint "option_value_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "custom_value", default: false
+    t.bigint "option_id"
+    t.string "value"
     t.index ["booking_id"], name: "index_booked_product_options_on_booking_id"
+    t.index ["option_id"], name: "index_booked_product_options_on_option_id"
     t.index ["option_value_id"], name: "index_booked_product_options_on_option_value_id"
   end
 
@@ -151,6 +155,7 @@ ActiveRecord::Schema.define(version: 20180103080906) do
     t.string "label"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "custom_value", default: false
   end
 
   create_table "product_options", force: :cascade do |t|
@@ -185,9 +190,9 @@ ActiveRecord::Schema.define(version: 20180103080906) do
   end
 
   create_table "reports", force: :cascade do |t|
+    t.bigint "booking_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "booking_id"
     t.index ["booking_id"], name: "index_reports_on_booking_id"
   end
 
@@ -236,6 +241,7 @@ ActiveRecord::Schema.define(version: 20180103080906) do
   add_foreign_key "availabilities", "users"
   add_foreign_key "booked_product_options", "bookings"
   add_foreign_key "booked_product_options", "option_values"
+  add_foreign_key "booked_product_options", "options"
   add_foreign_key "bookings", "products"
   add_foreign_key "bookings", "users"
   add_foreign_key "branches", "companies"

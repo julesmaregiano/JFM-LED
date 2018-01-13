@@ -1,15 +1,16 @@
-<%= week_calendar(start_date_param: :my_date,
-                   number_of_days: 7,
-                   attribute: :date,
-                   techs: techs,
-                   events: @availabilities) do |date, availabilities| %>
+<div class="card-container">
+  <%= week_calendar(start_date_param: :my_date,
+   number_of_days: 7,
+   attribute: :date,
+   events: @availabilities) do |date, availabilities| %>
 
-    <div class="date-day"><%= date.day %></div>
-    <div class="">
-      <% availabilities.sort_by(&:half).reverse!.sort_by(&:user).each do |availability| %>
-        <div class="week-box mng-calendar-<%= availability.status %>" data-availability-id="<%= availability.id %>">
-          <%= availability.user.first_name %>
-          <%= availability.status %>
-        </div>
-      <% end %>
-<% end %>
+   <div class="date-day"><%= date.day %></div>
+   <div class="">
+    <% availabilities.sort_by(&:half).reverse!.sort_by(&:user).each do |availability| %>
+    <div class="week-box mng-calendar-<%= availability.status %>" data-availability-id="<%= availability.id %>">
+      <%= render "shared/calendar_card", availability: availability %>
+    </div>
+    <% end %>
+    <% end %>
+  </div>
+</div>
