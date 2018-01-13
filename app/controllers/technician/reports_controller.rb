@@ -26,6 +26,7 @@ class Technician::ReportsController < ApplicationController
     @section2 = Section.where(name: "Contexte du chantier").first
     @section3 = Section.where(name: "Recommandations et localisations des ouvrages").first
     @section4 = Section.where(name: "Signataires").first
+    @answers = []
   end
 
   def update

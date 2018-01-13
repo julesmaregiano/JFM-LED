@@ -36,6 +36,7 @@
     <div class="text-left col-xs-6">
       <%= simple_form_for q.answers.find_or_create_by(report: @report) do |f| %>
         <%= f.input :string, label: q.name, input_html: {value: "##{@booking.id} - #{@booking.city}" } %>
+        <%= f.submit %>
       <% end %>
     </div>
     <!-- Question 2 -->
