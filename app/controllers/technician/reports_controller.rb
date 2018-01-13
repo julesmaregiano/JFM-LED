@@ -17,6 +17,8 @@ class Technician::ReportsController < ApplicationController
 
   def edit
     @booking = @report.booking
+    @client = @booking.user
+    @tech = @booking.availabilities.first.user
     @sections = Section.all
     @section1 = Section.where(name: "Désignation du chantier").first
     @section2 = Section.where(name: "Contexte du chantier").first
