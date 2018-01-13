@@ -39,6 +39,10 @@ $white-space: 20px;
   padding: 20px;
 }
 
+.no-padding {
+  padding: 0px !important;
+}
+
 .flexbox {
   display: flex !important;
   justify-content: center;

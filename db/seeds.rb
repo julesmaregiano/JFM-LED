@@ -168,7 +168,7 @@ Availability.where.not(booking_id: nil).where(status: "free").update(status: "bo
 Booking.all.each do |booking|
   booking.availabilities.empty?
   Availability.where(booking_id: nil).first(3).each do |availability|
-    availability.update(booking: booking)
+    availability.update(booking: booking, status: "booked")
   end
 end
 

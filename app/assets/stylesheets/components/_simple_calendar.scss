@@ -40,7 +40,7 @@
     font-size: 16px;
     font-weight: bold;
     top: 2%;
-    left: 5%;
+    left: 3%;
     opacity: 0.5;
   }
   .wday-0 {}
@@ -210,6 +210,23 @@
   margin: 0px;
   width: 30px !important;
   height: 30px;
+}
+
+.tech-card {
+    border: 1px solid $diago;
+    border-right: 8px solid $diago;
+    color: $dark-gray;
+    position: relative;
+    text-align: center;
+    height: 100px;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & p{
+      color: $diago;
+    }
 }
 
 .booking-info {
