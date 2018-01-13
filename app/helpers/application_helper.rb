@@ -2,7 +2,7 @@ module ApplicationHelper
 
 
   def date_in_futur(date)
-    (Date.today <=> date) < 1
+    (Date.current <=> date) < 1
   end
 
   def months
@@ -18,7 +18,7 @@ module ApplicationHelper
   end
 
   def date_in_futur(date)
-    (Date.today <=> date) < 1
+    (Date.current <=> date) < 1
   end
 
   def weekend?(day)

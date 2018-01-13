@@ -3,11 +3,11 @@ class Availability < ApplicationRecord
   belongs_to :booking, optional: true
   after_create :init
 
-  scope :of_the_day, -> { where("date = ?", Date.today) }
-  scope :of_the_week, -> { where("date <= ?", Date.today + 7)}
-  scope :of_last_week, -> { where("date >= ?", Date.today - 7)}
-  scope :to_come, -> { where("date >= ?", Date.today) }
-  scope :not_today, -> { where.not("date = ?", Date.today) }
+  scope :of_the_day, -> { where("date = ?", Date.current) }
+  scope :of_the_week, -> { where("date <= ?", Date.current + 7)}
+  scope :of_last_week, -> { where("date >= ?", Date.current - 7)}
+  scope :to_come, -> { where("date >= ?", Date.current) }
+  scope :not_today, -> { where.not("date = ?", Date.current) }
   scope :of, -> (user) {where("user_id = ? ", user.id)}
   scope :oldest_to_new, -> { order(created_at: :asc)}
   scope :free_first, -> { order(status: :asc) }
