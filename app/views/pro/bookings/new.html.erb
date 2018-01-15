@@ -15,6 +15,7 @@
 
           <div class="availabilities-fields"> <%# div pour injecter les avaialbilities via le JS %></div>
           <%= f.input :address %>
+          <%= f.input :reference %>
           <%= f.input :product_id, collection: @products.to_a, label_method: lambda { |product| "#{product.label}" } %>
 
           <div class="options-fields"></div> <%# div pour injecter les options via le JS %>
