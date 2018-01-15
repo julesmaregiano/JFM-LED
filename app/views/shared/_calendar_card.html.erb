@@ -1,5 +1,10 @@
 <% if availability.booking_id.nil? %>
-
+  <div class="calendar-card">
+      <p><%= availability.half %></p>
+      <p><%= availability.user.first_name %></p>
+      <p><%= availability.status %></p>
+    </div>
+  </div>
 <% else %>
   <div class="calendar-card">
     <div class="flexbox">
@@ -12,9 +17,8 @@
     </div>
     <div class="booking-actions flex-stretch">
       <div class="flexbox flex-end">
-        <p># <%= availability.booking.id %></p>
+        <p><strong><%= availability.booking.reference %></strong></p>
       </div>
-        <p>refresh</p>
     </div>
   </div>
 <% end %>

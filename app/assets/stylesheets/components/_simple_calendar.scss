@@ -17,6 +17,7 @@
   th {
     padding: 0px;
     height: 50px !important;
+    width: 10vw !important;
     border-collapse: collapse;
     border: 1px solid $medium-gray;
     box-sizing: border-box;
@@ -150,14 +151,10 @@
   }
 
   .btn-calendar-selected, .mng-calendar-selected  {
-    border: 1px solid $anis;
-    border-left: 8px solid $anis;
-    background-color: $anis;
+    border: 8px solid $diago;
+    background: $diago;
     font-color: white;
     font-weight: bold;
-    &:hover {
-      background-color: $anis;
-    }
   }
 
   .btn-calendar-doneinpast {

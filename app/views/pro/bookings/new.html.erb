@@ -15,6 +15,7 @@
 
           <div class="availabilities-fields"> <%# div pour injecter les avaialbilities via le JS %></div>
           <%= f.input :address %>
+          <%= f.input :reference %>
           <%= f.input :product_id, collection: @products.to_a, label_method: lambda { |product| "#{product.label}" } %>
 
           <div class="options-fields"></div> <%# div pour injecter les options via le JS %>
@@ -35,7 +36,7 @@
                   <% else %>
                     <div class="row">
                       <div class="col-xs-12"><label for=""><%= option.label %></label></div>
-                      <% option.option_values.each do |option_value| %>
+                      <% option.option_values.active.each do |option_value| %>
                       <div class="col-xs-4 option_values-tobook" data-option-value-id="<%= option_value.id %>"><%= option_value.label %></div>
                       <% end %>
                     </div>
