@@ -1,6 +1,9 @@
 <% if availability.booking_id.nil? %>
   <div class="calendar-card">
-      <p><strong><%= availability.status %></strong></p>
+      <p><%= availability.half %></p>
+      <p><%= availability.user.first_name %></p>
+      <p><%= availability.status %></p>
+    </div>
   </div>
 <% else %>
   <div class="calendar-card">
