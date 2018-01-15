@@ -28,8 +28,11 @@ class Manager::BookingsController < ApplicationController
     @user = current_user
     @booking = Booking.find(params[:id])
     old_availabilities = @booking.availabilities
-    if old_availabilities.update(status: "free") && @booking.update(availabilities_params)
+    if old_availabilities.first.pending? && old_availabilities.update(status: "free") && @booking.update(availabilities_params)
       @booking.availabilities.update(status: "booked")
+      redirect_to manager_planning_path
+    elsif old_availabilities.first.booked? && @booking.update(availabilities_params)
+      old_availabilities.update(status: "pending")
       redirect_to manager_planning_path
     else
       render :edit

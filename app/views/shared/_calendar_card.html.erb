@@ -17,6 +17,13 @@
     </div>
     <div class="booking-actions flex-stretch">
       <div class="flexbox flex-end">
+        <%= simple_form_for [@user.role, availability.booking] do |f| %>
+          <div class="availabilities-fields"></div>
+          <%= f.hidden_field :booking, value: availability.booking %>
+          <%= f.button :button, class: 'small-icon' do %>
+            <i class="fa fa-edit invert-<%= availability.status %>-color" aria-hidden="true"></i>
+          <% end %>
+        <% end %>
         <p><strong><%= availability.booking.reference %></strong></p>
       </div>
     </div>
