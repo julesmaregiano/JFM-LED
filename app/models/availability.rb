@@ -1,4 +1,4 @@
-class Availability < ApplicationRecord
+  class Availability < ApplicationRecord
   belongs_to :user
   belongs_to :booking, optional: true
   after_create :init
