@@ -1,5 +1,7 @@
 <% if availability.booking_id.nil? %>
-
+  <div class="calendar-card">
+      <p><strong><%= availability.status %></strong></p>
+  </div>
 <% else %>
   <div class="calendar-card">
     <div class="flexbox">
