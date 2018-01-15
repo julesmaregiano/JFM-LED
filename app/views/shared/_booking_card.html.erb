@@ -11,13 +11,23 @@
       <% end %>
     </div>
 
-    <div class="card-middle no-margin flexbox-vertical align-center">
-      <h5 class="no-margin"><%= technician.company.name %></h5>
-      <p><strong><%= booking.address1 %> - <%= booking.city %></strong></p>
-      <p>Technicien: <%= technician.first_name %> <%= technician.last_name %></p>
-      <p>Chef de Chantier: <%= booking.foreman_id? ? "#{booking.has_foreman.first_name} #{booking.has_foreman.last_name}" : "Non précisé" %></p>
-      <p>Statut de la demande : <strong><%= booking.availabilities.first.status %></strong></p>
-    </div>
+    <% if @user.pro? || @user.particulier? %>
+      <div class="card-middle no-margin flexbox-vertical align-center">
+        <h5 class="no-margin"><%= technician.company.name %></h5>
+        <p><strong><%= booking.address1 %> - <%= booking.city %></strong></p>
+        <p>Technicien: <%= technician.first_name %> <%= technician.last_name %></p>
+        <p>Chef de Chantier: <%= booking.foreman_id? ? "#{booking.has_foreman.first_name} #{booking.has_foreman.last_name}" : "Non précisé" %></p>
+        <p>Statut de la demande : <strong><%= booking.availabilities.first.status %></strong></p>
+      </div>
+    <% else %>
+      <div class="card-middle no-margin flexbox-vertical align-center">
+        <h5 class="no-margin"><%= booking.user.company.name %></h5>
+        <p><strong><%= booking.address1 %> - <%= booking.city %></strong></p>
+        <p>Technicien: <%= technician.first_name %> <%= technician.last_name %></p>
+        <p>Chef de Chantier: <%= booking.foreman_id? ? "#{booking.has_foreman.first_name} #{booking.has_foreman.last_name}" : "Non précisé" %></p>
+        <p>Statut de la demande : <strong><%= booking.availabilities.first.status %></strong></p>
+      </div>
+    <% end %>
   </div>
 
   <div class="card-right">
@@ -25,7 +35,7 @@
       <span><p class="card-date"><%= availability.date.strftime("%d %b") %> <%= availability.half %></p></span>
     <% end %>
     <div class="card-links flex-horizontal">
-      <%= link_to "tel:#{booking.foreman_id}" do %>
+      <%= link_to "tel:#{booking.foreman.phone}" do %>
         <i class="card-icon fa fa-phone" aria-hidden="true"></i>
       <% end %>
       <% if @user.manager? %>

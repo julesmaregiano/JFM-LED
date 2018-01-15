@@ -3,7 +3,7 @@
     <thead>
       <h4><strong>Liste des rapports</strong></h4>
       <tr>
-        <th scope="col">#id</th>
+        <th scope="col">Référence</th>
         <th scope="col">Date</th>
         <th scope="col">Adresse</th>
         <th scope="col">Client</th>
@@ -15,7 +15,7 @@
     <tbody>
       <% reports.each do |report| %>
         <tr>
-          <th scope="row"><%= report.id %></th>
+          <th scope="row"><%= report.booking.reference %></th>
           <td><%= report.created_at %></td>
           <td><%= report.booking.address %></td>
           <td><%= report.user.first_name + ' ' + report.user.last_name %></td>

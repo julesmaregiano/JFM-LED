@@ -3,7 +3,7 @@
     <thead>
       <h4><strong>Liste de vos interventions</strong></h4>
       <tr>
-        <th scope="col">#</th>
+        <th scope="col">Référence</th>
         <th scope="col">Commandé le</th>
         <th scope="col">Adresse</th>
         <th scope="col">Client</th>
@@ -17,7 +17,7 @@
       <% unless bookings.nil? %>
         <% bookings.each do |booking| %>
           <tr>
-            <th scope="row">#<%= booking.id %></th>
+            <th scope="row">#<%= booking.reference %></th>
             <td><%= booking.created_at.strftime("%a %d %b") %></td>
             <td><%= booking.address %></td>
             <td><%= booking.user.first_name + ' ' + booking.user.last_name %></td>
