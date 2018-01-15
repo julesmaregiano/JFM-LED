@@ -58,7 +58,7 @@ class Pro::BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:comment, :pdf, :foreman_id, :address1, :address2, :zipcode, :city, :country, :product_id, :surface, availability_ids: [], :reference)
+    params.require(:booking).permit(:comment, :pdf, :foreman_id, :address1, :address2, :zipcode, :city, :country, :product_id, :surface, :reference, availability_ids: [])
   end
 
   def option_params
