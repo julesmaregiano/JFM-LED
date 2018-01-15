@@ -144,9 +144,6 @@
     &:hover {
       color: white;
       background-color: $yellow;
-      i {
-        color: white;
-      }
     }
   }
 
@@ -170,9 +167,6 @@
     &:hover {
       color: white;
       background-color: $red;
-      i {
-        color: white;
-      }
     }
   }
 
@@ -207,6 +201,10 @@
   margin: 0px;
   width: 30px !important;
   height: 30px;
+}
+
+.dark-gray {
+  color: $dark-gray !important;
 }
 
 .tech-card {

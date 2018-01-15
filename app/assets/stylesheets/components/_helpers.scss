@@ -143,12 +143,12 @@ input, select {
   font-weight: bolder;
 }
 
-.pending-color {
+.pending-color, .invert-pending-color {
   color: $orange;
 }
-.free-color {
-
+.free-color, .invert-booked-color {
+  color: $red;
 }
-.booked-color {
+.booked-color, .invert-free-color {
   color: $anis;
 }
