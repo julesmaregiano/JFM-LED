@@ -35,8 +35,10 @@
       <span><p class="card-date"><%= availability.date.strftime("%d %b") %> <%= availability.half %></p></span>
     <% end %>
     <div class="card-links flex-horizontal">
-      <%= link_to "tel:#{booking.foreman.phone}" do %>
-        <i class="card-icon fa fa-phone" aria-hidden="true"></i>
+      <% unless booking.foreman.nil? %>
+        <%= link_to "tel:#{booking.foreman.phone}" do %>
+          <i class="card-icon fa fa-phone" aria-hidden="true"></i>
+        <% end %>
       <% end %>
       <% if @user.manager? %>
         <%= link_to manager_booking_path(booking) do %>
