@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180112095124) do
+ActiveRecord::Schema.define(version: 20180115103644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 20180112095124) do
     t.string "country"
     t.bigint "foreman_id"
     t.bigint "product_id"
+    t.string "reference"
     t.index ["foreman_id"], name: "index_bookings_on_foreman_id"
     t.index ["product_id"], name: "index_bookings_on_product_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
@@ -179,7 +180,7 @@ ActiveRecord::Schema.define(version: 20180112095124) do
     t.bigint "section_id"
     t.string "information"
     t.bigint "option_group_id"
-    t.string "input_type"
+    t.integer "input_type"
     t.string "slug"
     t.bigint "unit_id"
     t.datetime "created_at", null: false
