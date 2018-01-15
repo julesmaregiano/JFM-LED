@@ -48,7 +48,7 @@
         <% booking.product.options.each do |option| %>
           <p><strong><%= option.label %> :</strong>
             <% if option.custom_value? %>
-              <%= BookedProductOption.where(booking: booking, option: option).first.value || "non précisé" %>
+              <%= BookedProductOption.where(booking: booking, option: option).first.nil? ? "non précisé" : BookedProductOption.where(booking: booking, option: option).first.value %>
             <% else %>
               <% booking.option_values.each do |ov| %>
                <p><%= ov.label %></p>
