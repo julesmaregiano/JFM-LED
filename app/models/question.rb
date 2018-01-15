@@ -6,7 +6,7 @@ class Question < ApplicationRecord
   validates :name, presence: true, uniqueness: true, allow_blank: false
   validates :input_type, presence: true
 
-  enum input_type: [:option_choice_id, :numeric, :string, :boolean]
+  enum input_type: [:option_choice_id, :numeric, :string, :boolean, :date]
 
   def answer_is(diag)
     self.answers.where(diagnostic: diag).first
