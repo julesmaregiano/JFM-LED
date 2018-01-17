@@ -57,7 +57,7 @@
     <% q = section.questions.fourth %>
     <div class="text-left col-xs-6">
       <%= simple_form_for q.answers.find_or_create_by(report: @report) do |f| %>
-        <%= f.input :string, as: :date, label: q.name %>
+        <%= f.input :string, label: q.name %>
       <% end %>
     </div>
     <!-- Question 5 -->
@@ -86,7 +86,7 @@
     <% q = section.questions.third %>
     <div class="text-left col-xs-6">
       <%= simple_form_for q.answers.find_or_create_by(report: @report) do |f| %>
-        <%= f.input :string, label: q.name, as: :date %>
+        <%= f.input :string, label: q.name %>
       <% end %>
     </div>
     <% q = section.questions.fourth %>

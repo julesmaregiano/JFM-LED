@@ -24,7 +24,7 @@
 
     <%= simple_form_for([@user.role, @report]) do |m| %>
       <%= m.simple_fields_for :answers do |p| %>
-        <%= p.input :string %>
+        <%= p.input p.object.question.input_type.to_sym, { label: p.object.question.name }.merge( p.object.question.option_choice_id? ? {collection: p.object.question.option_choices} : {}) %>
       <% end %>
       <%= m.submit %>
     <% end %>

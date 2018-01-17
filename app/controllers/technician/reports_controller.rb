@@ -14,6 +14,10 @@ class Technician::ReportsController < ApplicationController
     @client = @booking.user
     @tech = @booking.availabilities.first.user
     @sections = Section.all
+    @section1 = Section.first
+    @section2 = Section.second
+    @section3 = Section.third
+    @section4 = Section.fourth
   end
 
   def edit
