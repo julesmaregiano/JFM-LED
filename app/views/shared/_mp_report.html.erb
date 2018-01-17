@@ -1,13 +1,13 @@
 <div class="card-container report">
   <div class="flexbox">
     <div class="client-company flexbox">
-      <% unless client.company.photo.nil? %>
-        <%= cl_image_tag client.company.photo.public_id, height: 150, width: 150, crop: :pad, class: "card-logo" %>
+      <% unless @client.company.photo.nil? %>
+        <%= cl_image_tag @client.company.photo.public_id, height: 150, width: 150, crop: :pad, class: "card-logo" %>
       <% end %>
       <div>
-        <h4><strong><%= client.company.name %></strong></h4>
-        <h6><%= client.branch.name %></h6>
-        <h6><%= client.branch.city %>, <%= @user.branch.zipcode %></h6>
+        <h4><strong><%= @client.company.name %></strong></h4>
+        <h6><%= @client.branch.name %></h6>
+        <h6><%= @client.branch.city %>, <%= @user.branch.zipcode %></h6>
     </div>
   </div>
   <div class="tech-company flexbox">
@@ -22,17 +22,25 @@
   </div>
 </div>
 
-  <% @sections.each do |section| %>
-  <div id="Section-<%= section.id %>" class="row report-section">
-    <h4 class="margin-bottom-small"><strong><%= section.name.capitalize %></strong></h4>
-    <% section.questions.each do |question| %>
-    <div class="text-left col-xs-6">
-      <%= simple_form_for question.answers.find_or_create_by(report: @report) do |f| %>
-        <%= f.input :string, label: question.name %>
-        <%= f.submit %>
+    <%= simple_form_for([@user.role, @report]) do |m| %>
+      <%= m.simple_fields_for :answers do |p| %>
+        <%= p.input :string %>
+      <% end %>
+      <%= m.submit %>
+    <% end %>
+
+
+<!--   <% @sections.each do |section| %>
+    <div id="Section-<%= section.id %>" class="row report-section">
+      <h4 class="margin-bottom-small"><strong><%= section.name.capitalize %></strong></h4>
+      <% section.questions.each do |question| %>
+        <div class="text-left col-xs-6">
+          <%= simple_form_for question.answers.find_or_create_by(report: @report) do |f| %>
+            <%= f.input question.input_type.to_sym, { label: question.name }.merge( question.option_choice_id? ? {collection: question.option_choices} : {})   %>
+            <%= f.submit %>
+          <% end %>
+        </div>
       <% end %>
     </div>
-    <% end %>
-  </div>
-  <% end %>
+  <% end %> -->
 </div>

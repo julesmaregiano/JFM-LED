@@ -31,7 +31,7 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :index]
     resources :bookings, only: [:show, :index]
     resources :availabilities, only: [:index]
-    resources :reports, only: [:show, :edit, :index]
+    resources :reports
   end
 
   namespace :manager do

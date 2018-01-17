@@ -4,6 +4,7 @@ class Report < ApplicationRecord
   has_one :technician, through: :booking, class_name: "User", foreign_key: "user_id"
   has_many :answers
   has_attachments :photos, maximum: 20
+  accepts_nested_attributes_for :answers
 
   def booker
     self.booking.users.first
