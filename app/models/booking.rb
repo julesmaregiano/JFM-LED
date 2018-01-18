@@ -52,7 +52,4 @@
     [address1, address2, city, zipcode, country].compact.join(', ')
   end
 
-  private
-
-
 end

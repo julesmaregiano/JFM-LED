@@ -1,0 +1,48 @@
+<div class="card-container report">
+  <div class="flexbox">
+    <div class="client-company flexbox">
+      <% unless client.company.photo.nil? %>
+        <%= cl_image_tag client.company.photo.public_id, height: 150, width: 150, crop: :pad, class: "card-logo" %>
+      <% end %>
+      <div>
+        <h4><strong><%= client.company.name %></strong></h4>
+        <h6><%= client.branch.name %></h6>
+        <h6><%= client.branch.city %>, <%= @user.branch.zipcode %></h6>
+    </div>
+  </div>
+  <div class="tech-company flexbox">
+    <% unless tech.company.photo.nil? %>
+      <%= cl_image_tag tech.company.photo.public_id, height: 150, width: 150, crop: :pad, class: "card-logo" %>
+    <% end %>
+    <div>
+      <h4><strong><%= tech.company.name %></strong></h4>
+      <h6><%= tech.branch.name %></h6>
+      <h6><%= tech.branch.city %>, <%= @user.branch.zipcode %></h6>
+    </div>
+  </div>
+</div>
+
+  <h4 class="text-center"><strong>Rapport de <%= @report.booking.product.label %> #<%= @report.id %></strong>
+    <%= link_to(content_tag(:i, nil, class: 'fa fa-eye'), technician_report_path(@report))%>
+  </h4>
+
+  <div class="">
+
+    <% @sections.each do |section| %>
+      <div id="Section-<%= section.id %>" class="row report-section">
+        <h4 class="margin-bottom-small"><strong><%= section.name.capitalize %></strong></h4>
+        <% section.questions.each do |question| %>
+          <div class="text-left col-xs-6">
+            <label for=""><%= question.name %></label><br/>
+            <%= question.answer_for(@report).litteral_answer %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+  </div>
+<!-- PICTURES -->
+
+
+<!-- SIGNATURES -->
+</div>

@@ -20,7 +20,7 @@
           <td><%= report.booking.address %></td>
           <td><%= report.user.first_name + ' ' + report.user.last_name %></td>
           <td><%= report.booking.availabilities.count %> demi-journées</td>
-          <td><%= report.answers.count > 0 ? "Terminé" : "En cours" %></td>
+          <td><%= report.progress %> %</td>
           <td>
             <% if current_user.technician? %>
               <%= link_to(content_tag(:i, nil, class: 'fa fa-eye'), technician_report_path(report))%>

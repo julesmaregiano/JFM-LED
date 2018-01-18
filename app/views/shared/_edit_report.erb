@@ -1,0 +1,45 @@
+<div class="card-container report">
+  <div class="flexbox">
+    <div class="client-company flexbox">
+      <% unless client.company.photo.nil? %>
+        <%= cl_image_tag client.company.photo.public_id, height: 150, width: 150, crop: :pad, class: "card-logo" %>
+      <% end %>
+      <div>
+        <h4><strong><%= client.company.name %></strong></h4>
+        <h6><%= client.branch.name %></h6>
+        <h6><%= client.branch.city %>, <%= @user.branch.zipcode %></h6>
+      </div>
+    </div>
+    <div class="tech-company flexbox">
+      <% unless tech.company.photo.nil? %>
+        <%= cl_image_tag tech.company.photo.public_id, height: 150, width: 150, crop: :pad, class: "card-logo" %>
+      <% end %>
+      <div>
+        <h4><strong><%= tech.company.name %></strong></h4>
+        <h6><%= tech.branch.name %></h6>
+        <h6><%= tech.branch.city %>, <%= @user.branch.zipcode %></h6>
+      </div>
+    </div>
+  </div>
+
+  <%= simple_form_for([@user.role, @report]) do |m| %>
+    <% @report.sections.uniq.sort_by(&:id).each do |section| %>
+      <div id="Section-<%= section.id %>" class="row report-section">
+      <h4><strong><%= section.name %></strong></h4>
+        <% @report.questions.where(section: section).each do |question| %>
+        <% answer = @report.answers.where(question: question) %>
+          <div class="text-left col-xs-6">
+            <%= m.simple_fields_for :answers, answer do |p|%>
+              <%= p.input p.object.question.input_type.to_sym, {as: p.object.question.display, label: p.object.question.name }.merge( p.object.question.option_choice_id? ? {collection: p.object.question.option_choices} : {}) %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="row report-section">
+      <%= m.input :photos, as: :attachinary %>
+    </div>
+    <%= m.submit %>
+  <% end %>
+
+</div>
