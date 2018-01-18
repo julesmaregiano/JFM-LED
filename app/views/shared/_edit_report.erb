@@ -30,7 +30,7 @@
         <% answer = @report.answers.where(question: question) %>
           <div class="text-left col-xs-6">
             <%= m.simple_fields_for :answers, answer do |p|%>
-              <% unless p.object.input_type.nil? %>
+              <% unless p.object.question.input_type.nil? %>
                 <%= p.input p.object.question.input_type.to_sym, {as: p.object.question.display, label: p.object.question.name }.merge( p.object.question.option_choice_id? ? {collection: p.object.question.option_choices} : {}) %>
               <% end %>
             <% end %>
