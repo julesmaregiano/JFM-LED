@@ -254,5 +254,9 @@ question19 = Question.create!( section: Section.find_by(name: "Signataires"), na
 question20 = Question.create!( section: Section.find_by(name: "Signataires"), name: "Observations des parties", information: "observations_mp", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string")
 puts "Questions créées: #{Question.count}"
 
+Report.all.each do |report| report.init end
+
+puts "Réponses créées: #{Answer.count}"
+
 
 # SEPARATION DEV/PROD

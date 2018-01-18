@@ -40,7 +40,6 @@ class Pro::BookingsController < ApplicationController
     @booking.user_id = @user.id
     if @booking.save
       @booking.availabilities.update(status: "pending")
-      Report.create(booking_id: @booking.id)
       option_params[:option_value_ids].each do |ovid|
         next unless @booking.product.option_value_ids.include?(ovid.to_i)
         BookedProductOption.create(booking_id: @booking.id, option_value_id: ovid)

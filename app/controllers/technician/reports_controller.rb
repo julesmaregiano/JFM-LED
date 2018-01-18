@@ -14,10 +14,6 @@ class Technician::ReportsController < ApplicationController
     @client = @booking.user
     @tech = @booking.availabilities.first.user
     @sections = Section.all
-    @section1 = Section.first
-    @section2 = Section.second
-    @section3 = Section.third
-    @section4 = Section.fourth
   end
 
   def edit
@@ -35,7 +31,6 @@ class Technician::ReportsController < ApplicationController
     @tech = @booking.availabilities.first.user
     @user = user_params
     @sections = Section.all
-    binding.pry
     if @report.update(report_params)
       redirect_to technician_report_path(@report)
     else
