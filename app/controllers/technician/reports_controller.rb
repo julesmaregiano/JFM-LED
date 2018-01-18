@@ -31,6 +31,7 @@ class Technician::ReportsController < ApplicationController
     @tech = @booking.availabilities.first.user
     @user = user_params
     @sections = Section.all
+    binding.pry
     if @report.update(report_params)
       redirect_to technician_report_path(@report)
     else

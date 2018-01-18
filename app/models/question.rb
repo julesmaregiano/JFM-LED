@@ -8,12 +8,12 @@ class Question < ApplicationRecord
 
   enum input_type: [:option_choice_id, :numeric, :string, :boolean]
 
-  def answer_is(diag)
-    self.answers.where(diagnostic: diag).first
+  def answer_for(report)
+    self.answers.where(report: report).first
   end
 
-  def has_answer?(diag)
-    self.answers.where(diagnostic: diag).first.attribute.slice('string', 'boolean', 'numeric', 'option_choice_id').compact.any?
+  def has_answer?(report)
+    self.answers.where(report: report).first.attribute.slice('string', 'boolean', 'numeric', 'option_choice_id').compact.any?
   end
 
 end
