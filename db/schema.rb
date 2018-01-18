@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180115103644) do
+ActiveRecord::Schema.define(version: 20180118132724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -169,6 +169,15 @@ ActiveRecord::Schema.define(version: 20180115103644) do
     t.index ["product_id"], name: "index_product_options_on_product_id"
   end
 
+  create_table "product_questions", force: :cascade do |t|
+    t.bigint "question_id"
+    t.bigint "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_product_questions_on_product_id"
+    t.index ["question_id"], name: "index_product_questions_on_question_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "label"
     t.datetime "created_at", null: false
@@ -185,6 +194,8 @@ ActiveRecord::Schema.define(version: 20180115103644) do
     t.bigint "unit_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "display"
+    t.boolean "active"
     t.index ["option_group_id"], name: "index_questions_on_option_group_id"
     t.index ["section_id"], name: "index_questions_on_section_id"
     t.index ["unit_id"], name: "index_questions_on_unit_id"
@@ -253,6 +264,8 @@ ActiveRecord::Schema.define(version: 20180115103644) do
   add_foreign_key "option_values", "options"
   add_foreign_key "product_options", "options"
   add_foreign_key "product_options", "products"
+  add_foreign_key "product_questions", "products"
+  add_foreign_key "product_questions", "questions"
   add_foreign_key "questions", "option_groups"
   add_foreign_key "questions", "sections"
   add_foreign_key "questions", "units"
