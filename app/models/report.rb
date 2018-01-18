@@ -18,5 +18,15 @@ class Report < ApplicationRecord
     end
   end
 
+  def progress
+    questions = self.product.questions.count
+    answered = 0
+    self.answers.each do |answer|
+      if answer.answered?
+        answered += 1
+      end
+    end
+    questions == 0 ? 0 : ((answered.to_f/questions.to_f)*100).round
+  end
 
 end

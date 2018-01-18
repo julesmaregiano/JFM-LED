@@ -15,5 +15,9 @@ class Answer < ApplicationRecord
     end
   end
 
+  def answered?
+    self.attributes.slice('date', 'string', 'boolean', 'numeric', 'option_choice_id').compact.any?
+  end
+
 
 end
