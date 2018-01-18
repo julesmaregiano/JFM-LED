@@ -8,15 +8,15 @@ class Question < ApplicationRecord
   validates :name, presence: true, uniqueness: true, allow_blank: false
   validates :input_type, presence: true
 
-  enum display: [:text, :check_boxes, :radio_buttons, :date, :integer]
-  enum input_type: [:option_choice_id, :numeric, :string, :boolean]
+  enum display: [:text, :check_boxes, :radio_buttons, :integer]
+  enum input_type: [:option_choice_id, :numeric, :string, :boolean, :date]
 
   def answer_for(report)
     self.answers.where(report: report).first
   end
 
   def has_answer?(report)
-    self.answers.where(report: report).first.attribute.slice('string', 'boolean', 'numeric', 'option_choice_id').compact.any?
+    self.answers.where(report: report).first.attribute.slice('date', 'string', 'boolean', 'numeric', 'option_choice_id').compact.any?
   end
 
 end

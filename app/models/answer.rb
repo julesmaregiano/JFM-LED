@@ -7,7 +7,7 @@ class Answer < ApplicationRecord
 
 
   def litteral_answer
-    hash = self.attributes.slice('string', 'boolean', 'numeric', 'option_choice_id')
+    hash = self.attributes.slice('date', 'string', 'boolean', 'numeric', 'option_choice_id')
     if hash.compact.empty?
       "Pas encore de réponse"
     else
