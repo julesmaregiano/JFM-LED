@@ -8,9 +8,6 @@ class ApplicationController < ActionController::Base
   if Rails.env.staging?
     http_basic_authenticate_with name: "juste", password: "lejusticier"
   end
-  if Rails.env.production?
-    http_basic_authenticate_with name: "juste", password: "lejusticier"
-  end
 
   def after_sign_in_path_for(resource)
      "/#{resource.role}/dashboard"

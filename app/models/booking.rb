@@ -6,10 +6,10 @@
   belongs_to :product
   has_attachment :pdf
 
-  belongs_to :foreman
+  belongs_to :foreman, optional: true
   has_one :report, dependent: :destroy
-  validates :user_id, presence: :true
-  validates :availabilities, presence: :true
+  validates :user_id, presence: true
+  validates :availabilities, presence: true
   belongs_to :user
   geocoded_by :address
   after_create :geocode
