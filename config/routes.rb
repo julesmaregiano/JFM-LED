@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :reports, only: [:index, :show]
     resources :availabilities, only: [:show]
     resources :foremen, only: [:create]
+    resources :report, only: [:show]
   end
 
   namespace :particulier do
