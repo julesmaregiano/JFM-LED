@@ -3,10 +3,12 @@
 
   <div class="dashboard-content">
     <div class="padding-box">
-        <div class= "col-xs-12 col-md-6" id="map" style="height: calc(100vh - 90px);"></div>
+      <div class="row">
+        <div class= "col-xs-12 col-md-6 hidden-xs" id="map" style="height: calc(100vh - 110px);"></div>
         <div class="col-xs-12 col-md-6">
           <%= render "shared/booking_details", booking: @booking %>
         </div>
+      </div>
     </div>
   </div>
 </div>
