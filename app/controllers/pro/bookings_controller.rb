@@ -85,10 +85,21 @@ class Pro::BookingsController < ApplicationController
   end
 
   def create_markers_for(bookings)
-    unless @booking.latitude.nil? || @booking.latitude.nil?
-      @markers = Gmaps4rails.build_markers(bookings) do |booking, marker|
-        marker.lat booking.latitude
-        marker.lng booking.longitude
+    if bookings.class == Booking
+      unless bookings.latitude.nil? || bookings.latitude.nil?
+        @markers = Gmaps4rails.build_markers(bookings) do |booking, marker|
+          marker.lat booking.latitude
+          marker.lng booking.longitude
+        end
+      end
+    else
+      bookings.each do |booking|
+        unless booking.latitude.nil? || booking.latitude.nil?
+          @markers = Gmaps4rails.build_markers(bookings) do |booking, marker|
+            marker.lat booking.latitude
+            marker.lng booking.longitude
+          end
+        end
       end
     end
   end

@@ -41,7 +41,7 @@
   def technicians
     self.availabilities.map do |availability|
       availability.user
-    end
+    end.uniq
   end
 
   def tech_of_the_day

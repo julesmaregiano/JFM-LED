@@ -1,36 +1,24 @@
 class Technician::ReportsController < ApplicationController
-  before_action :user_params, only: [:index, :show, :edit]
-  before_action :report_id_params, only: [:show, :edit, :update]
+  before_action :set_user, only: [:index, :show, :edit, :update]
+  before_action :set_report, only: [:show, :edit, :update]
+  before_action :set_booking, only: [:show, :edit, :update]
+  before_action :set_client, only: [:show, :edit, :update]
+  before_action :set_tech, only: [:show, :edit, :update]
+  before_action :set_sections, only: [:show, :edit, :update]
 
 
   def index
-    @user = current_user
     @reports = Report.all # car un seul diagnosticien pour l'instant
   end
 
   def show
-    @user = current_user
-    @booking = @report.booking
-    @client = @booking.user
-    @tech = @booking.availabilities.first.user
-    @sections = Section.all
   end
 
   def edit
-    @user = current_user
-    @booking = @report.booking
-    @client = @booking.user
-    @tech = @booking.availabilities.first.user
-    @sections = Section.all
     @report.answers.build
   end
 
   def update
-    @booking = @report.booking
-    @client = @booking.user
-    @tech = @booking.availabilities.first.user
-    @user = user_params
-    @sections = Section.all
     if @report.update(report_params)
       redirect_to technician_report_path(@report)
     else
@@ -41,12 +29,28 @@ class Technician::ReportsController < ApplicationController
 
   private
 
-  def user_params
+  def set_user
     @user = current_user
   end
 
-  def report_id_params
+  def set_report
     @report = Report.find(params[:id])
+  end
+
+  def set_booking
+    @booking = @report.booking
+  end
+
+  def set_client
+    @client = @booking.user
+  end
+
+  def set_tech
+    @tech = @booking.availabilities.first.user
+  end
+
+  def set_sections
+    @sections = @booking.product.sections.uniq
   end
 
   def report_params
