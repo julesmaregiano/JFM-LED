@@ -5,7 +5,9 @@
 
     <div class="padding-box">
       <div class="col-xs-12 col-md-6">
-        <%= render partial: "shared/booking_calendar", locals: { availabilities: @availabilities, user: @user, tech: User.where(role: "technician").first } %>
+        <div id="events_calendar">
+          <%= render partial: "shared/booking_calendar", locals: { availabilities: @availabilities, user: @user, tech: User.where(role: "technician").first } %>
+        </div>
       </div>
 
       <div class="col-xs-12 col-md-6">
