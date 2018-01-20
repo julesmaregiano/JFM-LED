@@ -43,12 +43,9 @@ class Pro::BookingsController < ApplicationController
       Report.create(booking_id: @booking.id)
       option_params[:option_value_ids].each do |option_value_id|
         next unless @booking.product.option_value_ids.include?(option_value_id.to_i)
-        BookedProductOption.create(booking_id: @booking.id, option_value_id: option_value_id)
+        BookedProductOption.find_or_create_by(booking_id: @booking.id, option_value_id: option_value_id)
       end
-      params[:custom_values].each do |option_id, value|
-        next unless @booking.product.option_ids.include?(option_id.to_i)
-        BookedProductOption.create(option_id: option_id, value: value, booking: @booking, custom_value: true)
-      end
+      get_custom_value
       redirect_to pro_dashboard_path(@user)
     else
       render :new
@@ -64,6 +61,7 @@ class Pro::BookingsController < ApplicationController
   end
 
   def update
+    @products = Product.all
     @user = current_user
     @tech = User.where(role: 3).first
     @foremen = Foreman.where(branch_id: @user.branch_id).to_a
@@ -71,14 +69,13 @@ class Pro::BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
     if @booking.update(booking_params)
       @booking.booked_product_options.where(custom_value: false).destroy_all
-      option_params[:option_value_ids].each do |option_value_id|
-        next unless @booking.product.option_value_ids.include?(option_value_id.to_i)
-        BookedProductOption.find_or_create_by(booking: @booking, option_value_id: option_value_id, option: OptionValue.find(option_value_id).option)
+      unless params[:option].nil?
+        option_params[:option_value_ids].each do |option_value_id|
+          next unless @booking.product.option_value_ids.include?(option_value_id.to_i)
+          BookedProductOption.find_or_create_by(booking: @booking, option_value_id: option_value_id, option: OptionValue.find(option_value_id).option)
+        end
       end
-      params[:custom_values].each do |option_id, value|
-        next unless @booking.product.option_ids.include?(option_id.to_i)
-        BookedProductOption.find_or_create_by(option_id: option_id, value: value, booking: @booking, custom_value: true)
-      end
+      get_custom_value
       redirect_to pro_dashboard_path
     else
       render :new
@@ -93,6 +90,13 @@ class Pro::BookingsController < ApplicationController
 
   def option_params
     params.require(:options).permit(option_value_ids: [])
+  end
+
+  def get_custom_value
+    params[:custom_values].each do |option_id, value|
+      next unless @booking.product.option_ids.include?(option_id.to_i)
+      BookedProductOption.find_or_create_by(option_id: option_id, value: value, booking: @booking, custom_value: true)
+    end
   end
 
 end
