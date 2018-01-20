@@ -67,8 +67,9 @@ class Pro::BookingsController < ApplicationController
     @foremen = Foreman.where(branch_id: @user.branch_id).to_a
     @availabilities = Availability.all
     @booking = Booking.find(params[:id])
-    if @booking.update(booking_params)
-      @booking.booked_product_options.where(custom_value: false).destroy_all
+    if @booking.booked_product_options.where(custom_value: false).destroy_all && @booking.update(booking_params)
+      @booking.availabilities.update(status: "pending")
+      Availability.where(booking: nil, status: "pending").each {|a| a.reset}
       unless params[:option].nil?
         option_params[:option_value_ids].each do |option_value_id|
           next unless @booking.product.option_value_ids.include?(option_value_id.to_i)
