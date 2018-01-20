@@ -12,7 +12,12 @@ class Question < ApplicationRecord
   enum input_type: [:option_choice_id, :numeric, :string, :boolean, :date]
 
   def answer_for(report)
-    self.answers.where(report: report).first
+    answer = self.answers.where(report: report).first
+    if answer.nil?
+      "Pas de réponse"
+    else
+      answer.litteral_answer
+    end
   end
 
   def has_answer?(report)

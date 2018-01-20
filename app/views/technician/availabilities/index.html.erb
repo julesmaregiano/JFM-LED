@@ -3,7 +3,9 @@
 
   <div class="dashboard-content">
     <div class="padding-box">
-      <%= render "shared/calendar", availabilities: @availabilities, user: @user, tech: @user %>
+      <div id="events_calendar">
+        <%= render "shared/calendar", availabilities: @availabilities, user: @user, tech: @user %>
+      </div>
     </div>
   </div>
 </div>

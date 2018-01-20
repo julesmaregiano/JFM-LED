@@ -1,7 +1,9 @@
 <div class="card-container">
-  <%= week_calendar(start_date_param: :my_date,
+  <%= week_calendar(start_date_param: :start_date,
    number_of_days: 7,
    attribute: :date,
+   previous_link: events_ajax_previous_link,
+   next_link: events_ajax_next_link,
    events: @availabilities) do |date, availabilities| %>
 
 

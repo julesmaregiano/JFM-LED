@@ -34,7 +34,7 @@
         <% section.questions.each do |question| %>
           <div class="text-left col-xs-6">
             <label for=""><%= question.name %></label><br/>
-            <%= question.answer_for(@report).litteral_answer %>
+            <%= question.answer_for(@report)%>
           </div>
         <% end %>
       </div>

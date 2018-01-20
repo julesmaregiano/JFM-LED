@@ -94,7 +94,7 @@
     <div class="col-xs-12 col-md-6">
       <div class="card-container">
         <h4><strong><i class="fa fa-truck"></i>  Techniciens</strong></h4>
-        <% booking.technicians.uniq.each do |tech| %>
+        <% booking.technicians.each do |tech| %>
         <div>
           <p><%= tech.first_name %> <%= tech.last_name %></p>
           <div class="flex-left flex-wrap">
