@@ -2,7 +2,6 @@
   belongs_to :user
   belongs_to :booking, optional: true
   after_create :init
-  after_save :reset
 
   scope :of_the_day, -> { where("date = ?", Date.current) }
   scope :of_the_week, -> { where("date <= ?", Date.current + 7)}
@@ -44,7 +43,9 @@
 
   def reset
     if self.booking.nil? && (DateTime.now.to_f - self.updated_at.to_f) > 1 #permet d'éviter le stack level too deep
-      self.update(status: "free")
+      self.update!(status: "free")
+    elsif self.booking.present? && self.free? && (DateTime.now.to_f - self.updated_at.to_f) > 1
+      self.update!(status: "pending")
     end
   end
 
