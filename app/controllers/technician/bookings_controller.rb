@@ -2,7 +2,7 @@ class Technician::BookingsController < ApplicationController
 
   def index
     @user = current_user
-    @bookings = Booking.for_next_week_for(@user)
+    @bookings = Booking.for_next_week_for(@user).compact
   end
 
   def show

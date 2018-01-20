@@ -75,7 +75,6 @@ class Pro::BookingsController < ApplicationController
     @tech = User.where(role: 3).first
   end
 
-
   def booking_params
     params.require(:booking).permit(:comment, :pdf, :foreman_id, :address1, :address2, :zipcode, :city, :country, :product_id, :surface, :reference, availability_ids: [])
   end

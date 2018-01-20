@@ -1,36 +1,38 @@
 class Technician::ReportsController < ApplicationController
-  before_action :params_user, only: [:index, :show, :edit]
-  before_action :params_report, only: [:show, :edit]
+  before_action :user_params, only: [:index, :show, :edit]
+  before_action :report_id_params, only: [:show, :edit, :update]
+
 
   def index
+    @user = current_user
     @reports = Report.all # car un seul diagnosticien pour l'instant
   end
 
   def show
-    @sections = Section.all
-    @section1 = Section.where(name: "Désignation du chantier").first
-    @section2 = Section.where(name: "Contexte du chantier").first
-    @section3 = Section.where(name: "Recommandations et localisations des ouvrages").first
-    @section4 = Section.where(name: "Signataires").first
+    @user = current_user
     @booking = @report.booking
+    @client = @booking.user
+    @tech = @booking.availabilities.first.user
+    @sections = Section.all
   end
 
   def edit
+    @user = current_user
     @booking = @report.booking
+    @client = @booking.user
+    @tech = @booking.availabilities.first.user
     @sections = Section.all
-    @section1 = Section.where(name: "Désignation du chantier").first
-    @section2 = Section.where(name: "Contexte du chantier").first
-    @section3 = Section.where(name: "Recommandations et localisations des ouvrages").first
-    @section4 = Section.where(name: "Signataires").first
+    @report.answers.build
   end
 
   def update
-    @user = params_user
-    @report = Report.find(params[:id])
-    @sections = Section.all
     @booking = @report.booking
-    if @report.update(photos_params)
-      redirect_to([@user.role, @report])
+    @client = @booking.user
+    @tech = @booking.availabilities.first.user
+    @user = user_params
+    @sections = Section.all
+    if @report.update(report_params)
+      redirect_to technician_report_path(@report)
     else
       render :edit
     end
@@ -39,15 +41,15 @@ class Technician::ReportsController < ApplicationController
 
   private
 
-  def params_user
+  def user_params
     @user = current_user
   end
 
-  def params_report
+  def report_id_params
     @report = Report.find(params[:id])
   end
 
-  def photos_params
-    params.require(:report).permit(photos:[])
+  def report_params
+    params.require(:report).permit(photos:[], answers_attributes: [:id, :report_id, :string, :numeric, :boolean, :question_id, :date, :option_choice_id])
   end
 end

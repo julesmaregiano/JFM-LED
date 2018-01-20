@@ -1,87 +1,8 @@
 <div class="dashboard-wrap">
   <%= render "shared/sidebar"%>
-  <%= render "shared/sidebar_forjs"%>
-
   <div class="dashboard-content with_right_sidebar">
     <div class="padding-box">
-      <h1 class="text-center">Rapport de MP <%= @report.id %>
-        <%= link_to(content_tag(:i, nil, class: 'fa fa-eye'), technician_report_path(@report))%>
-      </h1>
-
-      <!-- SECTION 1 -->
-      <% section = @section1 %>
-      <div id="Section-<%= section.id %>" class="tabcontent card-note card-line text-center">
-        <h3 class="margin-bottom-medium"><%= section.name.capitalize %></h3>
-
-        <!-- Question 1 -->
-
-        <% q = section.questions.first %>
-        <div class="margin-bottom-small text-left">
-          <%= simple_form_for q.answers.find_or_create_by(report: @report) do |f| %>
-            <%= f.input :string, label: q.name, input_html: {value: "##{@booking.id} - #{@booking.city}" } %>
-          <% end %>
-        </div>
-
-        <!-- Question 2 -->
-
-        <% q = section.questions.second %>
-        <div class="margin-bottom-small text-left">
-          <%= simple_form_for q.answers.find_or_create_by(report: @report) do |f| %>
-            <%= f.input :string, label: q.name, input_html: {value: "#{@booking.user.first_name} #{@booking.user.last_name}" } %>
-          <% end %>
-        </div>
-
-        <!-- Question 3 -->
-
-        <% q = section.questions.third %>
-        <div class="margin-bottom-small text-left">
-          <%= simple_form_for q.answers.find_or_create_by(report: @report) do |f| %>
-            <%= f.input :string, label: q.name %>
-          <% end %>
-        </div>
-
-        <!-- Question 4 -->
-
-        <% q = section.questions.fourth %>
-        <div class="margin-bottom-small text-left">
-          <%= simple_form_for q.answers.find_or_create_by(report: @report) do |f| %>
-            <%= f.input :string, label: q.name %>
-          <% end %>
-        </div>
-
-
-        <!-- Question 5 -->
-
-        <% q = section.questions.fifth %>
-        <div class="margin-bottom-small text-left">
-          <%= simple_form_for q.answers.find_or_create_by(report: @report) do |f| %>
-            <%= f.input :string, label: q.name, input_html: {value: "#{@booking.has_foreman.first_name} #{@booking.has_foreman.last_name} (Chef de chantier) - #{@booking.availabilities.first.user.first_name} #{@booking.availabilities.first.user.last_name} (Responsable géodétection)" } %>
-          <% end %>
-        </div>
-
-      </div>
-
-      <!-- FORM -->
-      <% [@section2, @section3, @section4].each do |section| %>
-        <div id="Section-<%= section.id %>" class="tabcontent card-note card-line text-center">
-          <h3 class="margin-bottom-medium"><%= section.name.capitalize %></h3>
-            <% section.questions.each do |q| %>
-              <div class="margin-bottom-small text-left">
-                <%= simple_form_for q.answers.find_or_create_by(report: @report) do |f| %>
-                  <%= f.input q.input_type.to_sym, { label: q.name }.merge( q.option_choice_id? ? {collection: q.option_choices} : {})   %>
-                <% end %>
-              </div>
-          <% end %>
-        </div>
-      <% end %>
-
-    <!-- PICTURES -->
-    <%= simple_form_for [@user.role, @report] do |f| %>
-      <%= f.input :photos, as: :attachinary %>
-      <%= f.button :submit %>
-    <% end %>
-
-    <!-- SIGNATURES -->
+      <%= render "shared/edit_report", booking: @booking, client: @client, tech: @tech %>
     </div>
   </div>
 </div>

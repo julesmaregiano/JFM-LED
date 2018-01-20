@@ -2,16 +2,21 @@ class Question < ApplicationRecord
   belongs_to :section
   belongs_to :option_group
   has_many :answers
-  enum input_type: {option_choice_id: 0, numeric: 1, string: 2, boolean: 3}
+  has_many :product_questions, dependent: :destroy
+  has_many :products, through: :product_questions
   delegate :option_choices, to: :option_group
   validates :name, presence: true, uniqueness: true, allow_blank: false
+  validates :input_type, presence: true
 
-  def answer_is(diag)
-    self.answers.where(diagnostic: diag).first
+  enum display: [:text, :check_boxes, :radio_buttons, :integer]
+  enum input_type: [:option_choice_id, :numeric, :string, :boolean, :date]
+
+  def answer_for(report)
+    self.answers.where(report: report).first
   end
 
-  def has_answer?(diag)
-    self.answers.where(diagnostic: diag).first.attribute.slice('string', 'boolean', 'numeric', 'option_choice_id').compact.any?
+  def has_answer?(report)
+    self.answers.where(report: report).first.attribute.slice('date', 'string', 'boolean', 'numeric', 'option_choice_id').compact.any?
   end
 
 end

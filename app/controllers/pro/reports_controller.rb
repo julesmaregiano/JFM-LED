@@ -7,8 +7,11 @@ class Pro::ReportsController < ApplicationController
 
   def show
     @report = Report.find(params[:id])
-    @sections = Section.all
     @booking =@report.booking
+    @client = @booking.user
+    @tech = @booking.availabilities.first.user
+    @report = Report.find(params[:id])
+    @sections = Section.all
     @user = current_user
     respond_to do |format|
       format.html
