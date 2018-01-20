@@ -1,0 +1,68 @@
+<div class="dashboard-wrap">
+  <%= render "/shared/sidebar"%>
+
+  <div class="dashboard-content">
+
+    <div class="padding-box">
+      <div class="col-xs-12 col-md-6">
+        <%= render partial: "shared/booking_calendar", locals: { availabilities: @availabilities, user: @user, tech: User.where(role: "technician").first } %>
+      </div>
+
+      <div class="col-xs-12 col-md-6">
+        <div class="card-container">
+
+          <%= simple_form_for [@user.role, @booking] do |f| %>
+
+          <div class="availabilities-fields"> <%# div pour injecter les avaialbilities via le JS %></div>
+          <%= f.input :address, input_html: {value: "#{@booking.address}" } %>
+          <%= f.input :reference %>
+          <%= f.input :product_id, collection: @products.to_a, label_method: lambda { |product| "#{product.label}" } %>
+
+          <div class="options-fields"></div> <%# div pour injecter les options via le JS %>
+
+          <div>
+            <% @products.each do |product| %>
+              <div class="options-container hidden" id="options-container-<%= product.id %>">
+                <% product.options.each do |option| %>
+
+                  <% if option.custom_value? %>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <label for=""><%= option.label %></label>
+                        <input type="text" name="custom_values[<%= option.id %>]">
+                      </div>
+                    </div>
+
+                  <% else %>
+                    <div class="row">
+                      <div class="col-xs-12"><label for=""><%= option.label %></label></div>
+                      <% option.option_values.active.each do |option_value| %>
+                      <div class="col-xs-4 option_values-tobook" data-option-value-id="<%= option_value.id %>"><%= option_value.label %></div>
+                      <% end %>
+                    </div>
+
+                  <% end %>
+
+                <% end %>
+
+              </div>
+            <% end %>
+          </div>
+
+          <%= f.hidden_field :address1 %>
+          <%= f.hidden_field :city %>
+          <%= f.hidden_field :zipcode %>
+          <%= f.hidden_field :country %>
+          <div class="form-group">
+          <%= f.input :foreman_id, label: "Chef de chantier", collection: Foreman.where(branch_id: @user.branch_id).to_a, label_method: lambda { |foreman| "#{foreman.first_name} #{foreman.last_name}" } %>
+          <%= f.input :comment %>
+          <%= f.input :pdf, label: "Bon de commande", as: :attachinary %>
+          <%= f.button :submit %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
