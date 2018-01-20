@@ -41,4 +41,12 @@
     # Si le technicien du matin
   end
 
+  def reset
+    if self.booking.nil? && (DateTime.now.to_f - self.updated_at.to_f) > 1 #permet d'éviter le stack level too deep
+      self.update!(status: "free")
+    elsif self.booking.present? && self.free? && (DateTime.now.to_f - self.updated_at.to_f) > 1
+      self.update!(status: "pending")
+    end
+  end
+
 end

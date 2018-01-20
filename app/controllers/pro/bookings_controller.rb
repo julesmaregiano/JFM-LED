@@ -1,39 +1,25 @@
 class Pro::BookingsController < ApplicationController
+  before_action :set_user
+  before_action :set_tech, only: [:new, :create, :edit, :update]
 
   def index
-    @user = current_user
     @bookings = Booking.where(user_id: @user.id)
-    @bookings_map = @bookings.where.not(latitude: nil, longitude: nil)
-
-    @markers = Gmaps4rails.build_markers(@bookings_map) do |booking, marker|
-      marker.lat booking.latitude
-      marker.lng booking.longitude
-    end
+    create_markers_for(@bookings)
   end
 
   def show
-    @user = current_user
     @booking = Booking.find(params[:id])
     @availabilities = @booking.availabilities
-    unless @booking.latitude.nil? || @booking.latitude.nil?
-      @markers = Gmaps4rails.build_markers(@booking) do |booking, marker|
-        marker.lat booking.latitude
-        marker.lng booking.longitude
-      end
-    end
+    create_markers_for(@booking)
   end
 
   def new
-    @user = current_user
-    @tech = User.where(role: 3).first
     @availabilities = Availability.to_come.not_today.free_first
     @products = Product.all
     @booking = Booking.new
   end
 
   def create
-    @user = current_user
-    @tech = User.where(role: 3).first
     @foremen = Foreman.where(branch_id: @user.branch_id).to_a
     @availabilities = Availability.all
     @booking = Booking.new(booking_params)
@@ -53,8 +39,6 @@ class Pro::BookingsController < ApplicationController
   end
 
   def edit
-    @user = current_user
-    @tech = User.where(role: 3).first
     @availabilities = Availability.to_come.not_today.free_first
     @products = Product.all
     @booking = Booking.find(params[:id])
@@ -62,8 +46,6 @@ class Pro::BookingsController < ApplicationController
 
   def update
     @products = Product.all
-    @user = current_user
-    @tech = User.where(role: 3).first
     @foremen = Foreman.where(branch_id: @user.branch_id).to_a
     @availabilities = Availability.all
     @booking = Booking.find(params[:id])
@@ -85,12 +67,30 @@ class Pro::BookingsController < ApplicationController
 
   private
 
+  def set_user
+    @user = current_user
+  end
+
+  def set_tech
+    @tech = User.where(role: 3).first
+  end
+
+
   def booking_params
     params.require(:booking).permit(:comment, :pdf, :foreman_id, :address1, :address2, :zipcode, :city, :country, :product_id, :surface, :reference, availability_ids: [])
   end
 
   def option_params
     params.require(:options).permit(option_value_ids: [])
+  end
+
+  def create_markers_for(bookings)
+    unless @booking.latitude.nil? || @booking.latitude.nil?
+      @markers = Gmaps4rails.build_markers(bookings) do |booking, marker|
+        marker.lat booking.latitude
+        marker.lng booking.longitude
+      end
+    end
   end
 
   def get_custom_value
