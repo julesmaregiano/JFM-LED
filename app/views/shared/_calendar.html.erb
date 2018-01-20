@@ -4,9 +4,11 @@
   <h4><strong>Emploi du temps de <%= tech.first_name %></strong></h4>
   <% end %>
 
-  <%= month_calendar(start_date_param: :my_date,
+  <%= month_calendar(start_date_param: :start_date,
                      number_of_days: 20,
                      attribute: :date,
+                     previous_link: events_ajax_previous_link,
+                     next_link: events_ajax_next_link,
                      events: @availabilities.of(tech)) do |date, availabilities| %>
 
    <div class="date-day"><%= date.day %></div>

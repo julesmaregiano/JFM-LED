@@ -3,7 +3,9 @@
 
   <div class="dashboard-content">
     <div class="padding-box">
-      <%= render "shared/week_calendar", availabilities: @availabilities, techs: @techs %>
+      <div id="events_calendar">
+        <%= render "shared/week_calendar", availabilities: @availabilities, techs: @techs %>
+      </div>
       <div class="row card-container">
         <h4><strong>Bookings à valider</strong></h4>
         <% @bookings.each do |booking| %>
