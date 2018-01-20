@@ -20,6 +20,7 @@ class Pro::BookingsController < ApplicationController
   end
 
   def create
+    @products = Product.all
     @foremen = Foreman.where(branch_id: @user.branch_id).to_a
     @availabilities = Availability.all
     @booking = Booking.new(booking_params)
