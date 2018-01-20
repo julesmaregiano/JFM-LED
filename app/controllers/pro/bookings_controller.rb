@@ -33,6 +33,7 @@ class Pro::BookingsController < ApplicationController
 
   def create
     @user = current_user
+    @products = Product.all
     @tech = User.where(role: 3).first
     @foremen = Foreman.where(branch_id: @user.branch_id).to_a
     @availabilities = Availability.all

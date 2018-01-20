@@ -1,0 +1,13 @@
+.report {
+  padding-left: 0px;
+}
+
+.report-section {
+  margin: 20px 0px;
+  padding-left: 15px;
+  border-left: 8px solid $blue-gray;
+  & h6{
+    color: $blue-gray;
+    border-bottom: 3px solid $blue-gray;
+  }
+}
