@@ -1,4 +1,4 @@
-$(document).ready(function(){
+function LoadBookingSelector () {
   $('.btn-calendar-free').click(function(){
     if ($(this).hasClass('btn-calendar-free')){
     $(this).addClass('btn-calendar-selected')
@@ -14,7 +14,8 @@ $(document).ready(function(){
       $('.availabilities-fields').append('<input type="hidden" name="booking[availability_ids][]" value="'+ availabilityId +'" />')
     })
   })
-});
+};
+$(document).ready(LoadBookingSelector);
 
 $(document).ready(function(){
   $('.option_values-tobook').click(function(){
@@ -34,7 +35,7 @@ $(document).ready(function(){
   })
 });
 
-$(document).ready(function(){
+function LoadPlanningSelector () {
   $('.mng-calendar-free').click(function(){
     console.log('lala')
     if ($(this).hasClass('mng-calendar-free')){
@@ -51,9 +52,10 @@ $(document).ready(function(){
       $('.availabilities-fields').append('<input type="hidden" name="booking[availability_ids][]" value="'+ availabilityId +'" />')
     })
   })
-});
+};
+$(document).ready(LoadPlanningSelector);
 
-$(document).ready(function(){
+function LoadPendingSelector (){
   $('.mng-calendar-pending').click(function(){
     console.log('lala')
     if ($(this).hasClass('mng-calendar-pending')){
@@ -69,7 +71,9 @@ $(document).ready(function(){
       $('.availabilities-fields').append('<input type="hidden" name="booking[availability_ids][]" value="'+ availabilityId +'" />')
     })
   })
-});
+};
+$(document).ready(LoadPendingSelector);
+
 
 $(document).ready(function(){
   $('#booking_product_id').change(function() {

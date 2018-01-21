@@ -1,1 +1,2 @@
 $("#events_calendar").html("<%= escape_javascript render partial: "shared/booking_calendar", locals: { availabilities: @availabilities, user: @user, tech: User.where(role: "technician").first } %>");
+$(document).ready(LoadBookingSelector);
