@@ -1,0 +1,36 @@
+<% bookings.each do |booking| %>
+  <div class="col-md-12 col-lg-6">
+    <div class="card flexbox">
+      <div class="flexbox card-left">
+        <div class="card-logo">
+          <p class="card-date text-center"><%= date.strftime("%a %d %b") %></p>
+          <% unless booking.user.company.photo.nil? %>
+            <%= cl_image_tag booking.user.company.photo.public_id, height: 110, width: 110, crop: :pad, class: "card-logo" %>
+          <% end %>
+        </div>
+
+        <div class="card-middle no-margin flexbox-vertical align-center">
+          <h5 class="no-margin"><%= booking.user.pro? ? booking.user.company.name : "Particulier" %></h5>
+          <p><%= booking.user.first_name %> <%= booking.user.last_name %></p>
+          <p><%= booking.address1 %> - <%= booking.city %></p>
+          <div class="card-links flex-horizontal align-center">
+            <%= link_to technician_booking_path(booking) do %>
+              <i class="card-icon fa fa-eye" aria-hidden="true"></i>
+            <% end %>
+            <%= link_to "http://waze.to/?ll=#{booking.latitude},#{booking.longitude}&navigate=yes" do %>
+              <i class="card-icon fa fa-car" aria-hidden="true"></i>
+            <% end %>
+            <%= link_to "tel:#{booking.foreman.phone}" do %>
+              <i class="card-icon fa fa-phone" aria-hidden="true"></i>
+            <% end %>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="card-right">
+      </div>
+
+    </div>
+  </div>
+<% end %>

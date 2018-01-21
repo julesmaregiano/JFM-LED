@@ -2,6 +2,7 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:eligibility, :home, :detection, :diagnostic, :societe]
 
   def home
+    @user = current_user
   end
 
   def eligibility
