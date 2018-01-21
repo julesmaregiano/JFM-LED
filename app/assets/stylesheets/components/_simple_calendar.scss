@@ -37,12 +37,16 @@
     padding: 0px;
   }
   .date-day {
+    z-index: 100;
+    background-color: white;
+    padding: 2px 5px;
+    opacity: 0.7;
+    border-radius: 50%;
     position: absolute;
     font-size: 16px;
     font-weight: bold;
     top: 2%;
     left: 3%;
-    opacity: 0.5;
   }
   .wday-0 {}
   .wday-1 {}
@@ -128,7 +132,7 @@
     }
   }
   .btn-calendar-free, .mng-calendar-free {
-    border: 1px solid $anis;
+    margin: 1px;
     border-left: 8px solid $anis;
     &:hover {
       background-color: $anis;
@@ -136,7 +140,7 @@
   }
 
 .btn-calendar-pending, .mng-calendar-pending {
-    border: 1px solid $yellow;
+  margin: 1px;
     border-left: 8px solid $yellow;
     p, a {
       margin: 0px;
@@ -155,11 +159,11 @@
   }
 
   .btn-calendar-doneinpast {
-    border: 1px solid $medium-gray;
+    margin: 1px;
     border-left: 8px solid $medium-gray;
   }
   .btn-calendar-booked, .btn-calendar-leave, .mng-calendar-booked, .mng-calendar-leave {
-    border: 1px solid $red;
+    margin: 1px;
     border-left: 8px solid $red;
     p, a {
       margin: 0px;
