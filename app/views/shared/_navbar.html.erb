@@ -99,9 +99,17 @@
             <li><%= render "shared/navbar_button", text: "Clients", icon: "group", link: manager_users_path%></li>
             <li><%= render "shared/navbar_button", text: "Profil", icon: "user", link: manager_user_path(@user)%></li>
           <% end %>
+        <% else %>
+          <li>
+            <%= link_to new_user_session_path do %>
+              <i class="fa fa-sign-in" aria-hidden="true"></i>  Se connecter
+            <% end %>
+          </li>
         <% end %>
       </ul>
     </div>
+
+
   </div>
 </div>
 
