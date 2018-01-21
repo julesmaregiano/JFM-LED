@@ -1,5 +1,5 @@
 <%= link_to link do %>
-  <div class="sidebar-button">
+  <div class="sidebar-button <%= current_page?(link) ? "sidebar-active" : "" %>">
     <div>
       <p>
         <% unless icon == "none" %>
