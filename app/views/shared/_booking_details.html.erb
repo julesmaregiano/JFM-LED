@@ -99,9 +99,7 @@
           <p><%= tech.first_name %> <%= tech.last_name %></p>
           <div class="flex-left flex-wrap">
             <% booking.availabilities.where(user: tech).each do |availability| %>
-            <div class="card-date">
-              <p><%= availability.date.strftime("%a %d %b") %> <%= availability.half %></p>
-            </div>
+              <p class="card-date text-center"><%= availability.date.strftime("%a %d %b") %> <%= availability.half %></p>
             <% end %>
           </div>
         </div>

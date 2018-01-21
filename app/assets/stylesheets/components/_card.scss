@@ -55,11 +55,9 @@
   border: 1px solid $anis;
   color: $dark-gray;
   padding: 7px 0px;
-  width: 100px;
+  padding: 2px;
+  width: 110px;
   border-radius: 0px 3px 3px 0px;
-  & p {
-    font-size: 13px;
-  }
 }
 
 .small-card {
