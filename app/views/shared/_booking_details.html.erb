@@ -45,8 +45,9 @@
     <div class="col-xs-12 col-md-6">
       <div class="card-container">
         <h4><strong><i class="fa fa-info"></i>  Infos techniques</strong></h4>
+        <p><strong>Prestation :</strong> <%= booking.product.label %></p>
         <% booking.product.options.each do |option| %>
-          <p><strong><%= option.label %> :</strong>
+          <p><strong><%= option.label %> : </strong>
             <% if option.custom_value? %>
               <%= BookedProductOption.where(booking: booking, option: option).first.nil? ? "non précisé" : BookedProductOption.where(booking: booking, option: option).first.value %>
             <% else %>
@@ -68,7 +69,7 @@
     <div class="col-xs-12 col-md-6">
       <div class="card-container">
         <h4><strong><i class="fa fa-file-text-o"></i>  Documents</strong></h4>
-        <p>Référence interne : <%= booking.reference.nil? ? "non renseigné" : "#{booking.reference}"%></p>
+        <p>Référence interne : <strong><%= booking.reference.nil? ? "non renseigné" : "#{booking.reference}"%></strong></p>
         <div class="flex-left align-center">
           <p>Bon de commande</p>
           <% if booking.pdf.nil? %>

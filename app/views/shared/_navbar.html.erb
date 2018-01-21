@@ -26,7 +26,7 @@
     <% if user_signed_in? %>
       <div class="navbar-wagon-item">
         <div class="dropdown">
-          <%= cl_image_tag current_user.company.photo.path, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", 'data-toggle': "dropdown", crop: :pad %>
+          <%= cl_image_tag current_user.company.photo.path, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", 'data-toggle': "dropdown", height: 65, width: 65, crop: :pad %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
 
             <% if current_user.particulier? %>
