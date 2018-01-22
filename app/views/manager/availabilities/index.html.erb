@@ -2,22 +2,27 @@
   <%= render "/shared/sidebar"%>
   <div class="dashboard-content">
     <div class="padding-box">
-      <div class="row">
+
+      <ul class="nav nav-tabs" role="tablist">
         <% @techs.each do |tech| %>
-        <div class="col-xs-12 col-md-6">
-          <div id="events_calendar">
-            <%= render partial: "shared/calendar", locals: {availabilities: @availabilities.of(tech), user: @user, tech: tech} %>
-          </div>
-        </div>
+          <li role="presentation" class="<%= tech == @techs.first ? "active" : "" %>">
+            <a href="#tech-<%= tech.id %>" aria-controls="tech-<%= tech.id %>" role="tab" data-toggle="tab">
+              <h4><strong><%= tech.first_name %></strong></h4>
+            </a>
+          </li>
+        <% end %>
+      </ul>
+
+      <div class="tab-content">
+        <% @techs.each do |tech| %>
+            <div role="tabpanel" class="tab-pane <%= tech == @techs.first ? "active" : "" %>" id="tech-<%= tech.id %>">
+              <div id="events_calendar">
+                <%= render partial: "shared/calendar", locals: {availabilities: @availabilities.of(tech), user: @user, tech: tech} %>
+              </div>
+            </div>
         <% end %>
       </div>
-      <div class="row">
-        <div class="col-xs-6 col-md-4">
-          <div class="card-container">
-            Créer un Technicien
-          </div>
-        </div>
-      </div>
+
     </div>
   </div>
 </div>

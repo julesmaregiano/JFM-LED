@@ -1,0 +1,15 @@
+.nav-tabs {
+  background: white;
+  & a {
+    color: $blue-gray;
+    }
+  & li {
+    margin-bottom: -2px !important;
+  }
+  & li.active, a:hover, li.active:hover {
+    a {
+      background-color: $blue-gray;
+      color: white;
+    }
+  }
+}
