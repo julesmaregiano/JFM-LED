@@ -17,4 +17,11 @@ class User < ApplicationRecord
 
   enum role: [:particulier, :pro, :technician, :manager, :admin]
 
+  scope :working_after, -> (debut) { joins(:availabilities).where("date >= ?", debut)}
+  scope :working_before, -> (fin) { joins(:availabilities).where("date <= ?", fin)}
+
+  def self.working_this_week(date)
+    self.working_after(date).working_before(date + 5).uniq
+  end
+
 end
