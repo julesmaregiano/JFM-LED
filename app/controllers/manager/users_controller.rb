@@ -6,6 +6,6 @@ class Manager::UsersController < ApplicationController
 
   def index
     @user = current_user
-    @users = User.all
+    @users = User.where(role: [1, 2, 3]).sort_by(&:company)
   end
 end

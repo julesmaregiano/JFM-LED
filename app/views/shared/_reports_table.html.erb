@@ -17,7 +17,7 @@
       <% reports.each do |report| %>
         <tr>
           <th scope="row"><%= report.booking.reference %></th>
-          <td><%= report.created_at %></td>
+          <td><%= report.created_at.strftime("%d/%m/%y") %></td>
           <td><%= report.booking.address %></td>
           <td><%= report.user.first_name + ' ' + report.user.last_name %></td>
           <td><%= report.booking.availabilities.count %> demi-journées</td>
