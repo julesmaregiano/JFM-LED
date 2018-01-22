@@ -14,7 +14,7 @@
 
   <div class="card-right">
     <% booking.availabilities.order(:date).each do |availability| %>
-      <span><p class="card-date"><%= availability.date.strftime("%d %b") %> <%= availability.half %></p></span>
+      <span><p class="card-date"><%= availability.date.strftime("%d/%m/%y") %> <%= availability.half[0].capitalize %></p></span>
     <% end %>
     <div class="card-links flex-horizontal">
       <%= link_to "tel:#{booking.foreman_id}" do %>

@@ -4,7 +4,7 @@
   <div class="dashboard-content">
     <div class="padding-box">
       <div id="events_calendar">
-        <%= render "shared/week_calendar", availabilities: @availabilities, techs: @techs %>
+        <%= render "shared/week_calendar", availabilities: @availabilities, techs: @techs.work_next_week %>
       </div>
       <div class="row card-container">
         <h4><strong>Bookings à valider</strong></h4>
