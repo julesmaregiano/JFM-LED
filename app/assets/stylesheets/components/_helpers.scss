@@ -51,6 +51,10 @@ $white-space: 20px;
 .align-center{
   align-items: center;
 }
+
+.align-start {
+  align-items: flex-start;
+}
 .flex-horizontal {
   display: flex;
   justify-content: center;

@@ -27,12 +27,15 @@
               <% if @user.manager? && booking.availabilities.first.pending? %>
                 <%= link_to "Valider dates", manager_planning_path %>
               <% else %>
-                <% booking.availabilities.each do |availability| %>
-                  <p><%= availability.date.strftime("%a %d %b") %></p>
+                <% booking.availabilities.map do |availability| availability.date end.uniq.sort.each do |date| %>
+                  <p><%= date.strftime("%a %d %b") %></p>
                 <% end %>
               <% end %>
             </td>
-            <td><%= @user.manager? ? link_to("Voir", manager_booking_path(booking)) : link_to("Voir", technician_booking_path(booking)) %></td>
+            <td><%= link_to [@user.role, booking] do %>
+                <i class="fa fa-eye"></i>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       <% end %>

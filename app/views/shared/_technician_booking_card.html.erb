@@ -1,0 +1,33 @@
+<div class="card flexbox ">
+  <div class="flexbox card-left align-start">
+    <div class="card-logo">
+      <p class="card-date text-center"><%= date.strftime("%a %d %b") %> <%= availability.nil? ? "" : "(#{availability.half[0].capitalize})" %></p>
+      <% unless booking.user.company.photo.nil? %>
+        <%= cl_image_tag booking.user.company.photo.public_id, height: 100, width: 100, crop: :pad, class: "card-logo" %>
+      <% end %>
+    </div>
+
+    <div class="card-middle">
+      <h5><%= booking.user.company.name %></h5>
+      <p><%= booking.user.first_name %> <%= booking.user.last_name %></p>
+      <p><%= booking.address1 %> - <%= booking.city %></p>
+    </div>
+  </div>
+
+  <div class="card-right flex-vertical">
+    <div class="card-links flex-horizontal align-center">
+      <%= link_to technician_booking_path(booking) do %>
+        <i class="card-icon fa fa-eye" aria-hidden="true"></i>
+      <% end %>
+      <%= link_to "http://waze.to/?ll=#{booking.latitude},#{booking.longitude}&navigate=yes" do %>
+        <i class="card-icon fa fa-car" aria-hidden="true"></i>
+      <% end %>
+      <%= link_to "tel:#{booking.user.phone}" do %>
+        <i class="card-icon fa fa-phone" aria-hidden="true"></i>
+      <% end %>
+    </div>
+  </div>
+
+</div>
+
+

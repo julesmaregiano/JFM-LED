@@ -8,6 +8,7 @@
         <th scope="col">Adresse</th>
         <th scope="col">Client</th>
         <th scope="col">Durée</th>
+        <th scope="col">Prestation</th>
         <th scope="col">Statut</th>
         <th scope="col">Actions</th>
       </tr>
@@ -20,6 +21,7 @@
           <td><%= report.booking.address %></td>
           <td><%= report.user.first_name + ' ' + report.user.last_name %></td>
           <td><%= report.booking.availabilities.count %> demi-journées</td>
+          <td><%= report.booking.product.label %></td>
           <td><%= report.progress %> %</td>
           <td>
             <% if current_user.technician? %>
