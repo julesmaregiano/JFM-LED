@@ -32,7 +32,7 @@
 
   <div class="card-right">
     <% booking.availabilities.map do |a| a.date end.uniq.sort.each do |date| %>
-      <p class="card-date text-center"><%= date.strftime("%a %d %b") %></p>
+      <p class="card-date text-center"><%= date.strftime("%d/%m/%y") %></p>
     <% end %>
     <div class="card-links flex-horizontal">
       <% unless booking.foreman.nil? %>

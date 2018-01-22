@@ -18,7 +18,7 @@
           <i class="card-icon fa fa-at" aria-hidden="true"></i>
           <% end %>
         </div>
-        <p>créée le <%= booking.created_at.strftime("%a %d %b")%></p>
+        <p>créée le <%= booking.created_at.strftime("%d/%m/%y")%></p>
       </div>
     </div>
     <div class="status <%= booking.availabilities.first.status %>-color padding-box">
@@ -100,7 +100,7 @@
           <p><%= tech.first_name %> <%= tech.last_name %></p>
           <div class="flex-left flex-wrap">
             <% booking.availabilities.where(user: tech).each do |availability| %>
-              <p class="card-date text-center"><%= availability.date.strftime("%a %d %b") %> <%= availability.half %></p>
+              <p class="card-date text-center"><%= availability.date.strftime("%d/%m/%y") %> (<%= availability.half[0].capitalize %>)</p>
             <% end %>
           </div>
         </div>

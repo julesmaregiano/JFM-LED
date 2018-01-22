@@ -18,7 +18,7 @@
         <% bookings.each do |booking| %>
           <tr>
             <th scope="row">#<%= booking.reference %></th>
-            <td><%= booking.created_at.strftime("%a %d %b") %></td>
+            <td><%= booking.created_at.strftime("%d/%m/%y") %></td>
             <td><%= booking.address %></td>
             <td><%= booking.user.first_name + ' ' + booking.user.last_name %></td>
             <td><%= booking.user.pro? ? booking.user.company.name : "Particulier" %></td>
@@ -28,7 +28,7 @@
                 <%= link_to "Valider dates", manager_planning_path %>
               <% else %>
                 <% booking.availabilities.map do |availability| availability.date end.uniq.sort.each do |date| %>
-                  <p><%= date.strftime("%a %d %b") %></p>
+                  <p><%= date.strftime("%d/%m/%y") %></p>
                 <% end %>
               <% end %>
             </td>
