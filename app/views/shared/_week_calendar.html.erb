@@ -5,13 +5,13 @@
    previous_link: events_ajax_previous_link,
    next_link: events_ajax_next_link,
    events: @availabilities) do |date, availabilities| %>
-     <div class="date-day text-center"><%= date.day %></div>
-     <div>
-      <% availabilities.sort_by(&:half).reverse!.sort_by(&:user).each do |availability| %>
-        <div class="week-box mng-calendar-<%= availability.status %>" data-availability-id="<%= availability.id %>">
-          <%= render "shared/calendar_card", availability: availability %>
-        </div>
-      <% end %>
+   <div class="date-day text-center"><%= date.day %></div>
+   <div>
+    <% availabilities.sort_by(&:half).reverse!.sort_by(&:user).each do |availability| %>
+    <div class="week-box mng-calendar-<%= availability.status %>" data-availability-id="<%= availability.id %>">
+      <%= render "shared/calendar_card", availability: availability %>
+    </div>
     <% end %>
   </div>
+    <% end %>
 </div>
