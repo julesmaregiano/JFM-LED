@@ -61,10 +61,11 @@
 }
 
 .small-card {
-  width: calc( 30vw - 66px);
+  min-width: 27vw;
   height: 20vh;
   background-color: white;
   padding: 5px;
+  position: relative;
 }
 
 .card-middle {
