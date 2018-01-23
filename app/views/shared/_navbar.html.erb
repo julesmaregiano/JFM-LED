@@ -5,13 +5,13 @@
 
   <div class="navbar-wagon-right hidden-xs hidden-sm">
     <% if user_signed_in? %>
-      <% if current_user.technician? %>
+      <% if @user.technician? %>
         <%= link_to "Tableau de bord", technician_dashboard_path, class: "navbar-wagon-item navbar-wagon-link" %>
-      <% elsif current_user.particulier? %>
+      <% elsif @user.particulier? %>
         <%= link_to "Tableau de bord", particulier_dashboard_path, class: "navbar-wagon-item navbar-wagon-link" %>
-      <% elsif current_user.pro? %>
+      <% elsif @user.pro? %>
         <%= link_to "+ Réserver une détection", new_pro_booking_path, class: "btn-slim flexbox" %>
-      <% elsif current_user.manager? %>
+      <% elsif @user.manager? %>
         <%= link_to "Tableau de bord", manager_dashboard_path, class: "navbar-wagon-item navbar-wagon-link" %>
       <% end %>
     <% else %>
@@ -26,27 +26,27 @@
     <% if user_signed_in? %>
       <div class="navbar-wagon-item">
         <div class="dropdown">
-          <%= cl_image_tag current_user.company.photo.path, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", 'data-toggle': "dropdown", height: 65, width: 65, crop: :pad %>
+          <%= cl_image_tag @user.company.photo.path, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", 'data-toggle': "dropdown", height: 65, width: 65, crop: :pad %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
 
-            <% if current_user.particulier? %>
+            <% if @user.particulier? %>
               <li><%= render "shared/navbar_button", text: "Tableau de bord", icon: "eye", link: particulier_dashboard_path %></li>
               <li><%= render "shared/navbar_button", text: "Bookings", icon: "list", link: particulier_bookings_path%></li>
               <li><%= render "shared/navbar_button", text: "Informations", icon: "info", link: particulier_infos_path %></li>
               <li><%= render "shared/navbar_button", text: "Mon profil", icon: "user", link: particulier_user_path(@user)%></li>
-            <% elsif current_user.pro? %>
+            <% elsif @user.pro? %>
               <li><%= render "shared/navbar_button", text: "Tableau de bord", icon: "eye", link: pro_dashboard_path %></li>
               <li><%= render "shared/navbar_button", text: "Bookings", icon: "list", link: pro_bookings_path%></li>
               <li><%= render "shared/navbar_button", text: "Rapports", icon: "folder-open", link: pro_reports_path%></li>
               <li><%= render "shared/navbar_button", text: "Profil", icon: "user", link: pro_user_path(@user)%></li>
-            <% elsif current_user.technician? %>
+            <% elsif @user.technician? %>
               <li><%= render "shared/navbar_button", text: "Tableau de bord", icon: "eye", link: technician_dashboard_path %></li>
               <li><%= render "shared/navbar_button", text: "Disponibilités", icon: "calendar", link: technician_availabilities_path %></li>
               <li><%= render "shared/navbar_button", text: "Bookings", icon: "list", link: technician_bookings_path%></li>
               <li><%= render "shared/navbar_button", text: "Rapports", icon: "folder-open", link: technician_reports_path%></li>
               <li><%= render "shared/navbar_button", text: "Clients", icon: "group", link: technician_users_path%></li>
               <li><%= render "shared/navbar_button", text: "Profil", icon: "user", link: technician_user_path(@user)%></li>
-            <% elsif current_user.manager? %>
+            <% elsif @user.manager? %>
               <li><%= render "shared/navbar_button", text: "Tableau de bord", icon: "eye", link: manager_dashboard_path %></li>
               <li><%= render "shared/navbar_button", text: "Mon équipe", icon: "calendar", link: manager_availabilities_path %></li>
               <li><%= render "shared/navbar_button", text: "Planning", icon: "calendar-check-o", link: manager_planning_path %></li>
@@ -73,24 +73,24 @@
       <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
       <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
         <% if user_signed_in? %>
-          <% if current_user.particulier? %>
+          <% if @user.particulier? %>
             <li><%= render "shared/navbar_button", text: "Tableau de bord", icon: "eye", link: particulier_dashboard_path %></li>
             <li><%= render "shared/navbar_button", text: "Bookings", icon: "list", link: particulier_bookings_path%></li>
             <li><%= render "shared/navbar_button", text: "Informations", icon: "info", link: particulier_infos_path %></li>
             <li><%= render "shared/navbar_button", text: "Mon profil", icon: "user", link: particulier_user_path(@user)%></li>
-          <% elsif current_user.pro? %>
+          <% elsif @user.pro? %>
             <li><%= render "shared/navbar_button", text: "Tableau de bord", icon: "eye", link: pro_dashboard_path %></li>
             <li><%= render "shared/navbar_button", text: "Bookings", icon: "list", link: pro_bookings_path%></li>
             <li><%= render "shared/navbar_button", text: "Rapports", icon: "folder-open", link: pro_reports_path%></li>
             <li><%= render "shared/navbar_button", text: "Profil", icon: "user", link: pro_user_path(@user)%></li>
-          <% elsif current_user.technician? %>
+          <% elsif @user.technician? %>
             <li><%= render "shared/navbar_button", text: "Tableau de bord", icon: "eye", link: technician_dashboard_path %></li>
             <li><%= render "shared/navbar_button", text: "Disponibilités", icon: "calendar", link: technician_availabilities_path %></li>
             <li><%= render "shared/navbar_button", text: "Bookings", icon: "list", link: technician_bookings_path%></li>
             <li><%= render "shared/navbar_button", text: "Rapports", icon: "folder-open", link: technician_reports_path%></li>
             <li><%= render "shared/navbar_button", text: "Clients", icon: "group", link: technician_users_path%></li>
             <li><%= render "shared/navbar_button", text: "Profil", icon: "user", link: technician_user_path(@user)%></li>
-          <% elsif current_user.manager? %>
+          <% elsif @user.manager? %>
             <li><%= render "shared/navbar_button", text: "Tableau de bord", icon: "eye", link: manager_dashboard_path %></li>
             <li><%= render "shared/navbar_button", text: "Mon équipe", icon: "calendar", link: manager_availabilities_path %></li>
             <li><%= render "shared/navbar_button", text: "Planning", icon: "calendar-check-o", link: manager_planning_path %></li>
