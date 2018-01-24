@@ -10,7 +10,7 @@ class Answer < ApplicationRecord
     hash = self.attributes.slice('date', 'string', 'boolean', 'numeric', 'option_choice_id')
     if hash.compact.empty?
       if self.answer_option_choices.exists?
-        self.answer_option_choices.map do |a| OptionChoice.find(a.option_choice_id).name end
+        self.answer_option_choices.map do |a| OptionChoice.find(a.option_choice_id).name end.join(" - ")
       else
         "Pas encore de réponse"
       end

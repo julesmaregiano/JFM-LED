@@ -1,5 +1,5 @@
 <div class="card-container report">
-  <div class="flexbox">
+  <div class="flexbox flex-space-around">
     <div class="client-company flexbox">
       <% unless client.company.photo.nil? %>
         <%= cl_image_tag client.company.photo.public_id, height: 150, width: 150, crop: :pad, class: "card-logo" %>
@@ -7,8 +7,15 @@
       <div>
         <h4><strong><%= client.company.name %></strong></h4>
         <h6><%= client.branch.name %></h6>
-        <h6><%= client.branch.city %>, <%= @user.branch.zipcode %></h6>
+        <h6><%= client.branch.city %></h6>
     </div>
+  </div>
+  <div>
+    <h4 class="text-center"><strong>Rapport de <%= @report.booking.product.label %></strong>
+      <%= @user.technician? ? link_to(content_tag(:i, nil, class: 'fa fa-edit'), edit_technician_report_path(@report)) : ""%>
+    </h4>
+    <p>Addresse de l'intervention <%= @report.booking.address %></p>
+    <p>Suite à la demande de <%= @report.booking.user.first_name %> <%= @report.booking.user.last_name %></p>
   </div>
   <div class="tech-company flexbox">
     <% unless tech.company.photo.nil? %>
@@ -17,14 +24,11 @@
     <div>
       <h4><strong><%= tech.company.name %></strong></h4>
       <h6><%= tech.branch.name %></h6>
-      <h6><%= tech.branch.city %>, <%= @user.branch.zipcode %></h6>
+      <h6><%= tech.branch.city %></h6>
     </div>
   </div>
 </div>
 
-  <h4 class="text-center"><strong>Rapport de <%= @report.booking.product.label %> #<%= @report.id %></strong>
-    <%= link_to(content_tag(:i, nil, class: 'fa fa-eye'), technician_report_path(@report))%>
-  </h4>
 
   <div class="">
 
