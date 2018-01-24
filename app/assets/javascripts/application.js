@@ -8,6 +8,7 @@
 //= require attachinary
 //= require Chart.bundle
 //= require chartkick.js
+//= require signature_pad
 //= require_tree .
 
 $(document).ready(function() {
