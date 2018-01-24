@@ -49,7 +49,15 @@
 
 
 <!-- SIGNATURES -->
+  <div class="report-section">
+    <h4><strong>Signature</strong></h4>
 
-<%= image_tag @report.signature %>
+    <% if @report.signature.present? %>
+      <%= image_tag @report.signature %>
+      <p> Signé le <%= @report.signed_on.strftime("%d/%m/%y à %Hh%M") %></p>
+    <% else %>
+      <p>Le rapport n'a pas été signé</p>
+    <% end %>
+  </div>
 
 </div>
