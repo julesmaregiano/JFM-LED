@@ -20,7 +20,9 @@ class Answer < ApplicationRecord
   end
 
   def answered?
-    self.attributes.slice('date', 'string', 'boolean', 'numeric', 'option_choice_id').compact.any?
+    if self.attributes.slice('date', 'string', 'boolean', 'numeric', 'option_choice_id').compact.any? || AnswerOptionChoice.where(answer_id: self.id).any?
+      return true
+    end
   end
 
 

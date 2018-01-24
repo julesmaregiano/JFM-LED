@@ -2,9 +2,11 @@ class Technician::DashboardsController < ApplicationController
 
   def show
     @user = current_user
-    @availabilities = Availability.of_the_week_for(@user)
-    @bookings = Booking.for_next_week_for(@user)
-    @bookings_for_map = @bookings.delete_if { |booking| booking.nil? || booking.latitude.nil? }
+    @bookings_hash = {}
+    dates = Date.today.business_dates_until(Date.today + 7)
+    dates.each { |d| @bookings_hash[d] = @user.availabilities.where(date: d).map { |a| a.booking }.uniq }
+
+    @bookings_for_map = Booking.for_next_week_for(@user).delete_if { |booking| booking.nil? || booking.latitude.nil? }
     @markers = Gmaps4rails.build_markers(@bookings_for_map) do |booking, marker|
       marker.lat booking.latitude
       marker.lng booking.longitude

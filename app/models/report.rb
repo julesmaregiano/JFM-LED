@@ -19,7 +19,7 @@ class Report < ApplicationRecord
   end
 
   def progress
-    questions = self.product.questions.count
+    questions = self.product.questions.where(active: true).count
     answered = 0
     self.answers.each do |answer|
       if answer.answered?

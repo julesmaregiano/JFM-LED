@@ -1,7 +1,7 @@
 <div class="card flexbox ">
   <div class="flexbox card-left align-start">
     <div class="card-logo">
-      <p class="card-date text-center"><%= date.strftime("%d/%m/%y") %> <%= availability.nil? ? "" : "(#{availability.half[0].capitalize})" %></p>
+      <p class="card-date text-center"><%= date.strftime("%d/%m/%y") %> <%= availability.nil? ? "" : "#{availability.half[0].capitalize}" %></p>
       <% unless booking.user.company.photo.nil? %>
         <%= cl_image_tag booking.user.company.photo.public_id, height: 100, width: 100, crop: :pad, class: "card-logo" %>
       <% end %>
