@@ -8,27 +8,20 @@
         <div class="col-xs-12 col-lg-7 col-xl-8">
           <div class="card-container">
             <h4><strong>Vos prochaines détections</strong></h4>
-            <% (0..4).to_a.each do |n| %>
+
+            <% @bookings_hash.each do |date, bookings|%>
               <div class="row">
-                <% day_availabilities = @user.availabilities.where(date: n.business_day.from_now).where.not(status: "free") %>
-                <% day_bookings = day_availabilities.map do |a| a.booking end.uniq %>
-                <% if day_bookings.count == 1 %>
-                  <div class="col-xs-12">
-                    <%= render "shared/technician_booking_card", booking: day_bookings.first, date: n.business_day.from_now, availability: nil %>
-                    </div>
-                <% elsif day_bookings.count == 2 %>
-                  <% day_bookings.each do |day_booking| %>
-                    <div class="col-xs-12 col-md-6">
-                      <%= render "shared/technician_booking_card", booking: day_booking, date: n.business_day.from_now, availability: Availability.where(booking: day_booking, date: n.business_day.from_now, user: @user).first %>
+                <% if bookings == 0 %>
+                  <p>Rien de prévu</p>
+                <% else %>
+                  <% bookings.each do |booking| %>
+                    <div class="col-xs-12 <%= bookings.count > 1 ? "col-md-6" : "" %>">
+                      <%= render "shared/technician_booking_card", booking: booking, date: date, availability: Availability.where(booking: booking, date: date, user: @user).first %>
                     </div>
                   <% end %>
-                <% else %>
-                  <p>Encore rien de prévu</p>
                 <% end %>
               </div>
-
             <% end %>
-
           </div>
         </div>
         </div>
