@@ -30,6 +30,7 @@ gem "coffee-rails"
 gem "simple_calendar", "~> 2.0"
 gem 'chartkick', '~> 2.2.0'
 gem 'groupdate'
+gem 'signature-pad-rails'
 
 
 source 'https://rails-assets.org' do

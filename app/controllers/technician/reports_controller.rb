@@ -19,6 +19,7 @@ class Technician::ReportsController < ApplicationController
   end
 
   def update
+    @report.signed_on = DateTime.now
     if @report.update(report_params)
       params[:report][:answers_attributes].each do |k, v|
         unless v["option_choice_id"].nil?
@@ -65,6 +66,6 @@ class Technician::ReportsController < ApplicationController
   end
 
   def report_params
-    params.require(:report).permit(photos:[], answers_attributes: [:id, :report_id, :string, :numeric, :boolean, :question_id, :date, :option_choice_id])
+    params.require(:report).permit(:signature, :signed_on, photos:[], answers_attributes: [:id, :report_id, :string, :numeric, :boolean, :question_id, :date, :option_choice_id])
   end
 end
