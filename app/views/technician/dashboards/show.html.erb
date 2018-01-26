@@ -10,7 +10,9 @@
             <h4><strong>Vos prochaines détections</strong></h4>
 
             <% @bookings_hash.each do |date, bookings|%>
+
               <div class="row">
+
                 <% if bookings == 0 %>
                   <p>Rien de prévu</p>
                 <% else %>
@@ -20,15 +22,15 @@
                     </div>
                   <% end %>
                 <% end %>
+
               </div>
+
             <% end %>
           </div>
-        </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
   <%= render "shared/map", markers: @markers %>
 
