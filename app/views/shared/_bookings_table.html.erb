@@ -3,11 +3,11 @@
     <thead>
       <h4><strong>Liste de vos interventions</strong></h4>
       <tr>
-        <th scope="col">Référence</th>
+        <th scope="col">Numéro d'affaire</th>
         <th scope="col">Commandé le</th>
-        <th scope="col">Adresse</th>
+        <th scope="col">Entreprise</th>
         <th scope="col">Client</th>
-        <th scope="col"> Entreprise </th>
+        <th scope="col">Adresse</th>
         <th scope="col">Durée</th>
         <th scope="col">Date</th>
         <th scope="col">Liens</th>
@@ -19,9 +19,9 @@
           <tr>
             <th scope="row">#<%= booking.reference %></th>
             <td><%= booking.created_at.strftime("%d/%m/%y") %></td>
-            <td><%= booking.address %></td>
+            <td><%= booking.user.company.name %></td>
             <td><%= booking.user.first_name + ' ' + booking.user.last_name %></td>
-            <td><%= booking.user.pro? ? booking.user.company.name : "Particulier" %></td>
+            <td><%= booking.address %></td>
             <td><%= booking.availabilities.size.odd? ? "#{booking.availabilities.size} demi-journées" : "#{booking.availabilities.size / 2} journées" %></td>
             <td>
               <% if @user.manager? && booking.availabilities.first.pending? %>
