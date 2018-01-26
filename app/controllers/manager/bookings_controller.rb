@@ -2,7 +2,7 @@ class Manager::BookingsController < ApplicationController
 
   def index
     @user = current_user
-    @bookings = Booking.all.order(created_at: 'DESC')
+    @bookings = Booking.all.sort_by(&:created_at)
   end
 
   def show

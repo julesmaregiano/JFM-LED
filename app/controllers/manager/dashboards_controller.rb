@@ -1,7 +1,7 @@
 class Manager::DashboardsController < ApplicationController
 
   def show
-      @user = current_user
+    @user = current_user
     @todays_bookings = Booking.where.not(latitude: nil, longitude: nil).of_the_day.uniq
     @pending_bookings = Booking.to_come.status_is(1)
     @markers = Gmaps4rails.build_markers(@todays_bookings) do |booking, marker|
