@@ -8,10 +8,8 @@
     <thead>
       <tr>
         <th>Technicien</th>
-        <% week_days.each do |day| %>
-          <% unless day == "dimanche" || day == "samedi" %>
-            <th><%= day %></th>
-          <% end %>
+        <% date_range.first(5).each do |day| %>
+          <th><%= l day, format: "%A %d %B" %></th>
         <% end %>
       </tr>
     </thead>
