@@ -8,7 +8,7 @@ class Technician::ReportsController < ApplicationController
 
 
   def index
-    @reports = Report.all # car un seul diagnosticien pour l'instant
+    @reports = Report.all.sort_by(&:created_at) # car un seul diagnosticien pour l'instant
   end
 
   def show

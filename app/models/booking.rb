@@ -18,8 +18,8 @@
   scope :of_the_day, -> { joins(:availabilities).where("date = ?", Date.current) }
   scope :to_come, -> { joins(:availabilities).where("date > ?", Date.yesterday) }
   scope :soon, -> { joins(:availabilities).where("date < ?", Date.current + 7) }
-  scope :for, -> (user) { joins(:availabilities).where(user_id: user.id) }
   scope :status, -> (status) { joins(:availabilities).where("status = ?", status)}
+  scope :of, -> (user) { joins(:availabilities).where("user = ?", user) }
 
   def self.status_is(status)
     self.status(status).uniq

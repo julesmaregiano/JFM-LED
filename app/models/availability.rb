@@ -14,7 +14,6 @@
   scope :morning, -> { where(half: "matin") }
   scope :afternoon, -> { where(half: "aprem") }
 
-
   enum status: [:free, :pending, :leave, :booked]
   enum half:[:matin, :aprem]
 

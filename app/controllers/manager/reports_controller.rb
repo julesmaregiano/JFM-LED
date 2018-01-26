@@ -3,7 +3,7 @@ class Manager::ReportsController < ApplicationController
   before_action :params_report, only: [:show, :edit]
 
   def index
-    @reports = Report.all # car un seul diagnosticien pour l'instant
+    @reports = Report.all.sort_by(&:created_at) # car un seul diagnosticien pour l'instant
   end
 
   def show

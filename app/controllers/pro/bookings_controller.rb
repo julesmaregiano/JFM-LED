@@ -3,7 +3,7 @@ class Pro::BookingsController < ApplicationController
   before_action :set_tech, only: [:new, :create, :edit, :update]
 
   def index
-    @bookings = Booking.where(user_id: @user.id)
+    @bookings = Booking.where(user_id: @user.id).sort_by(&:created_at)
     create_markers_for(@bookings)
   end
 

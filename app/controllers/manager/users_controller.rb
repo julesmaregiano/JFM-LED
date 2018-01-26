@@ -1,7 +1,7 @@
 class Manager::UsersController < ApplicationController
 
   def show
-    @user = current_user
+    @user = current_user.sort_by(&:last_name)
   end
 
   def index

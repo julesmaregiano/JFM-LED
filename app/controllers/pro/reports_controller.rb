@@ -2,7 +2,7 @@ class Pro::ReportsController < ApplicationController
 
   def index
     @user = current_user
-    @reports = Booking.where(user_id: @user).map do |booking| booking.report end
+    @reports = Booking.where(user_id: @user).map do |booking| booking.report end.sort_by(&:created_at)
   end
 
   def show
