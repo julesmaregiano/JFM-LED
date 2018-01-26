@@ -2,7 +2,7 @@ class Technician::BookingsController < ApplicationController
 
   def index
     @user = current_user
-    @bookings = Availability.of(@user).map { |a| a.booking }.uniq.sort_by(&:created_at)
+    @bookings = Availability.of(@user).map { |a| a.booking }.uniq.compact.sort_by { |b| b.created_at }
   end
 
   def show
