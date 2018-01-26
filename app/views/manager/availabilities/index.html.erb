@@ -16,8 +16,8 @@
       <div class="tab-content">
         <% @techs.each do |tech| %>
             <div role="tabpanel" class="tab-pane <%= tech == @techs.first ? "active" : "" %>" id="tech-<%= tech.id %>">
-              <div id="events_calendar">
-                <%= render partial: "shared/calendar", locals: {availabilities: @availabilities.of(tech), user: @user, tech: tech} %>
+              <div id="<%= tech.first_name %>_events_calendar">
+                <%= render "shared/calendar", availabilities: @availabilities.of(tech), tech: tech %>
               </div>
             </div>
         <% end %>

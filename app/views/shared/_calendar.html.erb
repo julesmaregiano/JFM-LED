@@ -5,14 +5,14 @@
                      attribute: :date,
                      previous_link: events_ajax_previous_link,
                      next_link: events_ajax_next_link,
-                     events: @availabilities.of(tech)) do |date, availabilities| %>
+                     events: availabilities) do |date, availabilities| %>
 
   <div class="date-day"><%= date.day %></div>
   <div class="cell-content">
     <div class="btn-container">
       <% availabilities.sort_by(&:half).reverse!.each do |availability| %>
         <div class="btn-calendar btn-calendar-<%= availability.status %>" data-availability-id="<%= availability.id %>" >
-          <% if user.technician? %>
+          <% if @user.technician? %>
             <% if availability.booking_id.nil? %>
               <%= availability.status %>
             <% else %>
@@ -21,10 +21,10 @@
               <%= link_to(content_tag(:i, nil, class: 'fa card-icon fa-eye'), technician_booking_path(availability.booking_id))%>
             <% end %>
 
-          <% elsif user.manager? %>
+          <% elsif @user.manager? %>
             <% if availability.booking_id.nil? %>
               <%= availability.status %>
-              <%= simple_form_for([user.role, availability]) do |f| %>
+              <%= simple_form_for([@user.role, availability]) do |f| %>
               <%= f.hidden_field :user_id, value: tech.id %>
                 <% if availability.free? %>
                   <%= f.hidden_field :status, value: "leave" %>
@@ -53,11 +53,11 @@
       <% end %>
 
       <!-- Si il n'y a pas d'availability -->
-      <% if user.manager? %>
+      <% if @user.manager? %>
 
         <% if availabilities.select { |av| av[:half] == "matin" }.empty? && date.future? %>
           <div class="btn-calendar">
-            <%= simple_form_for([user.role, Availability.new]) do |f| %>
+            <%= simple_form_for([@user.role, Availability.new]) do |f| %>
               <%= f.hidden_field :user_id, value: tech.id %>
               <%= f.hidden_field :date, value: date %>
               <%= f.hidden_field :half, value: "matin" %>
@@ -69,7 +69,7 @@
         <% end %>
         <% if availabilities.select { |av| av[:half] == "aprem" }.empty? && date.future? %>
           <div class="btn-calendar">
-            <%= simple_form_for([user.role, Availability.new]) do |f| %>
+            <%= simple_form_for([@user.role, Availability.new]) do |f| %>
               <%= f.hidden_field :user_id, value: tech.id %>
               <%= f.hidden_field :date, value: date %>
               <%= f.hidden_field :half, value: "aprem" %>

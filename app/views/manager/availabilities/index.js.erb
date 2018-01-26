@@ -1,1 +1,2 @@
-$("#events_calendar").html("<%= escape_javascript render(partial: "shared/calendar", locals: {availabilities: @availabilities.of(tech), user: @user, tech: tech}) %>");
+console.log('prout');
+$("#<%= tech.first_name %>_events_calendar").html("<%= escape_javascript render "shared/calendar", availabilities: @availabilities.of(@techs.first), tech: tech");
