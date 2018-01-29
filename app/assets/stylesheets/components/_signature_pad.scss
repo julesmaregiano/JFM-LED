@@ -1,12 +1,12 @@
 .signature_pad {
   width: calc(100vw - 46px);
-  height: 300px;
   margin: 0 auto;
 }
 
 .signature_pad_body canvas {
   border: 1px solid $gray;
   width: calc(100vw - 76px);
+  max-width: 350px;
   height: 100%;
 }
 
