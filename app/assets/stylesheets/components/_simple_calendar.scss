@@ -235,16 +235,18 @@
     span.calendar-title {
       margin: 0px;
     }
+    .calendar-card {
+
+    }
     .calendar-heading > a {
       font-size: 16px;
       padding: 0px 4px
     }
-    .day {
-
-    }
     .cell-content {
       height: 13vh;
       width: 100%;
+      display: flex;
+      flex-direction: column;
     }
     .date-day {
       font-weight: inherit;

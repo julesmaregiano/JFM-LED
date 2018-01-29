@@ -57,7 +57,7 @@
         <tr>
           <td><strong><%= report.booking.user.company.name %></strong> <br> <%= report.booking.reference %> <br> <%= report.booking.created_at.strftime("%d/%m/%y") %></td>
           <td><%= report.booking.product.label %> <br> <%= report.booking.city %></td>
-          <td>
+          <td class='text-center'>
             <%= report.progress %>% <br>
             <% if current_user.technician? %>
               <%= link_to(content_tag(:i, nil, class: 'fa fa-eye'), technician_report_path(report))%> <br>

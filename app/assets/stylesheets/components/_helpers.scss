@@ -166,3 +166,9 @@ input, select {
 .booked-color, .invert-free-color {
   color: $anis;
 }
+
+@media screen and (max-width: 576px) {
+  .row {
+    margin: 0px;
+  }
+}
