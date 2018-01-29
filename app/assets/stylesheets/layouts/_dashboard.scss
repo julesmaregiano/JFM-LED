@@ -14,3 +14,22 @@
     width: calc(100% - 450px);
   }
 }
+
+@media screen and (max-width: 576px) {
+  .padding-box {
+    padding: 0px;
+    padding-top: 10px;
+    margin-top: 10px;
+  }
+
+  .card {
+    margin: 5px 0px;
+  }
+
+  .card-container {
+    padding: 0px;
+    & h4 {
+      padding-top: 10px;
+    }
+  }
+}

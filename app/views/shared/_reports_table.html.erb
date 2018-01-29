@@ -1,7 +1,10 @@
 <div class="card-container">
-  <table class="table table-hover">
+
+  <!-- Vue Desktop -->
+
+  <table class="table table-hover hidden-xs">
     <thead>
-      <h4><strong>Liste des rapports</strong></h4>
+      <h4 class="hidden-xs"><strong>Liste des rapports</strong></h4>
       <tr>
         <th scope="col">Référence</th>
         <th scope="col">Date</th>
@@ -28,6 +31,36 @@
           <td>
             <% if current_user.technician? %>
               <%= link_to(content_tag(:i, nil, class: 'fa fa-eye'), technician_report_path(report))%>
+              <%= link_to(content_tag(:i, nil, class: 'fa fa-pencil'), edit_technician_report_path(report)) %>
+            <% elsif current_user.pro? %>
+              <%= link_to(content_tag(:i, nil, class: 'fa fa-eye'), pro_report_path(report))%>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <!-- Vue mobile -->
+
+  <table class="table table-hover hidden-sm hidden-md hidden-lg hidden-xl">
+    <thead>
+      <h4 class="hidden-sm hidden-md hidden-lg hidden-xl"><strong>Liste des rapports</strong></h4>
+      <tr>
+        <th scope="col">Affaire</th>
+        <th scope="col">Infos</th>
+        <th scope="col">Détails</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% reports.each do |report| %>
+        <tr>
+          <td><strong><%= report.booking.user.company.name %></strong> <br> <%= report.booking.reference %> <br> <%= report.booking.created_at.strftime("%d/%m/%y") %></td>
+          <td><%= report.booking.product.label %> <br> <%= report.booking.city %></td>
+          <td class='text-center'>
+            <%= report.progress %>% <br>
+            <% if current_user.technician? %>
+              <%= link_to(content_tag(:i, nil, class: 'fa fa-eye'), technician_report_path(report))%> <br>
               <%= link_to(content_tag(:i, nil, class: 'fa fa-pencil'), edit_technician_report_path(report)) %>
             <% elsif current_user.pro? %>
               <%= link_to(content_tag(:i, nil, class: 'fa fa-eye'), pro_report_path(report))%>

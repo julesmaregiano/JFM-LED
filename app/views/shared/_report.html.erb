@@ -1,33 +1,35 @@
 <div class="card-container report">
-  <div class="flexbox flex-space-around">
-    <div class="client-company flexbox">
-      <% unless client.company.photo.nil? %>
-        <%= cl_image_tag client.company.photo.public_id, height: 150, width: 150, crop: :pad, class: "card-logo" %>
+
+    <div class="row flex-space-around">
+      <div class="client-company flexbox col-xs-12 col-md-4">
+        <% unless client.company.photo.nil? %>
+          <%= cl_image_tag client.company.photo.public_id, height: 150, width: 150, crop: :pad, class: "card-logo" %>
+        <% end %>
+        <div>
+          <h4><strong><%= client.company.name %></strong></h4>
+          <h6><%= client.branch.name %></h6>
+          <h6><%= client.branch.city %></h6>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-4">
+      <h4 class="text-center"><strong>Rapport de <%= @report.booking.product.label %></strong>
+        <%= @user.technician? ? link_to(content_tag(:i, nil, class: 'fa fa-edit'), edit_technician_report_path(@report)) : ""%>
+      </h4>
+      <p>Addresse de l'intervention <%= @report.booking.address %></p>
+      <p>Suite à la demande de <%= @report.booking.user.first_name %> <%= @report.booking.user.last_name %></p>
+    </div>
+    <div class="tech-company flexbox col-xs-12 col-md-4">
+      <% unless tech.company.photo.nil? %>
+        <%= cl_image_tag tech.company.photo.public_id, height: 150, width: 150, crop: :pad, class: "card-logo" %>
       <% end %>
       <div>
-        <h4><strong><%= client.company.name %></strong></h4>
-        <h6><%= client.branch.name %></h6>
-        <h6><%= client.branch.city %></h6>
+        <h4><strong><%= tech.company.name %></strong></h4>
+        <h6><%= tech.branch.name %></h6>
+        <h6><%= tech.branch.city %></h6>
+      </div>
     </div>
+
   </div>
-  <div>
-    <h4 class="text-center"><strong>Rapport de <%= @report.booking.product.label %></strong>
-      <%= @user.technician? ? link_to(content_tag(:i, nil, class: 'fa fa-edit'), edit_technician_report_path(@report)) : ""%>
-    </h4>
-    <p>Addresse de l'intervention <%= @report.booking.address %></p>
-    <p>Suite à la demande de <%= @report.booking.user.first_name %> <%= @report.booking.user.last_name %></p>
-  </div>
-  <div class="tech-company flexbox">
-    <% unless tech.company.photo.nil? %>
-      <%= cl_image_tag tech.company.photo.public_id, height: 150, width: 150, crop: :pad, class: "card-logo" %>
-    <% end %>
-    <div>
-      <h4><strong><%= tech.company.name %></strong></h4>
-      <h6><%= tech.branch.name %></h6>
-      <h6><%= tech.branch.city %></h6>
-    </div>
-  </div>
-</div>
 
 
   <div class="">

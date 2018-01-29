@@ -1,7 +1,7 @@
 <div class="card-container">
-  <table class="table table-hover">
+  <table class="table table-hover hidden-xs">
     <thead>
-      <h4><strong>Liste de vos interventions</strong></h4>
+      <h4 class="hidden-xs"><strong>Liste de vos interventions</strong></h4>
       <tr>
         <th scope="col">Numéro d'affaire</th>
         <th scope="col">Commandé le</th>
@@ -36,6 +36,30 @@
                 <i class="fa fa-eye"></i>
               <% end %>
             </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <table class="table table-hover hidden-sm hidden-md hidden-lg hidden-xl">
+    <thead>
+      <h4 class="hidden-sm hidden-md hidden-lg hidden-xl"><strong>Liste de vos interventions</strong></h4>
+        <tr>
+          <th scope="col">Affaire</th>
+          <th scope="col">Infos</th>
+          <th scope="col">Détails</th>
+        </tr>
+    </thead>
+    <tbody>
+      <% unless bookings.nil? %>
+        <% bookings.each do |booking| %>
+          <tr>
+            <td><strong><%= booking.user.company.name %></strong> <br> <%= booking.reference %> <br> <%= booking.created_at.strftime("%d/%m/%y") %> </td>
+            <td><%= booking.product.label %> <br> <%= booking.city %></td>
+            <td class='text-center'><%= link_to [@user.role, booking] do %>
+                <i class="fa fa-eye"></i>
+              <% end %></td>
           </tr>
         <% end %>
       <% end %>
