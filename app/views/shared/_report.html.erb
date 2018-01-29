@@ -1,36 +1,28 @@
 <div class="card-container report">
 
-    <div class="row flex-space-around">
-      <div class="client-company flexbox col-xs-12 col-md-4">
-        <% unless client.company.photo.nil? %>
-          <%= cl_image_tag client.company.photo.public_id, height: 150, width: 150, crop: :pad, class: "card-logo" %>
-        <% end %>
-        <div>
-          <h4><strong><%= client.company.name %></strong></h4>
-          <h6><%= client.branch.name %></h6>
-          <h6><%= client.branch.city %></h6>
-      </div>
-    </div>
-    <div class="col-xs-12 col-md-4">
-      <h4 class="text-center"><strong>Rapport de <%= @report.booking.product.label %></strong>
-        <%= @user.technician? ? link_to(content_tag(:i, nil, class: 'fa fa-edit'), edit_technician_report_path(@report)) : ""%>
-      </h4>
-      <p>Addresse de l'intervention <%= @report.booking.address %></p>
-      <p>Suite à la demande de <%= @report.booking.user.first_name %> <%= @report.booking.user.last_name %></p>
-    </div>
-    <div class="tech-company flexbox col-xs-12 col-md-4">
-      <% unless tech.company.photo.nil? %>
-        <%= cl_image_tag tech.company.photo.public_id, height: 150, width: 150, crop: :pad, class: "card-logo" %>
+  <div class="row">
+    <div class="col-xs-6 client-company flexbox no-padding">
+      <% unless client.company.photo.nil? %>
+        <%= cl_image_tag client.company.photo.public_id, height: 100, width: 100, crop: :pad, class: "card-logo" %>
       <% end %>
       <div>
-        <h4><strong><%= tech.company.name %></strong></h4>
-        <h6><%= tech.branch.name %></h6>
-        <h6><%= tech.branch.city %></h6>
+        <h7><strong><%= client.company.name %></strong></h7>
+        <p><%= client.branch.name %></p>
+        <p><%= client.branch.city %>, <%= @user.branch.zipcode %></p>
       </div>
     </div>
-
+    <div class="col-xs-6 tech-company flexbox no-padding">
+      <% unless tech.company.photo.nil? %>
+        <%= cl_image_tag tech.company.photo.public_id, height: 100, width: 100, crop: :pad, class: "card-logo" %>
+      <% end %>
+      <div>
+        <h7><strong><%= tech.company.name %></strong></h7>
+        <p><%= tech.branch.name %></p>
+        <p><%= tech.branch.city %>, <%= @user.branch.zipcode %></p>
+      </div>
+    </div>
+    <h4 class="col-xs-12 text-center"><strong>Rapport de <%= @report.product.label %></strong></h4>
   </div>
-
 
   <div class="">
 
