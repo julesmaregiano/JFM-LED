@@ -16,9 +16,9 @@
             <% if availability.booking_id.nil? %>
               <%= availability.status %>
             <% else %>
-              <%= availability.booking.user.company.name %>
-              <%= availability.booking.address1 %> <%= availability.booking.city %>
-              <%= link_to(content_tag(:i, nil, class: 'fa card-icon fa-eye'), technician_booking_path(availability.booking_id))%>
+              <%= link_to technician_booking_path(availability.booking_id) do %>
+                <p><%= availability.booking.user.company.name %></p>
+              <% end %>
             <% end %>
 
           <% elsif @user.manager? %>

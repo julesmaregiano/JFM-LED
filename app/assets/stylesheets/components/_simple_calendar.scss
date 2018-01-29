@@ -228,3 +228,35 @@
   align-items: flex-start;
   text-align: left;
 }
+
+@media screen and (max-width: 576px) {
+  .simple-calendar {
+    padding: 0px;
+    span.calendar-title {
+      margin: 0px;
+    }
+    .calendar-heading > a {
+      font-size: 16px;
+      padding: 0px 4px
+    }
+    .day {
+
+    }
+    .cell-content {
+      height: 13vh;
+      width: 100%;
+    }
+    .date-day {
+      font-weight: inherit;
+      top: 1px;
+      left: 1px;
+      font-size: 12px;
+      padding: 1px;
+    }
+    .btn-calendar {
+      & a, p {
+        font-size: 12px;
+      }
+    }
+  }
+}
