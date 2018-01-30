@@ -1,0 +1,23 @@
+{
+  "name": "L'ED - Détection des Réseaux enterrés",
+  "short_name": "L'ED'",
+  "theme_color": "#68C3ED",
+  "background_color": "#68C3ED",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "Scope": "/",
+  "start_url": "/users/sign_in",
+  "icons": [
+    {
+      "src": "images/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "images/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+  ],
+  "splash_pages": null
+}
