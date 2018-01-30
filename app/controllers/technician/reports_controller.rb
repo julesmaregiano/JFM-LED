@@ -21,17 +21,6 @@ class Technician::ReportsController < ApplicationController
   def update
     @report.signed_on = DateTime.now
     if @report.update(report_params)
-      params[:report][:answers_attributes].each do |k, v|
-        unless v["option_choice_id"].nil?
-          if v["option_choice_id"].class == Array
-            Answer.find(v["id"].to_i).answer_option_choices.destroy_all
-            v["option_choice_id"].reject { |s| s.empty? }.each do |oc|
-              AnswerOptionChoice.find_or_create_by(option_choice_id: oc.to_i, answer_id: v["id"].to_i)
-            end
-          end
-        end
-      end
-
       redirect_to technician_report_path(@report)
     else
       render :edit

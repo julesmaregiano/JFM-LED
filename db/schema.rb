@@ -10,23 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180124154018) do
+ActiveRecord::Schema.define(version: 20180130110517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "answer_option_choices", force: :cascade do |t|
-    t.bigint "answer_id"
-    t.bigint "option_choice_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["answer_id"], name: "index_answer_option_choices_on_answer_id"
-    t.index ["option_choice_id"], name: "index_answer_option_choices_on_option_choice_id"
-  end
-
   create_table "answers", force: :cascade do |t|
-    t.bigint "question_id"
-    t.bigint "option_choice_id"
     t.bigint "report_id"
     t.integer "numeric"
     t.string "string"
@@ -35,8 +24,8 @@ ActiveRecord::Schema.define(version: 20180124154018) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "date"
-    t.index ["option_choice_id"], name: "index_answers_on_option_choice_id"
-    t.index ["question_id"], name: "index_answers_on_question_id"
+    t.bigint "question_option_id"
+    t.index ["question_option_id"], name: "index_answers_on_question_option_id"
     t.index ["report_id"], name: "index_answers_on_report_id"
   end
 
@@ -194,6 +183,15 @@ ActiveRecord::Schema.define(version: 20180124154018) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "question_options", force: :cascade do |t|
+    t.bigint "option_choice_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "question_id"
+    t.index ["option_choice_id"], name: "index_question_options_on_option_choice_id"
+    t.index ["question_id"], name: "index_question_options_on_question_id"
+  end
+
   create_table "questions", force: :cascade do |t|
     t.string "name"
     t.bigint "section_id"
@@ -258,10 +256,7 @@ ActiveRecord::Schema.define(version: 20180124154018) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "answer_option_choices", "answers"
-  add_foreign_key "answer_option_choices", "option_choices"
-  add_foreign_key "answers", "option_choices"
-  add_foreign_key "answers", "questions"
+  add_foreign_key "answers", "question_options"
   add_foreign_key "answers", "reports"
   add_foreign_key "availabilities", "bookings"
   add_foreign_key "availabilities", "users"
@@ -280,6 +275,8 @@ ActiveRecord::Schema.define(version: 20180124154018) do
   add_foreign_key "product_options", "products"
   add_foreign_key "product_questions", "products"
   add_foreign_key "product_questions", "questions"
+  add_foreign_key "question_options", "option_choices"
+  add_foreign_key "question_options", "questions"
   add_foreign_key "questions", "option_groups"
   add_foreign_key "questions", "sections"
   add_foreign_key "questions", "units"
