@@ -10,18 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180124154018) do
+ActiveRecord::Schema.define(version: 20180201094315) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "answer_option_choices", force: :cascade do |t|
-    t.bigint "answer_id"
-    t.bigint "option_choice_id"
+  create_table "active_admin_comments", force: :cascade do |t|
+    t.string "namespace"
+    t.text "body"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.string "author_type"
+    t.bigint "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["answer_id"], name: "index_answer_option_choices_on_answer_id"
-    t.index ["option_choice_id"], name: "index_answer_option_choices_on_option_choice_id"
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
   create_table "answers", force: :cascade do |t|
@@ -258,8 +263,6 @@ ActiveRecord::Schema.define(version: 20180124154018) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "answer_option_choices", "answers"
-  add_foreign_key "answer_option_choices", "option_choices"
   add_foreign_key "answers", "option_choices"
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "reports"

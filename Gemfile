@@ -31,6 +31,8 @@ gem "simple_calendar", "~> 2.0"
 gem 'chartkick', '~> 2.2.0'
 gem 'groupdate'
 gem 'signature-pad-rails'
+gem 'activeadmin', github: 'activeadmin/activeadmin'
+gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 
 
 source 'https://rails-assets.org' do
