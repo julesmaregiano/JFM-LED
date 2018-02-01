@@ -27,10 +27,9 @@
     <% @report.sections.uniq.sort_by(&:id).each do |section| %>
       <div id="Section-<%= section.id %>" class="row report-section">
       <h4><strong><%= section.name %></strong></h4>
-        <% @report.questions.where(section: section).each do |question| %>
-        <% answer = @report.answers.where(question: question) %>
+        <% @report.questions.where(section: section).uniq.each do |question| %>
           <div class="text-left col-xs-12 col-md-6">
-            <%= m.simple_fields_for :answers, answer do |p|%>
+            <%= m.simple_fields_for :answers, question.answers.find_or_create_by(report: @report) do |p|%>
               <% unless p.object.question.input_type.nil? %>
                 <%= p.input p.object.question.input_type.to_sym, {as: p.object.question.display, label: p.object.question.name }.merge( p.object.question.option_choice_id? ? {collection: p.object.question.option_choices} : {}) %>
               <% end %>
@@ -39,6 +38,9 @@
         <% end %>
       </div>
     <% end %>
+
+
+
     <div class="row report-section">
       <%= m.input :photos, as: :attachinary %>
     </div>

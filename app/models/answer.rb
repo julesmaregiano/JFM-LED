@@ -6,6 +6,13 @@ class Answer < ApplicationRecord
   validates :report, presence: true
   has_many :answer_option_choices
 
+  def litteral_form
+    hash = self.attributes.slice('date', 'string', 'boolean', 'numeric', 'option_choice_id')
+    unless hash.compact.empty?
+      hash.compact.first[0] == 'option_choice_id' ? OptionChoice.find(hash.compact.first[1]).name : hash.compact.first[1].to_s
+    end
+  end
+
   def litteral_answer
     hash = self.attributes.slice('date', 'string', 'boolean', 'numeric', 'option_choice_id')
     if hash.compact.empty?

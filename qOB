@@ -1,0 +1,172 @@
+[1mdiff --git a/app/controllers/technician/reports_controller.rb b/app/controllers/technician/reports_controller.rb[m
+[1mindex 263b89e..2b9b194 100644[m
+[1m--- a/app/controllers/technician/reports_controller.rb[m
+[1m+++ b/app/controllers/technician/reports_controller.rb[m
+[36m@@ -20,7 +20,15 @@[m [mclass Technician::ReportsController < ApplicationController[m
+ [m
+   def update[m
+     @report.signed_on = DateTime.now[m
+[32m+[m[32m    binding.pry[m
+     if @report.update(report_params)[m
+[32m+[m[32m      params[:report][:answers_attributes].each do |k, v|[m
+[32m+[m[32m        if v["option_choice_id"].class == Array[m
+[32m+[m[32m          v["option_choice_id"].reject { |s| s.empty? }.each do |oc|[m
+[32m+[m[32m            Answer.find_or_create_by(option_choice_id: oc.to_i, question: Answer.find(v["id"].to_i).question, report: @report)[m
+[32m+[m[32m          end[m
+[32m+[m[32m        end[m
+[32m+[m[32m      end[m
+       redirect_to technician_report_path(@report)[m
+     else[m
+       render :edit[m
+[36m@@ -55,6 +63,6 @@[m [mclass Technician::ReportsController < ApplicationController[m
+   end[m
+ [m
+   def report_params[m
+[31m-    params.require(:report).permit(:signature, :signed_on, photos:[], answers_attributes: [:id, :report_id, :string, :numeric, :boolean, :question_id, :date, :option_choice_id])[m
+[32m+[m[32m    params.require(:report).permit(:signature, :signed_on, photos:[], answers_attributes: [:id, :report_id, :string, :numeric, :boolean, :question_id, :date, :option_choice_id, option_choice_id: []])[m
+   end[m
+ end[m
+[1mdiff --git a/app/models/answer.rb b/app/models/answer.rb[m
+[1mindex 8bf7584..d90208d 100644[m
+[1m--- a/app/models/answer.rb[m
+[1m+++ b/app/models/answer.rb[m
+[36m@@ -6,6 +6,13 @@[m [mclass Answer < ApplicationRecord[m
+   validates :report, presence: true[m
+   has_many :answer_option_choices[m
+ [m
+[32m+[m[32m  def litteral_form[m
+[32m+[m[32m    hash = self.attributes.slice('date', 'string', 'boolean', 'numeric', 'option_choice_id')[m
+[32m+[m[32m    unless hash.compact.empty?[m
+[32m+[m[32m      hash.compact.first[0] == 'option_choice_id' ? OptionChoice.find(hash.compact.first[1]).name : hash.compact.first[1].to_s[m
+[32m+[m[32m    end[m
+[32m+[m[32m  end[m
+[32m+[m
+   def litteral_answer[m
+     hash = self.attributes.slice('date', 'string', 'boolean', 'numeric', 'option_choice_id')[m
+     if hash.compact.empty?[m
+[1mdiff --git a/app/models/question.rb b/app/models/question.rb[m
+[1mindex 2d71926..6edf78d 100644[m
+[1m--- a/app/models/question.rb[m
+[1m+++ b/app/models/question.rb[m
+[36m@@ -11,13 +11,8 @@[m [mclass Question < ApplicationRecord[m
+   enum display: [:text, :check_boxes, :radio_buttons, :integer][m
+   enum input_type: [:option_choice_id, :numeric, :string, :boolean, :date][m
+ [m
+[31m-  def answer_for(report)[m
+[31m-    answer = self.answers.where(report: report).first[m
+[31m-    if answer.nil?[m
+[31m-      "Pas de réponse"[m
+[31m-    else[m
+[31m-      answer.litteral_answer[m
+[31m-    end[m
+[32m+[m[32m  def answers_for(report)[m
+[32m+[m[32m    self.answers.where(report: report).map do |answer| answer.litteral_form end[m
+   end[m
+ [m
+   def has_answer?(report)[m
+[1mdiff --git a/app/views/shared/_edit_report.erb b/app/views/shared/_edit_report.erb[m
+[1mindex b58d7c7..d468078 100644[m
+[1m--- a/app/views/shared/_edit_report.erb[m
+[1m+++ b/app/views/shared/_edit_report.erb[m
+[36m@@ -27,10 +27,9 @@[m
+     <% @report.sections.uniq.sort_by(&:id).each do |section| %>[m
+       <div id="Section-<%= section.id %>" class="row report-section">[m
+       <h4><strong><%= section.name %></strong></h4>[m
+[31m-        <% @report.questions.where(section: section).each do |question| %>[m
+[31m-        <% answer = @report.answers.where(question: question) %>[m
+[32m+[m[32m        <% @report.questions.where(section: section).uniq.each do |question| %>[m
+           <div class="text-left col-xs-12 col-md-6">[m
+[31m-            <%= m.simple_fields_for :answers, answer do |p|%>[m
+[32m+[m[32m            <%= m.simple_fields_for :answers, question.answers.find_or_create_by(report: @report) do |p|%>[m
+               <% unless p.object.question.input_type.nil? %>[m
+                 <%= p.input p.object.question.input_type.to_sym, {as: p.object.question.display, label: p.object.question.name }.merge( p.object.question.option_choice_id? ? {collection: p.object.question.option_choices} : {}) %>[m
+               <% end %>[m
+[36m@@ -39,6 +38,9 @@[m
+         <% end %>[m
+       </div>[m
+     <% end %>[m
+[32m+[m
+[32m+[m
+[32m+[m
+     <div class="row report-section">[m
+       <%= m.input :photos, as: :attachinary %>[m
+     </div>[m
+[1mdiff --git a/app/views/shared/_report.html.erb b/app/views/shared/_report.html.erb[m
+[1mindex 945c8d9..fef7892 100644[m
+[1m--- a/app/views/shared/_report.html.erb[m
+[1m+++ b/app/views/shared/_report.html.erb[m
+[36m@@ -32,7 +32,7 @@[m
+         <% section.questions.where(active: true).each do |question| %>[m
+           <div class="text-left col-xs-12 col-md-6">[m
+             <label for=""><%= question.name %></label><br/>[m
+[31m-            <%= question.answer_for(@report)%>[m
+[32m+[m[32m            <%= question.answers_for(@report)%>[m
+           </div>[m
+         <% end %>[m
+       </div>[m
+[1mdiff --git a/db/schema.rb b/db/schema.rb[m
+[1mindex 32de72c..4c96d7a 100644[m
+[1m--- a/db/schema.rb[m
+[1m+++ b/db/schema.rb[m
+[36m@@ -10,12 +10,14 @@[m
+ #[m
+ # It's strongly recommended that you check this file into your version control system.[m
+ [m
+[31m-ActiveRecord::Schema.define(version: 20180130110517) do[m
+[32m+[m[32mActiveRecord::Schema.define(version: 20180130150056) do[m
+ [m
+   # These are extensions that must be enabled in order to support this database[m
+   enable_extension "plpgsql"[m
+ [m
+   create_table "answers", force: :cascade do |t|[m
+[32m+[m[32m    t.bigint "question_id"[m
+[32m+[m[32m    t.bigint "option_choice_id"[m
+     t.bigint "report_id"[m
+     t.integer "numeric"[m
+     t.string "string"[m
+[36m@@ -24,8 +26,8 @@[m [mActiveRecord::Schema.define(version: 20180130110517) do[m
+     t.datetime "created_at", null: false[m
+     t.datetime "updated_at", null: false[m
+     t.date "date"[m
+[31m-    t.bigint "question_option_id"[m
+[31m-    t.index ["question_option_id"], name: "index_answers_on_question_option_id"[m
+[32m+[m[32m    t.index ["option_choice_id"], name: "index_answers_on_option_choice_id"[m
+[32m+[m[32m    t.index ["question_id"], name: "index_answers_on_question_id"[m
+     t.index ["report_id"], name: "index_answers_on_report_id"[m
+   end[m
+ [m
+[36m@@ -183,15 +185,6 @@[m [mActiveRecord::Schema.define(version: 20180130110517) do[m
+     t.datetime "updated_at", null: false[m
+   end[m
+ [m
+[31m-  create_table "question_options", force: :cascade do |t|[m
+[31m-    t.bigint "option_choice_id"[m
+[31m-    t.datetime "created_at", null: false[m
+[31m-    t.datetime "updated_at", null: false[m
+[31m-    t.bigint "question_id"[m
+[31m-    t.index ["option_choice_id"], name: "index_question_options_on_option_choice_id"[m
+[31m-    t.index ["question_id"], name: "index_question_options_on_question_id"[m
+[31m-  end[m
+[31m-[m
+   create_table "questions", force: :cascade do |t|[m
+     t.string "name"[m
+     t.bigint "section_id"[m
+[36m@@ -256,7 +249,8 @@[m [mActiveRecord::Schema.define(version: 20180130110517) do[m
+     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true[m
+   end[m
+ [m
+[31m-  add_foreign_key "answers", "question_options"[m
+[32m+[m[32m  add_foreign_key "answers", "option_choices"[m
+[32m+[m[32m  add_foreign_key "answers", "questions"[m
+   add_foreign_key "answers", "reports"[m
+   add_foreign_key "availabilities", "bookings"[m
+   add_foreign_key "availabilities", "users"[m
+[36m@@ -275,8 +269,6 @@[m [mActiveRecord::Schema.define(version: 20180130110517) do[m
+   add_foreign_key "product_options", "products"[m
+   add_foreign_key "product_questions", "products"[m
+   add_foreign_key "product_questions", "questions"[m
+[31m-  add_foreign_key "question_options", "option_choices"[m
+[31m-  add_foreign_key "question_options", "questions"[m
+   add_foreign_key "questions", "option_groups"[m
+   add_foreign_key "questions", "sections"[m
+   add_foreign_key "questions", "units"[m
