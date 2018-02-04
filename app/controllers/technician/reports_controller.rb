@@ -27,6 +27,7 @@ class Technician::ReportsController < ApplicationController
           v["option_choice_id"].reject { |s| s.empty? }.each do |oc|
             Answer.find_or_create_by(option_choice_id: oc.to_i, question: Answer.find(v["id"].to_i).question, report: @report)
           end
+          Answer.find(v["id"].to_i).destroy
         end
       end
       redirect_to technician_report_path(@report)

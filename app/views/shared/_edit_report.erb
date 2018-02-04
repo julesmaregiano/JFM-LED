@@ -30,9 +30,9 @@
         <% @report.questions.where(section: section).uniq.each do |question| %>
           <div class="text-left col-xs-12 col-md-6">
             <%= m.simple_fields_for :answers, question.answers.find_or_create_by(report: @report) do |p|%>
-              <% unless p.object.question.input_type.nil? %>
-                <%= p.input p.object.question.input_type.to_sym, {as: p.object.question.display, label: p.object.question.name }.merge( p.object.question.option_choice_id? ? {collection: p.object.question.option_choices} : {}) %>
-              <% end %>
+
+              <%= p.input p.object.question.input_type.to_sym, {as: p.object.question.display, label: p.object.question.name }.merge( p.object.question.option_choice_id? ? {collection: p.object.question.option_choices, checked: p.object.question.option_choices } : {}) %>
+
             <% end %>
           </div>
         <% end %>
