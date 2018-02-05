@@ -45,10 +45,6 @@
                     </label>
                   </span>
 
-                    <%#= p.input p.object.question.input_type.to_sym, {as: p.object.question.display, label: p.object.question.name }.merge( p.object.question.option_choice_id? ? {collection: p.object.question.option_choices, checked: p.object.question.option_choices } : {}) %>
-
-                  <%# end %>
-
                 <% end %>
               <% else %>
               <%= @answers_per_question[question].count if @answers_per_question[question] %>

@@ -251,9 +251,5 @@ Question.first(20).each do |q| ProductQuestion.create(product: Product.first, qu
 
 puts "ProductQuestions: #{ProductQuestion.count}"
 
-Report.all.each do |report| report.init end
-
-puts "Réponses créées: #{Answer.count}"
-
 
 # SEPARATION DEV/PROD
