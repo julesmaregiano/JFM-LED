@@ -92,3 +92,47 @@
   opacity: 0.8;
   border-radius: 2px;
 }
+
+header .stripes {
+  display: grid;
+  grid: repeat(4, 200px) / repeat(10, 1fr);
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  transform: skewY(-7deg);
+  transform-origin: 0;
+  background: linear-gradient(150deg, white 20%, $light-gray 80%);
+  position: absolute;
+  top: 120px;
+  & span {
+    height: 195px;
+  }
+}
+
+header .stripes :nth-child(1) {
+  grid-column: span 3;
+  background: linear-gradient(150deg, $blue 15%, $light-blue 80%);
+  }
+
+header .stripes :nth-child(2) {
+  grid-area: 2 / auto / auto / span 2;
+  background: linear-gradient(150deg, $yellow 15%, $orange 74%);
+}
+
+header .stripes :nth-child(3) {
+  grid-area: 2 / 10 / 2 / 7;
+  background: linear-gradient(150deg, $yellow 15%, $orange 74%);
+}
+
+header .stripes :nth-child(4) {
+  grid-area: 3 / 2 / auto / 8;
+  background: linear-gradient(100deg, $purple 50%, $purpler 90%);
+}
+
+header .stripes :nth-child(5) {
+  grid-area: 4 / span 10 / auto / auto;
+  background: linear-gradient(150deg, $light-anis 40%, $anis 85%);
+}
+
+
+

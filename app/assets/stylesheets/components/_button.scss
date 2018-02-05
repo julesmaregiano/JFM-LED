@@ -15,7 +15,8 @@
   }
   &:hover {
     background-color: $yellow;
-    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
   }
 }
 .btn-slim, a.btn-slim {
@@ -42,7 +43,7 @@ input {
   background-color: $anis;
 }
 .btn-diago {
-  background-color: $diago;
+  background-color: $blue;
 }
 .btn-red {
   background-color: red;

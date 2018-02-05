@@ -55,7 +55,7 @@
   .wday-5 {}
   .wday-6 {}
   .today {
-    background: $diago;
+    background: $blue;
     & .date-day {
       color: $blue-gray;
     }
@@ -151,8 +151,8 @@
   }
 
   .btn-calendar-selected, .mng-calendar-selected  {
-    border: 8px solid $diago;
-    background: $diago;
+    border: 8px solid $blue;
+    background: $blue;
     font-color: white;
     font-weight: bold;
   }
@@ -207,7 +207,7 @@
 }
 
 .tech-card {
-    border-right: 8px solid $diago;
+    border-right: 8px solid $blue;
     margin: 1px 0px;
     color: $dark-gray;
     position: relative;
@@ -219,7 +219,7 @@
     align-items: center;
     justify-content: center;
     & p{
-      color: $diago;
+      color: $blue;
     }
 }
 

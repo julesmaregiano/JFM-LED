@@ -3,7 +3,7 @@
   position: fixed;
   top: 0px;
   width: 100%;
-  background: white;
+  background: rgba(255,255,255, 0.5);
   transition: all 0.3s ease;
   height: 70px;
   padding: 0px 30px;
@@ -45,7 +45,7 @@
   font-size: 14px;
 }
 .navbar-wagon-link:hover {
-  color: $diago;
+  color: $blue;
 }
 
 /* Dropdown menu */
