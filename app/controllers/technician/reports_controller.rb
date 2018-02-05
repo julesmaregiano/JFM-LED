@@ -15,12 +15,14 @@ class Technician::ReportsController < ApplicationController
   end
 
   def edit
-    @report.answers.build
+    # @report.answers.build
+    @questions = @booking.product.questions
+    @questions_per_section = @questions.group_by(&:section)
+    build_answers
   end
 
   def update
     @report.signed_on = DateTime.now
-    binding.pry
     if @report.update(report_params)
       params[:report][:answers_attributes].each do |k, v|
         if v["option_choice_id"].class == Array
@@ -65,5 +67,43 @@ class Technician::ReportsController < ApplicationController
 
   def report_params
     params.require(:report).permit(:signature, :signed_on, photos:[], answers_attributes: [:id, :report_id, :string, :numeric, :boolean, :question_id, :date, :option_choice_id, option_choice_id: []])
+  end
+
+  def build_answers
+    # Si il y a déjà des réponses
+    if @report.answers.any?
+      @answers_per_question = @report.answers.group_by(&:question)
+      # Pour chaque Question à Choix Multiple
+      @questions.where(display: "check_boxes").each do |question|
+        # Si l'utilsateur a déjà sélectionné au moins l'un des choix, on repropose les autres options
+        if @answers_per_question[question]
+          question.option_choices.where.not(id: @answers_per_question[question].map(&:option_choice_id)).each do |option_choice|
+            @answers_per_question[question] << Answer.new(question: question, report: @report, option_choice: option_choice)
+          end
+        # Si il n'a rien sélectionné, on propose toutes les options
+        else
+          @answers_per_question[question] = question.option_choices.map do |option_choice|
+            Answer.new(question: question, report: @report, option_choice: option_choice)
+          end
+        end
+      end
+    # Si la personne n'a répondu à rien
+    else
+      @answers_per_question = {}
+
+
+      @questions.each do |question|
+        # Si c'est une question à choix multiple on propose toutes les réponses
+        if question.check_boxes?
+          @answers_per_question[question] = question.option_choices.map do |option_choice|
+            Answer.new(question: question, report: @report, option_choice: option_choice)
+          end
+        # Si choix unique, on propose une réponse
+        else
+          @answers_per_question[question] = Answer.new(question: question, report: @report)
+        end
+      end
+
+    end
   end
 end

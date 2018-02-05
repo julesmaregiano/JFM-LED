@@ -8,7 +8,7 @@ class Report < ApplicationRecord
   has_many :sections, through: :questions
   has_attachments :photos, maximum: 20
   accepts_nested_attributes_for :answers
-  after_create :init
+  # after_create :init
 
   def init
     Question.where(active: true).each do |q|
