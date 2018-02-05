@@ -1,6 +1,9 @@
 class Technician::ReportsController < ApplicationController
   before_action :set_user, only: [:index, :show, :edit, :update]
   before_action :set_report, only: [:show, :edit, :update]
+  # before_action :ensure_report_not_signed s'assure que le report n'est pas signé unqieument pour edit et update
+  # si rapport signé -> show flash error "rapport deja signé vous ne pouvez plus éditer"
+
   before_action :set_booking, only: [:show, :edit, :update]
   before_action :set_client, only: [:show, :edit, :update]
   before_action :set_tech, only: [:show, :edit, :update]
@@ -15,7 +18,6 @@ class Technician::ReportsController < ApplicationController
   end
 
   def edit
-    # @report.answers.build
     @questions = @booking.product.questions
     @questions_per_section = @questions.group_by(&:section)
     build_answers
@@ -24,16 +26,11 @@ class Technician::ReportsController < ApplicationController
   def update
     @report.signed_on = DateTime.now
     if @report.update(report_params)
-      params[:report][:answers_attributes].each do |k, v|
-        if v["option_choice_id"].class == Array
-          v["option_choice_id"].reject { |s| s.empty? }.each do |oc|
-            Answer.find_or_create_by(option_choice_id: oc.to_i, question: Answer.find(v["id"].to_i).question, report: @report)
-          end
-          Answer.find(v["id"].to_i).destroy
-        end
-      end
       redirect_to technician_report_path(@report)
     else
+      @questions = @booking.product.questions
+      @questions_per_section = @questions.group_by(&:section)
+      build_answers
       render :edit
     end
   end
@@ -66,7 +63,12 @@ class Technician::ReportsController < ApplicationController
   end
 
   def report_params
-    params.require(:report).permit(:signature, :signed_on, photos:[], answers_attributes: [:id, :report_id, :string, :numeric, :boolean, :question_id, :date, :option_choice_id, option_choice_id: []])
+    params[:report][:answers_attributes].each do |answer_index, answer_params|
+      if answer_params.has_key?("multiple_answer") && answer_params.has_key?("option_choice_id") == false
+        params[:report][:answers_attributes][answer_index][:_destroy] = true
+      end
+    end
+    params.require(:report).permit(:signature, :signed_on, photos:[], answers_attributes: [:id, :_destroy, :report_id, :string, :numeric, :boolean, :question_id, :date, :option_choice_id, option_choice_id: []])
   end
 
   def build_answers
@@ -91,7 +93,6 @@ class Technician::ReportsController < ApplicationController
     else
       @answers_per_question = {}
 
-
       @questions.each do |question|
         # Si c'est une question à choix multiple on propose toutes les réponses
         if question.check_boxes?
@@ -100,10 +101,11 @@ class Technician::ReportsController < ApplicationController
           end
         # Si choix unique, on propose une réponse
         else
-          @answers_per_question[question] = Answer.new(question: question, report: @report)
+          @answers_per_question[question] = [Answer.new(question: question, report: @report)]
         end
       end
 
     end
   end
+
 end

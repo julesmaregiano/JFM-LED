@@ -1,10 +1,10 @@
 class Answer < ApplicationRecord
   belongs_to :question
   belongs_to :report
-  has_one :option_choice
+  belongs_to :option_choice, optional: true
   validates :question, presence: true
   validates :report, presence: true
-  has_many :answer_option_choices
+
 
   def litteral_form
     hash = self.attributes.slice('date', 'string', 'boolean', 'numeric', 'option_choice_id')

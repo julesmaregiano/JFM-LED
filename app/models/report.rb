@@ -7,15 +7,10 @@ class Report < ApplicationRecord
   has_many :questions, through: :answers
   has_many :sections, through: :questions
   has_attachments :photos, maximum: 20
-  accepts_nested_attributes_for :answers
-  # after_create :init
+  accepts_nested_attributes_for :answers, allow_destroy: true
 
-  def init
-    Question.where(active: true).each do |q|
-      if q.product_ids.include?(self.product.id)
-        Answer.find_or_create_by(report: self, question: q)
-      end
-    end
+  def signed?
+    # return true dès qu'une signature de faite
   end
 
   def progress
