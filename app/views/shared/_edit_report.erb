@@ -47,7 +47,6 @@
 
                 <% end %>
               <% else %>
-              <%= @answers_per_question[question].count if @answers_per_question[question] %>
                 <%= m.simple_fields_for :answers, @answers_per_question[question] do |p|%>
                   <% options = question.option_choice_id? ? {collection: question.option_choices } : {} %>
                   <%= p.input :question_id, as: :hidden %>

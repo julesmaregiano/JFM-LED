@@ -10,18 +10,18 @@ class Report < ApplicationRecord
   accepts_nested_attributes_for :answers, allow_destroy: true
 
   def signed?
-    # return true dès qu'une signature de faite
+    self.signed_on.any?
   end
 
   def progress
-    questions = self.product.questions.where(active: true).count
     answered = 0
-    self.answers.each do |answer|
-      if answer.answered?
+    questions = self.product.questions.where(active: true).count
+    self.answers.group_by(&:question).each do |question, answers|
+      if question.active? && answers.map { |a| a if a.answered? }.any?
         answered += 1
       end
     end
-    questions == 0 ? 0 : ((answered.to_f/questions.to_f)*100).round
+    questions.zero? ? 0 : ((answered.to_f/questions.to_f)*100).round
   end
 
 end

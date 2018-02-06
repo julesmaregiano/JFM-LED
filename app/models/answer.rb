@@ -7,26 +7,19 @@ class Answer < ApplicationRecord
 
 
   def litteral_form
-    hash = self.attributes.slice('date', 'string', 'boolean', 'numeric', 'option_choice_id')
-    unless hash.compact.empty?
-      hash.compact.first[0] == 'option_choice_id' ? OptionChoice.find(hash.compact.first[1]).name : hash.compact.first[1].to_s
+    if answers_hash.compact.empty?
+      "Pas encore de réponse"
+    else
+      answers_hash.compact.first[0] == 'option_choice_id' ? OptionChoice.find(answers_hash.compact.first[1]).name : answers_hash.compact.first[1].to_s
     end
   end
 
-  def litteral_answer
-    hash = self.attributes.slice('date', 'string', 'boolean', 'numeric', 'option_choice_id')
-    if hash.compact.empty?
-      "Pas encore de réponse"
-    else
-      hash.compact.first[0] == 'option_choice_id' ? OptionChoice.find(hash.compact.first[1]).name : hash.compact.first[1].to_s
-    end
+  def answers_hash
+    self.attributes.slice('date', 'string', 'boolean', 'numeric', 'option_choice_id').delete_if { |k, v| v.nil? || v == "" }
   end
 
   def answered?
-    if self.attributes.slice('date', 'string', 'boolean', 'numeric', 'option_choice_id').compact.any?
-      return true
-    end
+    answers_hash.any?
   end
-
 
 end

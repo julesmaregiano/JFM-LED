@@ -24,8 +24,11 @@ class Technician::ReportsController < ApplicationController
   end
 
   def update
-    @report.signed_on = DateTime.now
     if @report.update(report_params)
+      unless @report.signature == empty_signature_string
+        @report.signed_on = DateTime.now
+        @report.save
+      end
       redirect_to technician_report_path(@report)
     else
       @questions = @booking.product.questions
@@ -106,6 +109,10 @@ class Technician::ReportsController < ApplicationController
       end
 
     end
+  end
+
+  def empty_signature_string
+    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAV4AAACwCAYAAABHEgZcAAABBklEQVR4nO3BAQ0AAADCoPdPbQ43oAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAVwPDXQABjSI3YAAAAABJRU5ErkJggg=="
   end
 
 end
