@@ -7,10 +7,12 @@
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+    <%= wicked_pdf_javascript_include_tag "number_pages" %>
   </head>
   <body id="page-top">
     <%= render 'shared/navbar' %>
-    <%# render 'shared/flashes' %>
+    <%= render 'shared/flashes' %>
     <div>
       <%= yield %>
     </div>
