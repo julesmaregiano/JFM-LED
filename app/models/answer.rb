@@ -1,29 +1,25 @@
 class Answer < ApplicationRecord
   belongs_to :question
   belongs_to :report
-  has_one :option_choice
+  belongs_to :option_choice, optional: true
   validates :question, presence: true
   validates :report, presence: true
-  has_many :answer_option_choices
 
-  def litteral_answer
-    hash = self.attributes.slice('date', 'string', 'boolean', 'numeric', 'option_choice_id')
-    if hash.compact.empty?
-      if self.answer_option_choices.exists?
-        self.answer_option_choices.map do |a| OptionChoice.find(a.option_choice_id).name end.join(" - ")
-      else
-        "Pas encore de réponse"
-      end
+
+  def litteral_form
+    if answers_hash.compact.empty?
+      "Pas encore de réponse"
     else
-      hash.compact.first[0] == 'option_choice_id' ? OptionChoice.find(hash.compact.first[1]).name : hash.compact.first[1].to_s
+      answers_hash.compact.first[0] == 'option_choice_id' ? OptionChoice.find(answers_hash.compact.first[1]).name : answers_hash.compact.first[1].to_s
     end
+  end
+
+  def answers_hash
+    self.attributes.slice('date', 'string', 'boolean', 'numeric', 'option_choice_id').delete_if { |k, v| v.nil? || v == "" }
   end
 
   def answered?
-    if self.attributes.slice('date', 'string', 'boolean', 'numeric', 'option_choice_id').compact.any? || AnswerOptionChoice.where(answer_id: self.id).any?
-      return true
-    end
+    answers_hash.any?
   end
-
 
 end

@@ -32,7 +32,9 @@
         <% section.questions.where(active: true).each do |question| %>
           <div class="text-left col-xs-12 col-md-6">
             <label for=""><%= question.name %></label><br/>
-            <%= question.answer_for(@report)%>
+            <% question.answers_for(@report).each do |answer| %>
+              <p><%= answer %></p>
+            <% end %>
           </div>
         <% end %>
       </div>
@@ -46,11 +48,11 @@
   <div class="report-section">
     <h4><strong>Signature</strong></h4>
 
-    <% if @report.signature.present? %>
+    <% if @report.signed_on.nil? %>
+      <p>Le rapport n'a pas été signé</p>
+    <% else %>
       <%= image_tag @report.signature %>
       <p> Signé le <%= @report.signed_on.strftime("%d/%m/%y à %Hh%M") %></p>
-    <% else %>
-      <p>Le rapport n'a pas été signé</p>
     <% end %>
   </div>
 

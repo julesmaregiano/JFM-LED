@@ -24,21 +24,43 @@
   </div>
 
   <%= simple_form_for([@user.role, @report]) do |m| %>
-    <% @report.sections.uniq.sort_by(&:id).each do |section| %>
+    <% @questions_per_section.sort_by{ |section, _question| section.id }.each do |section, questions| %>
       <div id="Section-<%= section.id %>" class="row report-section">
       <h4><strong><%= section.name %></strong></h4>
-        <% @report.questions.where(section: section).each do |question| %>
-        <% answer = @report.answers.where(question: question) %>
+        <% questions.each do |question| %>
           <div class="text-left col-xs-12 col-md-6">
-            <%= m.simple_fields_for :answers, answer do |p|%>
-              <% unless p.object.question.input_type.nil? %>
-                <%= p.input p.object.question.input_type.to_sym, {as: p.object.question.display, label: p.object.question.name }.merge( p.object.question.option_choice_id? ? {collection: p.object.question.option_choices} : {}) %>
+            <div class="form-group check_boxes optional report_answers_option_choice_id">
+            <label class="control-label check_boxes optional"><%= question.name %></label>
+
+              <% if question.check_boxes? %>
+                <% @answers_per_question[question].each_with_index do |answer, index| %>
+                  <span class="checkbox">
+                    <label for="report_answers_attributes_<%= 100 + index %>_option_choice_id_<%= answer.option_choice_id %>">
+
+                      <input class="check_boxes optional" value="<%= answer.id %>" name="report[answers_attributes][<%= 100 + index %>][id]" type="hidden">
+                      <input class="check_boxes optional" value="<%= question.id %>" name="report[answers_attributes][<%= 100 + index %>][question_id]" id="report_answers_attributes<%= 100 + index %>_question_id_<%= question.id %>" type="hidden">
+                      <input class="check_boxes optional" value="true" name="report[answers_attributes][<%= 100 + index %>][multiple_answer]" id="report_answers_attributes<%= 100 + index %>_multiple_answer_<%= question.id %>" type="hidden">
+
+                      <input class="check_boxes optional" value="<%= answer.option_choice_id %>" name="report[answers_attributes][<%= 100 + index %>][option_choice_id]" id="report_answers_attributes_<%= 100 + index %>_option_choice_id_<%= answer.option_choice_id %>" type="checkbox" <%= "checked" if answer.persisted? %>><%= answer.option_choice.name %>
+                    </label>
+                  </span>
+
+                <% end %>
+              <% else %>
+                <%= m.simple_fields_for :answers, @answers_per_question[question] do |p|%>
+                  <% options = question.option_choice_id? ? {collection: question.option_choices } : {} %>
+                  <%= p.input :question_id, as: :hidden %>
+                  <%= p.input question.input_type.to_sym, options.merge(as: question.display, label: false) %>
+                <% end %>
               <% end %>
-            <% end %>
+            </div>
           </div>
         <% end %>
       </div>
     <% end %>
+
+
+
     <div class="row report-section">
       <%= m.input :photos, as: :attachinary %>
     </div>
@@ -51,7 +73,7 @@
         </div>
         <div class="signature_pad_footer">
           <div class="text-muted">Signez ci-dessus</div>
-          <button type="button" class="btn btn-default signature_pad_clear">Clear</button>
+          <button type="button" class="btn btn-default signature_pad_clear">Effacer</button>
         </div>
       </div>
     </div>
