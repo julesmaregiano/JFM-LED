@@ -10,7 +10,7 @@ class Report < ApplicationRecord
   accepts_nested_attributes_for :answers, allow_destroy: true
 
   def signed?
-    self.signed_on.any?
+    self.signed_on.present?
   end
 
   def progress

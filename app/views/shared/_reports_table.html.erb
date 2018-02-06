@@ -14,6 +14,7 @@
         <th scope="col">Durée</th>
         <th scope="col">Prestation</th>
         <th scope="col">Statut</th>
+        <th scope="col">Signature</th>
         <th scope="col">Actions</th>
       </tr>
     </thead>
@@ -28,6 +29,7 @@
           <td><%= report.booking.availabilities.count %> demi-journées</td>
           <td><%= report.booking.product.label %></td>
           <td><%= report.progress %> %</td>
+          <td><%= report.signed? ? "Signé" : "En attente" %></td>
           <td>
             <% if current_user.technician? %>
               <%= link_to(content_tag(:i, nil, class: 'fa fa-eye'), technician_report_path(report))%>
