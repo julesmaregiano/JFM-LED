@@ -6,9 +6,11 @@
   margin: 0;
   text-align: center;
   color: white;
+  border: 0px;
+  opacity: 0.8;
 }
 .alert-info {
-  background: $green;
+  background: $anis;
 }
 .alert-warning {
   background: $red;
