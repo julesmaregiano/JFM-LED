@@ -3,9 +3,7 @@
 
   <div class="dashboard-content with_right_sidebar">
     <div class="padding-box">
-      <%= link_to 'Create PDF document', pro_report_path(@report, :format => :pdf) %>
       <%= render "shared/report", booking: @booking, client: @client, tech: @tech %>
-
     </div>
   </div>
 </div>
