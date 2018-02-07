@@ -7,26 +7,21 @@ class Report < ApplicationRecord
   has_many :questions, through: :answers
   has_many :sections, through: :questions
   has_attachments :photos, maximum: 20
-  accepts_nested_attributes_for :answers
-  after_create :init
+  accepts_nested_attributes_for :answers, allow_destroy: true
 
-  def init
-    Question.where(active: true).each do |q|
-      if q.product_ids.include?(self.product.id)
-        Answer.find_or_create_by(report: self, question: q)
-      end
-    end
+  def signed?
+    self.signed_on.present?
   end
 
   def progress
-    questions = self.product.questions.where(active: true).count
     answered = 0
-    self.answers.each do |answer|
-      if answer.answered?
+    questions = self.product.questions.where(active: true).count
+    self.answers.group_by(&:question).each do |question, answers|
+      if question.active? && answers.map { |a| a if a.answered? }.any?
         answered += 1
       end
     end
-    questions == 0 ? 0 : ((answered.to_f/questions.to_f)*100).round
+    questions.zero? ? 0 : ((answered.to_f/questions.to_f)*100).round
   end
 
 end

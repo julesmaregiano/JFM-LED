@@ -1,24 +1,27 @@
+<%= wicked_pdf_stylesheet_link_tag "application" -%>
+<%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+
 <div class="card-container report">
 
   <div class="row">
     <div class="col-xs-6 client-company flexbox no-padding">
-      <% unless client.company.photo.nil? %>
-        <%= cl_image_tag client.company.photo.public_id, height: 100, width: 100, crop: :pad, class: "card-logo" %>
+      <% unless @client.company.photo.nil? %>
+        <%= cl_image_tag @client.company.photo.public_id, height: 100, width: 100, crop: :pad, class: "card-logo" %>
       <% end %>
       <div>
-        <h7><strong><%= client.company.name %></strong></h7>
-        <p><%= client.branch.name %></p>
-        <p><%= client.branch.city %>, <%= @user.branch.zipcode %></p>
+        <h7><strong><%= @client.company.name %></strong></h7>
+        <p><%= @client.branch.name %></p>
+        <p><%= @client.branch.city %>, <%= @user.branch.zipcode %></p>
       </div>
     </div>
     <div class="col-xs-6 tech-company flexbox no-padding">
-      <% unless tech.company.photo.nil? %>
-        <%= cl_image_tag tech.company.photo.public_id, height: 100, width: 100, crop: :pad, class: "card-logo" %>
+      <% unless @tech.company.photo.nil? %>
+        <%= cl_image_tag @tech.company.photo.public_id, height: 100, width: 100, crop: :pad, class: "card-logo" %>
       <% end %>
       <div>
-        <h7><strong><%= tech.company.name %></strong></h7>
-        <p><%= tech.branch.name %></p>
-        <p><%= tech.branch.city %>, <%= @user.branch.zipcode %></p>
+        <h7><strong><%= @tech.company.name %></strong></h7>
+        <p><%= @tech.branch.name %></p>
+        <p><%= @tech.branch.city %>, <%= @user.branch.zipcode %></p>
       </div>
     </div>
     <h4 class="col-xs-12 text-center"><strong>Rapport de <%= @report.product.label %></strong></h4>
@@ -32,7 +35,9 @@
         <% section.questions.where(active: true).each do |question| %>
           <div class="text-left col-xs-12 col-md-6">
             <label for=""><%= question.name %></label><br/>
-            <%= question.answer_for(@report)%>
+            <% question.answers_for(@report).each do |answer| %>
+              <p><%= answer %></p>
+            <% end %>
           </div>
         <% end %>
       </div>
@@ -40,17 +45,24 @@
 
   </div>
 <!-- PICTURES -->
-
+  <% if @report.photos? %>
+  <div class="report-section">
+    <h4><strong>Photos (<%= @report.photos.count %>)</strong></h4>
+    <% @report.photos.each do |photo| %>
+      <%= cl_image_tag photo.path, width: 200, height: 300, crop: :fill %>
+    <% end %>
+  </div>
+  <% end %>
 
 <!-- SIGNATURES -->
   <div class="report-section">
     <h4><strong>Signature</strong></h4>
 
-    <% if @report.signature.present? %>
+    <% if @report.signed_on.nil? %>
+      <p>Le rapport n'a pas été signé</p>
+    <% else %>
       <%= image_tag @report.signature %>
       <p> Signé le <%= @report.signed_on.strftime("%d/%m/%y à %Hh%M") %></p>
-    <% else %>
-      <p>Le rapport n'a pas été signé</p>
     <% end %>
   </div>
 

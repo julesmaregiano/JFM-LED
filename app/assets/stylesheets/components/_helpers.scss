@@ -115,10 +115,11 @@ $white-space: 20px;
   z-index: 10;
 }
 .fixed-under-top {
+  right: calc(100vw - 50% - 150px);
   position: fixed;
-  top: 70px;
-  width: 100%;
-  z-index: 10;
+  top: 7px;
+  width: 300px;
+  z-index: 1001;
 }
 .min-width {
   min-width: 200px;

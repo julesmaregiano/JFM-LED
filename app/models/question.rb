@@ -11,13 +11,8 @@ class Question < ApplicationRecord
   enum display: [:text, :check_boxes, :radio_buttons, :integer]
   enum input_type: [:option_choice_id, :numeric, :string, :boolean, :date]
 
-  def answer_for(report)
-    answer = self.answers.where(report: report).first
-    if answer.nil?
-      "Pas de réponse"
-    else
-      answer.litteral_answer
-    end
+  def answers_for(report)
+    self.answers.where(report: report).map do |answer| answer.litteral_form end
   end
 
   def has_answer?(report)

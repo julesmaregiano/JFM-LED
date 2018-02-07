@@ -63,11 +63,11 @@ companies.each_with_index do |company, index|
   end
 end
 
-puts "#{Company.all.count} entreprises crées avec un total de #{Branch.count} branches."
 Company.where(name: "Colas").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513872034/cfvrnbtt3vsxmsrowdo3.jpg")
 Company.where(name: "Vinci").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513621099/it12ozopccym0nsbx0rm.png")
 Company.where(name: "EDF").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513346869/dwb3llvaztsfnag9xbkn.jpg")
 
+puts "#{Company.all.count} entreprises crées avec un total de #{Branch.count} branches."
 
 #USERS
 
@@ -250,10 +250,6 @@ puts "Questions créées: #{Question.count}"
 Question.first(20).each do |q| ProductQuestion.create(product: Product.first, question: q) end
 
 puts "ProductQuestions: #{ProductQuestion.count}"
-
-Report.all.each do |report| report.init end
-
-puts "Réponses créées: #{Answer.count}"
 
 
 # SEPARATION DEV/PROD

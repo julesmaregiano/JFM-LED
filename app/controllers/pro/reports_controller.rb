@@ -16,9 +16,13 @@ class Pro::ReportsController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "file_name",   # Excluding ".pdf" extension.
-        template: "pro/reports/show.html.erb",
-        layout: 'pdf.html'
+        render pdf:                     "Votre Rapport",   # Excluding ".pdf" extension.
+        template:                       "shared/_report.html.erb",
+        page_size:                      'A4',
+        save_only:                      false,
+        background:                     false,                     # backround needs to be true to enable background colors to render
+        no_background:                  true,
+        encoding:                       'UTF-8'
       end
     end
   end
