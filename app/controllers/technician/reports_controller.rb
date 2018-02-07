@@ -15,6 +15,18 @@ class Technician::ReportsController < ApplicationController
   end
 
   def show
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf:                     "Votre Rapport",   # Excluding ".pdf" extension.
+        template:                       "shared/_report.html.erb",
+        page_size:                      'A4',
+        save_only:                      false,
+        background:                     false,                     # backround needs to be true to enable background colors to render
+        no_background:                  true,
+        encoding:                       'UTF-8'
+      end
+    end
   end
 
   def edit
