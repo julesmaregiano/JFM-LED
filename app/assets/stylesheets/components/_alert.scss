@@ -8,6 +8,11 @@
   color: white;
   border: 0px;
   opacity: 0.8;
+  & button {
+    position: absolute;
+    right: 10px;
+    top: 2px;
+  }
 }
 .alert-info {
   background: $anis;
