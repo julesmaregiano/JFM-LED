@@ -8,6 +8,7 @@
 
   belongs_to :foreman, optional: true
   has_one :report, dependent: :destroy
+  belongs_to :address, optional: true
   validates :user_id, presence: true
   validates :availabilities, presence: true
   belongs_to :user
@@ -48,9 +49,9 @@
     self.availabilities.of_the_day.first.user
   end
 
-  def address
-    [address1, address2, city, zipcode, country].compact.join(', ')
-  end
+  # def address
+  #   [address1, address2, city, zipcode, country].compact.join(', ')
+  # end
 
   def add_report
     if self.report.nil?
