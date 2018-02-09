@@ -7,16 +7,15 @@ function onPlaceChanged2() {
 
   console.log(components);
 
-  var haha = document.getElementById('booking_city').value;
-  console.log(haha);
-  document.getElementById('booking_address1').value = components.address;
-  document.getElementById('booking_city').value = components.city;
-  document.getElementById('booking_zipcode').value = components.zip_code;
+  document.getElementById('booking_address_attributes_city').value;
+  document.getElementById('booking_address_attributes_address1').value = components.address;
+  document.getElementById('booking_address_attributes_city').value = components.city;
+  document.getElementById('booking_address_attributes_zipcode').value = components.zip_code;
 
 
 
   if (components.country_code) {
-    var selector = '#booking_country option[value="' + components.country_code + '"]';
+    var selector = '#booking_address_attributes_country option[value="' + components.country_code + '"]';
     document.querySelector(selector).selected = true;
   }
 

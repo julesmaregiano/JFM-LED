@@ -17,6 +17,7 @@ class Pro::BookingsController < ApplicationController
     @availabilities = Availability.to_come.not_today.free_first
     @products = Product.all
     @booking = Booking.new
+    @booking.address = Address.new
   end
 
   def create
@@ -77,7 +78,7 @@ class Pro::BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit(:comment, :pdf, :foreman_id, :address1, :address2, :zipcode, :city, :country, :product_id, :surface, :reference, availability_ids: [])
+    params.require(:booking).permit(:comment, :pdf, :foreman_id, :address_id ,:address1, :address2, :zipcode, :city, :country, :product_id, :surface, :reference, availability_ids: [], address_attributes: [:address1, :address2, :zipcode, :city, :country])
   end
 
   def option_params

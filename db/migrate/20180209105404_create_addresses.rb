@@ -10,6 +10,7 @@ class CreateAddresses < ActiveRecord::Migration[5.1]
       t.string :country
       t.float :latitude
       t.float :longitude
+      t.references :booking, foreign_key: true
       t.timestamps
     end
   end

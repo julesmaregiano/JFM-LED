@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 20180209105600) do
     t.string "country"
     t.float "latitude"
     t.float "longitude"
+    t.bigint "booking_id"
+    t.index ["booking_id"], name: "index_addresses_on_booking_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -118,8 +120,6 @@ ActiveRecord::Schema.define(version: 20180209105600) do
     t.bigint "foreman_id"
     t.bigint "product_id"
     t.string "reference"
-    t.bigint "address_id"
-    t.index ["address_id"], name: "index_bookings_on_address_id"
     t.index ["foreman_id"], name: "index_bookings_on_foreman_id"
     t.index ["product_id"], name: "index_bookings_on_product_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
@@ -287,7 +287,7 @@ ActiveRecord::Schema.define(version: 20180209105600) do
   add_foreign_key "booked_product_options", "bookings"
   add_foreign_key "booked_product_options", "option_values"
   add_foreign_key "booked_product_options", "options"
-  add_foreign_key "bookings", "addresses"
+  add_foreign_key "addresses", "bookings"
   add_foreign_key "bookings", "products"
   add_foreign_key "bookings", "users"
   add_foreign_key "branches", "companies"

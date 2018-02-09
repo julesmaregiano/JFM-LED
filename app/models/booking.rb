@@ -3,18 +3,21 @@
   has_many :users, through: :availabilities
   has_many :booked_product_options, dependent: :destroy
   has_many :option_values, through: :booked_product_options, dependent: :destroy
-  belongs_to :product
-  has_attachment :pdf
 
+  belongs_to :product
   belongs_to :foreman, optional: true
-  has_one :report, dependent: :destroy
-  belongs_to :address, optional: true
+  belongs_to :user
+
   validates :user_id, presence: true
   validates :availabilities, presence: true
-  belongs_to :user
-  geocoded_by :address
-  after_create :geocode, :add_report
-  after_validation :geocode, if: :address1_changed?
+
+  has_one :address
+  has_one :report, dependent: :destroy
+
+  has_attachment :pdf
+  accepts_nested_attributes_for :address
+
+  after_create :add_report
 
   scope :of_the_day, -> { joins(:availabilities).where("date = ?", Date.current) }
   scope :to_come, -> { joins(:availabilities).where("date > ?", Date.yesterday) }
@@ -48,10 +51,6 @@
   def tech_of_the_day
     self.availabilities.of_the_day.first.user
   end
-
-  # def address
-  #   [address1, address2, city, zipcode, country].compact.join(', ')
-  # end
 
   def add_report
     if self.report.nil?
