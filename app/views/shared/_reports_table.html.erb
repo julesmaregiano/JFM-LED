@@ -25,7 +25,7 @@
           <td><%= report.created_at.strftime("%d/%m/%y") %></td>
           <td><%= report.booking.user.company.name %></td>
           <td><%= report.user.first_name + ' ' + report.user.last_name %></td>
-          <td><%= report.booking.address %></td>
+          <td><%= report.booking.address.full_address %></td>
           <td><%= report.booking.availabilities.count %> demi-journées</td>
           <td><%= report.booking.product.label %></td>
           <td><%= report.progress %> %</td>

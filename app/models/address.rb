@@ -1,5 +1,6 @@
 class Address < ApplicationRecord
-  belongs_to :booking
+  belongs_to :booking, optional: true
+  belongs_to :branch, optional: true
 
   geocoded_by :full_address
   after_validation :geocode, if: :address1_changed?

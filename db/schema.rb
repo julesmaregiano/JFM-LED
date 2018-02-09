@@ -40,7 +40,9 @@ ActiveRecord::Schema.define(version: 20180209105600) do
     t.float "latitude"
     t.float "longitude"
     t.bigint "booking_id"
+    t.bigint "branch_id"
     t.index ["booking_id"], name: "index_addresses_on_booking_id"
+    t.index ["branch_id"], name: "index_addresses_on_branch_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -288,6 +290,7 @@ ActiveRecord::Schema.define(version: 20180209105600) do
   add_foreign_key "booked_product_options", "option_values"
   add_foreign_key "booked_product_options", "options"
   add_foreign_key "addresses", "bookings"
+  add_foreign_key "addresses", "branches"
   add_foreign_key "bookings", "products"
   add_foreign_key "bookings", "users"
   add_foreign_key "branches", "companies"

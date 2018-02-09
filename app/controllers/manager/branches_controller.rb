@@ -23,6 +23,6 @@ class Manager::BranchesController < ApplicationController
   private
 
   def params_company
-    params.require(:branch).permit(:name, :city, :zipcode, :company_id)
+    params.require(:branch).permit(:name, :company_id, address_attributes: [:address1, :address2, :zipcode, :city, :country])
   end
 end
