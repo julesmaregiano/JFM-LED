@@ -34,14 +34,14 @@
             <% if current_user.technician? %>
               <%= link_to(content_tag(:i, nil, class: 'fa fa-eye'), technician_report_path(report))%>
               <% if report.signed? %>
-                <%= link_to(content_tag(:i, nil, class: 'fa fa-file-pdf-o'), technician_report_path(report, :format => :pdf))%>
+                <%= link_to(content_tag(:i, nil, class: 'fa fa-file-pdf-o'), technician_report_path(report, :format => :pdf), target: :_blank)%>
               <% else %>
                 <%= link_to(content_tag(:i, nil, class: 'fa fa-pencil'), edit_technician_report_path(report)) %>
               <% end %>
             <% elsif current_user.pro? %>
               <%= link_to(content_tag(:i, nil, class: 'fa fa-eye'), pro_report_path(report))%>
               <% if report.signed? %>
-                <%= link_to(content_tag(:i, nil, class: 'fa fa-file-pdf-o'), pro_report_path(report, format: :pdf))%>
+                <%= link_to(content_tag(:i, nil, class: 'fa fa-file-pdf-o'), pro_report_path(report, format: :pdf), target: :_blank)%>
               <% end %>
             <% end %>
           </td>
