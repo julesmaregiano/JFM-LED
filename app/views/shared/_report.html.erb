@@ -11,7 +11,7 @@
       <div>
         <h7><strong><%= @client.company.name %></strong></h7>
         <p><%= @client.branch.name %></p>
-        <p><%= @client.branch.city %>, <%= @user.branch.zipcode %></p>
+        <p><%= @client.branch.address.full_address %></p>
       </div>
     </div>
     <div class="col-xs-6 tech-company flexbox no-padding">
@@ -21,7 +21,7 @@
       <div>
         <h7><strong><%= @tech.company.name %></strong></h7>
         <p><%= @tech.branch.name %></p>
-        <p><%= @tech.branch.city %>, <%= @user.branch.zipcode %></p>
+        <p><%= @tech.branch.address.full_address %></p>
       </div>
     </div>
     <h4 class="col-xs-12 text-center"><strong>Rapport de <%= @report.product.label %></strong></h4>

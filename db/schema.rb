@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180201094315) do
+ActiveRecord::Schema.define(version: 20180209105600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,24 @@ ActiveRecord::Schema.define(version: 20180201094315) do
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  end
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "address1"
+    t.string "address2"
+    t.string "address3"
+    t.string "address4"
+    t.string "city"
+    t.string "zipcode"
+    t.string "country"
+    t.float "latitude"
+    t.float "longitude"
+    t.bigint "booking_id"
+    t.bigint "branch_id"
+    t.index ["booking_id"], name: "index_addresses_on_booking_id"
+    t.index ["branch_id"], name: "index_addresses_on_branch_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "answers", force: :cascade do |t|
@@ -271,6 +289,8 @@ ActiveRecord::Schema.define(version: 20180201094315) do
   add_foreign_key "booked_product_options", "bookings"
   add_foreign_key "booked_product_options", "option_values"
   add_foreign_key "booked_product_options", "options"
+  add_foreign_key "addresses", "bookings"
+  add_foreign_key "addresses", "branches"
   add_foreign_key "bookings", "products"
   add_foreign_key "bookings", "users"
   add_foreign_key "branches", "companies"

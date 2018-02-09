@@ -2,7 +2,12 @@
 <%= simple_form_for [@user.role, Branch.new]  do |f| %>
   <%= f.input :company_id, required: true, label: "Appartenant à l'entreprise..", collection: Company.all.to_a, label_method: lambda { |company| "#{company.name}" } %>
   <%= f.input :name, required: true %>
-  <%= f.input :city, required: true %>
-  <%= f.input :zipcode, required: true %>
+  <%= f.simple_fields_for :address, Address.new do |p|%>
+    <%= p.input :address1, required: true %>
+    <%= p.input :address2 %>
+    <%= p.input :zipcode, required: true %>
+    <%= p.input :city, required: true %>
+    <%= p.input :country, required: true  %>
+  <% end %>
   <%= f.submit %>
 <% end %>

@@ -32,7 +32,7 @@
     <div class="col-xs-12 col-md-6">
       <div class="card-container">
         <h4><strong><i class="fa fa-globe"></i>  Intervention</strong></h4>
-        <p>Addresse : <strong><%= booking.address %></strong></p>
+        <p>Addresse : <strong><%= booking.address.full_address %></strong></p>
         <p>Chef de Chantier : <strong>
           <%= booking.foreman_id? ? "#{booking.has_foreman.first_name} #{booking.has_foreman.last_name}" : "Non précisé" %>
           </strong></p>
