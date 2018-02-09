@@ -6,10 +6,15 @@ class Technician::DashboardsController < ApplicationController
     dates = Date.today.business_dates_until(Date.today + 7)
     dates.each { |d| @bookings_hash[d] = @user.availabilities.where(date: d).map { |a| a.booking }.uniq.compact }
 
-    @bookings_for_map = Booking.for_next_week_for(@user).delete_if { |booking| booking.nil? || booking.latitude.nil? }
-    @markers = Gmaps4rails.build_markers(@bookings_for_map) do |booking, marker|
-      marker.lat booking.latitude
-      marker.lng booking.longitude
+    @bookings_addresses = Booking.for_next_week_for(@user).uniq.map do |b|
+      unless b.address.latitude.nil? || b.address.longitude.nil?
+        b.address
+      end
     end
+    @markers = Gmaps4rails.build_markers(@bookings_addresses) do |address, marker|
+      marker.lat address.latitude
+      marker.lng address.longitude
+    end
+
   end
 end
