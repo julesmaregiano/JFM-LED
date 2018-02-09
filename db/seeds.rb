@@ -1,5 +1,7 @@
 #COMMON STUFF FOR DEV AND PROD
 
+Address.destroy_all
+puts "Addresses destroyed"
 Availability.destroy_all
 puts "Availability destroyed"
 Answer.destroy_all
@@ -45,29 +47,42 @@ puts "BookedProductOption destroyed"
 
 
 Company.create(name: "Particulier", photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1515313237/house-with-garden_1f3e1_gsndth.png")
-Branch.create(company_id: Company.last.id, name: "Particulier")
+Branch.create(company: Company.last, name: "Particulier")
 Company.create(name: "JFM Conseils", photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513872039/vcekpepvnrcjqtqfmgno.png")
-Branch.create(company_id: Company.last.id, name: "Les Ulis", city: "Les Ulis", zipcode: "91400")
-Branch.create(company_id: Company.last.id, name: "Compiègne", city: "Compiègne", zipcode: "60200")
+Branch.create(company: Company.last, name: "Les Ulis", city: "Les Ulis", zipcode: "91400")
+Address.create(address1: "1 rue de la Terre de Feu", zipcode: "91", city: "Les Ulis" , country: "France", branch: Branch.last)
+Branch.create(company: Company.last, name: "Compiègne", city: "Compiègne", zipcode: "60200")
+Address.create(address1: "20 Rue du Fonds Pernant", address2: "Immeuble Thalassa, ZAC des Mercières" , zipcode: "60200", city: "Compiègne" , country: "France", branch: Branch.last)
 
 prenoms = ["Jean", "James", "Jamel", "Michel"]
 noms = ["Carambole", "Duguesclin", "Durand", "Ramirez"]
 companies = ["Colas", "Vinci", "EDF"]
-companies.each_with_index do |company, index|
-  new_company = Company.create(name: company)
-  2.times do
-    new_branch = Branch.create(company_id: new_company.id, name: "Branche #{index + 1}")
-    3.times do
-      Foreman.create(first_name: prenoms.sample, last_name: noms.sample, branch_id: new_branch.id, phone: "06 47 05 11 44")
-    end
-  end
-end
 
-Company.where(name: "Colas").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513872034/cfvrnbtt3vsxmsrowdo3.jpg")
-Company.where(name: "Vinci").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513621099/it12ozopccym0nsbx0rm.png")
-Company.where(name: "EDF").update(photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513346869/dwb3llvaztsfnag9xbkn.jpg")
+colas = Company.create(name: "Colas", photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513872034/cfvrnbtt3vsxmsrowdo3.jpg")
+Branch.create(company: colas, name: "Branche Aulnay")
+Address.create(branch: Branch.last, address1: "10 r Nicolas Robert", zipcode: "93600", city: "Aulnay-Sous-Bois" , country: "France" )
+Foreman.create(first_name: prenoms.sample, last_name: noms.sample, branch: Branch.last, phone: "06 47 05 11 44")
+Branch.create(company: colas, name: "Branche Aulnay")
+Address.create(branch: Branch.last, address1: "110 Rue Gabriel Péri", zipcode: "94240", city: "L'Haÿ-les-Roses" , country: "France" )
+Foreman.create(first_name: prenoms.sample, last_name: noms.sample, branch: Branch.last, phone: "06 47 05 11 44")
 
-puts "#{Company.all.count} entreprises crées avec un total de #{Branch.count} branches."
+edf = Company.create(name: "EDF", photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513621099/it12ozopccym0nsbx0rm.png")
+Branch.create(company: edf, name: "Boutique Montmartre")
+Address.create(branch: Branch.last, address1: "67 Rue Pajol", zipcode: "75018", city: "Paris" , country: "France" )
+Foreman.create(first_name: prenoms.sample, last_name: noms.sample, branch: Branch.last, phone: "06 47 05 11 44")
+Branch.create(company: edf, name: "Boutique Ivry sur Seine")
+Address.create(branch: Branch.last, address1: "7 Avenue de la République", zipcode: "94205", city: "Ivry-sur-Seine" , country: "France" )
+Foreman.create(first_name: prenoms.sample, last_name: noms.sample, branch: Branch.last, phone: "06 47 05 11 44")
+
+vinci = Company.create(name: "Vinci",photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513346869/dwb3llvaztsfnag9xbkn.jpg")
+Branch.create(company: vinci, name: "Vinci Boulogne")
+Address.create(branch: Branch.last, address1: "191 Rue Gallieni", zipcode: "92100", city: "Boulogne-Billancourt" , country: "France" )
+Foreman.create(first_name: prenoms.sample, last_name: noms.sample, branch: Branch.last, phone: "06 47 05 11 44")
+Branch.create(company: vinci, name: "Vinci La Défense")
+Address.create(branch: Branch.last, address1: "64 Avenue de Colmar", zipcode: "92500", city: "Rueil-Malmaison" , country: "France" )
+Foreman.create(first_name: prenoms.sample, last_name: noms.sample, branch: Branch.last, phone: "06 47 05 11 44")
+
+puts "#{Company.all.count} entreprises crées avec un total de #{Branch.count} branches soit #{Address.count}."
 
 #USERS
 
@@ -87,8 +102,8 @@ next_90 = (-2..90).to_a
 next_90.each do |numero|
   User.all.where(role: 2).each do |user|
     date = numero.business_days.from_now
-    Availability.find_or_create_by(user_id: user.id, date: Date.new(date.year, date.month, date.day), half: "matin" )
-    Availability.find_or_create_by(user_id: user.id, date: Date.new(date.year, date.month, date.day), half: "aprem" )
+    Availability.find_or_create_by(user: user, date: Date.new(date.year, date.month, date.day), half: "matin" )
+    Availability.find_or_create_by(user: user, date: Date.new(date.year, date.month, date.day), half: "aprem" )
   end
 end
 puts "#{Availability.all.size} Availabilities créées."
