@@ -3,6 +3,7 @@
   has_many :users, through: :availabilities
   has_many :booked_product_options, dependent: :destroy
   has_many :option_values, through: :booked_product_options, dependent: :destroy
+  delegate :branch, to: :user
 
   belongs_to :product
   belongs_to :foreman, optional: true
@@ -24,7 +25,7 @@
   scope :to_come, -> { joins(:availabilities).where("date > ?", Date.yesterday) }
   scope :soon, -> { joins(:availabilities).where("date < ?", Date.current + 7) }
   scope :status, -> (status) { joins(:availabilities).where("status = ?", status)}
-  scope :of, -> (user) { joins(:availabilities).where("user = ?", user) }
+  scope :branch, -> (branch) { joins(:user).where(branch: branch) }
 
   def self.status_is(status)
     self.status(status).uniq
