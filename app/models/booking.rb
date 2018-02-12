@@ -20,6 +20,7 @@
   after_create :add_report
 
   scope :of_the_day, -> { joins(:availabilities).where("date = ?", Date.current) }
+  scope :for_this_branch, -> { joins(:availabilities).where("date = ?", Date.current) }
   scope :to_come, -> { joins(:availabilities).where("date > ?", Date.yesterday) }
   scope :soon, -> { joins(:availabilities).where("date < ?", Date.current + 7) }
   scope :status, -> (status) { joins(:availabilities).where("status = ?", status)}
