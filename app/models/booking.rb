@@ -25,7 +25,7 @@
   scope :to_come, -> { joins(:availabilities).where("date > ?", Date.yesterday) }
   scope :soon, -> { joins(:availabilities).where("date < ?", Date.current + 7) }
   scope :status, -> (status) { joins(:availabilities).where("status = ?", status)}
-  scope :branch, -> (branch) { joins(:user).where(branch: branch) }
+  scope :branch, -> (branch) { joins(:user).where("branch_id = ?", branch.id) }
 
   def self.status_is(status)
     self.status(status).uniq
