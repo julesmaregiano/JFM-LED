@@ -27,6 +27,7 @@
   scope :status, -> (status) { joins(:availabilities).where("status = ?", status)}
   scope :branch, -> (branch) { joins(:user).where("branch_id = ?", branch.id) }
 
+
   def self.status_is(status)
     self.status(status).uniq
   end

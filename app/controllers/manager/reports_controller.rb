@@ -3,7 +3,7 @@ class Manager::ReportsController < ApplicationController
   before_action :params_report, only: [:show, :edit]
 
   def index
-    @reports = Report.all.sort_by(&:created_at) # car un seul diagnosticien pour l'instant
+    @reports = Report.all.sort_by(&:created_at).map do |r| r if r.booking.availabilities.first.user.branch == @user.branch end.compact # car un seul diagnosticien pour l'instant
   end
 
   def show
