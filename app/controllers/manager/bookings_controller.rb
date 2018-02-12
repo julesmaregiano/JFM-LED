@@ -9,10 +9,10 @@ class Manager::BookingsController < ApplicationController
     @user = current_user
     @booking = Booking.find(params[:id])
     @availabilities = @booking.availabilities.order(date: 'ASC')
-    unless @booking.latitude.nil?
+    unless @booking.address.latitude.nil?
       @markers = Gmaps4rails.build_markers(@booking) do |booking, marker|
-        marker.lat booking.latitude
-        marker.lng booking.longitude
+        marker.lat booking.address.latitude
+        marker.lng booking.address.longitude
       end
     end
   end

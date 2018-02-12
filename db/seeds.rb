@@ -46,8 +46,8 @@ puts "BookedProductOption destroyed"
 #COMPANIES & BRANCHES & FOREMEN
 
 
-Company.create(name: "Particulier", photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1515313237/house-with-garden_1f3e1_gsndth.png")
-Branch.create(company: Company.last, name: "Particulier")
+# Company.create(name: "Particulier", photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1515313237/house-with-garden_1f3e1_gsndth.png")
+# Branch.create(company: Company.last, name: "Particulier")
 Company.create(name: "JFM Conseils", photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513872039/vcekpepvnrcjqtqfmgno.png")
 Branch.create(company: Company.last, name: "Les Ulis", city: "Les Ulis", zipcode: "91400")
 Address.create(address1: "1 rue de la Terre de Feu", zipcode: "91", city: "Les Ulis" , country: "France", branch: Branch.last)
@@ -86,13 +86,15 @@ puts "#{Company.all.count} entreprises crées avec un total de #{Branch.count} b
 
 #USERS
 
-particulier = User.create!(email: "particulier@led.fr", password: "123soleil", first_name: "Sarah", last_name: "Particulier", phone:"06 11 22 33 44", role:0, company: Company.where(name: "Particulier").first, branch: Branch.where(name: "Particulier").first)
+# particulier = User.create!(email: "particulier@led.fr", password: "123soleil", first_name: "Sarah", last_name: "Particulier", phone:"06 11 22 33 44", role:0, company: Company.where(name: "Particulier").first, branch: Branch.where(name: "Particulier").first)
 pro = User.create!(email: "pro@led.fr", password: "123soleil", first_name: "Marcel", last_name: "Pro", phone:"06 11 22 33 44", role:1, company: Company.where(name: "Colas").first, branch: Company.where(name: "Colas").first.branches.first)
 pro2 = User.create!(email: "pro2@led.fr", password: "123soleil", first_name: "Alexandra", last_name: "Pro", phone:"06 11 22 33 44", role:1, company: Company.where(name: "EDF").first, branch: Company.where(name: "EDF").first.branches.first)
 pro3 = User.create!(email: "pro3@led.fr", password: "123soleil", first_name: "Ivan", last_name: "Pro", phone:"06 11 22 33 44", role:1, company: Company.where(name: "Vinci").first, branch: Company.where(name: "Vinci").first.branches.first)
 technician = User.create!(email: "tech@led.fr", password: "123soleil", first_name: "Marie", last_name: "Tech", phone:"06 11 22 33 44", role:2, company: Company.where(name: "JFM Conseils").first, branch: Company.where(name: "JFM Conseils").first.branches.first)
 technician2 = User.create!(email: "tech2@led.fr", password: "123soleil", first_name: "Tom", last_name: "Tech", phone:"06 11 22 33 44", role:2, company: Company.where(name: "JFM Conseils").first, branch: Company.where(name: "JFM Conseils").first.branches.first)
 manager = User.create!(email: "manager@led.fr", password: "123soleil", first_name: "Fabrice", last_name: "Manager", phone:"06 11 22 33 44", role:3, company: Company.where(name: "JFM Conseils").first, branch: Company.where(name: "JFM Conseils").first.branches.first)
+nopimanager = User.create!(email: "nopimanager@led.fr", password: "123soleil", first_name: "Manager", last_name: "DeNopi", phone:"06 11 22 33 44", role:3, company: Company.where(name: "JFM Conseils").first, branch: Company.where(name: "JFM Conseils").first.branches.second)
+nopitech = User.create!(email: "nopitech@led.fr", password: "123soleil", first_name: "Nopi", last_name: "Tech", phone:"06 11 22 33 44", role:2, company: Company.where(name: "JFM Conseils").first, branch: Company.where(name: "JFM Conseils").first.branches.second)
 admin = User.create!(email: "admin@led.fr", password: "123soleil", first_name: "Ad", last_name: "Min", phone:"06 11 22 33 44", role:4, company: Company.last, branch: Branch.last)
 puts "#{User.all.size} Users créés."
 
@@ -158,7 +160,7 @@ puts "#{CompanyProduct.all.size} CompanyProducts créés"
 
 #BOOKINGS
 
-clients = [particulier, pro, pro2, pro3]
+clients = [pro, pro2, pro3]
 dates =[Date.today, Date.today + 1, Date.today + 4,Date.today + 5, Date.today + 7, Date.today + 12 ]
 
 
