@@ -13,7 +13,7 @@
     <div class="card-middle no-margin flexbox-vertical align-center">
       <h3 class="no-margin"><%= booking.user.pro? ? booking.user.company.name : "Particulier" %></h3>
       <p><%= booking.user.first_name %> <%= booking.user.last_name %></p>
-      <p><%= booking.address1 %> - <%= booking.city %></p>
+      <p><%= booking.address.address1 %> - <%= booking.address.city %></p>
     </div>
   </div>
 
@@ -23,7 +23,7 @@
       <%= link_to technician_booking_path(booking) do %>
         <i class="card-icon fa fa-eye" aria-hidden="true"></i>
       <% end %>
-      <%= link_to "http://waze.to/?ll=#{booking.latitude},#{booking.longitude}&navigate=yes" do %>
+      <%= link_to "http://waze.to/?ll=#{booking.address.latitude},#{booking.address.longitude}&navigate=yes" do %>
         <i class="card-icon fa fa-car" aria-hidden="true"></i>
       <% end %>
       <%= link_to "tel:#{booking.user.phone}" do %>

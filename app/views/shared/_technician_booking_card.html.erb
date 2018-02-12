@@ -19,7 +19,7 @@
       <%= link_to technician_booking_path(booking) do %>
         <i class="card-icon fa fa-eye" aria-hidden="true"></i>
       <% end %>
-      <%= link_to "http://waze.to/?ll=#{booking.latitude},#{booking.longitude}&navigate=yes" do %>
+      <%= link_to "http://waze.to/?ll=#{booking.address.latitude},#{booking.address.longitude}&navigate=yes" do %>
         <i class="card-icon fa fa-car" aria-hidden="true"></i>
       <% end %>
       <%= link_to "tel:#{booking.user.phone}" do %>
