@@ -12,7 +12,7 @@
   validates :user_id, presence: true
   validates :availabilities, presence: true
 
-  has_one :address
+  has_one :address, dependent: :destroy
   has_one :report, dependent: :destroy
 
   has_attachment :pdf
