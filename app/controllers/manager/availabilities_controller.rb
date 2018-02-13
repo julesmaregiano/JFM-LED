@@ -3,7 +3,7 @@ class Manager::AvailabilitiesController < ApplicationController
   def index
     @user = current_user
     @techs = User.where(role: 2, branch: current_user.branch)
-    @availabilities = Availability.to_come
+    @availabilities = Availability.to_come.includes(:user)
   end
 
   def create
