@@ -75,12 +75,13 @@ Address.create(branch: Branch.last, address1: "7 Avenue de la République", zipc
 Foreman.create(first_name: prenoms.sample, last_name: noms.sample, branch: Branch.last, phone: "06 47 05 11 44")
 
 vinci = Company.create(name: "Vinci",photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513346869/dwb3llvaztsfnag9xbkn.jpg")
-Branch.create(company: vinci, name: "Vinci Boulogne")
-Address.create(branch: Branch.last, address1: "191 Rue Gallieni", zipcode: "92100", city: "Boulogne-Billancourt" , country: "France" )
+Branch.create(company: vinci, name: "Vinci Roubaix")
+Address.create(branch: Branch.last, address1: "106 Quai de Boulogne", zipcode: "59100", city: "Roubaix" , country: "France" )
 Foreman.create(first_name: prenoms.sample, last_name: noms.sample, branch: Branch.last, phone: "06 47 05 11 44")
-Branch.create(company: vinci, name: "Vinci La Défense")
-Address.create(branch: Branch.last, address1: "64 Avenue de Colmar", zipcode: "92500", city: "Rueil-Malmaison" , country: "France" )
+Branch.create(company: vinci, name: "Vinci Energies Nord")
+Address.create(branch: Branch.last, address1: "41 Avenue de l'Harmonie", zipcode: "59650", city: "Villeneuve-d'Ascq" , country: "France" )
 Foreman.create(first_name: prenoms.sample, last_name: noms.sample, branch: Branch.last, phone: "06 47 05 11 44")
+
 
 puts "#{Company.all.count} entreprises crées avec un total de #{Branch.count} branches soit #{Address.count}."
 

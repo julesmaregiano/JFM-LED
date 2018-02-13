@@ -14,7 +14,11 @@ class Pro::BookingsController < ApplicationController
   end
 
   def new
-    @availabilities = Availability.to_come.not_today.free_first
+    if ["50", "14", "61", "27", "76", "80", "60", "62", "59", "02", "10", "51", "08", "55", "52", "54", "57", "88", "67"].include? @user.branch.address.zipcode[0..1]
+      @availabilities = Availability.to_come.not_today.free_first.where(user: User.where(branch: Branch.second))
+    else
+      @availabilities = Availability.to_come.not_today.free_first.where(user: User.where(branch: Branch.first))
+    end
     @products = Product.all
     @booking = Booking.new
     @booking.address = Address.new

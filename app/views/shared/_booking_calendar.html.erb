@@ -13,16 +13,28 @@
           <% morning_availability = availabilities.find { |availability| availability.half == "matin" } %>
           <% unless morning_availability.nil? %>
             <div class="btn-calendar btn-calendar-<%= morning_availability.status %>" data-availability-id="<%= morning_availability.id %>" >
-              <%= morning_availability.half %>
-              <%= morning_availability.status %>
+              <% morning_availabilities = availabilities.map { |a| a if a.matin? && a.free? }.compact %>
+              <% if morning_availabilities.count == 0 %>
+                <p>Complet</p>
+              <% elsif morning_availabilities.count == 1 %>
+                <p>Plus que <strong>1</strong> dispo</p>
+              <% else %>
+                <p>Disponible</p>
+              <% end %>
             </div>
           <% end %>
 
           <% afternoon_availability = availabilities.find { |availability| availability.half == "aprem" } %>
           <% unless afternoon_availability.nil? %>
             <div class="btn-calendar btn-calendar-<%= afternoon_availability.status %>" data-availability-id="<%= afternoon_availability.id %>" >
-              <%= afternoon_availability.half %>
-              <%= afternoon_availability.status %>
+              <% afternoon_availabilities = availabilities.map { |a| a if a.aprem? && a.free? }.compact %>
+              <% if afternoon_availabilities.count == 0 %>
+                <p>Complet</p>
+              <% elsif afternoon_availabilities.count == 1 %>
+                <p>Plus que <strong>1</strong> dispo</p>
+              <% else %>
+                <p>Disponible</p>
+              <% end %>
             </div>
           <% end %>
 
