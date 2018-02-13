@@ -38,7 +38,7 @@ class Pro::BookingsController < ApplicationController
         BookedProductOption.find_or_create_by(booking_id: @booking.id, option_value_id: option_value_id)
       end
       get_custom_value
-      redirect_to pro_dashboard_path(@user)
+      redirect_to pro_dashboard_path
     else
       render :new
     end

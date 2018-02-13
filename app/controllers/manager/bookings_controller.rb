@@ -21,7 +21,7 @@ class Manager::BookingsController < ApplicationController
     @user = current_user
     @techs = User.where(role: 2, branch: current_user.branch)
     @availabilities = Availability.all.where(user: User.where(branch: current_user.branch))
-    @bookings = Booking.to_come.status_is(1).map do |b| b if b.availabilities.first.user.branch == @user.branch end.compact
+    @bookings = Booking.status_is(1).map do |b| b if b.availabilities.first.user.branch == @user.branch end.compact
   end
 
   def update
@@ -29,7 +29,14 @@ class Manager::BookingsController < ApplicationController
     @availabilities = Availability.all
     @booking = Booking.find(params[:id])
     old_availabilities = @booking.availabilities
-    if old_availabilities.first.pending? && old_availabilities.update(status: "free") && @booking.update(availabilities_params)
+    binding.pry
+    if params[:booking].nil?
+      # Si l'user clique sur "Update" sans avoir sélectionné de date(s), il faut lui refournir de quoi charger l'edit.
+      @techs = User.where(role: 2, branch: current_user.branch)
+      @bookings = Booking.status_is(1).map do |b| b if b.availabilities.first.user.branch == @user.branch end.compact
+      @availabilities = Availability.all.where(user: User.where(branch: current_user.branch))
+      render :edit
+    elsif old_availabilities.first.pending? && old_availabilities.update(status: "free") && @booking.update(availabilities_params)
       @booking.availabilities.update(status: "booked")
       redirect_to manager_planning_path
     elsif old_availabilities.first.booked? && @booking.update(availabilities_params)
