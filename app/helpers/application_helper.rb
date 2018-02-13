@@ -1,6 +1,5 @@
 module ApplicationHelper
 
-
   def date_in_futur(date)
     (Date.current <=> date) < 1
   end

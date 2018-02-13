@@ -2,7 +2,7 @@ class Manager::BookingsController < ApplicationController
 
   def index
     @user = current_user
-    @bookings = Booking.all.sort_by(&:created_at)
+    @bookings = Booking.all.sort_by(&:created_at).map do |b| b if b.availabilities.first.user.branch == @user.branch end.compact
   end
 
   def show
@@ -19,9 +19,9 @@ class Manager::BookingsController < ApplicationController
 
   def edit
     @user = current_user
-    @techs = User.where(role: 2)
-    @availabilities = Availability.all
-    @bookings = Booking.to_come.status_is(1)
+    @techs = User.where(role: 2, branch: current_user.branch)
+    @availabilities = Availability.all.where(user: User.where(branch: current_user.branch))
+    @bookings = Booking.to_come.status_is(1).map do |b| b if b.availabilities.first.user.branch == @user.branch end.compact
   end
 
   def update
@@ -39,6 +39,8 @@ class Manager::BookingsController < ApplicationController
       render :edit
     end
   end
+
+  private
 
   def availabilities_params
     params.require(:booking).permit(availability_ids: [])

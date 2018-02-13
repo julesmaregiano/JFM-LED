@@ -4,7 +4,7 @@ class Technician::DashboardsController < ApplicationController
     @user = current_user
     @bookings_hash = {}
     dates = Date.today.business_dates_until(Date.today + 7)
-    dates.each { |d| @bookings_hash[d] = @user.availabilities.where(date: d).map { |a| a.booking }.uniq.compact }
+    dates.each { |d| @bookings_hash[d] = @user.availabilities.where(date: d).includes(:booking).map { |a| a.booking }.uniq.compact }
 
     @bookings_addresses = @bookings_hash.values.flatten.uniq.map do |b|
       unless b.address.latitude.nil? || b.address.longitude.nil?

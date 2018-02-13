@@ -59,7 +59,7 @@
     <h4><strong>Signature</strong></h4>
 
     <% if @report.signed_on.nil? %>
-      <p>Le rapport n'a pas été signé</p>
+      <p>Si le PV n'est pas retourné signé par le client signé dans la semaine, il sera considéré comme validé.</p>
     <% else %>
       <%= image_tag @report.signature %>
       <p> Signé le <%= @report.signed_on.strftime("%d/%m/%y à %Hh%M") %></p>
