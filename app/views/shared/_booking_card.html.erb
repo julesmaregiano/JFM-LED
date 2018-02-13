@@ -2,6 +2,7 @@
 <div class="card flexbox">
   <div class="flexbox card-left">
     <div class="card-logo">
+      <%= render "shared/dates_card", availabilities: booking.availabilities %>
       <% unless technician.company.photo.nil? %>
         <% if @user.pro? || @user.particulier? %>
           <%= cl_image_tag technician.company.photo.public_id, height: 110, width: 110, crop: :pad, class: "card-logo" %>
@@ -9,6 +10,28 @@
           <%= cl_image_tag booking.user.company.photo.public_id, height: 110, width: 110, crop: :pad, class: "card-logo" %>
         <% end %>
       <% end %>
+      <div>
+        <div class="card-links flex-horizontal">
+          <% unless booking.foreman.nil? %>
+            <%= link_to "tel:#{booking.foreman.phone}" do %>
+              <i class="card-icon fa fa-phone" aria-hidden="true"></i>
+            <% end %>
+          <% end %>
+          <% if @user.manager? %>
+            <%= link_to manager_booking_path(booking) do %>
+              <i class="card-icon fa fa-eye" aria-hidden="true"></i>
+            <% end %>
+            <% elsif @user.technician? %>
+              <%= link_to technician_booking_path(booking) do %>
+                <i class="card-icon fa fa-eye" aria-hidden="true"></i>
+              <% end %>
+            <% elsif @user.pro? %>
+              <%= link_to pro_booking_path(booking) do %>
+              <i class="card-icon fa fa-eye" aria-hidden="true"></i>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
     </div>
 
     <% if @user.pro? || @user.particulier? %>
@@ -28,30 +51,6 @@
         <p>Statut de la demande : <strong class="<%= booking.availabilities.first.status %>-color"><%= booking.availabilities.first.status %></strong></p>
       </div>
     <% end %>
-  </div>
-
-  <div class="card-right">
-    <%= render "shared/dates_card", availabilities: booking.availabilities %>
-    <div class="card-links flex-horizontal">
-      <% unless booking.foreman.nil? %>
-        <%= link_to "tel:#{booking.foreman.phone}" do %>
-          <i class="card-icon fa fa-phone" aria-hidden="true"></i>
-        <% end %>
-      <% end %>
-      <% if @user.manager? %>
-        <%= link_to manager_booking_path(booking) do %>
-          <i class="card-icon fa fa-eye" aria-hidden="true"></i>
-        <% end %>
-        <% elsif @user.technician? %>
-          <%= link_to technician_booking_path(booking) do %>
-            <i class="card-icon fa fa-eye" aria-hidden="true"></i>
-          <% end %>
-        <% elsif @user.pro? %>
-          <%= link_to pro_booking_path(booking) do %>
-          <i class="card-icon fa fa-eye" aria-hidden="true"></i>
-        <% end %>
-      <% end %>
-    </div>
   </div>
 
 </div>
