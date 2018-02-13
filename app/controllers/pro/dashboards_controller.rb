@@ -1,7 +1,7 @@
 class Pro::DashboardsController < ApplicationController
   def show
     @user = current_user
-    @bookings = Booking.to_come.where(user_id: @user.id).uniq
+    @bookings = Booking.to_come.where(user_id: @user.id).includes(:address, :availabilities, :foreman).uniq
     @bookings_addresses = Booking.to_come.where(user_id: @user.id).uniq.map do |b|
       unless b.address.latitude.nil? || b.address.longitude.nil?
         b.address
