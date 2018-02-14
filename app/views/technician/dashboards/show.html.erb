@@ -4,10 +4,10 @@
   <div class="dashboard-content overflox-horizontal-hidden">
     <div class="padding-box">
       <div class="row">
-        <div class= "hidden-xs col-md-12 col-lg-5 col-xl-4 card-container" id="map" style="height: calc(100vh - 110px);"></div>
+        <div class= "col-md-12 col-lg-5 col-xl-4 card-container" id="map" style="height: calc(100vh - 110px);"></div>
         <div class="col-xs-12 col-lg-7 col-xl-8">
           <div class="card-container">
-            <h4><strong>Vos prochaines détections</strong></h4>
+            <h4><strong>Bonjour <%= current_user.first_name %>, </strong> voilà tes prochaines missions </h4>
 
             <% @bookings_hash.each do |date, bookings|%>
 
