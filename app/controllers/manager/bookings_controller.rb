@@ -29,7 +29,6 @@ class Manager::BookingsController < ApplicationController
     @availabilities = Availability.all
     @booking = Booking.find(params[:id])
     old_availabilities = @booking.availabilities
-    binding.pry
     if params[:booking].nil?
       # Si l'user clique sur "Update" sans avoir sélectionné de date(s), il faut lui refournir de quoi charger l'edit.
       @techs = User.where(role: 2, branch: current_user.branch)
