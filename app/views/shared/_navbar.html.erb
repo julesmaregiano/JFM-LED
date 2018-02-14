@@ -3,34 +3,22 @@
     <%= image_tag "jfm-logo.png", class: "logo" %>
   <% end %>
 
-  <div class="navbar-wagon-right hidden-xs hidden-sm">
+  <div class="navbar-wagon-right">
     <% if user_signed_in? %>
-      <% if @user.technician? %>
-        <%= link_to "Tableau de bord", technician_dashboard_path, class: "navbar-wagon-item navbar-wagon-link" %>
-      <% elsif @user.particulier? %>
-        <%= link_to "Tableau de bord", particulier_dashboard_path, class: "navbar-wagon-item navbar-wagon-link" %>
-      <% elsif @user.pro? %>
-        <%= link_to "+ Réserver une détection", new_pro_booking_path, class: "btn-slim flexbox" %>
-      <% elsif @user.manager? %>
-        <%= link_to "Tableau de bord", manager_dashboard_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <% if @user.pro? %>
+        <div class="hidden-xs hidden-sm">
+          <%= link_to "Réserver", new_pro_booking_path, class: "btn-slim flexbox" %>
+        </div>
       <% end %>
-    <% else %>
-      <%= link_to "Bienvenue", '/', class: "navbar-wagon-item navbar-wagon-link" %>
-      <%= link_to "Détection", '/detection', class: "navbar-wagon-item navbar-wagon-link" %>
-      <%= link_to "Diagnostic", '/diagnostic', class: "navbar-wagon-item navbar-wagon-link" %>
-      <%= link_to "La société", '/societe', class: "navbar-wagon-item navbar-wagon-link" %>
-      <%= link_to "Se connecter", new_user_session_path, class: "navbar-wagon-item navbar-wagon-link btn-slim flexbox" %>
-    <% end %>
 
-    <!-- Profile picture with dropdown list -->
-    <% if user_signed_in? %>
       <div class="navbar-wagon-item">
         <div class="dropdown">
-          <%= cl_image_tag @user.company.photo.path, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", 'data-toggle': "dropdown", height: 65, width: 65, crop: :pad %>
+          <i class="fa fa-bars dropdown-toggle hidden-md hidden-lg" data-toggle="dropdown"></i>
+          <%= cl_image_tag @user.company.photo.path, class: "avatar dropdown-toggle hidden-xs hidden-sm", id: "navbar-wagon-menu", 'data-toggle': "dropdown", height: 65, width: 65, crop: :pad %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-              <li><%= render "shared/navbar_button", text: "Tableau de bord", icon: "eye", link: [@user.role.to_sym, :dashboard]%></li>
-              <li><%= render "shared/navbar_button", text: "Bookings", icon: "list", link: [@user.role.to_sym, :bookings] %></li>
-              <li><%= render "shared/navbar_button", text: "Rapports", icon: "folder-open", link: [@user.role.to_sym, :reports] %></li>
+            <li><%= render "shared/navbar_button", text: "Tableau de bord", icon: "eye", link: [@user.role.to_sym, :dashboard]%></li>
+            <li><%= render "shared/navbar_button", text: "Bookings", icon: "list", link: [@user.role.to_sym, :bookings] %></li>
+            <li><%= render "shared/navbar_button", text: "Rapports", icon: "folder-open", link: [@user.role.to_sym, :reports] %></li>
             <% if @user.technician? %>
               <li><%= render "shared/navbar_button", text: "Disponibilités", icon: "calendar", link: [@user.role.to_sym, :availabilities] %></li>
               <li><%= render "shared/navbar_button", text: "Clients", icon: "group", link: [@user.role.to_sym, :users]%></li>
@@ -40,65 +28,20 @@
             <% end %>
               <li><%= render "shared/navbar_button", text: "Profil", icon: "user", link: [@user.role.to_sym, @user] %></li>
               <li>
-                <%= link_to destroy_user_session_path, method: :delete do %>
-                  <i class="fa fa-sign-out" aria-hidden="true"></i>  Se déconnecter
-                <% end %>
-              </li>
-
-          </ul>
-        </div>
-      </div>
-    <% end %>
-  </div>
-
-    <!-- Dropdown appearing on mobile only -->
-  <div class="navbar-wagon-item hidden-md hidden-lg">
-    <div class="dropdown">
-      <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
-      <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-        <% if user_signed_in? %>
-          <% if @user.particulier? %>
-            <li><%= render "shared/navbar_button", text: "Tableau de bord", icon: "eye", link: particulier_dashboard_path %></li>
-            <li><%= render "shared/navbar_button", text: "Bookings", icon: "list", link: particulier_bookings_path%></li>
-            <li><%= render "shared/navbar_button", text: "Informations", icon: "info", link: particulier_infos_path %></li>
-            <li><%= render "shared/navbar_button", text: "Mon profil", icon: "user", link: particulier_user_path(@user)%></li>
-          <% elsif @user.pro? %>
-            <li><%= render "shared/navbar_button", text: "Tableau de bord", icon: "eye", link: pro_dashboard_path %></li>
-            <li><%= render "shared/navbar_button", text: "Bookings", icon: "list", link: pro_bookings_path%></li>
-            <li><%= render "shared/navbar_button", text: "Rapports", icon: "folder-open", link: pro_reports_path%></li>
-            <li><%= render "shared/navbar_button", text: "Profil", icon: "user", link: pro_user_path(@user)%></li>
-          <% elsif @user.technician? %>
-            <li><%= render "shared/navbar_button", text: "Tableau de bord", icon: "eye", link: technician_dashboard_path %></li>
-            <li><%= render "shared/navbar_button", text: "Disponibilités", icon: "calendar", link: technician_availabilities_path %></li>
-            <li><%= render "shared/navbar_button", text: "Bookings", icon: "list", link: technician_bookings_path%></li>
-            <li><%= render "shared/navbar_button", text: "Rapports", icon: "folder-open", link: technician_reports_path%></li>
-            <li><%= render "shared/navbar_button", text: "Clients", icon: "group", link: technician_users_path%></li>
-            <li><%= render "shared/navbar_button", text: "Profil", icon: "user", link: technician_user_path(@user)%></li>
-          <% elsif @user.manager? %>
-            <li><%= render "shared/navbar_button", text: "Tableau de bord", icon: "eye", link: manager_dashboard_path %></li>
-            <li><%= render "shared/navbar_button", text: "Mon équipe", icon: "calendar", link: manager_availabilities_path %></li>
-            <li><%= render "shared/navbar_button", text: "Planning", icon: "calendar-check-o", link: manager_planning_path %></li>
-            <li><%= render "shared/navbar_button", text: "Bookings", icon: "list", link: manager_bookings_path%></li>
-            <li><%= render "shared/navbar_button", text: "Rapports", icon: "folder-open", link: manager_reports_path%></li>
-            <li><%= render "shared/navbar_button", text: "Clients", icon: "group", link: manager_users_path%></li>
-            <li><%= render "shared/navbar_button", text: "Profil", icon: "user", link: manager_user_path(@user)%></li>
-          <% end %>
-            <li>
               <%= link_to destroy_user_session_path, method: :delete do %>
                 <i class="fa fa-sign-out" aria-hidden="true"></i>  Se déconnecter
               <% end %>
             </li>
-        <% else %>
-          <li>
-            <%= link_to new_user_session_path do %>
-              <i class="fa fa-sign-in" aria-hidden="true"></i>  Se connecter
-            <% end %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-
-
+          </ul>
+        </div>
+      </div>
+    <% else %>
+      <%= link_to "Bienvenue", '/', class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to "Détection", '/detection', class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to "Diagnostic", '/diagnostic', class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to "La société", '/societe', class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to "Se connecter", new_user_session_path, class: "navbar-wagon-item navbar-wagon-link btn-slim flexbox" %>
+    <% end %>
   </div>
 </div>
 
