@@ -1,6 +1,5 @@
 <% dates = availabilities.map do |a| a.date end.uniq.sort %>
 <div class="card-date text-center">
-  <p><%= dates.first.strftime("%d/%m/%y") %></p>
-  <p><%= localize(dates.first, "%d/%m/%y") %></p>
+  <p><%= localize(dates.first, format: "%a %m %b") %></p>
   <p style="font-size: 11px"><%= dates.count > 1 ? "+ #{dates.count - 1 } autres dates" : "" %></p>
 </div>
