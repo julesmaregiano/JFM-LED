@@ -28,33 +28,17 @@
         <div class="dropdown">
           <%= cl_image_tag @user.company.photo.path, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", 'data-toggle': "dropdown", height: 65, width: 65, crop: :pad %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-
-            <% if @user.particulier? %>
-              <li><%= render "shared/navbar_button", text: "Tableau de bord", icon: "eye", link: particulier_dashboard_path %></li>
-              <li><%= render "shared/navbar_button", text: "Bookings", icon: "list", link: particulier_bookings_path%></li>
-              <li><%= render "shared/navbar_button", text: "Informations", icon: "info", link: particulier_infos_path %></li>
-              <li><%= render "shared/navbar_button", text: "Mon profil", icon: "user", link: particulier_user_path(@user)%></li>
-            <% elsif @user.pro? %>
-              <li><%= render "shared/navbar_button", text: "Tableau de bord", icon: "eye", link: pro_dashboard_path %></li>
-              <li><%= render "shared/navbar_button", text: "Bookings", icon: "list", link: pro_bookings_path%></li>
-              <li><%= render "shared/navbar_button", text: "Rapports", icon: "folder-open", link: pro_reports_path%></li>
-              <li><%= render "shared/navbar_button", text: "Profil", icon: "user", link: pro_user_path(@user)%></li>
-            <% elsif @user.technician? %>
-              <li><%= render "shared/navbar_button", text: "Tableau de bord", icon: "eye", link: technician_dashboard_path %></li>
-              <li><%= render "shared/navbar_button", text: "Disponibilités", icon: "calendar", link: technician_availabilities_path %></li>
-              <li><%= render "shared/navbar_button", text: "Bookings", icon: "list", link: technician_bookings_path%></li>
-              <li><%= render "shared/navbar_button", text: "Rapports", icon: "folder-open", link: technician_reports_path%></li>
-              <li><%= render "shared/navbar_button", text: "Clients", icon: "group", link: technician_users_path%></li>
-              <li><%= render "shared/navbar_button", text: "Profil", icon: "user", link: technician_user_path(@user)%></li>
+              <li><%= render "shared/navbar_button", text: "Tableau de bord", icon: "eye", link: [@user.role.to_sym, :dashboard]%></li>
+              <li><%= render "shared/navbar_button", text: "Bookings", icon: "list", link: [@user.role.to_sym, :bookings] %></li>
+              <li><%= render "shared/navbar_button", text: "Rapports", icon: "folder-open", link: [@user.role.to_sym, :reports] %></li>
+            <% if @user.technician? %>
+              <li><%= render "shared/navbar_button", text: "Disponibilités", icon: "calendar", link: [@user.role.to_sym, :availabilities] %></li>
+              <li><%= render "shared/navbar_button", text: "Clients", icon: "group", link: [@user.role.to_sym, :users]%></li>
             <% elsif @user.manager? %>
-              <li><%= render "shared/navbar_button", text: "Tableau de bord", icon: "eye", link: manager_dashboard_path %></li>
-              <li><%= render "shared/navbar_button", text: "Mon équipe", icon: "calendar", link: manager_availabilities_path %></li>
+              <li><%= render "shared/navbar_button", text: "Mon équipe", icon: "calendar", link: [@user.role, :availabilities] %></li>
               <li><%= render "shared/navbar_button", text: "Planning", icon: "calendar-check-o", link: manager_planning_path %></li>
-              <li><%= render "shared/navbar_button", text: "Bookings", icon: "list", link: manager_bookings_path%></li>
-              <li><%= render "shared/navbar_button", text: "Rapports", icon: "folder-open", link: manager_reports_path%></li>
-              <li><%= render "shared/navbar_button", text: "Clients", icon: "group", link: manager_users_path%></li>
-              <li><%= render "shared/navbar_button", text: "Profil", icon: "user", link: manager_user_path(@user)%></li>
             <% end %>
+              <li><%= render "shared/navbar_button", text: "Profil", icon: "user", link: [@user.role.to_sym, @user] %></li>
               <li>
                 <%= link_to destroy_user_session_path, method: :delete do %>
                   <i class="fa fa-sign-out" aria-hidden="true"></i>  Se déconnecter
