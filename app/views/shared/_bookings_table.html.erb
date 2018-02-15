@@ -2,6 +2,7 @@
   <table class="table table-hover hidden-xs">
     <thead>
       <h4 class="hidden-xs"><strong>Liste de vos interventions</strong></h4>
+      <%= render "shared/search_bar_bookings" %>
       <tr>
         <th scope="col">Numéro d'affaire</th>
         <th scope="col">Commandé le</th>
@@ -86,3 +87,31 @@
     </tbody>
   </table>
 </div>
+
+<%= content_for :after_js do %>
+  <script>
+    var client = algoliasearch('W7HIKRIOMJ', 'e73aab21c2b35cb58b90872399fbee59');
+    var index = client.initIndex('Booking', 'Company');
+    //initialize autocomplete on search input (ID selector must match)
+    autocomplete('#aa-search-input',
+    { hint: false }, {
+        source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+        //value to be displayed in input control after user's suggestion selection
+        displayKey: 'booking',
+        //hash of templates used when rendering dataset
+        templates: {
+            //'suggestion' templating function used to render a single suggestion
+            suggestion: function(suggestion) {
+              return '<span><img src="'
+                      + suggestion.company.logo
+                      + '"></span><span>'
+                      + '<p><strong>'
+                      + suggestion._highlightResult.company.company.value + '</strong> ' + suggestion._highlightResult.user.first_name.value + ' ' + suggestion._highlightResult.user.last_name.value
+                      + '</p><i style="font-weight: lighter">' + suggestion._highlightResult.product.label.value + '</i></span>';
+            }
+        }
+    }).on('autocomplete:selected', function(event, suggestion, dataset) {
+    location.href = 'bookings/' + suggestion.id;
+  });;
+  </script>
+<% end %>

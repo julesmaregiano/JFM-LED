@@ -34,6 +34,7 @@ gem 'groupdate'
 gem 'signature-pad-rails'
 gem 'activeadmin', github: 'activeadmin/activeadmin'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
+gem "algoliasearch-rails"
 
 
 source 'https://rails-assets.org' do
