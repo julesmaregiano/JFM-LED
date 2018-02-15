@@ -1,8 +1,10 @@
 .aa-input-container {
   display: inline-block;
-  position: relative; }
+  position: relative;
+  padding-bottom: 5px;
+  }
 .aa-input-search {
-  width: 300px;
+  width: 350px;
   border: 1px solid rgba(228, 228, 228, 0.6);
   padding: 12px 28px 12px 12px;
   box-sizing: border-box;
