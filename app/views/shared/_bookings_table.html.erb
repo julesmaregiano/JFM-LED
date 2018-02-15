@@ -42,7 +42,7 @@
                 <i class="fa card-icon fa-file-text-o" style="color: gray"></i>
               <% end %>
             </td>
-            <td>
+            <td class= 'flexbox'>
               <% if booking.report.signed? %>
                 <%= link_to(content_tag(:i, nil, class: 'fa fa-eye card-icon'), [@user.role, booking.report])%>
                 <%= link_to(content_tag(:i, nil, class: 'fa fa-file-pdf-o card-icon'), [@user.role, booking.report, format: :pdf, target: :_blank])%>
@@ -114,12 +114,3 @@
   });;
   </script>
 <% end %>
-
-<div class="flexbox">
-  <img src="http://res.cloudinary.com/zanzibar/image/upload/c_scale,w_65/v1518599861/zwlkjqyosshsij9v2n4d.jpg" alt="">
-<div>
-
-  <p><strong>Colas </strong>Jean Marcelus</p>
-  <i><strong>Colas </strong>Jean Marcelus</i>
-</div>
-</div>
