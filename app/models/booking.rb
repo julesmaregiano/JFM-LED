@@ -18,6 +18,15 @@
   has_attachment :pdf
   accepts_nested_attributes_for :address
 
+  include AlgoliaSearch
+  algoliasearch do
+    attribute :reference, :user, :foreman, :product
+    attribute :company do
+      { company: user.company.name }
+    end
+    attributesForFaceting [:user, :product, :address]
+  end
+
   after_create :add_report
 
   scope :of_the_day, -> { joins(:availabilities).where("date = ?", Date.current) }
