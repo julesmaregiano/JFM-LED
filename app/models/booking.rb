@@ -20,11 +20,14 @@
 
   include AlgoliaSearch
   algoliasearch do
-    attribute :reference, :user, :foreman, :product
+    attribute :id, :reference, :user, :product
     attribute :company do
-      { company: user.company.name }
+      { company: user.company.name, logo: "http://res.cloudinary.com/zanzibar/image/upload/c_pad,h_65,w_65/#{user.company.photo.path}" }
     end
-    attributesForFaceting [:user, :product, :address]
+    attribute :address do
+      { address: address.address1, zipcode: address.zipcode, city: address.city }
+    end
+    attributesForFaceting [:user, :product]
   end
 
   after_create :add_report

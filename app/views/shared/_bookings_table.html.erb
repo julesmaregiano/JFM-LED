@@ -108,9 +108,12 @@
         templates: {
             //'suggestion' templating function used to render a single suggestion
             suggestion: function(suggestion) {
-              return '<span>' +
-                suggestion._highlightResult.reference.value + '</span><span>' +
-                suggestion._highlightResult.user.first_name.value + '</span>';
+              return '<span><img src="'
+                      + suggestion.company.logo
+                      + '"></span><span>'
+                      + '<p><strong>'
+                      + suggestion._highlightResult.company.company.value + '</strong> ' + suggestion._highlightResult.user.first_name.value + ' ' + suggestion._highlightResult.user.last_name.value
+                      + '</p><i style="font-weight: lighter">' + suggestion._highlightResult.product.label.value + '</i></span>';
             }
         }
     }).on('autocomplete:selected', function(event, suggestion, dataset) {
