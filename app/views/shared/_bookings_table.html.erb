@@ -90,7 +90,7 @@
 
 <%= content_for :after_js do %>
   <script>
-    var client = algoliasearch('W7HIKRIOMJ', 'e73aab21c2b35cb58b90872399fbee59');
+    var client = algoliasearch("<%= ENV['ALGOLIA_APP_KEY'] %>", "<%= ENV['ALGOLIA_SEARCH_KEY'] %>");
     var index = client.initIndex('Booking', 'Company');
     //initialize autocomplete on search input (ID selector must match)
     autocomplete('#aa-search-input',
