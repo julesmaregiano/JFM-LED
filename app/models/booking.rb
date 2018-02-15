@@ -21,6 +21,9 @@
   include AlgoliaSearch
   algoliasearch do
     attribute :id, :reference, :user, :product
+    attribute :created_at do
+      created_at.strftime("%-d/%m/%Y")
+    end
     attribute :company do
       { company: user.company.name, logo: "http://res.cloudinary.com/zanzibar/image/upload/c_pad,h_65,w_65/#{user.company.photo.path}" }
     end
