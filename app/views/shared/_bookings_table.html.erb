@@ -10,7 +10,9 @@
         <th scope="col">Adresse</th>
         <th scope="col">Durée</th>
         <th scope="col">Date</th>
-        <th scope="col">Liens</th>
+        <th scope="col">BdC</th>
+        <th class="text-center" scope="col">PV</th>
+        <th scope="col">Détails</th>
       </tr>
     </thead>
     <tbody>
@@ -22,7 +24,7 @@
             <td><%= booking.user.company.name %></td>
             <td><%= booking.user.first_name + ' ' + booking.user.last_name %></td>
             <td><%= booking.address.full_address %></td>
-            <td><%= booking.availabilities.size.odd? ? "#{booking.availabilities.size} demi-journées" : "#{booking.availabilities.size / 2} journées" %></td>
+            <td><%= booking.availabilities.size.odd? ? "#{booking.availabilities.size} ½j" : "#{booking.availabilities.size / 2} j" %></td>
             <td>
               <% if @user.manager? && booking.availabilities.first.pending? %>
                 <%= link_to "Valider dates", manager_planning_path %>
@@ -32,8 +34,26 @@
                 <% end %>
               <% end %>
             </td>
+            <td>
+              <% if booking.pdf? %>
+                <%= link_to(content_tag(:i, nil, class: 'fa card-icon fa-file-text-o'), cloudinary_url(booking.pdf.path), target: :_blank) %>
+              <% else %>
+                <i class="fa card-icon fa-file-text-o" style="color: gray"></i>
+              <% end %>
+            </td>
+            <td>
+              <% if booking.report.signed? %>
+                <%= link_to(content_tag(:i, nil, class: 'fa fa-eye card-icon'), [@user.role, booking.report])%>
+                <%= link_to(content_tag(:i, nil, class: 'fa fa-file-pdf-o card-icon'), [@user.role, booking.report, format: :pdf, target: :_blank])%>
+              <% elsif booking.report.progress > 0 %>
+                <%= booking.report.progress %> %
+              <% else %>
+                <i class="fa fa-eye card-icon" style="color: gray"></i>
+                <i class="fa fa-file-pdf-o card-icon" style="color: gray"></i>
+              <% end %>
+            </td>
             <td><%= link_to [@user.role, booking] do %>
-                <i class="fa fa-eye"></i>
+                <i class="fa card-icon fa-eye"></i>
               <% end %>
             </td>
           </tr>
