@@ -24,6 +24,9 @@ module JFMLed
       generate.helper false
     end
 
+
+    config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
+    config.i18n.default_locale = :fr
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 

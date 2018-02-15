@@ -172,4 +172,14 @@ input, select {
   .row {
     margin: 0px;
   }
+  .col-xs-12 {
+    padding: 1px;
+  }
+  .padding-box {
+    padding-top: 0px !important;
+  }
+  #map {
+    height: 50vh !important;
+    margin-bottom: 10px;
+  }
 }
