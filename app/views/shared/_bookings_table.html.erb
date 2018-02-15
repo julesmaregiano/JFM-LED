@@ -102,12 +102,11 @@
         templates: {
             //'suggestion' templating function used to render a single suggestion
             suggestion: function(suggestion) {
-              return '<span><img src="'
+              return '<div class="flexbox flex-start"><div><img style="margin-right: 6px" src="'
                       + suggestion.company.logo
-                      + '"></span><span>'
-                      + '<p><strong>'
-                      + suggestion._highlightResult.company.company.value + '</strong> ' + suggestion._highlightResult.user.first_name.value + ' ' + suggestion._highlightResult.user.last_name.value
-                      + '</p><i style="font-weight: lighter">' + suggestion._highlightResult.product.label.value + '</i></span>';
+                      + '"></div><div><p><strong>'
+                      + suggestion._highlightResult.company.company.value + '</strong> ' + suggestion._highlightResult.user.first_name.value + ' ' + suggestion._highlightResult.user.last_name.value + ' - ' + suggestion._highlightResult.reference.value
+                      + '</p><i style="font-weight: lighter">' + suggestion._highlightResult.product.label.value + '</i></div></div>';
             }
         }
     }).on('autocomplete:selected', function(event, suggestion, dataset) {
@@ -115,3 +114,12 @@
   });;
   </script>
 <% end %>
+
+<div class="flexbox">
+  <img src="http://res.cloudinary.com/zanzibar/image/upload/c_scale,w_65/v1518599861/zwlkjqyosshsij9v2n4d.jpg" alt="">
+<div>
+
+  <p><strong>Colas </strong>Jean Marcelus</p>
+  <i><strong>Colas </strong>Jean Marcelus</i>
+</div>
+</div>
