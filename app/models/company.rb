@@ -7,9 +7,4 @@ class Company < ApplicationRecord
 
   has_attachment :photo
 
-  include AlgoliaSearch
-  algoliasearch do
-    attribute :id, :name, :photo
-  end
-
 end

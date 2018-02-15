@@ -25,7 +25,7 @@
       created_at.strftime("%-d/%m/%Y")
     end
     attribute :company do
-      { company: user.company.name, logo: "http://res.cloudinary.com/zanzibar/image/upload/c_pad,h_65,w_65/#{user.company.photo.path}" }
+      { company: user.company.name, logo: cloudinary_url(user.company.photo.path) }
     end
     attribute :address do
       { address: address.address1, zipcode: address.zipcode, city: address.city }
