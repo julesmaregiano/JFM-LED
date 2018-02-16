@@ -77,7 +77,7 @@
         <% bookings.each do |booking| %>
           <tr>
             <td><strong><%= booking.user.company.name %></strong> <br> <%= booking.reference %> <br> <%= booking.created_at.strftime("%d/%m/%y") %> </td>
-            <td><%= booking.product.label %> <br> <%= booking.city %></td>
+            <td><%= booking.product.label %> <br> <%= booking.address.city %></td>
             <td class='text-center'><%= link_to [@user.role, booking] do %>
                 <i class="fa fa-eye"></i>
               <% end %></td>

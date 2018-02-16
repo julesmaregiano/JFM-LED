@@ -1,28 +1,13 @@
 <div class="sidebar hidden-xs hidden-sm">
-  <% if current_user.particulier? %>
-    <%= render "shared/sidebar_button", text: "Tableau de bord", icon: "eye", link: particulier_dashboard_path %>
-    <%= render "shared/sidebar_button", text: "Bookings", icon: "list", link: particulier_bookings_path%>
-    <%= render "shared/sidebar_button", text: "Informations", icon: "info", link: particulier_infos_path %>
-    <%= render "shared/sidebar_button", text: "Mon profil", icon: "user", link: particulier_user_path(@user)%>
-  <% elsif current_user.pro? %>
-    <%= render "shared/sidebar_button", text: "Tableau de bord", icon: "eye", link: pro_dashboard_path %>
-    <%= render "shared/sidebar_button", text: "Bookings", icon: "list", link: pro_bookings_path%>
-    <%= render "shared/sidebar_button", text: "Rapports", icon: "folder-open", link: pro_reports_path%>
-    <%= render "shared/sidebar_button", text: "Profil", icon: "user", link: pro_user_path(@user)%>
-  <% elsif current_user.technician? %>
-    <%= render "shared/sidebar_button", text: "Tableau de bord", icon: "eye", link: technician_dashboard_path %>
-    <%= render "shared/sidebar_button", text: "Disponibilités", icon: "calendar", link: technician_availabilities_path %>
-    <%= render "shared/sidebar_button", text: "Bookings", icon: "list", link: technician_bookings_path%>
-    <%= render "shared/sidebar_button", text: "Rapports", icon: "folder-open", link: technician_reports_path%>
-    <%= render "shared/sidebar_button", text: "Clients", icon: "group", link: technician_users_path%>
-    <%= render "shared/sidebar_button", text: "Profil", icon: "user", link: technician_user_path(@user)%>
+  <%= render "shared/sidebar_button", text: "Tableau de bord", icon: "eye", link: [@user.role, :dashboard]%>
+  <%= render "shared/sidebar_button", text: "Bookings", icon: "list", link: [@user.role, :bookings] %>
+  <%= render "shared/sidebar_button", text: "Rapports", icon: "folder-open", link: [@user.role, :reports] %>
+  <% if current_user.technician? %>
+    <%= render "shared/sidebar_button", text: "Disponibilités", icon: "calendar", link: [@user.role, :availabilities] %>
+    <%= render "shared/sidebar_button", text: "Clients", icon: "group", link: [@user.role, :users]%>
   <% elsif current_user.manager? %>
-    <%= render "shared/sidebar_button", text: "Tableau de bord", icon: "eye", link: manager_dashboard_path %>
-    <%= render "shared/sidebar_button", text: "Mon équipe", icon: "calendar", link: manager_availabilities_path %>
+    <%= render "shared/sidebar_button", text: "Mon équipe", icon: "calendar", link: [@user.role, :availabilities] %>
     <%= render "shared/sidebar_button", text: "Planning", icon: "calendar-check-o", link: manager_planning_path %>
-    <%= render "shared/sidebar_button", text: "Bookings", icon: "list", link: manager_bookings_path%>
-    <%= render "shared/sidebar_button", text: "Rapports", icon: "folder-open", link: manager_reports_path%>
-    <%= render "shared/sidebar_button", text: "Clients", icon: "group", link: manager_users_path%>
-    <%= render "shared/sidebar_button", text: "Profil", icon: "user", link: manager_user_path(@user)%>
   <% end %>
+  <%= render "shared/sidebar_button", text: "Profil", icon: "user", link: [@user.role, @user] %>
 </div>
