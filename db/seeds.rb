@@ -119,7 +119,7 @@ produits.each do |produit|
   if prod.label == "Marquage-Piquetage"
     option1 = Option.create(label: "Types de réseaux", custom_value: false)
     ProductOption.create(product: prod, option: option1)
-    types_reseaux = ["Tous (sauf assainissement)", "Electricité", "Eclairage", "Signalisation routière", "Gaz", "Hydrocarbures", "Produits chimiques", "Eau potable", "Chauffage/Clim", "Télécommunications"]
+    types_reseaux = ["Tous (sauf assainissement)", "Electricité", "Eclairage", "Signalisation routière", "Gaz", "Hydrocarbures", "Produits chimiques", "Eau potable", "Chauffage/Clim", "Télécommunications", "Indéterminé"]
     types_reseaux.each do |label|
       OptionValue.create(option: option1, label: label, active: true)
     end

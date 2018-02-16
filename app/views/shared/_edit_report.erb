@@ -1,6 +1,6 @@
 <div class="card-container report">
   <div class="row">
-    <div class="col-xs-6 client-company flexbox no-padding">
+    <div class="col-xs-12 col-sm-6 client-company flexbox no-padding">
       <% unless client.company.photo.nil? %>
         <%= cl_image_tag client.company.photo.public_id, height: 100, width: 100, crop: :pad, class: "card-logo" %>
       <% end %>
@@ -10,7 +10,7 @@
         <p><%= client.branch.address.full_address %></p>
       </div>
     </div>
-    <div class="col-xs-6 tech-company flexbox no-padding">
+    <div class="col-xs-12 col-sm-6 tech-company flexbox no-padding">
       <% unless tech.company.photo.nil? %>
         <%= cl_image_tag tech.company.photo.public_id, height: 100, width: 100, crop: :pad, class: "card-logo" %>
       <% end %>

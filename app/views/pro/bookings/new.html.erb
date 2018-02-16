@@ -16,9 +16,9 @@
           <%= simple_form_for [@user.role, @booking] do |f| %>
 
           <div class="availabilities-fields"> <%# div pour injecter les avaialbilities via le JS %></div>
-          <%= f.input :address, input_html: {value: ''} %>
-          <%= f.input :reference %>
-          <%= f.input :product_id, collection: @products.to_a, label_method: lambda { |product| "#{product.label}" } %>
+          <%= f.input :address, label: "Adresse" , input_html: {value: ''} %>
+          <%= f.input :reference, label: "Numéro d'affaire" %>
+          <%= f.input :product_id, label: "Produit", collection: @products.to_a, label_method: lambda { |product| "#{product.label}" } %>
 
           <div class="options-fields"></div> <%# div pour injecter les options via le JS %>
 
@@ -58,9 +58,9 @@
           <% end %>
           <div class="form-group">
           <%= f.input :foreman_id, label: "Chef de chantier", collection: Foreman.where(branch_id: @user.branch_id).to_a, label_method: lambda { |foreman| "#{foreman.first_name} #{foreman.last_name}" } %>
-          <%= f.input :comment %>
+          <%= f.input :comment, label: "Remarques" %>
           <%= f.input :pdf, label: "Bon de commande", as: :attachinary %>
-          <%= f.button :submit %>
+          <%= f.button :submit, label: "Réserver" %>
           </div>
           <% end %>
         </div>

@@ -24,7 +24,13 @@
         <p><%= @tech.branch.address.full_address %></p>
       </div>
     </div>
-    <h4 class="col-xs-12 text-center"><strong>Rapport de <%= @report.product.label %></strong></h4>
+    <div class="col-xs-12 text-center">
+      <h4><strong>Rapport de <%= @report.product.label %></strong></h4>
+      <p>Chantier: <strong><%= @report.booking.address.full_address %></strong></p>
+      <p>Technicien(s): <strong><% @report.booking.technicians.uniq.each do |t| %>
+                                <%= t.full_name %>,
+                              <% end %></strong></p>
+    </div>
   </div>
 
   <div class="">
