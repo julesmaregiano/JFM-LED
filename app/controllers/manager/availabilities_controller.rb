@@ -20,9 +20,15 @@ class Manager::AvailabilitiesController < ApplicationController
     @user = current_user
     @availability = Availability.find(params[:id])
     if @availability.update(params_availability)
-      redirect_to manager_availabilities_path
+      respond_to do |format|
+        format.html {redirect_to manager_availabilities_path}
+        format.js
+      end
     else
-      render :edit
+      respond_to do |format|
+        format.html {render :edit}
+        format.js
+      end
     end
   end
 
