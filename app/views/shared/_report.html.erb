@@ -3,38 +3,9 @@
 
 <div class="card-container report">
 
-  <div class="row">
-    <div class="col-xs-6 client-company flexbox no-padding">
-      <% unless @client.company.photo.nil? %>
-        <%= cl_image_tag @client.company.photo.public_id, height: 100, width: 100, crop: :pad, class: "card-logo" %>
-      <% end %>
-      <div>
-        <h7><strong><%= @client.company.name %></strong></h7>
-        <p><%= @client.branch.name %></p>
-        <p><%= @client.branch.address.full_address %></p>
-      </div>
-    </div>
-    <div class="col-xs-6 tech-company flexbox no-padding">
-      <% unless @tech.company.photo.nil? %>
-        <%= cl_image_tag @tech.company.photo.public_id, height: 100, width: 100, crop: :pad, class: "card-logo" %>
-      <% end %>
-      <div>
-        <h7><strong><%= @tech.company.name %></strong></h7>
-        <p><%= @tech.branch.name %></p>
-        <p><%= @tech.branch.address.full_address %></p>
-      </div>
-    </div>
-    <div class="col-xs-12 text-center">
-      <h4><strong>Rapport de <%= @report.product.label %></strong></h4>
-      <p>Chantier: <strong><%= @report.booking.address.full_address %></strong></p>
-      <p>Technicien(s): <strong><% @report.booking.technicians.uniq.each do |t| %>
-                                <%= t.full_name %>,
-                              <% end %></strong></p>
-    </div>
-  </div>
+  <%= render "shared/report_header", report: @report %>
 
-  <div class="">
-
+  <div>
     <% @sections.each do |section| %>
       <div id="Section-<%= section.id %>" class="row report-section">
         <h4 class="margin-bottom-small"><strong><%= section.name.capitalize %></strong></h4>
