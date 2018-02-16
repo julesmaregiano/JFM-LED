@@ -1,4 +1,7 @@
 <div class="card-container">
+<% if @user.pro? %>
+  <h4><strong>Bonjour <%= @user.first_name %></strong>, choisissez vos dates :</h4>
+<% end %>
   <%= month_calendar(start_date_param: :start_date,
                      attribute: :date,
                      number_of_days: 20,

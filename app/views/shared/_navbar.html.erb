@@ -16,17 +16,17 @@
           <i class="fa fa-bars dropdown-toggle hidden-md hidden-lg" data-toggle="dropdown"></i>
           <%= cl_image_tag @user.company.photo.path, class: "avatar dropdown-toggle hidden-xs hidden-sm", id: "navbar-wagon-menu", 'data-toggle': "dropdown", height: 65, width: 65, crop: :pad %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-            <li><%= render "shared/navbar_button", text: "Tableau de bord", icon: "eye", link: [@user.role.to_sym, :dashboard]%></li>
-            <li><%= render "shared/navbar_button", text: "Bookings", icon: "list", link: [@user.role.to_sym, :bookings] %></li>
-            <li><%= render "shared/navbar_button", text: "Rapports", icon: "folder-open", link: [@user.role.to_sym, :reports] %></li>
+            <li><%= render "shared/navbar_button", text: "Tableau de bord", icon: "eye", link: [@user.role, :dashboard]%></li>
+            <li><%= render "shared/navbar_button", text: "Bookings", icon: "list", link: [@user.role, :bookings] %></li>
+            <li><%= render "shared/navbar_button", text: "Rapports", icon: "folder-open", link: [@user.role, :reports] %></li>
             <% if @user.technician? %>
-              <li><%= render "shared/navbar_button", text: "Disponibilités", icon: "calendar", link: [@user.role.to_sym, :availabilities] %></li>
-              <li><%= render "shared/navbar_button", text: "Clients", icon: "group", link: [@user.role.to_sym, :users]%></li>
+              <li><%= render "shared/navbar_button", text: "Disponibilités", icon: "calendar", link: [@user.role, :availabilities] %></li>
+              <li><%= render "shared/navbar_button", text: "Clients", icon: "group", link: [@user.role, :users]%></li>
             <% elsif @user.manager? %>
               <li><%= render "shared/navbar_button", text: "Mon équipe", icon: "calendar", link: [@user.role, :availabilities] %></li>
               <li><%= render "shared/navbar_button", text: "Planning", icon: "calendar-check-o", link: manager_planning_path %></li>
             <% end %>
-              <li><%= render "shared/navbar_button", text: "Profil", icon: "user", link: [@user.role.to_sym, @user] %></li>
+              <li><%= render "shared/navbar_button", text: "Profil", icon: "user", link: [@user.role, @user] %></li>
               <li>
               <%= link_to destroy_user_session_path, method: :delete do %>
                 <i class="fa fa-sign-out" aria-hidden="true"></i>  Se déconnecter

@@ -43,7 +43,10 @@
               <%= link_to manager_booking_path(availability.booking_id) do %>
                 <div class="calendar-card">
                   <%= cl_image_tag availability.booking.user.company.photo.public_id, height: 50, width: 50, crop: :pad, class: "card-logo" %>
-                  <p><%= availability.booking.city %></p>
+                  <div>
+                    <h7><%= availability.booking.user.company.name %></h7>
+                    <p><%= availability.booking.address.city %> - <%= availability.booking.reference %></p>
+                  </div>
                 </div>
               <% end %>
             <% end %>

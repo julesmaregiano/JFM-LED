@@ -65,7 +65,7 @@
       <% reports.each do |report| %>
         <tr>
           <td><strong><%= report.booking.user.company.name %></strong> <br> <%= report.booking.reference %> <br> <%= report.booking.created_at.strftime("%d/%m/%y") %></td>
-          <td><%= report.booking.product.label %> <br> <%= report.booking.city %></td>
+          <td><%= report.booking.product.label %> <br> <%= report.booking.address.city %></td>
           <td class='text-center'>
             <%= report.progress %>% <br>
             <% if current_user.technician? %>
