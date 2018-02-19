@@ -38,8 +38,8 @@
   <div class="report-section">
     <h4><strong>Signature</strong></h4>
 
-    <% if @report.signed_on.nil? %>
-      <p>En l'absence de signature et passé un délai de trois jours, la réception du PV sera considérée comme complète.</p>
+    <% if @report.signed? %>
+      <p>En l'absence de signature et passé un délai de trois jours, la réception du Rapport de <%= @report.booking.product.label %> sera considérée comme complète.</p>
     <% else %>
       <%= image_tag @report.signature %>
       <p> Signé le <%= @report.signed_on.strftime("%d/%m/%y à %Hh%M") %></p>

@@ -4,9 +4,11 @@
       <tr>
 
         <th scope="col">Entreprise</th>
+        <th scope="col">Filliale</th>
         <th scope="col">Nom</th>
         <th scope="col">Role</th>
         <th scope="col">Téléphone</th>
+        <th scope="col">Mail</th>
       </tr>
     </thead>
     <tbody>
@@ -14,9 +16,11 @@
         <tr>
 
           <td><%= user.company.name %></td>
+          <td><%= user.branch.name %></td>
           <td><%= user.first_name %> <%= user.last_name %></td>
           <td><%= user.role %></td>
           <td><%= user.phone %></td>
+          <td><%= user.email %></td>
         </tr>
       <% end %>
     </tbody>

@@ -250,7 +250,7 @@ option_choices = {
   "groupe 3" => ["Electricité (BT, HTA, HTB)", "Eclairage", "Feux tricolores et signalisation routière", "Gaz", "Hydrocarbures", "Produits chimiques", "Eau potable", "Assainissement (EU-EP)", "Chauffage/Clim", "Télécommunications", "Zone d'emprise multiréseaux"],
   "groupe 4" => ["Classe A","Classe B", "Classe C"],
   "groupe 5" => ["Absence de DICT", "DICT complète", "DICT incomplète"],
-  "groupe 6" => ["Rien à signaler", "Prudence lors des travaux"]
+  "groupe 6" => ["Rien à signaler", "Ecarts IC/DT", "Quelques points en B", "Prudence lors des travaux"]
 }
 
 option_choices.each { |key, value|
@@ -282,11 +282,11 @@ question15 = Question.create!( section: Section.find_by(name: "Recommandations e
 question16 = Question.create!( section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "Identifie les profondeurs de l'ouvrage ?", information: "profondeur", option_group: OptionGroup.find_by(name: "groupe 1"), input_type: "option_choice_id", active: true, display: "radio_buttons")
 question17 = Question.create!( section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "Matérialise la classe de précision ?", information: "precision", option_group: OptionGroup.find_by(name: "groupe 1"), input_type: "option_choice_id", active: true, display: "radio_buttons")
 
-Section.find((4..10).to_a).each do |section|
-question10a = Question.create!( section: section, name: "Classe de réseaux", option_group: OptionGroup.find_by(name: "groupe 4"), input_type: "option_choice_id", active: true, display: "check_boxes")
-question10b = Question.create!( section: section, name: "Commentaire sur la DICT", option_group: OptionGroup.find_by(name: "groupe 5"), input_type: "option_choice_id", active: true, display: "check_boxes")
-question10c = Question.create!( section: section, name: "Avis du technicien", option_group: OptionGroup.find_by(name: "groupe 6"), input_type: "option_choice_id", active: true, display: "check_boxes")
-question10d = Question.create!( section: section, name: "Concessionnaire", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: true)
+Section.find((4..11).to_a).each do |section|
+  question10a = Question.create!( section: section, name: "Classe de réseaux", option_group: OptionGroup.find_by(name: "groupe4"), input_type: "option_choice_id", active: true, display: "check_boxes")
+  question10b = Question.create!( section: section, name: "Commentaire sur la DICT", option_group: OptionGroup.find_by(name: "groupe5"), input_type: "option_choice_id", active: true, display: "check_boxes")
+  question10c = Question.create!( section: section, name: "Avis du technicien", option_group: OptionGroup.find_by(name: "groupe6"), input_type: "option_choice_id", active: true, display: "check_boxes")
+  question10d = Question.create!( section: section, name: "Concessionnaire", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: true)
 end
 
 question18 = Question.create!( section: Section.find_by(name: "Signataires"), name: "Remarques du rédacteur :", information: "remarques_mp", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: true, display: "text")
