@@ -1,15 +1,16 @@
 <div class="row report-header">
-  <div class="col-xs-12 col-sm-6 text-center">
+  <div class="col-xs-12 text-center">
     <h4><strong>Rapport de <%= @report.product.label %></strong></h4>
   </div>
-  <div class="col-xs-12 col-sm-6">
+  <div class="col-xs-12 text-center">
     <p>Chantier: <strong><%= @report.booking.address.full_address %></strong></p>
     <p>Technicien(s): <strong><% @report.booking.technicians.uniq.map do |t| %>
                               <%= t.full_name %>,
                             <% end %></strong></p>
     <p>Durée: <strong><%= @report.booking.availabilities.size.odd? ? "#{@report.booking.availabilities.size} ½ journée(s)" : "#{@report.booking.availabilities.size / 2} journée(s)" %></strong></p>
+    <p>Référence: <strong><%= @report.booking.reference %></strong></p>
   </div>
-  <div class="col-xs-12 col-sm-6 client-company flexbox no-padding">
+  <div class="col-xs-12 col-sm-6 client-company flex-left">
     <% unless @client.company.photo.nil? %>
       <%= cl_image_tag @client.company.photo.public_id, height: 100, width: 100, crop: :pad, class: "card-logo" %>
     <% end %>
@@ -19,7 +20,7 @@
       <p><%= @client.branch.address.full_address %></p>
     </div>
   </div>
-  <div class="col-xs-12 col-sm-6 tech-company flexbox no-padding">
+  <div class="col-xs-12 col-sm-6 tech-company flex-left">
     <% unless @tech.company.photo.nil? %>
       <%= cl_image_tag @tech.company.photo.public_id, height: 100, width: 100, crop: :pad, class: "card-logo" %>
     <% end %>

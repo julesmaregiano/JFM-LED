@@ -6,16 +6,28 @@ body {
   .margin-bottom-small {
     margin-bottom: 0px !important;
   }
+}
+
+html {
+  background-color: white;
+  }
+
+.card-container {
+  height: auto;
+  border-top: 0px solid white;
+  box-shadow: none;
   label {
     font-style: italic;
     font-weight: lighter;
   }
   h4 {
     font-weight: lighter;
-    text-decoration: underline;
+  }
+  p {
+    font-weight: bolder;
   }
 }
 
-.card-container {
-  border-top: 0px solid white;
+.report-header {
+  padding-bottom: 30px !important;
 }
