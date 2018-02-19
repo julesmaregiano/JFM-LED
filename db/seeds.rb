@@ -294,7 +294,11 @@ question19 = Question.create!( section: Section.find_by(name: "Signataires"), na
 question20 = Question.create!( section: Section.find_by(name: "Signataires"), name: "Observations des parties", information: "observations_mp", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: true, display: "text")
 puts "Questions créées: #{Question.count}"
 
-Question.all.each do |q| ProductQuestion.create(product: Product.first, question: q) end
+Product.all.each do |product|
+  Question.all.each do |q|
+    ProductQuestion.create(product: product, question: q)
+  end
+end
 
 puts "ProductQuestions: #{ProductQuestion.count}"
 
