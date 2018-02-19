@@ -1,0 +1,33 @@
+// CSS Pour le PDF
+
+body {
+  padding: 0px !important;
+  margin: 0px !important;
+  .margin-bottom-small {
+    margin-bottom: 0px !important;
+  }
+}
+
+html {
+  background-color: white;
+  }
+
+.card-container {
+  height: auto;
+  border-top: 0px solid white;
+  box-shadow: none;
+  label {
+    font-style: italic;
+    font-weight: lighter;
+  }
+  h4 {
+    font-weight: lighter;
+  }
+  p {
+    font-weight: bolder;
+  }
+}
+
+.report-header {
+  padding-bottom: 30px !important;
+}

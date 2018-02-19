@@ -1,39 +1,19 @@
 <%= wicked_pdf_stylesheet_link_tag "application" -%>
-<%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+
+<% if request.format == "application/pdf" %>
+  <%= wicked_pdf_stylesheet_link_tag "pdf.css" -%>
+<% end %>
 
 <div class="card-container report">
 
-  <div class="row">
-    <div class="col-xs-6 client-company flexbox no-padding">
-      <% unless @client.company.photo.nil? %>
-        <%= cl_image_tag @client.company.photo.public_id, height: 100, width: 100, crop: :pad, class: "card-logo" %>
-      <% end %>
-      <div>
-        <h7><strong><%= @client.company.name %></strong></h7>
-        <p><%= @client.branch.name %></p>
-        <p><%= @client.branch.address.full_address %></p>
-      </div>
-    </div>
-    <div class="col-xs-6 tech-company flexbox no-padding">
-      <% unless @tech.company.photo.nil? %>
-        <%= cl_image_tag @tech.company.photo.public_id, height: 100, width: 100, crop: :pad, class: "card-logo" %>
-      <% end %>
-      <div>
-        <h7><strong><%= @tech.company.name %></strong></h7>
-        <p><%= @tech.branch.name %></p>
-        <p><%= @tech.branch.address.full_address %></p>
-      </div>
-    </div>
-    <h4 class="col-xs-12 text-center"><strong>Rapport de <%= @report.product.label %></strong></h4>
-  </div>
+  <%= render "shared/report_header", report: @report %>
 
-  <div class="">
-
+  <div>
     <% @sections.each do |section| %>
       <div id="Section-<%= section.id %>" class="row report-section">
         <h4 class="margin-bottom-small"><strong><%= section.name.capitalize %></strong></h4>
         <% section.questions.where(active: true).each do |question| %>
-          <div class="text-left col-xs-12 col-md-6">
+          <div class="text-left col-xs-12 col-sm-6 col-md-4 col-lg-3">
             <label for=""><%= question.name %></label><br/>
             <% question.answers_for(@report).each do |answer| %>
               <p><%= answer %></p>
@@ -58,8 +38,8 @@
   <div class="report-section">
     <h4><strong>Signature</strong></h4>
 
-    <% if @report.signed_on.nil? %>
-      <p>Si le PV n'est pas retourné signé par le client signé dans la semaine, il sera considéré comme validé.</p>
+    <% if @report.signed? %>
+      <p>En l'absence de signature et passé un délai de trois jours, la réception du Rapport de <%= @report.booking.product.label %> sera considérée comme complète.</p>
     <% else %>
       <%= image_tag @report.signature %>
       <p> Signé le <%= @report.signed_on.strftime("%d/%m/%y à %Hh%M") %></p>

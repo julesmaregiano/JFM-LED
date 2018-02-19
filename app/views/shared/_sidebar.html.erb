@@ -1,7 +1,5 @@
 <div class="sidebar hidden-xs hidden-sm">
   <%= render "shared/sidebar_button", text: "Tableau de bord", icon: "eye", link: [@user.role, :dashboard]%>
-  <%= render "shared/sidebar_button", text: "Bookings", icon: "list", link: [@user.role, :bookings] %>
-  <%= render "shared/sidebar_button", text: "Rapports", icon: "folder-open", link: [@user.role, :reports] %>
   <% if current_user.technician? %>
     <%= render "shared/sidebar_button", text: "Disponibilités", icon: "calendar", link: [@user.role, :availabilities] %>
     <%= render "shared/sidebar_button", text: "Clients", icon: "group", link: [@user.role, :users]%>
@@ -9,5 +7,7 @@
     <%= render "shared/sidebar_button", text: "Mon équipe", icon: "calendar", link: [@user.role, :availabilities] %>
     <%= render "shared/sidebar_button", text: "Planning", icon: "calendar-check-o", link: manager_planning_path %>
   <% end %>
+  <%= render "shared/sidebar_button", text: "Bookings", icon: "list", link: [@user.role, :bookings] %>
+  <%= render "shared/sidebar_button", text: "Rapports", icon: "folder-open", link: [@user.role, :reports] %>
   <%= render "shared/sidebar_button", text: "Profil", icon: "user", link: [@user.role, @user] %>
 </div>

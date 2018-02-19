@@ -22,23 +22,8 @@
             <% end %>
 
           <% elsif @user.manager? %>
+              <%= render "shared/update_availability_form", user: @user, availability: availability, tech: tech %>
             <% if availability.booking_id.nil? %>
-              <%= availability.status %>
-              <%= simple_form_for([@user.role, availability]) do |f| %>
-              <%= f.hidden_field :user_id, value: tech.id %>
-                <% if availability.free? %>
-                  <%= f.hidden_field :status, value: "leave" %>
-                  <%= f.button :button, class: 'small-icon' do %>
-                    <i class="fa fa-refresh small-icon" aria-hidden="true"></i>
-                  <% end %>
-                <% else %>
-                  <%= f.hidden_field :status, value: "free" %>
-                  <%= f.button :button, class: 'small-icon' do %>
-                    <i class="fa fa-refresh small-icon" aria-hidden="true"></i>
-                  <% end %>
-                <% end %>
-              <% end %>
-
             <% else %>
               <%= link_to manager_booking_path(availability.booking_id) do %>
                 <div class="calendar-card">

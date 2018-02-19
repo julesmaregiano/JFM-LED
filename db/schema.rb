@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180209105600) do
+ActiveRecord::Schema.define(version: 20180209105404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,10 +41,10 @@ ActiveRecord::Schema.define(version: 20180209105600) do
     t.float "longitude"
     t.bigint "booking_id"
     t.bigint "branch_id"
-    t.index ["booking_id"], name: "index_addresses_on_booking_id"
-    t.index ["branch_id"], name: "index_addresses_on_branch_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_addresses_on_booking_id"
+    t.index ["branch_id"], name: "index_addresses_on_branch_id"
   end
 
   create_table "answers", force: :cascade do |t|
@@ -235,9 +235,9 @@ ActiveRecord::Schema.define(version: 20180209105600) do
   end
 
   create_table "reports", force: :cascade do |t|
-    t.bigint "booking_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "booking_id"
     t.binary "signature"
     t.datetime "signed_on"
     t.index ["booking_id"], name: "index_reports_on_booking_id"
@@ -281,6 +281,8 @@ ActiveRecord::Schema.define(version: 20180209105600) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "addresses", "bookings"
+  add_foreign_key "addresses", "branches"
   add_foreign_key "answers", "option_choices"
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "reports"
@@ -289,8 +291,6 @@ ActiveRecord::Schema.define(version: 20180209105600) do
   add_foreign_key "booked_product_options", "bookings"
   add_foreign_key "booked_product_options", "option_values"
   add_foreign_key "booked_product_options", "options"
-  add_foreign_key "addresses", "bookings"
-  add_foreign_key "addresses", "branches"
   add_foreign_key "bookings", "products"
   add_foreign_key "bookings", "users"
   add_foreign_key "branches", "companies"

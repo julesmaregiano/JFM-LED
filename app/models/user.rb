@@ -25,4 +25,8 @@ class User < ApplicationRecord
     self.working_after(date).working_before(date + 5).uniq
   end
 
+  def full_name
+    [first_name, last_name].compact.join(' ')
+  end
+
 end

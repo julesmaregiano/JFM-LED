@@ -39,6 +39,10 @@
         <p>Téléphone : <strong>
         <%= booking.foreman_id? ? "#{booking.has_foreman.phone}" : "Non précisé" %>
         </strong></p>
+        <% if booking.comment? %>
+          <p>Commentaire : <i><%= booking.comment %></i>
+          </p>
+        <% end %>
       </div>
     </div>
 
