@@ -1,4 +1,14 @@
 <div class="row report-header">
+  <div class="col-xs-12 col-sm-6 text-center">
+    <h4><strong>Rapport de <%= @report.product.label %></strong></h4>
+  </div>
+  <div class="col-xs-12 col-sm-6">
+    <p>Chantier: <strong><%= @report.booking.address.full_address %></strong></p>
+    <p>Technicien(s): <strong><% @report.booking.technicians.uniq.map do |t| %>
+                              <%= t.full_name %>,
+                            <% end %></strong></p>
+    <p>Durée: <strong><%= @report.booking.availabilities.size.odd? ? "#{@report.booking.availabilities.size} ½ journée(s)" : "#{@report.booking.availabilities.size / 2} journée(s)" %></strong></p>
+  </div>
   <div class="col-xs-12 col-sm-6 client-company flexbox no-padding">
     <% unless @client.company.photo.nil? %>
       <%= cl_image_tag @client.company.photo.public_id, height: 100, width: 100, crop: :pad, class: "card-logo" %>
@@ -18,13 +28,5 @@
       <p><%= @tech.branch.name %></p>
       <p><%= @tech.branch.address.full_address %></p>
     </div>
-  </div>
-  <div class="col-xs-12 text-center">
-    <h4><strong>Rapport de <%= @report.product.label %></strong></h4>
-    <p>Chantier: <strong><%= @report.booking.address.full_address %></strong></p>
-    <p>Technicien(s): <strong><% @report.booking.technicians.uniq.map do |t| %>
-                              <%= t.full_name %>,
-                            <% end %></strong></p>
-    <p>Durée: <strong><%= @report.booking.availabilities.size.odd? ? "#{@report.booking.availabilities.size} ½ journée(s)" : "#{@report.booking.availabilities.size / 2} journée(s)" %></strong></p>
   </div>
 </div>

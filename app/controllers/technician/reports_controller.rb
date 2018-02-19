@@ -21,9 +21,14 @@ class Technician::ReportsController < ApplicationController
         render pdf:                     "Votre Rapport",   # Excluding ".pdf" extension.
         template:                       "shared/_report.html.erb",
         page_size:                      'A4',
+        margin:  { top:                 5,                     # default 10 (mm)
+                   bottom:              5,
+                   left:                8,
+                   right:               8 },
+        viewport_size:                  '1280x1024',
         save_only:                      false,
-        background:                     false,                     # backround needs to be true to enable background colors to render
-        no_background:                  true,
+        background:                     true,                     # backround needs to be true to enable background colors to render
+        no_background:                  false,
         encoding:                       'UTF-8'
       end
     end

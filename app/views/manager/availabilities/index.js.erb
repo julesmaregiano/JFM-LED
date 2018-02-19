@@ -1,3 +1,1 @@
-$('.small-icon').console.log('haha');
-$('.btn').html("<%= render('shared/update_availability_form', user: @user, availability: availability, tech: tech) %>");
 $("#<%= tech.first_name %>_events_calendar").html("<%= escape_javascript render 'shared/calendar', availabilities: @availabilities.of(@techs.first), tech: tech");

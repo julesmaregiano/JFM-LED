@@ -207,7 +207,17 @@ puts "#{BookedProductOption.all.size} BookedProductOption créées"
 
 #SECTIONS
 
-sections = ["Désignation du chantier", "Contexte du chantier", "Recommandations et localisations des ouvrages", "Précisions", "Signataires"]
+sections = ["Désignation du chantier",
+            "Contexte du chantier",
+            "Recommandations et localisations des ouvrages",
+            "Précisions sur les réseaux d'éclairage",
+            "Précisions sur les réseaux d'électricité",
+            "Précisions sur les réseaux de signalisation (SLT)",
+            "Précisions sur les réseaux de gaz",
+            "Précisions sur les réseaux d'eau potable (AEP)",
+            "Précisions sur les réseaux de télécom(s)",
+            "Précisions sur les réseaux indéterminés",
+            "Signataires"]
 sections.each do |section|
   Section.create(name: section)
 end
@@ -225,7 +235,7 @@ puts "Création des #{Unit.all.size} unités de mesure"
 
 #OPTION GROUPS
 
-option_groups = ["groupe 0", "groupe 1", "groupe 2", "groupe 3"]
+option_groups = ["groupe 0", "groupe 1", "groupe 2", "groupe 3", "groupe 4", "groupe 5", "groupe 6"]
 option_groups.each do |option|
   OptionGroup.create(name: option)
 end
@@ -238,8 +248,9 @@ option_choices = {
   "groupe 1" => ["Oui", "Non"],
   "groupe 2" => ["Vrai", "Faux"],
   "groupe 3" => ["Electricité (BT, HTA, HTB)", "Eclairage", "Feux tricolores et signalisation routière", "Gaz", "Hydrocarbures", "Produits chimiques", "Eau potable", "Assainissement (EU-EP)", "Chauffage/Clim", "Télécommunications", "Zone d'emprise multiréseaux"],
-  "groupe 4" => ["Classe A","Classe B", "Classe C", "Absence de DICT", "DICT complète", "DICT incomplète"],
-  "groupe 5" => ["Rien à signaler", "Prudence lors des travaux"]
+  "groupe 4" => ["Classe A","Classe B", "Classe C"],
+  "groupe 5" => ["Absence de DICT", "DICT complète", "DICT incomplète"],
+  "groupe 6" => ["Rien à signaler", "Prudence lors des travaux"]
 }
 
 option_choices.each { |key, value|
@@ -262,13 +273,12 @@ question7 = Question.create!( section: Section.find_by(name: "Contexte du chanti
 question8 = Question.create!( section: Section.find_by(name: "Contexte du chantier"), name: "Date prévisionelle de démarrage", information: "date_demarrage_previsionelle", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "date", active: true)
 question9 = Question.create!( section: Section.find_by(name: "Contexte du chantier"), name: "Durée prévisionelle des travaux", information: "duree_previsionelle", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: true)
 
-question10a = Question.create!( section: Section.find_by(name: "Précisions"), name: "Identifie la présence des réseaux suivants ?", information: "reseaux_presents", option_group: OptionGroup.find_by(name: "groupe 4"), input_type: "option_choice_id", active: true, display: "check_boxes")
-question10a = Question.create!( section: Section.find_by(name: "Précisions"), name: "Identifie la présence des réseaux suivants ?", information: "reseaux_presents", option_group: OptionGroup.find_by(name: "groupe 4"), input_type: "option_choice_id", active: true, display: "check_boxes")
-question10a = Question.create!( section: Section.find_by(name: "Précisions"), name: "Identifie la présence des réseaux suivants ?", information: "reseaux_presents", option_group: OptionGroup.find_by(name: "groupe 4"), input_type: "option_choice_id", active: true, display: "check_boxes")
-question10a = Question.create!( section: Section.find_by(name: "Précisions"), name: "Identifie la présence des réseaux suivants ?", information: "reseaux_presents", option_group: OptionGroup.find_by(name: "groupe 4"), input_type: "option_choice_id", active: true, display: "check_boxes")
-question10a = Question.create!( section: Section.find_by(name: "Précisions"), name: "Identifie la présence des réseaux suivants ?", information: "reseaux_presents", option_group: OptionGroup.find_by(name: "groupe 4"), input_type: "option_choice_id", active: true, display: "check_boxes")
-question10a = Question.create!( section: Section.find_by(name: "Précisions"), name: "Identifie la présence des réseaux suivants ?", information: "reseaux_presents", option_group: OptionGroup.find_by(name: "groupe 4"), input_type: "option_choice_id", active: true, display: "check_boxes")
-question10a = Question.create!( section: Section.find_by(name: "Précisions"), name: "Identifie la présence des réseaux suivants ?", information: "reseaux_presents", option_group: OptionGroup.find_by(name: "groupe 4"), input_type: "option_choice_id", active: true, display: "check_boxes")
+Section.find((4..10).to_a).each do |section|
+question10a = Question.create!( section: section, name: "Classe de réseaux", option_group: OptionGroup.find_by(name: "groupe 4"), input_type: "option_choice_id", active: true, display: "check_boxes")
+question10b = Question.create!( section: section, name: "Qualité de la DICT", option_group: OptionGroup.find_by(name: "groupe 5"), input_type: "option_choice_id", active: true, display: "check_boxes")
+question10c = Question.create!( section: section, name: "Avis du technicien", option_group: OptionGroup.find_by(name: "groupe 6"), input_type: "option_choice_id", active: true, display: "check_boxes")
+question10d = Question.create!( section: section, name: "Concessionnaire", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: true)
+end
 
 question10 = Question.create!( section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "Identifie la présence des réseaux suivants ?", information: "reseaux_presents", option_group: OptionGroup.find_by(name: "groupe 3"), input_type: "option_choice_id", active: true, display: "check_boxes")
 question11 = Question.create!( section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "S'appuie sur des investigations complémentaires ?", information: "presence_ic", option_group: OptionGroup.find_by(name: "groupe 1"), input_type: "option_choice_id", active: true, display: "radio_buttons")
@@ -278,14 +288,13 @@ question14 = Question.create!( section: Section.find_by(name: "Recommandations e
 question15 = Question.create!( section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "Matérialise la zone d'emprise d'un ou plusieurs ouvrages ?", information: "emprise", option_group: OptionGroup.find_by(name: "groupe 1"), input_type: "option_choice_id", active: true, display: "radio_buttons")
 question16 = Question.create!( section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "Identifie les profondeurs de l'ouvrage ?", information: "profondeur", option_group: OptionGroup.find_by(name: "groupe 1"), input_type: "option_choice_id", active: true, display: "radio_buttons")
 question17 = Question.create!( section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "Matérialise la classe de précision ?", information: "precision", option_group: OptionGroup.find_by(name: "groupe 1"), input_type: "option_choice_id", active: true, display: "radio_buttons")
-question17a = Question.create!( section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "Avis du technicien", information: "ras", option_group: OptionGroup.find_by(name: "groupe 5"), input_type: "option_choice_id", active: true, display: "radio_buttons")
 
 question18 = Question.create!( section: Section.find_by(name: "Signataires"), name: "Remarques du rédacteur :", information: "remarques_mp", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: true, display: "text")
 question19 = Question.create!( section: Section.find_by(name: "Signataires"), name: "Durée de l'intervention", information: "duree_mp", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: true, display: "integer")
 question20 = Question.create!( section: Section.find_by(name: "Signataires"), name: "Observations des parties", information: "observations_mp", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: true, display: "text")
 puts "Questions créées: #{Question.count}"
 
-Question.first(20).each do |q| ProductQuestion.create(product: Product.first, question: q) end
+Question.all.each do |q| ProductQuestion.create(product: Product.first, question: q) end
 
 puts "ProductQuestions: #{ProductQuestion.count}"
 

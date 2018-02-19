@@ -35,13 +35,13 @@
               <% if question.check_boxes? %>
                 <% @answers_per_question[question].each_with_index do |answer, index| %>
                   <span class="checkbox">
-                    <label for="report_answers_attributes_<%= 100 + index %>_option_choice_id_<%= answer.option_choice_id %>">
+                    <label for="report_answers_attributes_<%= 100 * question.id + index %>_option_choice_id_<%= answer.option_choice_id %>">
 
-                      <input class="check_boxes optional" value="<%= answer.id %>" name="report[answers_attributes][<%= 100 + index %>][id]" type="hidden">
-                      <input class="check_boxes optional" value="<%= question.id %>" name="report[answers_attributes][<%= 100 + index %>][question_id]" id="report_answers_attributes<%= 100 + index %>_question_id_<%= question.id %>" type="hidden">
-                      <input class="check_boxes optional" value="true" name="report[answers_attributes][<%= 100 + index %>][multiple_answer]" id="report_answers_attributes<%= 100 + index %>_multiple_answer_<%= question.id %>" type="hidden">
+                      <input class="check_boxes optional" value="<%= answer.id %>" name="report[answers_attributes][<%= 100 * question.id + index %>][id]" type="hidden">
+                      <input class="check_boxes optional" value="<%= question.id %>" name="report[answers_attributes][<%= 100 * question.id + index %>][question_id]" id="report_answers_attributes<%= 100 * question.id + index %>_question_id_<%= question.id %>" type="hidden">
+                      <input class="check_boxes optional" value="true" name="report[answers_attributes][<%= 100 * question.id + index %>][multiple_answer]" id="report_answers_attributes<%= 100 * question.id + index %>_multiple_answer_<%= question.id %>" type="hidden">
 
-                      <input class="check_boxes optional" value="<%= answer.option_choice_id %>" name="report[answers_attributes][<%= 100 + index %>][option_choice_id]" id="report_answers_attributes_<%= 100 + index %>_option_choice_id_<%= answer.option_choice_id %>" type="checkbox" <%= "checked" if answer.persisted? %>><%= answer.option_choice.name %>
+                      <input class="check_boxes optional" value="<%= answer.option_choice_id %>" name="report[answers_attributes][<%= 100 * question.id + index %>][option_choice_id]" id="report_answers_attributes_<%= 100 * question.id + index %>_option_choice_id_<%= answer.option_choice_id %>" type="checkbox" <%= "checked" if answer.persisted? %>><%= answer.option_choice.name %>
                     </label>
                   </span>
 

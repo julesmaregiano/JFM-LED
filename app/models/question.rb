@@ -5,7 +5,7 @@ class Question < ApplicationRecord
   has_many :product_questions, dependent: :destroy
   has_many :products, through: :product_questions
   delegate :option_choices, to: :option_group
-  validates :name, presence: true, uniqueness: true, allow_blank: false
+  validates :name, presence: true, allow_blank: false
   validates :input_type, presence: true
 
   enum display: [:text, :check_boxes, :radio_buttons, :integer]
