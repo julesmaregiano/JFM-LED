@@ -18,7 +18,6 @@
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li><%= render "shared/navbar_button", text: "Tableau de bord", icon: "eye", link: [@user.role, :dashboard]%></li>
             <li><%= render "shared/navbar_button", text: "Bookings", icon: "list", link: [@user.role, :bookings] %></li>
-            <li><%= render "shared/navbar_button", text: "Rapports", icon: "folder-open", link: [@user.role, :reports] %></li>
             <% if @user.technician? %>
               <li><%= render "shared/navbar_button", text: "Disponibilités", icon: "calendar", link: [@user.role, :availabilities] %></li>
               <li><%= render "shared/navbar_button", text: "Clients", icon: "group", link: [@user.role, :users]%></li>

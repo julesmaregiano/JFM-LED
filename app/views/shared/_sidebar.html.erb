@@ -8,6 +8,5 @@
     <%= render "shared/sidebar_button", text: "Planning", icon: "calendar-check-o", link: manager_planning_path %>
   <% end %>
   <%= render "shared/sidebar_button", text: "Bookings", icon: "list", link: [@user.role, :bookings] %>
-  <%= render "shared/sidebar_button", text: "Rapports", icon: "folder-open", link: [@user.role, :reports] %>
   <%= render "shared/sidebar_button", text: "Profil", icon: "user", link: [@user.role, @user] %>
 </div>

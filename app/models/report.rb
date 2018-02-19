@@ -13,15 +13,4 @@ class Report < ApplicationRecord
     self.signed_on.present?
   end
 
-  def progress
-    answered = 0
-    questions = self.product.questions.where(active: true).count
-    self.answers.group_by(&:question).each do |question, answers|
-      if question.active? && answers.map { |a| a if a.answered? }.any?
-        answered += 1
-      end
-    end
-    questions.zero? ? 0 : ((answered.to_f/questions.to_f)*100).round
-  end
-
 end
