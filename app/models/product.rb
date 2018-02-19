@@ -7,6 +7,6 @@ class Product < ApplicationRecord
   has_many :option_values, through: :options
   has_many :product_questions
   has_many :questions, through: :product_questions
-  has_many :sections, through: :product_questions
+  has_many :sections, through: :questions
 end
 
