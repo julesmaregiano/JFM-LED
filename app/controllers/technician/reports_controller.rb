@@ -79,7 +79,7 @@ class Technician::ReportsController < ApplicationController
   end
 
   def set_sections
-    @sections = @booking.product.sections.uniq
+    @sections = @booking.product.sections.uniq.sort_by(&:created_at)
   end
 
   def report_params
