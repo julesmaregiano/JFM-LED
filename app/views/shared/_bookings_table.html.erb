@@ -46,8 +46,6 @@
               <% if booking.report.signed? %>
                 <%= link_to(content_tag(:i, nil, class: 'fa fa-eye card-icon'), [@user.role, booking.report])%>
                 <%= link_to(content_tag(:i, nil, class: 'fa fa-file-pdf-o card-icon'), [@user.role, booking.report, format: :pdf, target: :_blank])%>
-              <% elsif booking.report.progress > 0 %>
-                <%= booking.report.progress %> %
               <% else %>
                 <i class="fa fa-eye card-icon" style="color: gray"></i>
                 <i class="fa fa-file-pdf-o card-icon" style="color: gray"></i>
