@@ -34,7 +34,8 @@ gem 'groupdate'
 gem 'signature-pad-rails'
 gem 'activeadmin', github: 'activeadmin/activeadmin'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
-gem "algoliasearch-rails"
+gem 'algoliasearch-rails'
+gem 'mailjet', :git => 'https://github.com/mailjet/mailjet-gem.git'
 
 
 source 'https://rails-assets.org' do
@@ -50,4 +51,5 @@ group :development, :test do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'bullet'
+  gem "letter_opener"
 end

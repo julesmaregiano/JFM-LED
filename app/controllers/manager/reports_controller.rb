@@ -41,6 +41,13 @@ class Manager::ReportsController < ApplicationController
     end
   end
 
+  def send_report_mail
+    @user = current_user
+    @report = Report.find(params[:id])
+    ReportMailer.report_complete(@report).deliver
+    flash[:notice] = "Le rapport a bien été envoyé."
+    redirect_to([@user.role, @report])
+  end
 
   private
 
@@ -79,4 +86,5 @@ class Manager::ReportsController < ApplicationController
   def set_sections
     @sections = @booking.product.sections.uniq.sort_by(&:created_at)
   end
+
 end

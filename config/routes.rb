@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     get '/dashboard', to: "dashboards#show"
     resources :users, only: [:show]
     resources :bookings, only: [:new, :create, :show, :index, :edit, :update]
-    resources :reports, only: [:index, :show]
+    resources :reports, only: [:show]
     resources :availabilities, only: [:show]
     resources :foremen, only: [:create]
     resources :report, only: [:show]
@@ -33,16 +33,17 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :index]
     resources :bookings, only: [:show, :index]
     resources :availabilities, only: [:index]
-    resources :reports
+    resources :reports, only: [:show, :edit, :update]
   end
 
   namespace :manager do
     get '/dashboard', to: "dashboards#show"
     get '/planning', to: "bookings#edit"
+    get :send_report_mail, to: 'reports#send_report_mail', as: :send_report_mail
     resources :users, only: [:show, :index]
     resources :bookings, only: [:show, :index, :update]
     resources :availabilities, only: [:index, :show, :update, :create]
-    resources :reports, only: [:show, :edit, :index]
+    resources :reports, only: [:show, :edit, :update]
     resources :companies, only: [:create, :update]
     resources :branches, only: [:create, :update]
   end

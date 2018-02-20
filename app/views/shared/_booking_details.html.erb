@@ -85,11 +85,9 @@
         </div>
         <div class="flex-left align-center">
           <p>Rapport</p>
+          <%= link_to(content_tag(:i, nil, class: 'fa card-icon fa-eye'), [@user.role, booking.report])%>
           <% if current_user.technician? || current_user.manager? %>
-          <%= link_to(content_tag(:i, nil, class: 'fa card-icon fa-eye'), technician_report_path(booking.report))%>
-          <%= link_to(content_tag(:i, nil, class: 'fa card-icon fa-pencil'), edit_technician_report_path(booking.report)) %>
-          <% elsif current_user.pro? %>
-          <%= link_to(content_tag(:i, nil, class: 'fa card-icon fa-eye'), pro_report_path(booking.report))%>
+            <%= link_to(content_tag(:i, nil, class: 'fa card-icon fa-pencil'), [:edit, @user.role, booking.report] ) %>
           <% end %>
 
         </div>
