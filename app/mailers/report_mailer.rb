@@ -16,8 +16,8 @@ class ReportMailer < ApplicationMailer
       render_to_string( pdf:                            "#{@report.booking.reference} Rapport de #{@report.booking.product.label}",
                         template:                       "shared/_report.html.erb",
                         page_size:                      'A4',
-                        margin:  { top:                 5,                     # default 10 (mm)
-                                   bottom:              5,
+                        margin:  { top:                 0,                     # default 10 (mm)
+                                   bottom:              0,
                                    left:                0,
                                    right:               0 },
                         viewport_size:                  '1280x1024',
