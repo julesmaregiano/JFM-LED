@@ -15,6 +15,7 @@ class ReportMailer < ApplicationMailer
     attachments["report#{report.id}.pdf"] = WickedPdf.new.pdf_from_string(
       render_to_string( pdf:                            "#{@report.booking.reference} Rapport de #{@report.booking.product.label}",
                         template:                       "shared/_report.html.erb",
+                        page_size:                      'A4',
                         margin:  { top:                 5,                     # default 10 (mm)
                                    bottom:              5,
                                    left:                0,
@@ -27,6 +28,6 @@ class ReportMailer < ApplicationMailer
       )
     )
 
-    mail to: @report.booking.user.email, subject: 'Votre rapport de #{@report.booking.product.label} de votre chantier à #{@report.booking.address.city}'
+    mail to: @report.booking.user.email, subject: "Votre rapport de #{@report.booking.product.label} de votre chantier à #{@report.booking.address.city}"
   end
 end
