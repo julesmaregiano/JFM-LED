@@ -1,1 +1,4 @@
-<%= link_to "Envoyer le Report", :controller => "reports", :action => "send_report_mail", :id => report.id %>
+<div style="background-color: white; border-radius: 10px 10px 0px 0px; width: 300px;">
+
+  <%= link_to content_tag(:i, nil, class: 'fa card-icon fa-envelope'), :controller => "reports", :action => "send_report_mail", :id => report.id %>
+</div>

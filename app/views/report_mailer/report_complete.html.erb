@@ -1,4 +1,4 @@
-<h1>Mr/Mme <%= @user.full_name %></h1>
+<h1>Mr/Mme <%= @report.booking.user.full_name %></h1>
 
 <p>
   Veuillez trouver ci-joint le rapport de <%= @report.booking.product.label %> de votre chantier de : <strong><%= @report.booking.address.full_address %></strong>.
