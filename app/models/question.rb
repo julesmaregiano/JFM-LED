@@ -7,6 +7,7 @@ class Question < ApplicationRecord
   delegate :option_choices, to: :option_group
   validates :name, presence: true, allow_blank: false
   validates :input_type, presence: true
+  validates :order, presence: true
 
   enum display: [:text, :check_boxes, :radio_buttons, :integer]
   enum input_type: [:option_choice_id, :numeric, :string, :boolean, :date]

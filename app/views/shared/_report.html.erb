@@ -12,7 +12,7 @@
     <% @sections.each do |section| %>
       <div id="Section-<%= section.id %>" class="row report-section nobreak">
         <h4 class="margin-bottom-small"><strong><%= section.name.capitalize %></strong></h4>
-        <% section.questions.where(active: true).each do |question| %>
+        <% section.questions.where(active: true).sort_by(&:order).each do |question| %>
           <div class="nobreak text-left col-xs-12 <%= section.name.include?("Précisions") ? "col-lg-6" : "col-lg-12" %>">
             <p><%= question.name %><strong>
             <% question.answers_for(@report).each do |answer| %>
@@ -36,14 +36,21 @@
 
 <!-- SIGNATURES -->
   <div class="report-section">
-    <h4><strong>Signature</strong></h4>
-
-    <% if @report.signed? %>
+    <h4><strong>Signatures</strong></h4>
+    <br>
+    <div class="col-xs-12 col-md-6">
+      <% if @report.signed? %>
+        <p><strong>Signature du chef de chantier</strong></p>
+        <%= image_tag @report.signature %>
+        <p> Signé le <%= @report.signed_on.strftime("%d/%m/%y à %Hh%M") %></p>
+      <% else %>
+        <p>En l'absence de signature et passé un délai de trois jours, la réception du Rapport de <%= @report.booking.product.label %> sera considérée comme complète.</p>
+      <% end %>
+    </div>
+    <div class="col-xs-12 col-md-6">
+      <p><strong>Signature de l'intervenant</strong></p>
       <%= image_tag @report.signature %>
-      <p> Signé le <%= @report.signed_on.strftime("%d/%m/%y à %Hh%M") %></p>
-    <% else %>
-      <p>En l'absence de signature et passé un délai de trois jours, la réception du Rapport de <%= @report.booking.product.label %> sera considérée comme complète.</p>
-    <% end %>
+    </div>
   </div>
 
 </div>

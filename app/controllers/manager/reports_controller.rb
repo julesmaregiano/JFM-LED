@@ -4,14 +4,14 @@ class Manager::ReportsController < ApplicationController
   before_action :set_booking, only: [:show, :edit, :update]
   before_action :set_client, only: [:show, :edit, :update]
   before_action :set_tech, only: [:show, :edit, :update]
-  before_action :set_sections, only: [:show, :edit, :update]
+  before_action :set_sections, only: [:edit, :update]
 
   def index
     @reports = Report.all.sort_by(&:created_at).map do |r| r if r.booking.availabilities.first.user.branch == @user.branch end.compact # car un seul diagnosticien pour l'instant
   end
 
   def show
-    @sections = @booking.product.sections.uniq.sort_by(&:created_at).map do |s| s if s.has_answers?(@report) end.compact
+    @sections = @booking.product.sections.uniq.sort_by(&:created_at).map do |s| s if s.has_answers?(@report) end.compact.sort_by(&:order)
     respond_to do |format|
       format.html
       format.pdf do
@@ -32,14 +32,14 @@ class Manager::ReportsController < ApplicationController
   end
 
   def edit
-    @sections = @booking.product.sections.uniq.sort_by(&:created_at)
+    @sections = @booking.product.sections.uniq.sort_by(&:order)
     @questions = @booking.product.questions
     @questions_per_section = @questions.group_by(&:section)
     build_answers
   end
 
   def update
-    @sections = @booking.product.sections.uniq.sort_by(&:created_at)
+    @sections = @booking.product.sections.uniq.sort_by(&:order)
     if @report.update(report_params)
       unless @report.signature == empty_signature_string
         @report.signed_on = DateTime.now
@@ -103,7 +103,7 @@ class Manager::ReportsController < ApplicationController
   end
 
   def set_sections
-    @sections = @booking.product.sections.uniq.sort_by(&:created_at)
+    @sections = @booking.product.sections.uniq.sort_by(&:order)
   end
 
   def build_answers

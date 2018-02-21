@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180209105404) do
+ActiveRecord::Schema.define(version: 20180221162308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -229,6 +229,7 @@ ActiveRecord::Schema.define(version: 20180209105404) do
     t.datetime "updated_at", null: false
     t.integer "display"
     t.boolean "active"
+    t.integer "order"
     t.index ["option_group_id"], name: "index_questions_on_option_group_id"
     t.index ["section_id"], name: "index_questions_on_section_id"
     t.index ["unit_id"], name: "index_questions_on_unit_id"
@@ -247,6 +248,7 @@ ActiveRecord::Schema.define(version: 20180209105404) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "order"
   end
 
   create_table "units", force: :cascade do |t|

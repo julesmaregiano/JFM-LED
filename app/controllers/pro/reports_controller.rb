@@ -11,7 +11,7 @@ class Pro::ReportsController < ApplicationController
     @client = @booking.user
     @tech = @booking.availabilities.first.user
     @report = Report.find(params[:id])
-    @sections = @booking.product.sections.uniq.sort_by(&:created_at)
+    @sections = @booking.product.sections.uniq.sort_by(&:created_at).map do |s| s if s.has_answers?(@report) end.compact.sort_by(&:order)
     @user = current_user
     respond_to do |format|
       format.html
