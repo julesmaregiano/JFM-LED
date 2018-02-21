@@ -33,6 +33,15 @@ GIT
       cloudinary (~> 1.1.0)
       rails (>= 3.2)
 
+GIT
+  remote: https://github.com/mailjet/mailjet-gem.git
+  revision: 133ec6a4d62dcbac8d763d1f1900f083cc55d6af
+  specs:
+    mailjet (1.5.4)
+      activesupport (>= 3.1.0)
+      rack (>= 1.4.0)
+      rest-client
+
 GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
@@ -74,6 +83,8 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    addressable (2.5.2)
+      public_suffix (>= 2.0.2, < 4.0)
     algoliasearch (1.19.1)
       httpclient (~> 2.8.3)
       json (>= 1.5.1)
@@ -184,6 +195,10 @@ GEM
       activerecord
       kaminari-core (= 1.1.1)
     kaminari-core (1.1.1)
+    launchy (2.4.3)
+      addressable (~> 2.3)
+    letter_opener (1.6.0)
+      launchy (~> 2.2)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -218,6 +233,7 @@ GEM
       pry (~> 0.10)
     pry-rails (0.3.6)
       pry (>= 0.10.4)
+    public_suffix (3.0.2)
     puma (3.11.0)
     rack (2.0.3)
     rack-test (0.6.3)
@@ -354,7 +370,9 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-fileupload-rails
   jquery-rails
+  letter_opener
   listen (~> 3.0.5)
+  mailjet!
   pg
   pry-byebug
   pry-rails

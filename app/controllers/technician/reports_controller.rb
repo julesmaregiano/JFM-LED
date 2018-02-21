@@ -46,6 +46,7 @@ class Technician::ReportsController < ApplicationController
         @report.signed_on = DateTime.now
         @report.save
       end
+      flash[:notice] = "Le rapport a bien été enregistré."
       redirect_to technician_report_path(@report)
     else
       @questions = @booking.product.questions

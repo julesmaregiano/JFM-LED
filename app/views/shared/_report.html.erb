@@ -1,6 +1,6 @@
 <%= wicked_pdf_stylesheet_link_tag "application" -%>
 
-<% if request.format == "application/pdf" %>
+<% if request.nil? || request.format == "application/pdf" %>
   <%= wicked_pdf_stylesheet_link_tag "pdf.css" -%>
 <% end %>
 

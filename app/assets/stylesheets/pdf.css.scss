@@ -1,5 +1,12 @@
 // CSS Pour le PDF
 
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+@include make-grid(xs);
+@include make-grid(sm);
+@include make-grid(md);
+@include make-grid(lg);
+
 body {
   padding: 0px !important;
   margin: 0px !important;
