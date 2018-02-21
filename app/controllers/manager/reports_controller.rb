@@ -11,6 +11,7 @@ class Manager::ReportsController < ApplicationController
   end
 
   def show
+    @sections = @booking.product.sections.uniq.sort_by(&:created_at).map do |s| s if s.has_answers?(@report) end.compact
     respond_to do |format|
       format.html
       format.pdf do
@@ -31,12 +32,14 @@ class Manager::ReportsController < ApplicationController
   end
 
   def edit
+    @sections = @booking.product.sections.uniq.sort_by(&:created_at)
     @questions = @booking.product.questions
     @questions_per_section = @questions.group_by(&:section)
     build_answers
   end
 
   def update
+    @sections = @booking.product.sections.uniq.sort_by(&:created_at)
     if @report.update(report_params)
       unless @report.signature == empty_signature_string
         @report.signed_on = DateTime.now

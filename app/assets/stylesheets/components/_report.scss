@@ -1,19 +1,21 @@
 .report {
   padding-left: 0px;
-}
-
-.report-section {
-  margin: 20px 0px;
-  padding-left: 15px;
-  border-left: 8px solid $blue-gray;
-  & h6{
-    color: $blue-gray;
-    border-bottom: 3px solid $blue-gray;
+  .report-header {
+    margin: auto;
+    border-bottom: 2px solid $blue-gray;
+    padding: 5px 0px;
+  }
+  .report-section {
+    margin: 20px 0px 20px 20px;
+    padding-left: 15px;
+    & h6{
+      color: $blue-gray;
+      border-bottom: 3px solid $blue-gray;
+    }
+    strong {
+      margin-left: 10px;
+    }
   }
 }
 
-.report-header {
-  margin: auto;
-  border-bottom: 2px solid $blue-gray;
-  padding: 5px 0px;
-}
+

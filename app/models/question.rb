@@ -16,7 +16,10 @@ class Question < ApplicationRecord
   end
 
   def has_answer?(report)
-    self.answers.where(report: report).first.attribute.slice('date', 'string', 'boolean', 'numeric', 'option_choice_id').compact.any?
+    answer = self.answers.where(report: report).first
+    unless answer.nil?
+      answer.attributes.slice('date', 'string', 'boolean', 'numeric', 'option_choice_id').compact.any?
+    end
   end
 
 end
