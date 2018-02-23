@@ -36,7 +36,7 @@ class Technician::ReportsController < ApplicationController
   end
 
   def edit
-    @questions = @booking.product.questions
+    @questions = @booking.product.questions.where(active: true)
     @questions_per_section = @questions.group_by(&:section)
     build_answers
   end

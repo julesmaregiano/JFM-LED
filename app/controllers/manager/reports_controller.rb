@@ -1,5 +1,5 @@
 class Manager::ReportsController < ApplicationController
-  before_action :set_user, only: [:index, :show, :edit]
+  before_action :set_user, only: [:index, :show, :edit, :update]
   before_action :set_report, only: [:show, :edit, :update]
   before_action :set_booking, only: [:show, :edit, :update]
   before_action :set_client, only: [:show, :edit, :update]
@@ -33,7 +33,7 @@ class Manager::ReportsController < ApplicationController
 
   def edit
     @sections = @booking.product.sections.uniq.sort_by(&:order)
-    @questions = @booking.product.questions
+    @questions = @booking.product.questions.where(active: true)
     @questions_per_section = @questions.group_by(&:section)
     build_answers
   end
