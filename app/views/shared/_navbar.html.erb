@@ -5,6 +5,7 @@
 
   <div class="navbar-wagon-right">
     <% if user_signed_in? %>
+      <%= render "shared/search_bar_bookings" %>
       <% if @user.pro? %>
         <div class="hidden-xs hidden-sm">
           <%= link_to "Réserver", new_pro_booking_path, class: "btn-slim flexbox" %>
@@ -44,3 +45,29 @@
   </div>
 </div>
 
+<%= content_for :after_js do %>
+  <script>
+    var client = algoliasearch("<%= ENV['ALGOLIA_APP_KEY'] %>", "<%= ENV['ALGOLIA_SEARCH_KEY'] %>");
+    var index = client.initIndex('Booking', 'Company');
+    //initialize autocomplete on search input (ID selector must match)
+    autocomplete('#aa-search-input',
+    { hint: false }, {
+        source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+        //value to be displayed in input control after user's suggestion selection
+        displayKey: 'booking',
+        //hash of templates used when rendering dataset
+        templates: {
+            //'suggestion' templating function used to render a single suggestion
+            suggestion: function(suggestion) {
+              return '<div class="flexbox flex-start"><div><img style="margin-right: 6px" src="'
+                      + suggestion.company.logo
+                      + '"></div><div><p><strong>'
+                      + suggestion._highlightResult.company.company.value + '</strong> ' + suggestion._highlightResult.user.first_name.value + ' ' + suggestion._highlightResult.user.last_name.value + ' - ' + suggestion._highlightResult.reference.value
+                      + '</p><i style="font-weight: lighter">' + suggestion._highlightResult.product.label.value + '</i></div></div>';
+            }
+        }
+    }).on('autocomplete:selected', function(event, suggestion, dataset) {
+    location.href = 'bookings/' + suggestion.id;
+  });;
+  </script>
+<% end %>
