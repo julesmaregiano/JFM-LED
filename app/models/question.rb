@@ -7,6 +7,7 @@ class Question < ApplicationRecord
   delegate :option_choices, to: :option_group
   validates :name, presence: true, allow_blank: false
   validates :input_type, presence: true
+  validates :order, presence: true
 
   enum display: [:text, :check_boxes, :radio_buttons, :integer]
   enum input_type: [:option_choice_id, :numeric, :string, :boolean, :date]
@@ -16,7 +17,10 @@ class Question < ApplicationRecord
   end
 
   def has_answer?(report)
-    self.answers.where(report: report).first.attribute.slice('date', 'string', 'boolean', 'numeric', 'option_choice_id').compact.any?
+    answer = self.answers.where(report: report).first
+    unless answer.nil?
+      answer.attributes.slice('date', 'string', 'boolean', 'numeric', 'option_choice_id').compact.any?
+    end
   end
 
 end

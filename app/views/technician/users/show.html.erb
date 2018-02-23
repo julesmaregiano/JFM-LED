@@ -7,6 +7,25 @@
           <%= render "/shared/profile" %>
         </div>
 
+        <div class="col-xs-12 col-md-6 card-container">
+            <%= simple_form_for [@user.role, @user] do |f| %>
+            <%= f.input_field :signature, as: :hidden, class: 'signature_pad_input' %>
+            <div class="signature_pad text-center">
+              <div class="signature_pad_body">
+                <canvas></canvas>
+              </div>
+              <div class="signature_pad_footer">
+                <div class="text-muted">Signez ci-dessus</div>
+                <button type="button" class="signature_pad_clear btn">Effacer</button>
+                <%= f.button :submit, 'Sauvegarder ma signature', class: 'btn btn-success signature_pad_save' %>
+              </div>
+            </div>
+
+            <% end %>
+
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

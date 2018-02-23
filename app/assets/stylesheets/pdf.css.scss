@@ -20,21 +20,13 @@ html {
   }
 
 .card-container {
+  .report-header {
+    padding-bottom: 30px !important;
+  }
+  div.nobreak {
+    page-break-inside: avoid;
+  }
   height: auto;
   border-top: 0px solid white;
   box-shadow: none;
-  label {
-    font-style: italic;
-    font-weight: lighter;
-  }
-  h4 {
-    font-weight: lighter;
-  }
-  p {
-    font-weight: bolder;
-  }
-}
-
-.report-header {
-  padding-bottom: 30px !important;
 }

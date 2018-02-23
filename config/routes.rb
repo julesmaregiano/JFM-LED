@@ -30,7 +30,7 @@ Rails.application.routes.draw do
 
   namespace :technician do
     get '/dashboard', to: "dashboards#show"
-    resources :users, only: [:show, :index]
+    resources :users, only: [:show, :index, :update]
     resources :bookings, only: [:show, :index]
     resources :availabilities, only: [:index]
     resources :reports, only: [:show, :edit, :update]

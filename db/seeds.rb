@@ -218,8 +218,10 @@ sections = ["Désignation du chantier",
             "Précisions sur les réseaux de télécom(s)",
             "Précisions sur les réseaux indéterminés",
             "Signataires"]
+counter = 1
 sections.each do |section|
-  Section.create(name: section)
+  Section.create(order: counter, name: section)
+  counter += 1
 end
 puts "Création des #{Section.count} sections"
 
@@ -258,40 +260,40 @@ option_choices.each { |key, value|
     OptionChoice.create(option_group: OptionGroup.find_by(name: key), name: choix)
   }
 }
+puts "Création des #{OptionChoice.count} option choices"
 
 # QUESTIONS
 # RAPPEL enum input_type: {option_choice_id: 0, numeric: 1, string: 2, boolean: 3}
 
-puts "Création des #{OptionChoice.count} option choices"
 
-question1 = Question.create!( section: Section.find_by(name: "Désignation du chantier"), name: "Désignation du chantier", information: "designation_chantier", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: true)
-question2 = Question.create!( section: Section.find_by(name: "Désignation du chantier"), name: "Nom du maître d'oeuvre", information: "nom_maitre_oeuvre", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: false)
-question3 = Question.create!( section: Section.find_by(name: "Désignation du chantier"), name: "Numéro de DICT", information: "numero_dict", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: true)
-question4 = Question.create!( section: Section.find_by(name: "Désignation du chantier"), name: "Date de génération du DICT", information: "date_dict", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "date", active: true)
-question5 = Question.create!( section: Section.find_by(name: "Désignation du chantier"), name: "Personnes présentes", information: "personnes_presentes", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: false)
-question7 = Question.create!( section: Section.find_by(name: "Contexte du chantier"), name: "Nature des travaux et techniques utilisées", information: "nature_travaux", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: true)
-question8 = Question.create!( section: Section.find_by(name: "Contexte du chantier"), name: "Date prévisionelle de démarrage", information: "date_demarrage_previsionelle", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "date", active: true)
-question9 = Question.create!( section: Section.find_by(name: "Contexte du chantier"), name: "Durée prévisionelle des travaux", information: "duree_previsionelle", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: true)
+question1 = Question.create!(order: 1, section: Section.find_by(name: "Désignation du chantier"), name: "Désignation du chantier :", information: "designation_chantier", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: true)
+question2 = Question.create!(order: 2, section: Section.find_by(name: "Désignation du chantier"), name: "Nom du maître d'oeuvre :", information: "nom_maitre_oeuvre", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: false)
+question3 = Question.create!(order: 3, section: Section.find_by(name: "Désignation du chantier"), name: "Numéro de DICT :", information: "numero_dict", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: true)
+question4 = Question.create!(order: 4, section: Section.find_by(name: "Désignation du chantier"), name: "Date de génération du DICT :", information: "date_dict", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "date", active: true)
+question5 = Question.create!(order: 5, section: Section.find_by(name: "Désignation du chantier"), name: "Personnes présentes :", information: "personnes_presentes", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: false)
+question7 = Question.create!(order: 1, section: Section.find_by(name: "Contexte du chantier"), name: "Nature des travaux et techniques utilisées :", information: "nature_travaux", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: true)
+question8 = Question.create!(order: 2, section: Section.find_by(name: "Contexte du chantier"), name: "Date prévisionelle de démarrage :", information: "date_demarrage_previsionelle", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "date", active: true)
+question9 = Question.create!(order: 3, section: Section.find_by(name: "Contexte du chantier"), name: "Durée prévisionelle des travaux :", information: "duree_previsionelle", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: true)
 
-question10 = Question.create!( section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "Identifie la présence des réseaux suivants ?", information: "reseaux_presents", option_group: OptionGroup.find_by(name: "groupe 3"), input_type: "option_choice_id", active: true, display: "check_boxes")
-question11 = Question.create!( section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "S'appuie sur des investigations complémentaires ?", information: "presence_ic", option_group: OptionGroup.find_by(name: "groupe 1"), input_type: "option_choice_id", active: true, display: "radio_buttons")
-question12 = Question.create!( section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "Identifie des zones de doutes, à risques (coudes, croisements, branchements) ?", information: "presence_doutes", option_group: OptionGroup.find_by(name: "groupe 1"), input_type: "option_choice_id", active: true, display: "radio_buttons")
-question13 = Question.create!( section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "Suit le code couleur règlementaire ?", information: "couleurs_reglementaires", option_group: OptionGroup.find_by(name: "groupe 1"), input_type: "option_choice_id", active: true, display: "radio_buttons")
-question14 = Question.create!( section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "Matérialise l'axe présumé des ouvrages ?", information: "axe", option_group: OptionGroup.find_by(name: "groupe 1"), input_type: "option_choice_id", active: true, display: "radio_buttons")
-question15 = Question.create!( section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "Matérialise la zone d'emprise d'un ou plusieurs ouvrages ?", information: "emprise", option_group: OptionGroup.find_by(name: "groupe 1"), input_type: "option_choice_id", active: true, display: "radio_buttons")
-question16 = Question.create!( section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "Identifie les profondeurs de l'ouvrage ?", information: "profondeur", option_group: OptionGroup.find_by(name: "groupe 1"), input_type: "option_choice_id", active: true, display: "radio_buttons")
-question17 = Question.create!( section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "Matérialise la classe de précision ?", information: "precision", option_group: OptionGroup.find_by(name: "groupe 1"), input_type: "option_choice_id", active: true, display: "radio_buttons")
+question10 = Question.create!(order: 1, section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "Identifie la présence des réseaux suivants ?", information: "reseaux_presents", option_group: OptionGroup.find_by(name: "groupe 3"), input_type: "option_choice_id", active: true, display: "check_boxes")
+question11 = Question.create!(order: 2, section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "S'appuie sur des investigations complémentaires ?", information: "presence_ic", option_group: OptionGroup.find_by(name: "groupe 1"), input_type: "option_choice_id", active: true, display: "radio_buttons")
+question12 = Question.create!(order: 3, section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "Identifie des zones de doutes, à risques (coudes, croisements, branchements) ?", information: "presence_doutes", option_group: OptionGroup.find_by(name: "groupe 1"), input_type: "option_choice_id", active: true, display: "radio_buttons")
+question13 = Question.create!(order: 4, section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "Suit le code couleur règlementaire ?", information: "couleurs_reglementaires", option_group: OptionGroup.find_by(name: "groupe 1"), input_type: "option_choice_id", active: true, display: "radio_buttons")
+question14 = Question.create!(order: 5, section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "Matérialise l'axe présumé des ouvrages ?", information: "axe", option_group: OptionGroup.find_by(name: "groupe 1"), input_type: "option_choice_id", active: true, display: "radio_buttons")
+question15 = Question.create!(order: 6, section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "Matérialise la zone d'emprise d'un ou plusieurs ouvrages ?", information: "emprise", option_group: OptionGroup.find_by(name: "groupe 1"), input_type: "option_choice_id", active: true, display: "radio_buttons")
+question16 = Question.create!(order: 7, section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "Identifie les profondeurs de l'ouvrage ?", information: "profondeur", option_group: OptionGroup.find_by(name: "groupe 1"), input_type: "option_choice_id", active: true, display: "radio_buttons")
+question17 = Question.create!(order: 8, section: Section.find_by(name: "Recommandations et localisations des ouvrages"), name: "Matérialise la classe de précision ?", information: "precision", option_group: OptionGroup.find_by(name: "groupe 1"), input_type: "option_choice_id", active: true, display: "radio_buttons")
 
 Section.find((4..10).to_a).each do |section|
-question10a = Question.create!( section: section, name: "Classe de réseaux", option_group: OptionGroup.find_by(name: "groupe 4"), input_type: "option_choice_id", active: true, display: "check_boxes")
-question10b = Question.create!( section: section, name: "Commentaire sur la DICT", option_group: OptionGroup.find_by(name: "groupe 5"), input_type: "option_choice_id", active: true, display: "check_boxes")
-question10c = Question.create!( section: section, name: "Avis du technicien", option_group: OptionGroup.find_by(name: "groupe 6"), input_type: "option_choice_id", active: true, display: "check_boxes")
-question10d = Question.create!( section: section, name: "Concessionnaire", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: true)
+question10d = Question.create!(order: 1, section: section, name: "Concessionnaire :", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: true)
+question10a = Question.create!(order: 2, section: section, name: "Classe de réseaux :", option_group: OptionGroup.find_by(name: "groupe 4"), input_type: "option_choice_id", active: true, display: "check_boxes")
+question10b = Question.create!(order: 3, section: section, name: "Commentaire sur la DICT :", option_group: OptionGroup.find_by(name: "groupe 5"), input_type: "option_choice_id", active: true, display: "check_boxes")
+question10c = Question.create!(order: 4, section: section, name: "Avis du technicien :", option_group: OptionGroup.find_by(name: "groupe 6"), input_type: "option_choice_id", active: true, display: "check_boxes")
 end
 
-question18 = Question.create!( section: Section.find_by(name: "Signataires"), name: "Remarques du rédacteur :", information: "remarques_mp", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: true, display: "text")
-question19 = Question.create!( section: Section.find_by(name: "Signataires"), name: "Durée de l'intervention", information: "duree_mp", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: true, display: "integer")
-question20 = Question.create!( section: Section.find_by(name: "Signataires"), name: "Observations des parties", information: "observations_mp", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: true, display: "text")
+question18 = Question.create!(order: 1, section: Section.find_by(name: "Signataires"), name: "Remarques du rédacteur :", information: "remarques_mp", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: true, display: "text")
+question19 = Question.create!(order: 2, section: Section.find_by(name: "Signataires"), name: "Durée de l'intervention :", information: "duree_mp", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: true, display: "integer")
+question20 = Question.create!(order: 3, section: Section.find_by(name: "Signataires"), name: "Observations des parties :", information: "observations_mp", option_group: OptionGroup.find_by(name: "groupe 0"), input_type: "string", active: true, display: "text")
 puts "Questions créées: #{Question.count}"
 
 Product.all.each do |product|

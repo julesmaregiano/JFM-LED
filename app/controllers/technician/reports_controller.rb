@@ -7,7 +7,7 @@ class Technician::ReportsController < ApplicationController
   before_action :set_booking, only: [:show, :edit, :update]
   before_action :set_client, only: [:show, :edit, :update]
   before_action :set_tech, only: [:show, :edit, :update]
-  before_action :set_sections, only: [:show, :edit, :update]
+  before_action :set_sections, only: [:edit, :update]
 
 
   def index
@@ -15,6 +15,7 @@ class Technician::ReportsController < ApplicationController
   end
 
   def show
+    @sections = @booking.product.sections.uniq.sort_by(&:created_at).map do |s| s if s.has_answers?(@report) end.compact.sort_by(&:order)
     respond_to do |format|
       format.html
       format.pdf do
@@ -80,7 +81,7 @@ class Technician::ReportsController < ApplicationController
   end
 
   def set_sections
-    @sections = @booking.product.sections.uniq.sort_by(&:created_at)
+    @sections = @booking.product.sections.uniq.sort_by(&:order)
   end
 
   def report_params
@@ -130,7 +131,7 @@ class Technician::ReportsController < ApplicationController
   end
 
   def empty_signature_string
-    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAV4AAACwCAYAAABHEgZcAAABBklEQVR4nO3BAQ0AAADCoPdPbQ43oAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAVwPDXQABjSI3YAAAAABJRU5ErkJggg=="
+    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAYAAAB5fY51AAABdElEQVR4nO3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD+Bn+3AAEkkD9cAAAAAElFTkSuQmCC"
   end
 
 end
