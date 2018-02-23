@@ -15,7 +15,7 @@ class Technician::ReportsController < ApplicationController
   end
 
   def show
-    @sections = @booking.product.sections.uniq.sort_by(&:created_at).map do |s| s if s.has_answers?(@report) end.compact.sort_by(&:order)
+    @sections = @booking.product.sections.uniq.sort_by(&:order).map do |s| s if s.has_answers?(@report) end.compact.sort_by(&:order)
     respond_to do |format|
       format.html
       format.pdf do
