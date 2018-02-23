@@ -1,4 +1,5 @@
-<div style="background-color: white; border-radius: 10px 10px 0px 0px; width: 80px;">
+<div style="background-color: white; border-radius: 10px 10px 0px 0px; width: 120px;">
   <%= link_to content_tag(:i, nil, class: 'fa card-icon fa-envelope'), :controller => "reports", :action => "send_report_mail", :id => report.id %>
   <%= link_to content_tag(:i, nil, class: 'fa card-icon fa-pencil'), [:edit, @user.role, booking.report] %>
+  <%= link_to(content_tag(:i, nil, class: 'fa fa-file-pdf-o card-icon'), [@user.role, booking.report, format: :pdf], target: :_blank)%>
 </div>
