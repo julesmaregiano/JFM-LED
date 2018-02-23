@@ -25,10 +25,18 @@
 <!-- PICTURES -->
   <% if @report.photos? %>
   <div class="report-section nobreak">
-    <h4><strong>Photos (<%= @report.photos.count %>)</strong></h4>
-    <% @report.photos.each do |photo| %>
-      <%= cl_image_tag photo.path, width: 200, height: 300, crop: :fill %>
-    <% end %>
+    <h4><strong>Photos</strong></h4>
+    <div class="flex-left">
+      <% @report.photos.first(2).each do |photo| %>
+        <%= cl_image_tag photo.path, width: 200, height: 300, crop: :fill, class: "report-photo" %>
+      <% end %>
+
+      <% if @report.photos.count > 2 %>
+        <div class="report-cta flexbox report-photo">
+          <p class="text-center"><strong><%= @report.photos.count - 2 %> photos restantes</strong><br>Demandez votre rapport photo (250€HT)</p>
+        </div>
+      <% end %>
+    </div>
   </div>
   <% end %>
 

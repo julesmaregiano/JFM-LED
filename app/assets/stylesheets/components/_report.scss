@@ -19,3 +19,16 @@
 }
 
 
+.report-cta {
+  width: 200px;
+  height: 300px;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+  align-items: center;
+  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.4)) , url("http://res.cloudinary.com/zanzibar/image/upload/c_fill,h_300,w_200/v1519232356/fo6f2ne7ji7ubsqknwj6.jpg");
+  padding: 10px;
+}
+
+.report-photo {
+  padding-right: 3px;
+}
