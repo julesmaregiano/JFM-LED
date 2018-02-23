@@ -13,3 +13,10 @@
     }
   }
 }
+
+.sorting::after, .sorting_asc::after {
+  font-size: 14px;
+  &:active {
+    color: $anis;
+  }
+}
