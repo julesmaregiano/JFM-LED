@@ -8,7 +8,6 @@
 
   <%= render "shared/report_header", report: @report %>
 
-  <div>
     <% @sections.each do |section| %>
       <div id="Section-<%= section.id %>" class="row report-section nobreak">
         <h4 class="margin-bottom-small"><strong><%= section.name.capitalize %></strong></h4>
@@ -22,7 +21,6 @@
         <% end %>
       </div>
     <% end %>
-  </div>
 
 <!-- PICTURES -->
   <% if @report.photos? %>
@@ -35,24 +33,23 @@
   <% end %>
 
 <!-- SIGNATURES -->
-  <div class="report-section">
+  <div class="report-section row">
     <h4><strong>Signatures</strong></h4>
-    <br>
     <div class="col-xs-12 col-md-6">
       <% if @report.signed? %>
-        <p><strong>Signature du chef de chantier</strong></p>
-        <%= image_tag @report.signature %>
+        <p><strong>Signature du client</strong></p>
+        <div> <%= image_tag @report.signature %></div>
         <p> Signé le <%= @report.signed_on.strftime("%d/%m/%y à %Hh%M") %></p>
       <% else %>
         <p>En l'absence de signature et passé un délai de trois jours, la réception du Rapport de <%= @report.booking.product.label %> sera considérée comme complète.</p>
       <% end %>
     </div>
     <div class="col-xs-12 col-md-6">
-      <p><strong>Signature de l'intervenant</strong></p>
+      <p><strong>Signature de <%= @tech.company.name %></strong></p>
       <% if @tech.signature.present? %>
         <%= image_tag @tech.signature %>
       <% else %>
-        <p>L'intervenant n'a pas apposé sa signature</p>
+        Le technicien n'a pas enregistré sa signature
       <% end %>
     </div>
   </div>
