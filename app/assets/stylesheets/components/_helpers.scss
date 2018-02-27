@@ -124,6 +124,14 @@ $white-space: 20px;
 .min-width {
   min-width: 200px;
 }
+.no-decoration {
+  color: $dark-gray !important;
+  text-decoration: none;
+  & :hover {
+    color: $diago !important;
+  }
+}
+
 //CONFIG
 a:hover {
   text-decoration: none !important;
