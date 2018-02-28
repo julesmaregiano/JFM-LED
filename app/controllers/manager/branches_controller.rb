@@ -2,7 +2,7 @@ class Manager::BranchesController < ApplicationController
 
   def create
     @user = current_user
-    @branch = Branch.new(params_company)
+    @branch = Branch.new(params_branch)
     if @branch.save
       redirect_to manager_user_path(@user)
     else
@@ -22,7 +22,7 @@ class Manager::BranchesController < ApplicationController
 
   private
 
-  def params_company
-    params.require(:branch).permit(:name, :company_id, address_attributes: [:address1, :address2, :zipcode, :city, :country])
+  def params_branch
+    params.require(:branch).permit(:name, :photo, :company_id, address_attributes: [:address1, :address2, :zipcode, :city, :country])
   end
 end
