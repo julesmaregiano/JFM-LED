@@ -73,7 +73,7 @@
         <h4><strong><i class="fa fa-file-text-o"></i>  Documents</strong></h4>
         <p>Référence interne : <strong><%= booking.reference.nil? ? "non renseigné" : "#{booking.reference}"%></strong></p>
         <div class="flex-left align-center">
-          <p>Bon de commande</p>
+          <p>Bon de commande : </p>
           <% if booking.pdf.nil? %>
           <i class="fa card-icon fa-file-text-o" style="color: gray"></i>
           <% else %>
@@ -82,8 +82,8 @@
 
         </div>
         <div class="flex-left align-center">
-          <p>Rapport</p>
-          <%= link_to(content_tag(:i, nil, class: 'fa card-icon fa-eye'), [@user.role, booking.report])%>
+          <p>Rapport : </p>
+          <%= link_to(content_tag(:i, nil, class: 'fa card-icon fa-file-text-o'), [@user.role, booking.report])%>
           <% if current_user.technician? || current_user.manager? %>
             <%= link_to(content_tag(:i, nil, class: 'fa card-icon fa-pencil'), [:edit, @user.role, booking.report] ) %>
           <% end %>

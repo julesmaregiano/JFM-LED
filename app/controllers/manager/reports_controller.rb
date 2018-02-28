@@ -1,4 +1,4 @@
-class Manager::ReportsController < ApplicationController
+  class Manager::ReportsController < ApplicationController
   before_action :set_user, only: [:index, :show, :edit, :update]
   before_action :set_report, only: [:show, :edit, :update]
   before_action :set_booking, only: [:show, :edit, :update]

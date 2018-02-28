@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <% if @user.pro? || @user.particulier? %>
+    <% if @user.pro? %>
       <div class="card-middle no-margin flexbox-vertical align-center">
         <h5 class="no-margin"><%= technician.company.name %></h5>
         <p><strong><%= booking.address.address1 %> - <%= booking.address.city %></strong></p>
