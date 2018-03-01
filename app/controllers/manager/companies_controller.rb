@@ -23,6 +23,6 @@ class Manager::CompaniesController < ApplicationController
   private
 
   def params_company
-    params.require(:company).permit(:name)
+    params.require(:company).permit(:name, :photo)
   end
 end
