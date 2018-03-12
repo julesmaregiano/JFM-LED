@@ -42,6 +42,9 @@ source 'https://rails-assets.org' do
   gem "rails-assets-underscore"
 end
 
+group :development do
+  gem 'rails-erd'
+end
 
 group :development, :test do
   gem 'pry-byebug'
