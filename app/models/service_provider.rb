@@ -3,4 +3,5 @@ class ServiceProvider < ApplicationRecord
   validates :siret, presence: true
 
   has_many :technicians
+  has_many :managers
 end
