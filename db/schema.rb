@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180312212928) do
+ActiveRecord::Schema.define(version: 20180312213904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -160,6 +160,16 @@ ActiveRecord::Schema.define(version: 20180312212928) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["branch_id"], name: "index_foremen_on_branch_id"
+  end
+
+  create_table "managers", force: :cascade do |t|
+    t.string "email"
+    t.string "first_name"
+    t.string "last_name"
+    t.bigint "service_provider_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["service_provider_id"], name: "index_managers_on_service_provider_id"
   end
 
   create_table "option_choices", force: :cascade do |t|
@@ -317,6 +327,7 @@ ActiveRecord::Schema.define(version: 20180312212928) do
   add_foreign_key "company_products", "companies"
   add_foreign_key "company_products", "products"
   add_foreign_key "foremen", "branches"
+  add_foreign_key "managers", "service_providers"
   add_foreign_key "option_choices", "option_groups"
   add_foreign_key "option_values", "options"
   add_foreign_key "product_options", "options"
