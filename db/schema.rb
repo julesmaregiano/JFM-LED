@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180312213904) do
+ActiveRecord::Schema.define(version: 20180313005120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,9 @@ ActiveRecord::Schema.define(version: 20180312213904) do
     t.bigint "branch_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "addressable_type"
+    t.integer "addressable_id"
+    t.index ["addressable_id", "addressable_type"], name: "index_addresses_on_addressable_id_and_addressable_type"
     t.index ["booking_id"], name: "index_addresses_on_booking_id"
     t.index ["branch_id"], name: "index_addresses_on_branch_id"
   end
