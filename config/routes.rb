@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users
+  devise_for :managers
 
   root to: 'pages#home'
   get '/eligibility', to: 'pages#eligibility'
