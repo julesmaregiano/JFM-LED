@@ -6,14 +6,15 @@
   delegate :branch, to: :user
 
   belongs_to :product
-  belongs_to :foreman, optional: true
   belongs_to :user
+  belongs_to :foreman, optional: true
 
   validates :user_id, presence: true
   validates :availabilities, presence: true
 
   has_one :address, dependent: :destroy
-  has_one :report, dependent: :destroy
+  has_one :report,  dependent: :destroy
+  has_one :address, dependent: :destroy, as: :addressable
 
   has_attachment :pdf
   accepts_nested_attributes_for :address
