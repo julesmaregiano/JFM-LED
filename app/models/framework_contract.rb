@@ -11,7 +11,7 @@ class FrameworkContract < ApplicationRecord
 end
 
 # == Schema Information
-# Schema version: 20180313013829
+# Schema version: 20180313100739
 #
 # Table name: framework_contracts
 #
@@ -21,6 +21,7 @@ end
 #  ends_at             :date
 #  half_day_price      :integer
 #  id                  :integer          not null, primary key
+#  product_id          :integer
 #  service_provider_id :integer
 #  starts_at           :date
 #  updated_at          :datetime         not null
@@ -28,5 +29,6 @@ end
 # Indexes
 #
 #  index_framework_contracts_on_company_id           (company_id)
+#  index_framework_contracts_on_product_id           (product_id)
 #  index_framework_contracts_on_service_provider_id  (service_provider_id)
 #
