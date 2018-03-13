@@ -44,6 +44,7 @@ end
 
 group :development do
   gem 'rails-erd'
+  gem 'annotate'
 end
 
 group :development, :test do

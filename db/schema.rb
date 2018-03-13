@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180223090900) do
+ActiveRecord::Schema.define(version: 20180313031525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,9 @@ ActiveRecord::Schema.define(version: 20180223090900) do
     t.bigint "branch_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "addressable_type"
+    t.integer "addressable_id"
+    t.index ["addressable_id", "addressable_type"], name: "index_addresses_on_addressable_id_and_addressable_type"
     t.index ["booking_id"], name: "index_addresses_on_booking_id"
     t.index ["branch_id"], name: "index_addresses_on_branch_id"
   end
@@ -141,6 +144,7 @@ ActiveRecord::Schema.define(version: 20180223090900) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "siret"
   end
 
   create_table "company_products", force: :cascade do |t|
@@ -148,6 +152,8 @@ ActiveRecord::Schema.define(version: 20180223090900) do
     t.bigint "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "half_day_price"
+    t.float "day_price"
     t.index ["company_id"], name: "index_company_products_on_company_id"
     t.index ["product_id"], name: "index_company_products_on_product_id"
   end
@@ -160,6 +166,29 @@ ActiveRecord::Schema.define(version: 20180223090900) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["branch_id"], name: "index_foremen_on_branch_id"
+  end
+
+  create_table "framework_contracts", force: :cascade do |t|
+    t.date "starts_at"
+    t.date "ends_at"
+    t.float "day_price"
+    t.integer "half_day_price"
+    t.bigint "company_id"
+    t.bigint "service_provider_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_framework_contracts_on_company_id"
+    t.index ["service_provider_id"], name: "index_framework_contracts_on_service_provider_id"
+  end
+
+  create_table "managers", force: :cascade do |t|
+    t.string "email"
+    t.string "first_name"
+    t.string "last_name"
+    t.bigint "service_provider_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["service_provider_id"], name: "index_managers_on_service_provider_id"
   end
 
   create_table "option_choices", force: :cascade do |t|
@@ -251,6 +280,23 @@ ActiveRecord::Schema.define(version: 20180223090900) do
     t.integer "order"
   end
 
+  create_table "service_providers", force: :cascade do |t|
+    t.string "name"
+    t.string "siret"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "technicians", force: :cascade do |t|
+    t.string "email"
+    t.string "first_name"
+    t.string "last_name"
+    t.bigint "service_provider_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["service_provider_id"], name: "index_technicians_on_service_provider_id"
+  end
+
   create_table "units", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -300,6 +346,9 @@ ActiveRecord::Schema.define(version: 20180223090900) do
   add_foreign_key "company_products", "companies"
   add_foreign_key "company_products", "products"
   add_foreign_key "foremen", "branches"
+  add_foreign_key "framework_contracts", "companies"
+  add_foreign_key "framework_contracts", "service_providers"
+  add_foreign_key "managers", "service_providers"
   add_foreign_key "option_choices", "option_groups"
   add_foreign_key "option_values", "options"
   add_foreign_key "product_options", "options"
@@ -310,6 +359,7 @@ ActiveRecord::Schema.define(version: 20180223090900) do
   add_foreign_key "questions", "sections"
   add_foreign_key "questions", "units"
   add_foreign_key "reports", "bookings"
+  add_foreign_key "technicians", "service_providers"
   add_foreign_key "users", "branches"
   add_foreign_key "users", "companies"
 end

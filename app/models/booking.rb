@@ -1,19 +1,20 @@
   class Booking < ApplicationRecord
   has_many :availabilities
-  has_many :users, through: :availabilities
   has_many :booked_product_options, dependent: :destroy
+  has_many :users,         through: :availabilities
   has_many :option_values, through: :booked_product_options, dependent: :destroy
   delegate :branch, to: :user
 
   belongs_to :product
-  belongs_to :foreman, optional: true
   belongs_to :user
+  belongs_to :foreman, optional: true
 
   validates :user_id, presence: true
   validates :availabilities, presence: true
 
   has_one :address, dependent: :destroy
-  has_one :report, dependent: :destroy
+  has_one :report,  dependent: :destroy
+  has_one :address, dependent: :destroy, as: :addressable
 
   has_attachment :pdf
   accepts_nested_attributes_for :address
@@ -77,3 +78,35 @@
   end
 
 end
+
+# == Schema Information
+# Schema version: 20180312213904
+#
+# Table name: bookings
+#
+#  address1     :string
+#  address2     :string
+#  address3     :string
+#  address4     :string
+#  city         :string
+#  comment      :text
+#  confirmed_at :datetime
+#  country      :string
+#  created_at   :datetime         not null
+#  foreman_id   :integer
+#  id           :integer          not null, primary key
+#  latitude     :float
+#  longitude    :float
+#  product_id   :integer
+#  reference    :string
+#  surface      :string
+#  updated_at   :datetime         not null
+#  user_id      :integer
+#  zipcode      :string
+#
+# Indexes
+#
+#  index_bookings_on_foreman_id  (foreman_id)
+#  index_bookings_on_product_id  (product_id)
+#  index_bookings_on_user_id     (user_id)
+#
