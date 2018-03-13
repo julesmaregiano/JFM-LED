@@ -1,5 +1,6 @@
 class Technician < ApplicationRecord
   belongs_to :service_provider
+  has_one    :address, as: :addressable
 
   validates :email, :first_name, :last_name,
     presence: true,
