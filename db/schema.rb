@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180313013358) do
+ActiveRecord::Schema.define(version: 20180313013829) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -164,6 +164,19 @@ ActiveRecord::Schema.define(version: 20180313013358) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["branch_id"], name: "index_foremen_on_branch_id"
+  end
+
+  create_table "framework_contracts", force: :cascade do |t|
+    t.date "starts_at"
+    t.date "ends_at"
+    t.float "day_price"
+    t.integer "hal_day_price"
+    t.bigint "company_id"
+    t.bigint "service_provider_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_framework_contracts_on_company_id"
+    t.index ["service_provider_id"], name: "index_framework_contracts_on_service_provider_id"
   end
 
   create_table "managers", force: :cascade do |t|
@@ -331,6 +344,8 @@ ActiveRecord::Schema.define(version: 20180313013358) do
   add_foreign_key "company_products", "companies"
   add_foreign_key "company_products", "products"
   add_foreign_key "foremen", "branches"
+  add_foreign_key "framework_contracts", "companies"
+  add_foreign_key "framework_contracts", "service_providers"
   add_foreign_key "managers", "service_providers"
   add_foreign_key "option_choices", "option_groups"
   add_foreign_key "option_values", "options"
