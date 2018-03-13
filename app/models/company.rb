@@ -12,12 +12,13 @@ class Company < ApplicationRecord
 end
 
 # == Schema Information
-# Schema version: 20180312213904
+# Schema version: 20180313013358
 #
 # Table name: companies
 #
 #  created_at :datetime         not null
 #  id         :integer          not null, primary key
 #  name       :string
+#  siret      :string
 #  updated_at :datetime         not null
 #
