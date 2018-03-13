@@ -1,6 +1,13 @@
 class FrameworkContract < ApplicationRecord
   belongs_to :company
   belongs_to :service_provider
+
+  validates :starts_at, ends_at,
+    presence: true
+
+  validates :half_day_price, :day_price,
+    presence:     true,
+    numericality: true
 end
 
 # == Schema Information
@@ -12,7 +19,7 @@ end
 #  created_at          :datetime         not null
 #  day_price           :float
 #  ends_at             :date
-#  hal_day_price       :integer
+#  half_day_price      :integer
 #  id                  :integer          not null, primary key
 #  service_provider_id :integer
 #  starts_at           :date
