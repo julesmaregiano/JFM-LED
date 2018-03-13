@@ -4,6 +4,9 @@ class Manager < ApplicationRecord
   validates :email, :first_name, :last_name,
     presence: true,
     length:   { maximum: 255 }
+
+  validates :service_provider,
+    presence: true
 end
 
 # == Schema Information
