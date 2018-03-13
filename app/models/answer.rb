@@ -23,3 +23,27 @@ class Answer < ApplicationRecord
   end
 
 end
+
+# == Schema Information
+# Schema version: 20180312213904
+#
+# Table name: answers
+#
+#  boolean          :string
+#  comment          :string
+#  created_at       :datetime         not null
+#  date             :date
+#  id               :integer          not null, primary key
+#  numeric          :integer
+#  option_choice_id :integer
+#  question_id      :integer
+#  report_id        :integer
+#  string           :string
+#  updated_at       :datetime         not null
+#
+# Indexes
+#
+#  index_answers_on_option_choice_id  (option_choice_id)
+#  index_answers_on_question_id       (question_id)
+#  index_answers_on_report_id         (report_id)
+#

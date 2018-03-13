@@ -5,3 +5,15 @@ class ServiceProvider < ApplicationRecord
   has_many :technicians
   has_many :managers
 end
+
+# == Schema Information
+# Schema version: 20180312213904
+#
+# Table name: service_providers
+#
+#  created_at :datetime         not null
+#  id         :integer          not null, primary key
+#  name       :string
+#  siret      :string
+#  updated_at :datetime         not null
+#

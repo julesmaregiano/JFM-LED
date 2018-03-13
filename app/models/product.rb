@@ -10,3 +10,13 @@ class Product < ApplicationRecord
   has_many :sections, through: :questions
 end
 
+# == Schema Information
+# Schema version: 20180312213904
+#
+# Table name: products
+#
+#  created_at :datetime         not null
+#  id         :integer          not null, primary key
+#  label      :string
+#  updated_at :datetime         not null
+#

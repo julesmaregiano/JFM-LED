@@ -14,3 +14,20 @@ class Report < ApplicationRecord
   end
 
 end
+
+# == Schema Information
+# Schema version: 20180312213904
+#
+# Table name: reports
+#
+#  booking_id :integer
+#  created_at :datetime         not null
+#  id         :integer          not null, primary key
+#  signature  :binary
+#  signed_on  :datetime
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_reports_on_booking_id  (booking_id)
+#

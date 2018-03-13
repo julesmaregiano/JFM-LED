@@ -12,3 +12,28 @@ class Address < ApplicationRecord
 
 end
 
+# == Schema Information
+# Schema version: 20180312213904
+#
+# Table name: addresses
+#
+#  address1   :string
+#  address2   :string
+#  address3   :string
+#  address4   :string
+#  booking_id :integer
+#  branch_id  :integer
+#  city       :string
+#  country    :string
+#  created_at :datetime         not null
+#  id         :integer          not null, primary key
+#  latitude   :float
+#  longitude  :float
+#  updated_at :datetime         not null
+#  zipcode    :string
+#
+# Indexes
+#
+#  index_addresses_on_booking_id  (booking_id)
+#  index_addresses_on_branch_id   (branch_id)
+#

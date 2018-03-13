@@ -11,3 +11,15 @@ class Section < ApplicationRecord
     end.any?
   end
 end
+
+# == Schema Information
+# Schema version: 20180312213904
+#
+# Table name: sections
+#
+#  created_at :datetime         not null
+#  id         :integer          not null, primary key
+#  name       :string
+#  order      :integer
+#  updated_at :datetime         not null
+#
