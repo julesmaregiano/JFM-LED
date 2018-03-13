@@ -2,7 +2,7 @@ class FrameworkContract < ApplicationRecord
   belongs_to :company
   belongs_to :service_provider
 
-  validates :starts_at, ends_at,
+  validates :starts_at, :ends_at,
     presence: true
 
   validates :half_day_price, :day_price,
