@@ -4,15 +4,17 @@ class CompanyProduct < ApplicationRecord
 end
 
 # == Schema Information
-# Schema version: 20180312213904
+# Schema version: 20180313031525
 #
 # Table name: company_products
 #
-#  company_id :integer
-#  created_at :datetime         not null
-#  id         :integer          not null, primary key
-#  product_id :integer
-#  updated_at :datetime         not null
+#  company_id     :integer
+#  created_at     :datetime         not null
+#  day_price      :float
+#  half_day_price :float
+#  id             :integer          not null, primary key
+#  product_id     :integer
+#  updated_at     :datetime         not null
 #
 # Indexes
 #
