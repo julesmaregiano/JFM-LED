@@ -170,7 +170,7 @@ ActiveRecord::Schema.define(version: 20180313013829) do
     t.date "starts_at"
     t.date "ends_at"
     t.float "day_price"
-    t.integer "hal_day_price"
+    t.integer "half_day_price"
     t.bigint "company_id"
     t.bigint "service_provider_id"
     t.datetime "created_at", null: false
