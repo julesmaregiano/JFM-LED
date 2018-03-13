@@ -1,6 +1,13 @@
 class CompanyProduct < ApplicationRecord
   belongs_to :product
   belongs_to :company
+
+  validates :company, presence: true
+  validates :product, presence: true
+
+  validates :half_day_price, :day_price,
+    presence:     true,
+    numericality: true
 end
 
 # == Schema Information
