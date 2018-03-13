@@ -1,5 +1,6 @@
 class FrameworkContract < ApplicationRecord
   belongs_to :company
+  belongs_to :product
   belongs_to :service_provider
 
   validates :starts_at, :ends_at,
