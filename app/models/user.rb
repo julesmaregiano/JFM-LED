@@ -3,9 +3,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
 
   validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :phone, presence: true
-  validates :role, presence: true
+  validates :last_name,  presence: true
+  validates :phone,      presence: true
+  validates :role,       presence: true
+
   belongs_to :company
   belongs_to :branch
 
