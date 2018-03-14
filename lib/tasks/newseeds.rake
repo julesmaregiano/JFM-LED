@@ -4,13 +4,14 @@ namespace :newseeds do
     Manager.delete_all
     Technician.delete_all
     ServiceProvider.delete_all
-    service_provider = ServiceProvider.create do |sp|
+
+    service_provider = ServiceProvider.create! do |sp|
       sp.name    = "JFM"
       sp.siret   = "BLah"
       sp.address = sp.build_address
     end
 
-    manager = Manager.create do |mgr|
+    manager = Manager.create! do |mgr|
        mgr.first_name       = 'Jules'
        mgr.last_name        = 'Marechianno'
        mgr.email            = 'manager@led.fr'
@@ -20,9 +21,10 @@ namespace :newseeds do
 
     40.times do
       Technician.create! do |tech|
-        tech.first_name = 'Pathe'
-        tech.last_name  = 'SENE'
-        tech.email      = 'path.sene@led.fr'
+        tech.first_name       = 'Pathe'
+        tech.last_name        = 'SENE'
+        tech.email            = 'path.sene@led.fr'
+        tech.service_provider = service_provider
       end
     end
   end
