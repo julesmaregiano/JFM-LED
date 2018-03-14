@@ -19,7 +19,7 @@ class Manager::BookingsController < ApplicationController
 
   def edit
     @user = current_user
-    @techs = User.where(role: 2, branch: current_user.branch)
+#    @techs = User.where(role: 2, branch: current_user.branch)
     @availabilities = Availability.all.where(user: User.where(branch: current_user.branch))
     @bookings = Booking.status_is(1).map do |b| b if b.availabilities.first.user.branch == @user.branch end.compact
   end

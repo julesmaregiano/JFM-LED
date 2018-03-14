@@ -1,8 +1,8 @@
-class Manager::AvailabilitiesController < ApplicationController
+class Manager::AvailabilitiesController < Manager::ApplicationController
 
   def index
-    @user = current_user
-    @techs = User.where(role: 2, branch: current_user.branch)
+    @user           = current_user
+    @techs          = current_manager.service_provider.technicians
     @availabilities = Availability.to_come.includes(:user)
   end
 
