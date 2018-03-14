@@ -17,7 +17,13 @@ namespace :newseeds do
        mgr.password         = '123soleil'
        mgr.service_provider = service_provider
     end
-    puts service_provider.inspect
-    puts manager.inspect
+
+    40.times do
+      Technician.create! do |tech|
+        tech.first_name = 'Pathe'
+        tech.last_name  = 'SENE'
+        tech.email      = 'path.sene@led.fr'
+      end
+    end
   end
 end
