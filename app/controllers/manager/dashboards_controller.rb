@@ -1,4 +1,4 @@
-class Manager::DashboardsController < ApplicationController
+class Manager::DashboardsController < Manager::ApplicationController
 
   def show
     @user = current_user
