@@ -38,9 +38,9 @@ Rails.application.routes.draw do
   end
 
   namespace :manager do
-    get '/dashboard', to: "dashboards#show"
-    get '/planning', to: "bookings#edit"
-    get :send_report_mail, to: 'reports#send_report_mail', as: :send_report_mail
+    get :send_report_mail, to: "reports#send_report_mail", as: :send_report_mail
+    get '/dashboard',      to: "dashboards#show"
+    get '/planning',       to: "planning#index"
     resources :users,          only: [:show, :index]
     resources :reports,        only: [:show, :edit, :update]
     resources :bookings,       only: [:show, :index, :update]
