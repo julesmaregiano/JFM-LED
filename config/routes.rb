@@ -41,12 +41,13 @@ Rails.application.routes.draw do
     get '/dashboard', to: "dashboards#show"
     get '/planning', to: "bookings#edit"
     get :send_report_mail, to: 'reports#send_report_mail', as: :send_report_mail
-    resources :users, only: [:show, :index]
-    resources :bookings, only: [:show, :index, :update]
+    resources :users,          only: [:show, :index]
+    resources :reports,        only: [:show, :edit, :update]
+    resources :bookings,       only: [:show, :index, :update]
+    resources :branches,       only: [:create, :update]
+    resources :companies,      only: [:create, :update]
+    resources :technicians
     resources :availabilities, only: [:index, :show, :update, :create]
-    resources :reports, only: [:show, :edit, :update]
-    resources :companies, only: [:create, :update]
-    resources :branches, only: [:create, :update]
   end
 
   resources :answers, only: [:show]
