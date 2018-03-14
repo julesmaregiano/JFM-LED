@@ -1,0 +1,17 @@
+<%= simple_form_for [:manager, @technician] do |f| %>
+  <div class='row'>
+    <div class='col-md-6'>
+      <%= f.input :email, label: "Email" %>
+      <%= f.input :first_name, label: "Prénom" %>
+      <%= f.input :last_name,  label: "Nom" %>
+    </div>
+    <div class='col-md-6'>
+      <%= f.simple_fields_for :address_attributes do |p|%>
+        <%= p.input :address1, label: 'Addresse' %>
+        <%= p.input :city,     label: 'Ville'    %>
+        <%= p.input :zipcode,  label: 'Code postal' %>
+        <%= p.input :country,  label: 'Pays' %>
+      <% end %>
+    </div>
+    <%= f.button :submit, label: "Enregistrer" %>
+  <% end %>
