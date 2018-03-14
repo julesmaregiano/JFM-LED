@@ -1,12 +1,12 @@
 <div class="sidebar hidden-xs hidden-sm">
-  <%= render "shared/sidebar_button", text: "Tableau de bord", icon: "eye", link: [@user.role, :dashboard]%>
-  <% if current_user.technician? %>
+  <%#= render "shared/sidebar_button", text: "Tableau de bord", icon: "eye", link: [@user.role, :dashboard]%>
+  <% if current_user && current_user.technician? %>
     <%= render "shared/sidebar_button", text: "Disponibilités", icon: "calendar", link: [@user.role, :availabilities] %>
     <%= render "shared/sidebar_button", text: "Clients", icon: "group", link: [@user.role, :users]%>
-  <% elsif current_user.manager? %>
+  <% elsif current_user && current_user.manager? %>
     <%= render "shared/sidebar_button", text: "Mon équipe", icon: "calendar", link: [@user.role, :availabilities] %>
     <%= render "shared/sidebar_button", text: "Planning", icon: "calendar-check-o", link: manager_planning_path %>
   <% end %>
-  <%= render "shared/sidebar_button", text: "Bookings", icon: "list", link: [@user.role, :bookings] %>
-  <%= render "shared/sidebar_button", text: "Profil", icon: "user", link: [@user.role, @user] %>
+  <%#= render "shared/sidebar_button", text: "Bookings", icon: "list", link: [@user.role, :bookings] %>
+  <%#= render "shared/sidebar_button", text: "Profil", icon: "user", link: [@user.role, @user] %>
 </div>
