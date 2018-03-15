@@ -4,9 +4,10 @@
     <%= render "shared/sidebar_button", text: "Disponibilités", icon: "calendar", link: [@user.role, :availabilities] %>
     <%= render "shared/sidebar_button", text: "Clients", icon: "group", link: [@user.role, :users]%>
   <% elsif current_manager %>
-    <%= render "shared/sidebar_button", text: "Mon équipe",  icon: "calendar",         link: manager_availabilities_path %>
-    <%= render "shared/sidebar_button", text: "Planning",    icon: "calendar-check-o", link: manager_planning_path       %>
-    <%= render "shared/sidebar_button", text: "Techniciens", icon: "calendar-check-o", link: manager_technicians_path       %>
+    <%= render "shared/sidebar_button", text: "Mon équipe",    icon: "calendar",         link: manager_availabilities_path %>
+    <%= render "shared/sidebar_button", text: "Planning",      icon: "calendar-check-o", link: manager_planning_path       %>
+    <%= render "shared/sidebar_button", text: "Techniciens",   icon: "calendar-check-o", link: manager_technicians_path    %>
+    <%= render "shared/sidebar_button", text: "Créer Booking", icon: "check-o",          link: new_manager_booking_path    %>
   <% end %>
   <%#= render "shared/sidebar_button", text: "Bookings", icon: "list", link: [@user.role, :bookings] %>
   <%#= render "shared/sidebar_button", text: "Profil", icon: "user", link: [@user.role, @user] %>
