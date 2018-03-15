@@ -4,11 +4,17 @@
     <div class="padding-box">
       <div class= "col-xs-12 col-md-6">
         <div class= "card-container">
-          <div>
-            <p>
-              Réservation #123
-              <span class='pull-right'>Marquage Piquetage</span>
-            </p>
+          <div class='row'>
+            <div class='col-md-6'>
+              <p> Réservation #123 </p>
+              <p>Prix: <%= number_to_currency(1999) %></p>
+              <p>Dates: </p>
+            </div>
+            <div class='col-md-6 text-right'>
+              <p>Marquage Piquetage</p>
+              <p>Statut: <span class='label label-danger'>PENDING</span> </p>
+              <p><%= link_to 'Modifier', '#' %></p>
+            </div>
           </div>
         </div>
         <div class= "card-container">
