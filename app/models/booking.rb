@@ -6,15 +6,16 @@
   delegate :branch, to: :user
 
   belongs_to :product
-  belongs_to :user
+  belongs_to :user,    optional: true
   belongs_to :foreman, optional: true
 
-  validates :user_id,        presence: true
-  validates :availabilities, presence: true
+  #validates :user_id,        presence: true
+  #validates :availabilities, presence: true
 
   has_one :address, dependent: :destroy
   has_one :report,  dependent: :destroy
   has_one :address, dependent: :destroy, as: :addressable
+  accepts_nested_attributes_for :address
 
   has_attachment :pdf
   accepts_nested_attributes_for :address
@@ -25,9 +26,9 @@
     attribute :created_at do
       created_at.strftime("%-d/%m/%Y")
     end
-    attribute :company do
-      { company: user.company.name, logo: "http://res.cloudinary.com/zanzibar/image/upload/c_scale,w_65/#{user.company.photo.path}" }
-    end
+   # attribute :company do
+   #   { company: user.try(:company).try(:name), logo: "http://res.cloudinary.com/zanzibar/image/upload/c_scale,w_65/#{user.company.photo.path}" }
+   # end
     attribute :address do
       { address: address.address1, zipcode: address.zipcode, city: address.city }
     end
