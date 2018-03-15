@@ -36,7 +36,8 @@ gem 'activeadmin', github: 'activeadmin/activeadmin'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 gem 'algoliasearch-rails'
 gem 'mailjet', :git => 'https://github.com/mailjet/mailjet-gem.git'
-
+gem 'webpacker', '~> 3.3'
+gem 'react_on_rails', '10.0.2'
 
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"
