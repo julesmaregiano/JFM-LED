@@ -66,6 +66,24 @@
             </div>
           </div>
         </div>
+        <div class= "card-container">
+          <h6>Messagerie</h6>
+          <section>
+            <p><i class='fa fa-user'></i>Le chef de chantier sera à la base vie au 1er étage. </p>
+            <small>il y a<%= time_ago_in_words Time.now - 10.minutes %></small>
+          </section>
+          <section class='text-right'>
+            <p>D'accord c'est noté <i class='fa fa-user'></i></p>
+            <small>il y a<%= time_ago_in_words Time.now - 10.minutes %></small>
+          </section>
+          <hr />
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Votre message ici">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">Envoyer</button>
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
