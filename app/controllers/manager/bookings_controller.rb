@@ -1,4 +1,4 @@
-class Manager::BookingsController < ApplicationController
+class Manager::BookingsController < Manager::ApplicationController
   before_action :load_products, only: [:new, :create]
 
   def index
@@ -6,20 +6,24 @@ class Manager::BookingsController < ApplicationController
     @bookings = Booking.all.sort_by(&:created_at).map do |b| b if b.availabilities.first.user.branch == @user.branch end.compact
   end
 
-  #GET /manager/bookings/news
+  # GET /manager/bookings/news
   def new
+    @booking = Booking.new
+  end
+
+  # POST /manager/bookings
+  def create
+    @booking = service_provider.bookings.build(booking_params)
+    if @booking.save
+      redirect_to manager_booking_path(@booking)
+    else
+      render :new
+    end
   end
 
   def show
-    @user = current_user
-    @booking = Booking.find(params[:id])
+    @booking        = service_provider.bookings.find(params[:id])
     @availabilities = @booking.availabilities.order(date: 'ASC')
-    unless @booking.address.latitude.nil?
-      @markers = Gmaps4rails.build_markers(@booking) do |booking, marker|
-        marker.lat booking.address.latitude
-        marker.lng booking.address.longitude
-      end
-    end
   end
 
   def edit
@@ -55,6 +59,10 @@ class Manager::BookingsController < ApplicationController
 
   def availabilities_params
     params.require(:booking).permit(availability_ids: [])
+  end
+
+  def booking_params
+    params.require(:booking).permit(:address, :client_id, :product_id, address_attributes: [:address1])
   end
 
   def load_products
