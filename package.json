@@ -1,5 +1,7 @@
 {
   "name": "JFM-LED",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "react-on-rails": "^10.1.3"
+  }
 }

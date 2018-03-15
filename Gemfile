@@ -38,7 +38,7 @@ gem 'algoliasearch-rails'
 gem 'mailjet', :git => 'https://github.com/mailjet/mailjet-gem.git'
 gem 'webpacker', '~> 3.3'
 gem 'react_on_rails', '10.0.2'
-
+gem 'mini_racer'
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"
 end
@@ -58,3 +58,5 @@ group :development, :test do
   gem 'bullet'
   gem "letter_opener"
 end
+
+gem 'mini_racer', platforms: :ruby
