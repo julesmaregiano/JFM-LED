@@ -1,22 +1,22 @@
   class Availability < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
+  belongs_to :technician
   belongs_to :booking, optional: true
   after_create :init
 
-  scope :of_the_day, -> { where("date = ?", Date.current) }
-  scope :of_the_week, -> { where("date <= ?", Date.current + 7)}
+  scope :of,    -> (user) { where("user_id = ? ", user.id)}
+  scope :to_come,      -> { where("date >= ?", Date.current) }
+  scope :morning,      -> { where(half: "matin") }
+  scope :not_today,    -> { where.not("date = ?", Date.current) }
+  scope :afternoon,    -> { where(half: "aprem") }
+  scope :free_first,   -> { order(status: :asc) }
+  scope :of_the_day,   -> { where("date = ?", Date.current) }
+  scope :of_the_week,  -> { where("date <= ?", Date.current + 7)}
   scope :of_last_week, -> { where("date >= ?", Date.current - 7)}
-  scope :to_come, -> { where("date >= ?", Date.current) }
-  scope :not_today, -> { where.not("date = ?", Date.current) }
-  scope :of, -> (user) {where("user_id = ? ", user.id)}
-  scope :oldest_to_new, -> { order(created_at: :asc)}
-  scope :free_first, -> { order(status: :asc) }
-  scope :morning, -> { where(half: "matin") }
-  scope :afternoon, -> { where(half: "aprem") }
-
+  scope :oldest_to_new,-> { order(created_at: :asc)}
 
   enum status: [:free, :pending, :leave, :booked]
-  enum half:[:matin, :aprem]
+  enum half:   [:matin, :aprem]
 
   def self.of_the_week_for(user)
     self.to_come
