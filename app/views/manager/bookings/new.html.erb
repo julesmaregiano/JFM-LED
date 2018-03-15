@@ -1,8 +1,11 @@
 <div class='container'>
-  <%= simple_form_for [:manager, Booking.new] do |f| %>
+  <%= @booking.errors.inspect %>
+  <%= simple_form_for [:manager, @booking] do |f| %>
     <div class='row'>
       <div class='col-md-6'>
-        <%= f.input :address, label: "Adresse" %>
+        <%= f.fields_for :address_attributes do |ff| %>
+          <%= ff.input :address1, label: "Adresse" %>
+        <% end %>
         <%= f.input :product_id, label: "Produit", collection: @products.to_a, label_method: lambda { |product| "#{product.label}" } %>
       </div>
       <div class='col-md-6'>
@@ -11,5 +14,6 @@
         <%= f.input :pdf, label: "Bon de commande", as: :attachinary %>
       </div>
     </div>
+  <%= f.submit 'Enregistrer la réservation' %>
   <% end %>
 </div>
