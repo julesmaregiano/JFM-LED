@@ -5,6 +5,10 @@ class Manager::BookingsController < ApplicationController
     @bookings = Booking.all.sort_by(&:created_at).map do |b| b if b.availabilities.first.user.branch == @user.branch end.compact
   end
 
+  #GET /manager/bookings/news
+  def new
+  end
+
   def show
     @user = current_user
     @booking = Booking.find(params[:id])
