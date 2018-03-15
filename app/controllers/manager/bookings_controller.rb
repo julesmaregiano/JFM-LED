@@ -62,7 +62,10 @@ class Manager::BookingsController < Manager::ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit(:address, :client_id, :product_id, address_attributes: [:address1])
+    params.require(:booking).permit(
+      :address, :client_id, :product_id, :send_confirmation_email,
+      address_attributes: [:address1]
+    )
   end
 
   def load_products

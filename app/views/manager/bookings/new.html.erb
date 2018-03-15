@@ -1,5 +1,4 @@
 <div class='container'>
-  <%= @booking.errors.inspect %>
   <%= simple_form_for [:manager, @booking] do |f| %>
     <div class='row'>
       <div class='col-md-6'>
@@ -12,6 +11,7 @@
         <%= f.input :reference, label: "Numéro d'affaire" %>
         <%#= f.input :company_id, label: "Produit", collection: @products.to_a, label_method: lambda { |product| "#{product.label}" } %>
         <%= f.input :pdf, label: "Bon de commande", as: :attachinary %>
+        <%= f.input :send_confirmation_email, label: "Envoyer mail de confirmation", as: :boolean %>
       </div>
     </div>
   <%= f.submit 'Enregistrer la réservation' %>
