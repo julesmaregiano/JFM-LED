@@ -9,7 +9,7 @@
   belongs_to :user
   belongs_to :foreman, optional: true
 
-  validates :user_id, presence: true
+  validates :user_id,        presence: true
   validates :availabilities, presence: true
 
   has_one :address, dependent: :destroy
