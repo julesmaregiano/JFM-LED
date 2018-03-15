@@ -1,4 +1,5 @@
 class Manager::BookingsController < ApplicationController
+  before_action :load_products, only: [:new, :create]
 
   def index
     @user = current_user
@@ -56,4 +57,8 @@ class Manager::BookingsController < ApplicationController
     params.require(:booking).permit(availability_ids: [])
   end
 
+  def load_products
+    @products ||= Product.all
+    @clients  ||= Company.all
+  end
 end
