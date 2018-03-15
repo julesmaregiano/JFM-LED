@@ -1,5 +1,6 @@
 class Technician < ApplicationRecord
   belongs_to :service_provider
+  has_many   :availabilities
   has_one    :address, as: :addressable
   accepts_nested_attributes_for :address
 
