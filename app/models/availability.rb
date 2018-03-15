@@ -52,21 +52,23 @@
 end
 
 # == Schema Information
-# Schema version: 20180312213904
+# Schema version: 20180315141216
 #
 # Table name: availabilities
 #
-#  booking_id :integer
-#  created_at :datetime         not null
-#  date       :date
-#  half       :integer
-#  id         :integer          not null, primary key
-#  status     :integer
-#  updated_at :datetime         not null
-#  user_id    :integer
+#  booking_id    :integer
+#  created_at    :datetime         not null
+#  date          :date
+#  half          :integer
+#  id            :integer          not null, primary key
+#  status        :integer
+#  technician_id :integer
+#  updated_at    :datetime         not null
+#  user_id       :integer
 #
 # Indexes
 #
-#  index_availabilities_on_booking_id  (booking_id)
-#  index_availabilities_on_user_id     (user_id)
+#  index_availabilities_on_booking_id     (booking_id)
+#  index_availabilities_on_technician_id  (technician_id)
+#  index_availabilities_on_user_id        (user_id)
 #
