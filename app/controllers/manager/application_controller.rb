@@ -13,6 +13,9 @@ class Manager::ApplicationController < ApplicationController
     manager_dashboard_path
   end
 
+  def service_provider
+    current_manager.try(:service_provider)
+  end
 
   protected
 
