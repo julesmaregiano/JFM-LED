@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180313100739) do
+ActiveRecord::Schema.define(version: 20180315024330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,6 +125,9 @@ ActiveRecord::Schema.define(version: 20180313100739) do
     t.bigint "foreman_id"
     t.bigint "product_id"
     t.string "reference"
+    t.string "bookable_type"
+    t.bigint "bookable_id"
+    t.index ["bookable_type", "bookable_id"], name: "index_bookings_on_bookable_type_and_bookable_id"
     t.index ["foreman_id"], name: "index_bookings_on_foreman_id"
     t.index ["product_id"], name: "index_bookings_on_product_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
