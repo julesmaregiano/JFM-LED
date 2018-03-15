@@ -1,9 +1,20 @@
 <div class="dashboard-wrap">
   <%= render "shared/sidebar"%>
-
   <div class="dashboard-content">
     <div class="padding-box">
-      <div class= "col-xs-12 col-md-6 card-container" id="map" style="height: calc(100vh - 110px);"></div>
+      <div class= "col-xs-12 col-md-6">
+        <div class= "card-container">
+          <div>
+            <p>
+              Réservation #123
+              <span class='pull-right'>Marquage Piquetage</span>
+            </p>
+          </div>
+        </div>
+        <div class= "card-container">
+          <div id="map" style="height: calc(100vh - 40vh);"></div>
+        </div>
+      </div>
       <div class="col-xs-12 col-md-6">
         <%#= render "shared/booking_details", booking: @booking %>
       </div>
