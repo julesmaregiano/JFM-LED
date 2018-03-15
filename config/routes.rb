@@ -43,7 +43,7 @@ Rails.application.routes.draw do
     get '/planning',       to: "planning#index"
     resources :users,          only: [:show, :index]
     resources :reports,        only: [:show, :edit, :update]
-    resources :bookings,       only: [:show, :index, :update, :new]
+    resources :bookings,       only: [:show, :index, :update, :new, :create]
     resources :branches,       only: [:create, :update]
     resources :companies,      only: [:create, :update]
     resources :technicians
