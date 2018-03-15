@@ -1,99 +1,105 @@
-<br />
-<div class='container'>
-  <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle='tab' href="#vueGenerale">Vue générale</a></li>
-    <li><a data-toggle='tab' href="#techniciens">Technicien 1</a></li>
-    <li><a data-toggle='tab' href="#techniciens">Technicien 2</a></li>
-    <li><a data-toggle='tab' href="#techniciens">Technicien 3</a></li>
-  </ul>
-  <div class='tab-content'>
-    <div id="vueGenerale" class="tab-pane fade in active planning">
-      <div class='row rowHeading'>
-        <div class='col-md-2'>TECH</div>
-        <div class='col-md-2'>Lundi</div>
-        <div class='col-md-2'>Mardi</div>
-        <div class='col-md-2'>Mercredi</div>
-        <div class='col-md-2'>Jeudi</div>
-        <div class='col-md-2'>Vendredi</div>
+<div class="dashboard-wrap">
+  <%= render "/shared/sidebar"%>
+  <div class="dashboard-content">
+    <div class="padding-box">
+      <div class='container'>
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle='tab' href="#vueGenerale">Vue générale</a></li>
+          <li><a data-toggle='tab' href="#techniciens">Technicien 1</a></li>
+          <li><a data-toggle='tab' href="#techniciens">Technicien 2</a></li>
+          <li><a data-toggle='tab' href="#techniciens">Technicien 3</a></li>
+        </ul>
+        <div class='tab-content'>
+          <div id="vueGenerale" class="tab-pane fade in active planning">
+            <div class='row rowHeading'>
+              <div class='col-md-2'>TECH</div>
+              <div class='col-md-2'>Lundi</div>
+              <div class='col-md-2'>Mardi</div>
+              <div class='col-md-2'>Mercredi</div>
+              <div class='col-md-2'>Jeudi</div>
+              <div class='col-md-2'>Vendredi</div>
+            </div>
+            <div class='row rowAvailability'>
+              <div class='col-md-2'>
+                <p class='technicianName'> PATHE </p>
+              </div>
+              <div class='col-md-2'>
+                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
+                <div class='panel panel-success'> <div class='panel-heading'>TEST</div> </div>
+              </div>
+              <div class='col-md-2'>
+                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
+                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
+              </div>
+              <div class='col-md-2'>
+                <div class='panel panel-danger'> <div class='panel-heading'>TEST</div> </div>
+                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
+              </div>
+              <div class='col-md-2'>
+                <div class='panel panel-warning'> <div class='panel-heading'>TEST</div> </div>
+                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
+              </div>
+              <div class='col-md-2'>
+                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
+                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
+              </div>
+            </div>
+            <div class='row rowAvailability'>
+              <div class='col-md-2'>
+                <p class='technicianName'>Cyril</p>
+              </div>
+              <div class='col-md-2'>
+                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
+                <div class='panel panel-success'> <div class='panel-heading'>TEST</div> </div>
+              </div>
+              <div class='col-md-2'>
+                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
+                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
+              </div>
+              <div class='col-md-2'>
+                <div class='panel panel-danger'> <div class='panel-heading'>TEST</div> </div>
+                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
+              </div>
+              <div class='col-md-2'>
+                <div class='panel panel-warning'> <div class='panel-heading'>TEST</div> </div>
+                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
+              </div>
+              <div class='col-md-2'>
+                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
+                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
+              </div>
+            </div>
+            <div class='row rowAvailability'>
+              <div class='col-md-2'>
+                <p class='technicianName'>Jules</p>
+              </div>
+              <div class='col-md-2'>
+                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
+                <div class='panel panel-success'> <div class='panel-heading'>TEST</div> </div>
+              </div>
+              <div class='col-md-2'>
+                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
+                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
+              </div>
+              <div class='col-md-2'>
+                <div class='panel panel-danger'> <div class='panel-heading'>TEST</div> </div>
+                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
+              </div>
+              <div class='col-md-2'>
+                <div class='panel panel-warning'> <div class='panel-heading'>TEST</div> </div>
+                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
+              </div>
+              <div class='col-md-2'>
+                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
+                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
+              </div>
+            </div>
+          </div>
+          <div id="techniciens" class="tab-pane fade in">
+            <h3>Technicien</h3>
+          </div>
+        </div>
       </div>
-      <div class='row rowAvailability'>
-        <div class='col-md-2'>
-          <p class='technicianName'> PATHE </p>
-        </div>
-        <div class='col-md-2'>
-          <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-          <div class='panel panel-success'> <div class='panel-heading'>TEST</div> </div>
-        </div>
-        <div class='col-md-2'>
-          <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-          <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-        </div>
-        <div class='col-md-2'>
-          <div class='panel panel-danger'> <div class='panel-heading'>TEST</div> </div>
-          <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-        </div>
-        <div class='col-md-2'>
-          <div class='panel panel-warning'> <div class='panel-heading'>TEST</div> </div>
-          <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-        </div>
-        <div class='col-md-2'>
-          <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-          <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-        </div>
-      </div>
-      <div class='row rowAvailability'>
-        <div class='col-md-2'>
-          <p class='technicianName'>Cyril</p>
-        </div>
-        <div class='col-md-2'>
-          <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-          <div class='panel panel-success'> <div class='panel-heading'>TEST</div> </div>
-        </div>
-        <div class='col-md-2'>
-          <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-          <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-        </div>
-        <div class='col-md-2'>
-          <div class='panel panel-danger'> <div class='panel-heading'>TEST</div> </div>
-          <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-        </div>
-        <div class='col-md-2'>
-          <div class='panel panel-warning'> <div class='panel-heading'>TEST</div> </div>
-          <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-        </div>
-        <div class='col-md-2'>
-          <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-          <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-        </div>
-      </div>
-      <div class='row rowAvailability'>
-        <div class='col-md-2'>
-          <p class='technicianName'>Jules</p>
-        </div>
-        <div class='col-md-2'>
-          <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-          <div class='panel panel-success'> <div class='panel-heading'>TEST</div> </div>
-        </div>
-        <div class='col-md-2'>
-          <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-          <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-        </div>
-        <div class='col-md-2'>
-          <div class='panel panel-danger'> <div class='panel-heading'>TEST</div> </div>
-          <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-        </div>
-        <div class='col-md-2'>
-          <div class='panel panel-warning'> <div class='panel-heading'>TEST</div> </div>
-          <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-        </div>
-        <div class='col-md-2'>
-          <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-          <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-        </div>
-      </div>
-    </div>
-    <div id="techniciens" class="tab-pane fade in">
-      <h3>Technicien</h3>
     </div>
   </div>
 </div>
