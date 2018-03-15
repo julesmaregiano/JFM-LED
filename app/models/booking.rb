@@ -81,31 +81,32 @@
 end
 
 # == Schema Information
-# Schema version: 20180315024330
+# Schema version: 20180315032152
 #
 # Table name: bookings
 #
-#  address1      :string
-#  address2      :string
-#  address3      :string
-#  address4      :string
-#  bookable_id   :integer
-#  bookable_type :string
-#  city          :string
-#  comment       :text
-#  confirmed_at  :datetime
-#  country       :string
-#  created_at    :datetime         not null
-#  foreman_id    :integer
-#  id            :integer          not null, primary key
-#  latitude      :float
-#  longitude     :float
-#  product_id    :integer
-#  reference     :string
-#  surface       :string
-#  updated_at    :datetime         not null
-#  user_id       :integer
-#  zipcode       :string
+#  address1                :string
+#  address2                :string
+#  address3                :string
+#  address4                :string
+#  bookable_id             :integer
+#  bookable_type           :string
+#  city                    :string
+#  comment                 :text
+#  confirmed_at            :datetime
+#  country                 :string
+#  created_at              :datetime         not null
+#  foreman_id              :integer
+#  id                      :integer          not null, primary key
+#  latitude                :float
+#  longitude               :float
+#  product_id              :integer
+#  reference               :string
+#  send_confirmation_email :boolean          default("false")
+#  surface                 :string
+#  updated_at              :datetime         not null
+#  user_id                 :integer
+#  zipcode                 :string
 #
 # Indexes
 #
