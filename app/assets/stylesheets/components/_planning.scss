@@ -1,14 +1,49 @@
 .planning {
-
-  .rowAvailability {
+  background-color: #fff;
+  padding: 10px;
+  .rowAvailability, .rowHeading {
     .col-md-2 {
       padding-left: 1px !important;
       padding-right: 1px !important;
+
+      &:last-child {
+       padding-right: 15px !important;
+      }
+
+      &:first-child {
+       padding-left: 15px !important;
+      }
     }
+  }
+  .rowAvailability {
+    height: 200px;
     .panel {
        margin-bottom: 2px;
        text-align: center;
+       height: 50px;
+
+       .panel-heading {
+          height: 100%;
+       }
     }
   }
 
+  .rowHeading {
+    font-weight: bold;
+
+    .col-md-2 {
+      text-align: center;
+
+      &:first-child {
+        text-align: left;
+      }
+    }
+  }
+
+  .technicianName {
+    height: 200px;
+    line-height: 100px;
+    display: block;
+    font-weight: bold;
+  }
 }
