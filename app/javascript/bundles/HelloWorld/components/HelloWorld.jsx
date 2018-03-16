@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 import React     from 'react';
 
-import HalfDayAvailability from './HalfDayAvailability.jsx';
-
 export default class HelloWorld extends React.Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
