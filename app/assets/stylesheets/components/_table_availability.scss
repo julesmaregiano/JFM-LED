@@ -1,0 +1,24 @@
+.tableAvailabilities {
+
+  td {
+    text-align: right;
+    background-color: white;
+
+    &.success {
+      background-color: green;
+    }
+
+    &.warning {
+      background-color: orange;
+    }
+
+    &.danger {
+      background-color: red;
+    }
+
+    &.tech {
+      vertical-align: middle;
+    }
+
+  }
+}
