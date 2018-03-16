@@ -22,91 +22,35 @@ export default class HelloWorld extends React.Component {
 
   render() {
     return (
-        <div id="vueGenerale" className="tab-pane fade in active planning">
-          <div className='row rowHeading'>
-            <div className='col-md-2'>TECH</div>
-            <div className='col-md-2'>Lundi</div>
-            <div className='col-md-2'>Mardi</div>
-            <div className='col-md-2'>Mercredi</div>
-            <div className='col-md-2'>Jeudi</div>
-            <div className='col-md-2'>Vendredi</div>
-          </div>
-          <div className='row rowAvailability'>
-            <div className='col-md-2'>
-              <p className='technicianName'> PATHE </p>
-            </div>
-            <div className='col-md-2'>
-              <div className='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-              <div className='panel panel-success'> <div class='panel-heading'>TEST</div> </div>
-            </div>
-            <div className='col-md-2'>
-              <div className='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-              <div className='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-            </div>
-            <div className='col-md-2'>
-              <div className='panel panel-danger'> <div class='panel-heading'>TEST</div> </div>
-              <div className='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-            </div>
-            <div className='col-md-2'>
-              <div className='panel panel-warning'> <div class='panel-heading'>TEST</div> </div>
-              <div className='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-            </div>
-            <div className='col-md-2'>
-              <div className='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-              <div className='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-            </div>
-          </div>
-          <div className='row rowAvailability'>
-            <div className='col-md-2'>
-              <p className='technicianName'>Cyril</p>
-            </div>
-            <div className='col-md-2'>
-              <div className='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-              <div className='panel panel-success'> <div class='panel-heading'>TEST</div> </div>
-            </div>
-            <div className='col-md-2'>
-              <div className='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-              <div className='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-            </div>
-            <div className='col-md-2'>
-              <div className='panel panel-danger'> <div class='panel-heading'>TEST</div> </div>
-              <div className='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-            </div>
-            <div className='col-md-2'>
-              <div className='panel panel-warning'> <div class='panel-heading'>TEST</div> </div>
-              <div className='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-            </div>
-            <div className='col-md-2'>
-              <div className='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-              <div className='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-            </div>
-          </div>
-          <div className='row rowAvailability'>
-            <div className='col-md-2'>
-              <p className='technicianName'>Jules</p>
-            </div>
-            <div className='col-md-2'>
-              <div className='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-              <div className='panel panel-success'> <div class='panel-heading'>TEST</div> </div>
-            </div>
-            <div className='col-md-2'>
-              <div className='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-              <div className='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-            </div>
-            <div className='col-md-2'>
-              <div className='panel panel-danger'> <div class='panel-heading'>TEST</div> </div>
-              <div className='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-            </div>
-            <div className='col-md-2'>
-              <div className='panel panel-warning'> <div class='panel-heading'>TEST</div> </div>
-              <div className='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-            </div>
-            <div className='col-md-2'>
-              <div className='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-              <HalfDayAvailability />
-            </div>
-          </div>
-        </div>
+        <table className='table'>
+          <thead>
+            <tr>
+              <th>TECH</th>
+              <th>Lundi</th>
+              <th>Mardi</th>
+              <th>Mercredi</th>
+              <th>Jeudi</th>
+              <th>Vendredi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td rowspan='2'>PATHE</td>
+              <td>TECH</td>
+              <td>TECH</td>
+              <td>TECH</td>
+              <td>TECH</td>
+              <td>TECH</td>
+            </tr>
+            <tr>
+              <td>TECH</td>
+              <td>TECH</td>
+              <td>TECH</td>
+              <td>TECH</td>
+              <td>TECH</td>
+            </tr>
+          </tbody>
+        </table>
     );
   }
 }
