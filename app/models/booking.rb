@@ -1,4 +1,4 @@
-  class Booking < ApplicationRecord
+class Booking < ApplicationRecord
   has_many :availabilities
   has_many :booked_product_options, dependent: :destroy
   has_many :users,         through: :availabilities
@@ -15,7 +15,6 @@
   has_one :address, dependent: :destroy
   has_one :report,  dependent: :destroy
   has_one :address, dependent: :destroy, as: :addressable
-  accepts_nested_attributes_for :address
 
   has_attachment :pdf
   accepts_nested_attributes_for :address
