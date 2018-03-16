@@ -11,8 +11,9 @@
         <%= f.input :product_id, label: "Produit", collection: @products.to_a, label_method: lambda { |product| "#{product.label}" } %>
       </div>
       <div class='col-md-6'>
-        <%= f.input :reference, label: "Numéro d'affaire" %>
-        <%= f.input :company,   label: "Client", collection: Company.all %>
+        <%= f.input :reference,  label: "Numéro d'affaire" %>
+        <%= f.input :company_id, label: "Client",           collection: Company.all %>
+        <%= f.input :foreman_id, label: "Chef de chantier", collection: Foreman.all %>
         <%= f.input :pdf, label: "Bon de commande", as: :attachinary %>
       </div>
     </div>
