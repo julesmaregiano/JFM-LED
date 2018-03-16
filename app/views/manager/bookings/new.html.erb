@@ -27,8 +27,8 @@
                 <td rowspan='2'><%= item.first_name %></td>
                <% else %>
                  <td>
-                   <%= item.class %>
-                   <%= f.check_box :availability_ids, name:'booking[availability_ids][]' , value: item.id %>
+                   <%= item.id %>
+                   <%= check_box_tag 'booking[availability_ids][]', item.id, false %>
                  </td>
                <% end %>
             <% end %>
