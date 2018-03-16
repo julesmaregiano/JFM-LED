@@ -12,7 +12,7 @@
       </div>
       <div class='col-md-6'>
         <%= f.input :reference, label: "Numéro d'affaire" %>
-        <%#= f.input :company_id, label: "Produit", collection: @products.to_a, label_method: lambda { |product| "#{product.label}" } %>
+        <%= react_component 'ClientSelector' %>
         <%= f.input :pdf, label: "Bon de commande", as: :attachinary %>
       </div>
     </div>
