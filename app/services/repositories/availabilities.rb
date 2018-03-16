@@ -1,6 +1,7 @@
 class Repositories::Availabilities
   def self.for_technicians(tech_ids, starts_at, ends_at)
     Availability
+      .includes(:technician)
       .where(technician_id: tech_ids)
       .of_the_week
       .order(date: :asc)
