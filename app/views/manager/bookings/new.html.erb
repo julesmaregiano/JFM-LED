@@ -12,7 +12,7 @@
       </div>
       <div class='col-md-6'>
         <%= f.input :reference, label: "Numéro d'affaire" %>
-        <%= react_component 'ClientSelector' %>
+        <%= f.input :company,   label: "Client", collection: Company.all %>
         <%= f.input :pdf, label: "Bon de commande", as: :attachinary %>
       </div>
     </div>
