@@ -1,5 +1,6 @@
 class Manager::BookingsController < Manager::ApplicationController
-  before_action :load_products, only: [:new, :create]
+  before_action :load_products,       only: [:new, :create]
+  before_action :load_availabilities, only: [:new, :create, :edit]
 
   def index
     @user = current_user
@@ -8,7 +9,7 @@ class Manager::BookingsController < Manager::ApplicationController
 
   # GET /manager/bookings/news
   def new
-    @booking = Booking.new
+    @booking        = Booking.new
   end
 
   # POST /manager/bookings
@@ -68,6 +69,15 @@ class Manager::BookingsController < Manager::ApplicationController
       address_attributes: [:address1],
       company_attributes: [:address1]
     )
+  end
+
+  def service_provider
+    current_manager.try(:service_provider)
+  end
+
+  def load_availabilities
+    technician_ids  = service_provider.technician_ids
+    @availabilities = Repositories::Availabilities.for_technicians(technician_ids, Date.today, Date.today + 5.days)
   end
 
   def load_products
