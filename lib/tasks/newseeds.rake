@@ -1,6 +1,10 @@
 namespace :newseeds do
 
   task seed: :environment do
+    Address.delete_all
+    Report.delete_all
+    Booking.delete_all
+    Availability.delete_all
     Manager.delete_all
     Technician.delete_all
     ServiceProvider.delete_all
@@ -11,7 +15,7 @@ namespace :newseeds do
       sp.address = sp.build_address
     end
 
-    manager = Manager.create! do |mgr|
+    Manager.create! do |mgr|
        mgr.first_name       = 'Jules'
        mgr.last_name        = 'Marechianno'
        mgr.email            = 'manager@led.fr'
@@ -19,7 +23,7 @@ namespace :newseeds do
        mgr.service_provider = service_provider
     end
 
-    40.times do
+    1.times do
       Technician.create! do |tech|
         tech.first_name       = 'Pathe'
         tech.last_name        = 'SENE'
