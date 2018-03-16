@@ -5,7 +5,7 @@ import HalfDayAvailability from './HalfDayAvailability.jsx';
 
 export default class HelloWorld extends React.Component {
   static propTypes = {
-    name: PropTypes.string.isRequired, // this is passed from the Rails view
+    name: PropTypes.string.isRequired,
   };
 
   /**
@@ -22,35 +22,36 @@ export default class HelloWorld extends React.Component {
 
   render() {
     return (
-        <table className='table'>
-          <thead>
-            <tr>
-              <th>TECH</th>
-              <th>Lundi</th>
-              <th>Mardi</th>
-              <th>Mercredi</th>
-              <th>Jeudi</th>
-              <th>Vendredi</th>
-            </tr>
-          </thead>
+        <table className='table tableAvailabilities'>
           <tbody>
             <tr>
-              <td rowspan='2'>PATHE</td>
-              <td>TECH</td>
-              <td>TECH</td>
-              <td>TECH</td>
-              <td>TECH</td>
-              <td>TECH</td>
+              <td rowspan='2' class='tech'>Pathé</td>
+              <Availability css='danger' />
+              <Availability />
+              <Availability  css='warning' />
+              <Availability />
+              <Availability  css='success' />
             </tr>
             <tr>
-              <td>TECH</td>
-              <td>TECH</td>
-              <td>TECH</td>
-              <td>TECH</td>
-              <td>TECH</td>
+              <Availability css='danger' />
+              <Availability />
+              <Availability  css='warning' />
+              <Availability />
+              <Availability  css='success' />
             </tr>
           </tbody>
         </table>
+    );
+  }
+}
+
+class Availability extends React.Component {
+  render() {
+    let {css } = this.props
+    return (
+        <td className={css}>
+          <input type='checkbox' />
+        </td>
     );
   }
 }
