@@ -5,6 +5,7 @@ class Booking < ApplicationRecord
   has_many :option_values, through: :booked_product_options, dependent: :destroy
   delegate :branch, to: :user
 
+  belongs_to :service_provider
   belongs_to :product
   belongs_to :user,    optional: true
   belongs_to :foreman, optional: true
@@ -12,12 +13,12 @@ class Booking < ApplicationRecord
   #validates :user_id,        presence: true
   #validates :availabilities, presence: true
 
-  has_one :address, dependent: :destroy
   has_one :report,  dependent: :destroy
   has_one :address, dependent: :destroy, as: :addressable
 
-  has_attachment :pdf
   accepts_nested_attributes_for :address
+
+  has_attachment :pdf
 
   include AlgoliaSearch
   algoliasearch do
@@ -80,7 +81,7 @@ class Booking < ApplicationRecord
 end
 
 # == Schema Information
-# Schema version: 20180315032152
+# Schema version: 20180316094501
 #
 # Table name: bookings
 #
@@ -102,6 +103,7 @@ end
 #  product_id              :integer
 #  reference               :string
 #  send_confirmation_email :boolean          default("false")
+#  service_provider_id     :integer
 #  surface                 :string
 #  updated_at              :datetime         not null
 #  user_id                 :integer
@@ -112,5 +114,6 @@ end
 #  index_bookings_on_bookable_type_and_bookable_id  (bookable_type,bookable_id)
 #  index_bookings_on_foreman_id                     (foreman_id)
 #  index_bookings_on_product_id                     (product_id)
+#  index_bookings_on_service_provider_id            (service_provider_id)
 #  index_bookings_on_user_id                        (user_id)
 #

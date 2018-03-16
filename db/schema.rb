@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180315141216) do
+ActiveRecord::Schema.define(version: 20180316094501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,9 +130,11 @@ ActiveRecord::Schema.define(version: 20180315141216) do
     t.string "bookable_type"
     t.bigint "bookable_id"
     t.boolean "send_confirmation_email", default: false
+    t.bigint "service_provider_id"
     t.index ["bookable_type", "bookable_id"], name: "index_bookings_on_bookable_type_and_bookable_id"
     t.index ["foreman_id"], name: "index_bookings_on_foreman_id"
     t.index ["product_id"], name: "index_bookings_on_product_id"
+    t.index ["service_provider_id"], name: "index_bookings_on_service_provider_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
@@ -361,6 +363,7 @@ ActiveRecord::Schema.define(version: 20180315141216) do
   add_foreign_key "booked_product_options", "option_values"
   add_foreign_key "booked_product_options", "options"
   add_foreign_key "bookings", "products"
+  add_foreign_key "bookings", "service_providers"
   add_foreign_key "bookings", "users"
   add_foreign_key "branches", "companies"
   add_foreign_key "company_products", "companies"

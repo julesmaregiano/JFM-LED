@@ -3,8 +3,8 @@ class ServiceProvider < ApplicationRecord
   validates :siret, presence: true
 
   has_one  :address,  as: :addressable
-  has_many :bookings, as: :bookable
   has_many :technicians
+  has_many :bookings
   has_many :managers
 end
 
