@@ -1,7 +1,7 @@
   class Availability < ApplicationRecord
-  belongs_to :user, optional: true
-  belongs_to :technician
+  belongs_to :user,    optional: true
   belongs_to :booking, optional: true
+  belongs_to :technician
   after_create :init
 
   scope :of,    -> (user) { where("user_id = ? ", user.id)}
