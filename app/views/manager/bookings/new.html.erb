@@ -2,6 +2,7 @@
   <div class='text-center'>
     <h1>Créer une réservation</h1>
   </div>
+  <%= @booking.errors.inspect %>
   <%= simple_form_for [:manager, @booking] do |f| %>
     <div class='row'>
       <div class='col-md-6'>
@@ -17,6 +18,26 @@
         <%= f.input :pdf, label: "Bon de commande", as: :attachinary %>
       </div>
     </div>
+    <table class='table'>
+      <tbody>
+        <% @availabilities.each do |days| %>
+          <% days.each_with_index do |day_items, day_item_index| %>
+            <tr>
+            <% day_items.each_with_index do |item, item_index| %>
+               <% if day_item_index.even? && item_index.zero? %>
+                <td rowspan='2'><%= item.first_name %></td>
+               <% else %>
+                 <td>
+                   <%= item.class %>
+                   <%= f.check_box :availability_ids, name:'booking[availability_ids][]' , value: item.id %>
+                 </td>
+               <% end %>
+            <% end %>
+          </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
     <%= react_component 'HelloWorld' %>
     <div class='text-center'>
       <%= f.input :send_confirmation_email, label: "Envoyer mail de confirmation", as: :boolean %>
