@@ -17,18 +17,21 @@
         <%= f.input :pdf, label: "Bon de commande", as: :attachinary %>
       </div>
     </div>
-    <table class='table'>
+    <table class='table tableAvailabilities'>
       <tbody>
         <% @availabilities.each do |days| %>
           <% days.each_with_index do |day_items, day_item_index| %>
             <tr>
             <% day_items.each_with_index do |item, item_index| %>
                <% if day_item_index.even? && item_index.zero? %>
-                <td rowspan='2'><%= item.first_name %></td>
+                <td rowspan='2' class='tech'><%= item.first_name %></td>
                <% else %>
                  <td>
-                   <%= item.id %>
-                   <%= check_box_tag 'booking[availability_ids][]', item.id, false %>
+                    <% if item.booking %>
+                      <%= item.booking.company.name %>
+                    <% else %>
+                      <%= check_box_tag 'booking[availability_ids][]', item.id, false %>
+                    <% end %>
                  </td>
                <% end %>
             <% end %>
