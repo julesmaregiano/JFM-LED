@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import './HalfDayAvailability.jsx'
+
 export default class HelloWorld extends React.Component {
   static propTypes = {
     name: PropTypes.string.isRequired, // this is passed from the Rails view
@@ -11,9 +13,6 @@ export default class HelloWorld extends React.Component {
    */
   constructor(props) {
     super(props);
-
-    // How to set initial state in ES6 class syntax
-    // https://facebook.github.io/react/docs/reusable-components.html#es6-classes
     this.state = { name: this.props.name };
   }
 
@@ -104,7 +103,7 @@ export default class HelloWorld extends React.Component {
             </div>
             <div className='col-md-2'>
               <div className='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-              <div className='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
+              <HalfDayAvailability />
             </div>
           </div>
         </div>
