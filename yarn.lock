@@ -4780,6 +4780,10 @@ react@^16.2.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
+reactjs-popup@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/reactjs-popup/-/reactjs-popup-1.0.5.tgz#4525f4caae6ba4b7c948d5e9a9a660321033d3a6"
+
 read-cache@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/read-cache/-/read-cache-1.0.0.tgz#e664ef31161166c9751cdbe8dbcf86b5fb58f774"
