@@ -26,18 +26,18 @@ export default class HelloWorld extends React.Component {
           <tbody>
             <tr>
               <td rowspan='2' class='tech'>Pathé</td>
+              <Availability />
+              <Availability checked={true}/>
               <Availability css='danger' />
-              <Availability />
-              <Availability  css='warning' />
-              <Availability />
-              <Availability  css='success' />
+              <Availability css='warning' />
+              <Availability css='success' />
             </tr>
             <tr>
               <Availability css='danger' />
               <Availability />
               <Availability  css='warning' />
-              <Availability />
-              <Availability  css='success' />
+              <Availability checked={true} />
+              <Availability  checked={true} css='success' />
             </tr>
           </tbody>
         </table>
@@ -47,10 +47,10 @@ export default class HelloWorld extends React.Component {
 
 class Availability extends React.Component {
   render() {
-    let {css } = this.props
+    let { css, checked } = this.props
     return (
         <td className={css}>
-          <input type='checkbox' />
+          <input type='checkbox' checked={checked} />
         </td>
     );
   }
