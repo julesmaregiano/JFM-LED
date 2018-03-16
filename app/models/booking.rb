@@ -6,9 +6,10 @@ class Booking < ApplicationRecord
   delegate :branch, to: :user
 
   belongs_to :service_provider
+  belongs_to :company
   belongs_to :product
-  belongs_to :user,    optional: true
   belongs_to :foreman, optional: true
+  belongs_to :user,    optional: true
 
   #validates :user_id,        presence: true
   #validates :availabilities, presence: true
@@ -17,6 +18,7 @@ class Booking < ApplicationRecord
   has_one :address, dependent: :destroy, as: :addressable
 
   accepts_nested_attributes_for :address
+  accepts_nested_attributes_for :company
 
   has_attachment :pdf
 
