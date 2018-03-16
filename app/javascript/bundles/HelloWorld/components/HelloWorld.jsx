@@ -39,6 +39,36 @@ export default class HelloWorld extends React.Component {
               <Availability checked={true} />
               <Availability  checked={true} css='success' />
             </tr>
+            <tr>
+              <td rowspan='2' class='tech'>MarieTech</td>
+              <Availability />
+              <Availability checked={true}/>
+              <Availability css='danger' />
+              <Availability css='warning' />
+              <Availability css='success' />
+            </tr>
+            <tr>
+              <Availability css='danger' />
+              <Availability />
+              <Availability  css='warning' />
+              <Availability checked={true} />
+              <Availability  checked={true} css='success' />
+            </tr>
+            <tr>
+              <td rowspan='2' class='tech'>Jules Tech</td>
+              <Availability />
+              <Availability  />
+              <Availability  />
+              <Availability />
+              <Availability css='success' />
+            </tr>
+            <tr>
+              <Availability />
+              <Availability />
+              <Availability  css='warning' />
+              <Availability />
+              <Availability  checked={true} css='success' />
+            </tr>
           </tbody>
         </table>
     );
