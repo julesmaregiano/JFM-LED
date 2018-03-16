@@ -46,6 +46,7 @@ end
 group :development do
   gem 'rails-erd'
   gem 'annotate'
+  gem 'ffaker'
 end
 
 group :development, :test do
