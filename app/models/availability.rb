@@ -52,7 +52,7 @@
 end
 
 # == Schema Information
-# Schema version: 20180315141216
+# Schema version: 20180316173732
 #
 # Table name: availabilities
 #
@@ -68,7 +68,8 @@ end
 #
 # Indexes
 #
-#  index_availabilities_on_booking_id     (booking_id)
-#  index_availabilities_on_technician_id  (technician_id)
-#  index_availabilities_on_user_id        (user_id)
+#  index_availabilities_on_booking_id                       (booking_id)
+#  index_availabilities_on_technician_id                    (technician_id)
+#  index_availabilities_on_technician_id_and_date_and_half  (technician_id,date,half) UNIQUE
+#  index_availabilities_on_user_id                          (user_id)
 #
