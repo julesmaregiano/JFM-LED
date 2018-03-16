@@ -1,5 +1,4 @@
 class Foreman < ApplicationRecord
-  belongs_to :branch
   belongs_to :service_provider
 
   has_many :bookings
