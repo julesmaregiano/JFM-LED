@@ -65,9 +65,10 @@ class Manager::BookingsController < Manager::ApplicationController
   def booking_params
     params.require(:booking).permit(
       :address, :client_id, :product_id, :company_id,
-      :send_confirmation_email,
+      :send_confirmation_email, :reference, :foreman_id,
+      availability_ids:   [],
       address_attributes: [:address1],
-      company_attributes: [:address1]
+      company_attributes: [:address1],
     )
   end
 
