@@ -2,6 +2,14 @@ class Foreman < ApplicationRecord
   belongs_to :service_provider
 
   has_many :bookings
+
+  validates :first_name, :last_name,
+    presence: true,
+    length:   { maximum: 255 }
+
+  validates :phone,
+    presence: true
+
 end
 
 # == Schema Information
