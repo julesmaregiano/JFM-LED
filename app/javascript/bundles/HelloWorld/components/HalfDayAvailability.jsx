@@ -1,10 +1,11 @@
-import React from 'react-rails';
+import React from 'react';
 
 export default class HalfDayAvailability extends React.Component {
   render() {
-    <div className='panel panel-default'>
-      <div class='panel-heading'>TEST</div>
-    </div>
+    return (
+      <div className='panel panel-default'>
+        <div className='panel-heading'>TEST</div>
+      </div>
+    )
   }
-
 }
