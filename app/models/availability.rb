@@ -1,4 +1,4 @@
-  class Availability < ApplicationRecord
+class Availability < ApplicationRecord
   belongs_to :user,    optional: true
   belongs_to :booking, optional: true
   belongs_to :technician
