@@ -81,7 +81,7 @@ class Booking < ApplicationRecord
 end
 
 # == Schema Information
-# Schema version: 20180316094501
+# Schema version: 20180316124903
 #
 # Table name: bookings
 #
@@ -93,6 +93,7 @@ end
 #  bookable_type           :string
 #  city                    :string
 #  comment                 :text
+#  company_id              :integer
 #  confirmed_at            :datetime
 #  country                 :string
 #  created_at              :datetime         not null
@@ -112,6 +113,7 @@ end
 # Indexes
 #
 #  index_bookings_on_bookable_type_and_bookable_id  (bookable_type,bookable_id)
+#  index_bookings_on_company_id                     (company_id)
 #  index_bookings_on_foreman_id                     (foreman_id)
 #  index_bookings_on_product_id                     (product_id)
 #  index_bookings_on_service_provider_id            (service_provider_id)
