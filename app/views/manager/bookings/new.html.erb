@@ -26,13 +26,16 @@
                <% if day_item_index.even? && item_index.zero? %>
                 <td rowspan='2' class='tech'><%= item.first_name %></td>
                <% else %>
-                 <td>
-                    <% if item.booking %>
-                      <%= item.booking.company.name %>
-                    <% else %>
-                      <%= check_box_tag 'booking[availability_ids][]', item.id, false %>
-                    <% end %>
-                 </td>
+                 <% if item.booking %>
+                   <td class='danger'>
+                     <%= item.booking.company.name %>
+                     <i class='fa fa-check'></i>
+                   </td>
+                 <% else %>
+                   <td>
+                     <%= check_box_tag 'booking[availability_ids][]', item.id, false %>
+                   </td>
+                 <% end %>
                <% end %>
             <% end %>
           </tr>
