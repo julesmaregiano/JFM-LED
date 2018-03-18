@@ -8,6 +8,7 @@
         <%= f.fields_for :address_attributes do |ff| %>
           <div data-controller='address'>
             <%= ff.input :address1, label: "Adresse", input_html: {data: {'action': "keyup->address#search", target: 'address.search'}} %>
+            <%= ff.input :latitude, as: :hidden,input_html: {data: {target: 'address.latitude'}} %>
           </div>
         <% end %>
         <%= f.input :product_id, label: "Produit", collection: @products.to_a, label_method: lambda { |product| "#{product.label}" } %>
