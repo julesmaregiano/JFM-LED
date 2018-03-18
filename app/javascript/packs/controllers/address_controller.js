@@ -6,13 +6,16 @@ export default class extends Controller {
   static targets = ["search"]
 
   connect() {
+
+  }
+
+  onPlaceChanged() {
+    console.log(this.getPlace());
   }
 
   search(event) {
-
-  var bookingAddress = document.getElementById('booking_address_attributes_address1');
-    var autocomplete = new google.maps.places.Autocomplete(bookingAddress, { types: ['geocode'] });
-    console.log(event.target.value);
+    var autocomplete = new google.maps.places.Autocomplete(this.searchTarget, { types: ['geocode'] });
+    google.maps.event.addListener(autocomplete, 'place_changed', this.onPlaceChanged);
   }
 
 }
