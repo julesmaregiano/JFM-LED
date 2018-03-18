@@ -1,16 +1,18 @@
 import { Controller } from "stimulus"
-import { loadScript } from "tiny-script-loader"
 
 export default class extends Controller {
 
-  static targets = ["search"]
+  static targets = ["search", "latitude"]
 
   connect() {
 
   }
 
   onPlaceChanged() {
-    console.log(this.getPlace());
+    let { geometry } = this.getPlace();
+
+    this.latitudeTarget.value = geometry.location.lat();
+
   }
 
   search(event) {
