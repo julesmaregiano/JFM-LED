@@ -3,7 +3,7 @@ class Repositories::Availabilities
     Availability
       .includes(:technician)
       .where(technician_id: tech_ids)
-      .of_the_week
+      .where("date  >= ? AND date <= ?", starts_at, ends_at)
       .order(date: :asc)
       .group_by {|a| a.technician }
       .map do |key, values|
