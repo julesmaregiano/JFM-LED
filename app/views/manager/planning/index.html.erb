@@ -2,9 +2,9 @@
   <div class='container'>
     <ul class="nav nav-tabs" data-controller='planning'>
       <li class="active"><a data-toggle='tab' href="#vueGenerale">Vue générale</a></li>
-      <li><a data-toggle='tab' href="#techniciens" data-action='hover->planning#load'>Technicien 1</a></li>
-      <li><a data-toggle='tab' href="#techniciens">Technicien 2</a></li>
-      <li><a data-toggle='tab' href="#techniciens">Technicien 3</a></li>
+      <% current_manager.technicians.each do |tech| %>
+        <li><%= link_to tech.name, manager_technician_planning_path(tech.id) %></li>
+      <% end %>
     </ul>
     <div class='tab-content'>
       <div id="vueGenerale"  role="tabpanel"  class="tab-pane fade in active planning">
