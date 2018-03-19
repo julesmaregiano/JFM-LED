@@ -6,10 +6,16 @@
       </li>
       <% current_manager.technicians.each do |tech| %>
         <li class="<%= tech.id.eql?(@tech.id) ? 'active' : '' %>">
-          <%= link_to tech.name, manager_technician_planning_path(tech.id) %>
+          <%= link_to tech.name, manager_technician_planning_path(tech.id, date: @next_date - 1.weeks) %>
         </li>
       <% end %>
     </ul>
+    <div class="text-center">
+      <ul class='pagination'>
+        <li> <%= link_to 'précédent', manager_technician_planning_url(@tech.id, date: @next_date - 2.weeks) %> </li>
+        <li> <%= link_to 'suivant',   manager_technician_planning_url(@tech.id, date: @next_date) %> </li>
+      </ul>
+    </div>
     <table class='table tableAvailabilities'>
       <% if @headers %>
         <thead>
