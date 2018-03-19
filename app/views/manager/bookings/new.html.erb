@@ -15,7 +15,12 @@
       </div>
       <div class='col-md-6'>
         <%= f.input :reference,  label: "Numéro d'affaire" %>
-        <%= f.input :company_id, label: "Client",           collection: Company.all %>
+        <div>
+          <%= f.input :company_id, label: "Client",           collection: Company.all %>
+          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalClientAttributes">
+            Launch demo modal
+          </button>
+        </div>
         <%= f.input :foreman_id, label: "Chef de chantier", collection: Foreman.all %>
         <%= f.input :pdf, label: "Bon de commande", as: :attachinary %>
       </div>
@@ -49,6 +54,28 @@
     <div class='text-center'>
       <%= f.input :send_confirmation_email, label: "Envoyer mail de confirmation", as: :boolean %>
       <%= f.submit 'Enregistrer la réservation' %>
+    </div>
+    <div class="modal fade" id="modalClientAttributes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+          </div>
+          <div class="modal-body">
+            <%= f.fields_for :company_attributes do |ff| %>
+              <div data-controller='address'>
+                <%= ff.input :name, label: "Nom du client" %>
+                <%= ff.input :siret  %>
+              </div>
+            <% end %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
     </div>
   <% end %>
 </div>
