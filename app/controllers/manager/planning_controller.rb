@@ -10,6 +10,10 @@ class Manager::PlanningController < Manager::ApplicationController
     @headers        = @availabilities.first.last.map(&:date) unless @availabilities.length.zero?
   end
 
+  def show
+    @tech = current_manager.technicians.find(params[:id])
+  end
+
   private
 
   def service_provider
