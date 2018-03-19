@@ -1,13 +1,19 @@
 <div class="padding-box">
   <div class='container'>
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs" data-controller='planning'>
       <li class="active"><a data-toggle='tab' href="#vueGenerale">Vue générale</a></li>
-      <li><a data-toggle='tab' href="#techniciens">Technicien 1</a></li>
+      <li><a data-toggle='tab' href="#techniciens" data-action='hover->planning#load'>Technicien 1</a></li>
       <li><a data-toggle='tab' href="#techniciens">Technicien 2</a></li>
       <li><a data-toggle='tab' href="#techniciens">Technicien 3</a></li>
     </ul>
     <div class='tab-content'>
       <div id="vueGenerale"  role="tabpanel"  class="tab-pane fade in active planning">
+        <div class="text-center">
+          <ul class='pagination'>
+            <li> <%= link_to 'précédent', manager_planning_url(date: @next_date - 2.weeks) %> </li>
+            <li> <%= link_to 'suivant',   manager_planning_url(date: @next_date) %> </li>
+          </ul>
+        </div>
         <table class='table tableAvailabilities'>
           <% if @headers %>
             <thead>
@@ -46,8 +52,12 @@
             <% end %>
           </tbody>
         </table>
-        <%= link_to 'précédent', manager_planning_url(date: @next_date - 2.weeks) %>
-        <%= link_to 'suivant',   manager_planning_url(date: @next_date) %>
+        <div class="text-center">
+          <ul class='pagination'>
+            <li> <%= link_to 'précédent', manager_planning_url(date: @next_date - 2.weeks) %> </li>
+            <li> <%= link_to 'suivant',   manager_planning_url(date: @next_date) %> </li>
+          </ul>
+        </div>
       </div>
       <div id="techniciens"  role="tabpanel"  class="tab-pane fade in">
         <h3>Technicien</h3>
