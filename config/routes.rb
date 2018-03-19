@@ -41,6 +41,7 @@ Rails.application.routes.draw do
     get :send_report_mail, to: "reports#send_report_mail", as: :send_report_mail
     get '/dashboard',      to: "dashboards#show"
     get '/planning',       to: "planning#index"
+    get '/planning/:id',   to: "planning#show", as: :technician_planning
     resources :users,          only: [:show, :index]
     resources :reports,        only: [:show, :edit, :update]
     resources :bookings,       only: [:show, :index, :update, :new, :create]
