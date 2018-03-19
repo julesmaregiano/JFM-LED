@@ -1,104 +1,46 @@
-<div class="dashboard-wrap">
-  <%= render "/shared/sidebar"%>
-  <div class="dashboard-content">
-    <div class="padding-box">
-      <div class='container'>
-        <ul class="nav nav-tabs">
-          <li class="active"><a data-toggle='tab' href="#vueGenerale">Vue générale</a></li>
-          <li><a data-toggle='tab' href="#techniciens">Technicien 1</a></li>
-          <li><a data-toggle='tab' href="#techniciens">Technicien 2</a></li>
-          <li><a data-toggle='tab' href="#techniciens">Technicien 3</a></li>
-        </ul>
-        <div class='tab-content'>
-          <div id="vueGenerale" class="tab-pane fade in active planning">
-            <div class='row rowHeading'>
-              <div class='col-md-2'>TECH</div>
-              <div class='col-md-2'>Lundi</div>
-              <div class='col-md-2'>Mardi</div>
-              <div class='col-md-2'>Mercredi</div>
-              <div class='col-md-2'>Jeudi</div>
-              <div class='col-md-2'>Vendredi</div>
-            </div>
-            <div class='row rowAvailability'>
-              <div class='col-md-2'>
-                <p class='technicianName'> PATHE </p>
-              </div>
-              <div class='col-md-2'>
-                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-                <div class='panel panel-success'> <div class='panel-heading'>TEST</div> </div>
-              </div>
-              <div class='col-md-2'>
-                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-              </div>
-              <div class='col-md-2'>
-                <div class='panel panel-danger'> <div class='panel-heading'>TEST</div> </div>
-                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-              </div>
-              <div class='col-md-2'>
-                <div class='panel panel-warning'> <div class='panel-heading'>TEST</div> </div>
-                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-              </div>
-              <div class='col-md-2'>
-                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-              </div>
-            </div>
-            <div class='row rowAvailability'>
-              <div class='col-md-2'>
-                <p class='technicianName'>Cyril</p>
-              </div>
-              <div class='col-md-2'>
-                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-                <div class='panel panel-success'> <div class='panel-heading'>TEST</div> </div>
-              </div>
-              <div class='col-md-2'>
-                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-              </div>
-              <div class='col-md-2'>
-                <div class='panel panel-danger'> <div class='panel-heading'>TEST</div> </div>
-                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-              </div>
-              <div class='col-md-2'>
-                <div class='panel panel-warning'> <div class='panel-heading'>TEST</div> </div>
-                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-              </div>
-              <div class='col-md-2'>
-                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-              </div>
-            </div>
-            <div class='row rowAvailability'>
-              <div class='col-md-2'>
-                <p class='technicianName'>Jules</p>
-              </div>
-              <div class='col-md-2'>
-                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-                <div class='panel panel-success'> <div class='panel-heading'>TEST</div> </div>
-              </div>
-              <div class='col-md-2'>
-                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-              </div>
-              <div class='col-md-2'>
-                <div class='panel panel-danger'> <div class='panel-heading'>TEST</div> </div>
-                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-              </div>
-              <div class='col-md-2'>
-                <div class='panel panel-warning'> <div class='panel-heading'>TEST</div> </div>
-                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-              </div>
-              <div class='col-md-2'>
-                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-                <div class='panel panel-default'> <div class='panel-heading'>TEST</div> </div>
-              </div>
-            </div>
-          </div>
-          <div id="techniciens" class="tab-pane fade in">
-            <h3>Technicien</h3>
-          </div>
-        </div>
+<div class="padding-box">
+  <div class='container'>
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle='tab' href="#vueGenerale">Vue générale</a></li>
+      <li><a data-toggle='tab' href="#techniciens">Technicien 1</a></li>
+      <li><a data-toggle='tab' href="#techniciens">Technicien 2</a></li>
+      <li><a data-toggle='tab' href="#techniciens">Technicien 3</a></li>
+    </ul>
+    <div class='tab-content'>
+      <div id="vueGenerale" class="tab-pane fade in active planning">
+        <table class='table tableAvailabilities'>
+          <thead>
+            <tr>
+              <th></th>
+              <% @headers.each do |date| %>
+                <th><%= l date, format: :long %></th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <% @availabilities.each do |days| %>
+              <% days.each_with_index do |day_items, day_item_index| %>
+                <tr>
+                  <% day_items.each_with_index do |item, item_index| %>
+                    <% if day_item_index.even? && item_index.zero? %>
+                      <td rowspan='2' class='tech'><%= item.first_name %></td>
+                    <% else %>
+                      <% if item.booking %>
+                        <td class='danger'> <%= item.booking.company.name %> </td>
+                      <% else %>
+                        <td> <%= check_box_tag 'booking[availability_ids][]', item.id, false %> </td>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+
+      </div>
+      <div id="techniciens" class="tab-pane fade in">
+        <h3>Technicien</h3>
       </div>
     </div>
   </div>
