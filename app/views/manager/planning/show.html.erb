@@ -13,6 +13,7 @@
     <div class="text-center">
       <ul class='pagination'>
         <li> <%= link_to 'précédent', manager_technician_planning_url(@tech.id, date: @next_date - 2.weeks) %> </li>
+        <li class='active'> <%=link_to l(@next_date - 1.week, format: '%B %Y'), '#!' %> </li>
         <li> <%= link_to 'suivant',   manager_technician_planning_url(@tech.id, date: @next_date) %> </li>
       </ul>
     </div>
