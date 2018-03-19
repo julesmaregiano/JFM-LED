@@ -4,6 +4,7 @@ class Manager < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   belongs_to :service_provider
+  has_many   :technicians, through: :service_provider
 
   validates :email, :first_name, :last_name,
     presence: true,
