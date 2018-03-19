@@ -27,6 +27,14 @@
       </div>
     </div>
     <table class='table tableAvailabilities'>
+      <thead>
+        <tr>
+          <th></th>
+          <% @headers.each do |date| %>
+            <th><%= l date, format: :long %></th>
+          <% end %>
+        </tr>
+      </thead>
       <tbody>
         <% @availabilities.each do |days| %>
           <% days.each_with_index do |day_items, day_item_index| %>
