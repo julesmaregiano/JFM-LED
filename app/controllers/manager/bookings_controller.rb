@@ -69,6 +69,7 @@ class Manager::BookingsController < Manager::ApplicationController
       availability_ids:   [],
       address_attributes: [:address1],
       company_attributes: [:name, :siret],
+      foreman_attributes: [:first_name, :last_name, :phone, :service_provider_id],
     )
   end
 
