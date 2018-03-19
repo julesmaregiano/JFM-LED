@@ -68,7 +68,7 @@ class Manager::BookingsController < Manager::ApplicationController
       :send_confirmation_email, :reference, :foreman_id,
       availability_ids:   [],
       address_attributes: [:address1],
-      company_attributes: [:address1],
+      company_attributes: [:name, :siret],
     )
   end
 
