@@ -12,6 +12,7 @@ class Manager::PlanningController < Manager::ApplicationController
 
   def show
     @tech = current_manager.technicians.find(params[:id])
+    @availabilities = Repositories::Availabilities.for_technician(@tech.id, Date.today, Date.today + 10.days)
   end
 
   private
