@@ -80,6 +80,7 @@ class Manager::BookingsController < Manager::ApplicationController
   def load_availabilities
     technician_ids  = service_provider.technician_ids
     @availabilities = Repositories::Availabilities.for_technicians(technician_ids, Date.today, Date.today + 5.days)
+    @headers        = @availabilities.first.last.map(&:date)
   end
 
   def load_products
