@@ -22,7 +22,7 @@
         <thead>
           <tr>
             <% @headers.each do |date| %>
-              <th><%= l date, format: :long %></th>
+              <th><%= l date, format: '%a %d %b %Y' %></th>
             <% end %>
           </tr>
         </thead>
