@@ -1,0 +1,14 @@
+<div class="padding-box">
+  <div class='container'>
+    <ul class="nav nav-tabs" data-controller='planning'>
+      <li>
+          <%= link_to 'Vue générale', manager_planning_path %>
+      </li>
+      <% current_manager.technicians.each do |tech| %>
+        <li class="<%= tech.id.eql?(@tech.id) ? 'active' : '' %>">
+          <%= link_to tech.name, manager_technician_planning_path(tech.id) %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
