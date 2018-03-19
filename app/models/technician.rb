@@ -7,6 +7,10 @@ class Technician < ApplicationRecord
   validates :email, :first_name, :last_name,
     presence: true,
     length:   { maximum: 255 }
+
+  def name
+    [first_name, last_name].join ' '
+  end
 end
 
 # == Schema Information
