@@ -19,6 +19,7 @@ class Booking < ApplicationRecord
 
   accepts_nested_attributes_for :address
   accepts_nested_attributes_for :company
+  accepts_nested_attributes_for :foreman
 
   has_attachment :pdf
 
