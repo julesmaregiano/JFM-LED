@@ -10,6 +10,7 @@ class Manager::PlanningController < Manager::ApplicationController
     @next_date      = beginning + 7.days
     @tech = current_manager.technicians.find(params[:id])
     @availabilities = Repositories::Availabilities.for_technician(@tech.id, beginning, ending)
+    @headers        = @availabilities.first.map(&:date) unless @availabilities.length.zero?
   end
 
   private
