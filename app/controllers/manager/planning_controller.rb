@@ -1,10 +1,13 @@
 class Manager::PlanningController < Manager::ApplicationController
   def index
     technician_ids  = service_provider.technician_ids
-    beginning       = Date.today.beginning_of_week
-    ending          = beginning + 5.days
+    given           = params[:date].present? ? Date.parse(params[:date]) : Date.today
+    beginning       = given.beginning_of_week
+    ending          = beginning + 4.days
+    @next_date      = beginning + 7.days
+
     @availabilities = Repositories::Availabilities.for_technicians(technician_ids, beginning, ending)
-    @headers        = @availabilities.first.last.map(&:date)
+    @headers        = @availabilities.first.last.map(&:date) unless @availabilities.length.zero?
   end
 
   private

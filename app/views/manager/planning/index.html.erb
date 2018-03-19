@@ -9,14 +9,16 @@
     <div class='tab-content'>
       <div id="vueGenerale"  role="tabpanel"  class="tab-pane fade in active planning">
         <table class='table tableAvailabilities'>
-          <thead>
-            <tr>
-              <th></th>
-              <% @headers.each do |date| %>
-                <th><%= l date, format: :long %></th>
-              <% end %>
-            </tr>
-          </thead>
+          <% if @headers %>
+            <thead>
+              <tr>
+                <th></th>
+                <% @headers.each do |date| %>
+                  <th><%= l date, format: :long %></th>
+                <% end %>
+              </tr>
+            </thead>
+          <% end %>
           <tbody>
             <% @availabilities.each do |days| %>
               <% days.each_with_index do |day_items, day_item_index| %>
@@ -35,9 +37,17 @@
                 </tr>
               <% end %>
             <% end %>
+            <% if @availabilities.length.zero? %>
+              <tr>
+                <td>
+                  <div class='alert alert-info'>Vous n'avez pas d'availabilities pour cette semaine.</div>
+                </td>
+              </tr>
+            <% end %>
           </tbody>
         </table>
-
+        <%= link_to 'précédent', manager_planning_url(date: @next_date - 2.weeks) %>
+        <%= link_to 'suivant',   manager_planning_url(date: @next_date) %>
       </div>
       <div id="techniciens"  role="tabpanel"  class="tab-pane fade in">
         <h3>Technicien</h3>
