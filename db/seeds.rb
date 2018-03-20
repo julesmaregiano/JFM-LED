@@ -25,9 +25,12 @@ puts "Unit destroyed"
 User.destroy_all
 puts "User destroyed"
 Foreman.destroy_all
+Technician.destroy_all
+Manager.destroy_all
 puts "Foreman destroyed"
 CompanyProduct.destroy_all
 puts "CompanyProduct destroyed"
+Branch.destroy_all
 Company.destroy_all
 puts "Company destroyed"
 ProductOption.destroy_all
@@ -122,45 +125,46 @@ puts "Manager créé"
 #PRODUCT MP
 
 product_mp = Product.create! do |p|
-              p.label = "Marquage-Piquetage"
-            end
+  p.label = "Marquage-Piquetage"
+end
+Rails.logger.info product_mp.inspect
 
   product_mp_product_option_1 = ProductOption.create! do |po|
-                                  po.product = product_mp,
-                                  po.option = Option.create! do |o|
-                                    o.label = "Longueur (en m)",
-                                    o.custom_value = true
-                                  end
-                                end
+    po.product = product_mp
+      po.option = Option.create! do |o|
+        o.label = "Longueur (en m)"
+        o.custom_value = true
+      end
+  end
 
   product_mp_product_option_2 = ProductOption.create! do |po|
-                                  po.product = product_mp.id,
+                                  po.product = product_mp
                                   po.option = Option.create! do |o|
-                                    o.label = "Types de réseaux",
+                                    o.label = "Types de réseaux"
                                     o.custom_value = false
                                   end
                                 end
   zones_mp = ['Trottoir (2m)', '1 trottoir + 1 chaussée (6m)', '2 trottoirs + 2 chaussées (12m)', 'Boulevard (20m)']
   zones_mp.each do |label|
     OptionValue.create! do |ov|
-                          ov.option = product_mp_product_option_2.option,
-                          ov.label = label,
+                          ov.option = product_mp_product_option_2.option
+                          ov.label = label
                           ov.active = true
     end
   end
 
   product_mp_product_option_3 = ProductOption.create! do |po|
-                                  po.product = product_mp,
+                                  po.product = product_mp
                                   po.option = Option.create! do |o|
-                                    o.label = "Types de réseaux",
+                                    o.label = "Types de réseaux"
                                     o.custom_value = false
                                   end
                                 end
     types_reseaux = ['Tous réseaux', 'Tous sauf assainissement', 'Réseaux sensibles']
     types_reseaux.each do |label|
       OptionValue.create! do |ov|
-                            ov.option = product_mp_product_option_3.option,
-                            ov.label = label,
+                            ov.option = product_mp_product_option_3.option
+                            ov.label = label
                             ov.active = true
       end
     end
@@ -173,25 +177,25 @@ product_sondages = Product.create! do |p|
 end
 
   product_sondages_product_option_1 = ProductOption.create! do |po|
-                                        po.product = product_sondages,
+                                        po.product = product_sondages
                                         po.option = Option.create! do |o|
-                                          o.label = "Nombre de sondages",
+                                          o.label = "Nombre de sondages"
                                           o.custom_value = true
                                         end
                                       end
 
   product_sondages_product_option_2 = ProductOption.create! do |po|
-                                        po.product = product_sondages,
+                                        po.product = product_sondages
                                         po.option = Option.create! do |o|
-                                          o.label = "Environnement",
+                                          o.label = "Environnement"
                                           o.custom_value = false
                                         end
                                       end
     zones_sondages = ['Zone Urbaine', 'Zone non-urbaine']
     types_reseaux.each do |label|
       OptionValue.create! do |ov|
-                            ov.option = product_sondages_product_option_2.option,
-                            ov.label = label,
+                            ov.option = product_sondages_product_option_2.option
+                            ov.label = label
                             ov.active = true
       end
     end
@@ -200,14 +204,14 @@ puts "Product Sondage & ses options créé"
 
 #COMPANY_PRODUCTS
 
-ServiceCompany.each do |company|
-  Product.all.each do |product|
-    CompanyProduct.create! do |cp|
-      cp.product_id = product.id,
-      cp.company_id = company.id
-    end
-  end
-end
+#ServiceCompany.each do |company|
+#  Product.all.each do |product|
+#    CompanyProduct.create! do |cp|
+#      cp.product_id = product.id
+#      cp.company_id = company.id
+#    end
+#  end
+#end
 puts "#{CompanyProduct.all.size} CompanyProducts créés"
 
 #BOOKINGS
