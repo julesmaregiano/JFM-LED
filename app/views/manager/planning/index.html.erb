@@ -1,10 +1,11 @@
-<div class="padding-box">
+<div class="padding-box" data-controller='planning'>
   <div class='container'>
-    <ul class="nav nav-tabs" data-controller='planning'>
+    <ul class="nav nav-tabs">
       <li class="active"><a data-toggle='tab' href="#vueGenerale">Vue générale</a></li>
       <% current_manager.technicians.each do |tech| %>
         <li><%= link_to tech.name, manager_technician_planning_path(tech.id) %></li>
       <% end %>
+      <li class="pull-right hide" data-target='planning.menu'><a class='btn' href="#">Modifier</a></li>
     </ul>
     <div class='tab-content'>
       <div id="vueGenerale"  role="tabpanel"  class="tab-pane fade in active planning">
@@ -38,7 +39,8 @@
                       <% if item.booking %>
                         <td class='danger'> <%= item.booking.company.name %> </td>
                       <% else %>
-                        <td> <%= check_box_tag 'booking[availability_ids][]', item.id, false %> </td>
+                        <% opts = { data: {action: 'planning#select'} } %>
+                        <td> <%= check_box_tag 'booking[availability_ids][]', item.id, false, opts %> </td>
                       <% end %>
                     <% end %>
                   <% end %>
