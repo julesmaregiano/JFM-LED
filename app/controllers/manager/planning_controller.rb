@@ -11,7 +11,16 @@ class Manager::PlanningController < Manager::ApplicationController
     @tech = current_manager.technicians.find(params[:id])
     @availabilities = Repositories::Availabilities.for_technician(@tech.id, beginning, ending)
     @headers        = @availabilities.first.map(&:date) unless @availabilities.length.zero?
-    @weeks = weeks
+    @weeks          = weeks.map do |w|
+      collection = Repositories::Availabilities.for_technician(@tech.id, w[:start], w[:stop])
+      {
+        cweek: w[:week],
+        start: w[:start],
+        stop:  w[:stop],
+        items: collection,
+        headers: collection.first.map(&:date)
+      }
+    end
   end
 
   private
