@@ -1,7 +1,7 @@
 import { Controller } from "stimulus"
 
 export default class PlanningController extends Controller {
-  static targets = ['menu']
+  static targets = ['menu', 'dropdown']
 
   connect() {
     console.log("Planning connected")
@@ -12,6 +12,7 @@ export default class PlanningController extends Controller {
 
     if(checked_count > 0) {
       this.menuTarget.classList.remove('hide');
+      this.dropdownTarget.classList.add('open');
     } else {
       this.menuTarget.classList.add('hide');
     }
