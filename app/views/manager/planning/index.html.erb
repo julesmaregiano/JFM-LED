@@ -31,7 +31,7 @@
                 <tr>
                   <% day_items.each_with_index do |item, item_index| %>
                     <% if day_item_index.even? && item_index.zero? %>
-                      <td rowspan='2' class='tech'><%= item.first_name %></td>
+                      <td rowspan='2' class='tech'><%= item.name %></td>
                     <% else %>
                       <% if item.booking %>
                         <td class='danger'> <%= item.booking.company.name %> </td>
