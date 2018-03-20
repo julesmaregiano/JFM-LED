@@ -1,12 +1,10 @@
 /* Main navbar */
-.navbar-wagon {
+.navbar {
   position: fixed;
   top: 0px;
   width: 100%;
   background: white;
-  transition: all 0.3s ease;
-  height: 70px;
-  padding: 0px 30px;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -14,27 +12,27 @@
 }
 
 /* Logo */
-.navbar-wagon-brand img {
-  height: 70px;
+.navbar-brand {
+  height: 80px;
 }
 
 /* User Avatar */
-.navbar-wagon .avatar {
-  height: 55px;
-  width: 55px;
+.navbar .avatar {
+  height: 85px;
+  width: 85px;
   border-radius: 50%;
-  border: 1px solid $anis;
+  border: 0px solid $anis;
 }
 
 /* Right section */
-.navbar-wagon-right {
+.navbar-right {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 /* Basic navbar item */
-.navbar-wagon-item {
+.navbar-item {
   cursor: pointer;
   padding: 0 20px;
 }
@@ -43,21 +41,46 @@
   padding: 20px;
 }
 
-/* Navbar link */
-.navbar-wagon-link {
-  color: #616668;
-  font-size: 14px;
+/* Navbar tab */
+.navbar-center {
+  display: flex;
+  height: 80px;
 }
-.navbar-wagon-link:hover {
-  color: $diago;
+.navbar-tab {
+  width: 100px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  color: $medium-gray;
+  border-bottom: 8px solid white;
+  & i {
+    font-size: 35px;
+  }
+  & p {
+    font-size: 13px;
+  }
+  &:hover {
+    color: $dark-gray;
+  }
 }
 
+.tab-active {
+  border-bottom: 8px solid $anis;
+  background-color: white;
+  & i, p {
+    color: $anis;
+  }
+}
+
+
 /* Dropdown menu */
-.navbar-wagon-dropdown-menu {
+.navbar-dropdown-menu {
   margin-top: 15px;
   border-color: #E6E6E6;
 }
-.navbar-wagon-dropdown-menu li > a {
+.navbar-dropdown-menu li > a {
   transition: color 0.5s ease;
   font-weight: lighter !important;
   color: $dark-gray !important;
@@ -65,11 +88,11 @@
   line-height: 22px !important;
   padding: 10px 20px;
 }
-.navbar-wagon-dropdown-menu li > a:hover {
+.navbar-dropdown-menu li > a:hover {
   background: transparent !important;
   color: $dark-gray !important;
 }
-.navbar-wagon-dropdown-menu:before {
+.navbar-dropdown-menu:before {
   content: ' ';
   height: 10px;
   width: 10px;
@@ -83,14 +106,14 @@
 }
 
 @media screen and (max-width: 576px) {
-  .navbar-wagon-dropdown-menu {
+  .navbar-dropdown-menu {
     width: 95vw;
     right: -45px;
     & a, i {
       font-size: 23px !important;
     }
   }
-  .navbar-wagon-dropdown-menu:before {
+  .navbar-dropdown-menu:before {
     right: 55px;
   }
   .dropdown {

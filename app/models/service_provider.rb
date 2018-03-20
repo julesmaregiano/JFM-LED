@@ -6,6 +6,9 @@ class ServiceProvider < ApplicationRecord
   has_many :technicians
   has_many :bookings
   has_many :managers
+
+  has_attachment :photo
+
 end
 
 # == Schema Information

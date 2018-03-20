@@ -1,0 +1,6 @@
+<%= link_to link do %>
+    <div class="navbar-tab text-center <%= current_page?(link) ? "tab-active" : "" %>">
+      <i class="fa fa-<%= icon %>" aria-hidden="true"></i>
+      <p><%= text %></p>
+    </div>
+<% end %>
