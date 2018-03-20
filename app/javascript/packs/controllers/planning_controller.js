@@ -1,7 +1,7 @@
 import { Controller } from "stimulus"
 
 export default class PlanningController extends Controller {
-  static targets = ['menu', 'dropdown']
+  static targets = ['menu', 'dropdown', 'form']
 
   connect() {
     console.log("Planning connected")
