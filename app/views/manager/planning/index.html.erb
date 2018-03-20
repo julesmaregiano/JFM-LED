@@ -5,7 +5,19 @@
       <% current_manager.technicians.each do |tech| %>
         <li><%= link_to tech.name, manager_technician_planning_path(tech.id) %></li>
       <% end %>
-      <li class="pull-right hide" data-target='planning.menu'><a class='btn' href="#">Modifier</a></li>
+      <li class="pull-right hide" data-target='planning.menu'>
+        <div class="dropdown open" data-target='planning.dropdown'>
+          <a href='#!' class="btn btn-default dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Modifier
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><a href="#">Congés</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Formation</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Indisponible</a></li>
+          </ul>
+      </li>
     </ul>
     <div class='tab-content'>
       <div id="vueGenerale"  role="tabpanel"  class="tab-pane fade in active planning">
