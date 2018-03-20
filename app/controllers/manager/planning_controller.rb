@@ -7,10 +7,8 @@ class Manager::PlanningController < Manager::ApplicationController
   end
 
   def show
-    @next_date      = beginning + 7.days
-    @tech = current_manager.technicians.find(params[:id])
-    @availabilities = Repositories::Availabilities.for_technician(@tech.id, beginning, ending)
-    @headers        = @availabilities.first.map(&:date) unless @availabilities.length.zero?
+    @next_date      = beginning.beginning_of_month + 1.month
+    @tech           = current_manager.technicians.find(params[:id])
     @weeks          = weeks.map do |w|
       collection = Repositories::Availabilities.for_technician(@tech.id, w[:start], w[:stop])
       {
