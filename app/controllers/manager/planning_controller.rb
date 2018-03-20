@@ -11,9 +11,18 @@ class Manager::PlanningController < Manager::ApplicationController
     @tech = current_manager.technicians.find(params[:id])
     @availabilities = Repositories::Availabilities.for_technician(@tech.id, beginning, ending)
     @headers        = @availabilities.first.map(&:date) unless @availabilities.length.zero?
+    @weeks = weeks
   end
 
   private
+
+  def weeks
+    start = given_date.beginning_of_month
+    stop  = start.end_of_month
+    (start..stop).to_a.select(&:weekday?).group_by(&:cweek).map do |cweek, items|
+      { week: cweek, start: items.first, stop: items.last }
+    end
+  end
 
   def given_date
     params[:date].present? ? Date.parse(params[:date]) : Date.today
