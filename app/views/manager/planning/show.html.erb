@@ -17,37 +17,39 @@
         <li> <%= link_to 'suivant',   manager_technician_planning_url(@tech.id, date: @next_date) %> </li>
       </ul>
     </div>
-    <table class='table tableAvailabilities'>
-      <% if @headers %>
-        <thead>
-          <tr>
-            <% @headers.each do |date| %>
-              <th><%= l date, format: '%a %d %b %Y' %></th>
-            <% end %>
-          </tr>
-        </thead>
-      <% end %>
-      <tbody>
-        <% @availabilities.each do |days| %>
-          <tr>
-            <% days.each do |item| %>
-              <% if item.booking %>
-                <td class='danger'> <%= item.booking.company.name %> </td>
-              <% else %>
-                <td> <%= check_box_tag 'booking[availability_ids][]', item.id, false %> </td>
+    <% @weeks.each do |week| %>
+      <table class='table tableAvailabilities'>
+        <% if week[:headers] %>
+          <thead>
+            <tr>
+              <% week[:headers].each do |date| %>
+                <th><%= l date, format: '%a %d %b %Y' %></th>
               <% end %>
-            <% end %>
-          </tr>
+            </tr>
+          </thead>
         <% end %>
-        <% if @availabilities.length.zero? %>
-          <tr>
-            <td>
-              <div class='alert alert-info'>Vous n'avez pas d'availabilities pour cette semaine.</div>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+        <tbody>
+          <% week[:items].each do |days| %>
+            <tr>
+              <% days.each do |item| %>
+                <% if item.booking %>
+                  <td class='danger'> <%= item.booking.company.name %> </td>
+                <% else %>
+                  <td> <%= check_box_tag 'booking[availability_ids][]', item.id, false %> </td>
+                <% end %>
+              <% end %>
+            </tr>
+          <% end %>
+          <% if @availabilities.length.zero? %>
+            <tr>
+              <td>
+                <div class='alert alert-info'>Vous n'avez pas d'availabilities pour cette semaine.</div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
   </div>
 </div>
 
