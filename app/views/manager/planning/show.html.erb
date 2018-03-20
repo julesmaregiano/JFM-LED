@@ -6,17 +6,11 @@
       </li>
       <% current_manager.technicians.each do |tech| %>
         <li class="<%= tech.id.eql?(@tech.id) ? 'active' : '' %>">
-          <%= link_to tech.name, manager_technician_planning_path(tech.id, date: @next_date - 1.weeks) %>
+          <%= link_to tech.name, manager_technician_planning_path(tech.id, date: @current_date) %>
         </li>
       <% end %>
     </ul>
-    <div class="text-center">
-      <ul class='pagination'>
-        <li> <%= link_to 'précédent', manager_technician_planning_url(@tech.id, date: @next_date - 2.month) %> </li>
-        <li class='active'> <%=link_to l(@next_date - 1.month, format: '%B %Y'), '#!' %> </li>
-        <li> <%= link_to 'suivant',   manager_technician_planning_url(@tech.id, date: @next_date + 1.month) %> </li>
-      </ul>
-    </div>
+    <br />
     <% @weeks.each do |week| %>
       <table class='table tableAvailabilities'>
         <% if week[:headers] %>
@@ -50,6 +44,13 @@
         </tbody>
       </table>
     <% end %>
+    <div class="text-center">
+      <ul class='pagination'>
+        <li> <%= link_to 'précédent', manager_technician_planning_url(@tech.id, date: @current_date - 1.month) %> </li>
+        <li class='active'> <%=link_to l(@current_date, format: '%B %Y'), '#!' %> </li>
+        <li> <%= link_to 'suivant',   manager_technician_planning_url(@tech.id, date: @current_date + 1.month) %> </li>
+      </ul>
+    </div>
   </div>
 </div>
 
