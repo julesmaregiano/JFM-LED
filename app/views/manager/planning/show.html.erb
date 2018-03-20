@@ -12,9 +12,9 @@
     </ul>
     <div class="text-center">
       <ul class='pagination'>
-        <li> <%= link_to 'précédent', manager_technician_planning_url(@tech.id, date: @next_date - 2.weeks) %> </li>
-        <li class='active'> <%=link_to l(@next_date - 1.week, format: '%B %Y'), '#!' %> </li>
-        <li> <%= link_to 'suivant',   manager_technician_planning_url(@tech.id, date: @next_date) %> </li>
+        <li> <%= link_to 'précédent', manager_technician_planning_url(@tech.id, date: @next_date - 2.month) %> </li>
+        <li class='active'> <%=link_to l(@next_date - 1.month, format: '%B %Y'), '#!' %> </li>
+        <li> <%= link_to 'suivant',   manager_technician_planning_url(@tech.id, date: @next_date + 1.month) %> </li>
       </ul>
     </div>
     <% @weeks.each do |week| %>
@@ -40,7 +40,7 @@
               <% end %>
             </tr>
           <% end %>
-          <% if @availabilities.length.zero? %>
+          <% if @weeks.length.zero? %>
             <tr>
               <td>
                 <div class='alert alert-info'>Vous n'avez pas d'availabilities pour cette semaine.</div>
