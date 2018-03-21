@@ -8,7 +8,6 @@ class ServiceProvider < ApplicationRecord
   has_many :managers
 
   has_attachment :photo
-
 end
 
 # == Schema Information

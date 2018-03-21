@@ -25,11 +25,12 @@ puts "Unit destroyed"
 User.destroy_all
 puts "User destroyed"
 Foreman.destroy_all
+Technician.destroy_all
+Manager.destroy_all
 puts "Foreman destroyed"
-Branch.destroy_all
-puts "Branch destroyed"
 CompanyProduct.destroy_all
 puts "CompanyProduct destroyed"
+Branch.destroy_all
 Company.destroy_all
 puts "Company destroyed"
 ProductOption.destroy_all
@@ -46,164 +47,195 @@ puts "BookedProductOption destroyed"
 #COMPANIES & BRANCHES & FOREMEN
 
 
-# Company.create(name: "Particulier", photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1515313237/house-with-garden_1f3e1_gsndth.png")
-# Branch.create(company: Company.last, name: "Particulier")
-Company.create(name: "JFM Conseils", photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513872039/vcekpepvnrcjqtqfmgno.png")
-Branch.create(company: Company.last, name: "Les Ulis", city: "Les Ulis", zipcode: "91400")
-Address.create(address1: "1 rue de la Terre de Feu", zipcode: "91", city: "Les Ulis" , country: "France", branch: Branch.last)
-Branch.create(company: Company.last, name: "Compiègne", city: "Compiègne", zipcode: "60200")
-Address.create(address1: "20 Rue du Fonds Pernant", address2: "Immeuble Thalassa, ZAC des Mercières" , zipcode: "60200", city: "Compiègne" , country: "France", branch: Branch.last)
+service_provider = ServiceProvider.create! do |sp|
+                     sp.name =       "JFM Conseils"
+                     sp.siret =      "43540466000027"
+                     sp.photo_url =  "http://res.cloudinary.com/zanzibar/image/upload/v1513872039/vcekpepvnrcjqtqfmgno.png"
+                     sp.address = Address.new do |a|
+                       a.address1 =      "1 rue de la Terre de Feu"
+                       a.zipcode =       "91"
+                       a.city =          "Les Ulis"
+                       a.country =       "France"
+                     end
+                   end
+puts "ServiceProvider créé"
 
-prenoms = ["Jean", "James", "Jamel", "Michel"]
-noms = ["Carambole", "Duguesclin", "Durand", "Ramirez"]
-companies = ["Colas", "Vinci", "EDF"]
+# [SHOULD BE] construction_company = ConstructioCompany.create! do |cc|
+construction_company = Company.create! do |cc|
+                         cc.name =       "Colas Aulnay-Sous-Bois"
+                         cc.siret =      "43512466000027"
+                         cc.photo_url =  "http://res.cloudinary.com/zanzibar/image/upload/v1513872034/cfvrnbtt3vsxmsrowdo3.jpg"
+                         cc.address = Address.new do |a|
+                           a.address1 =      "10 r Nicolas Robert"
+                           a.zipcode =       "93600"
+                           a.city =          "Aulnay-Sous-Bois"
+                           a.country =       "France"
+                         end
+                       end
 
-colas = Company.create(name: "Colas", photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513872034/cfvrnbtt3vsxmsrowdo3.jpg")
-Branch.create(company: colas, name: "Branche Aulnay")
-Address.create(branch: Branch.last, address1: "10 r Nicolas Robert", zipcode: "93600", city: "Aulnay-Sous-Bois" , country: "France" )
-Foreman.create(first_name: prenoms.sample, last_name: noms.sample, branch: Branch.last, phone: "06 47 05 11 44")
-Branch.create(company: colas, name: "Branche Aulnay")
-Address.create(branch: Branch.last, address1: "110 Rue Gabriel Péri", zipcode: "94240", city: "L'Haÿ-les-Roses" , country: "France" )
-Foreman.create(first_name: prenoms.sample, last_name: noms.sample, branch: Branch.last, phone: "06 47 05 11 44")
+puts "ConstructionCompany créée"
 
-edf = Company.create(name: "EDF", photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513621099/it12ozopccym0nsbx0rm.png")
-Branch.create(company: edf, name: "Boutique Montmartre")
-Address.create(branch: Branch.last, address1: "67 Rue Pajol", zipcode: "75018", city: "Paris" , country: "France" )
-Foreman.create(first_name: prenoms.sample, last_name: noms.sample, branch: Branch.last, phone: "06 47 05 11 44")
-Branch.create(company: edf, name: "Boutique Ivry sur Seine")
-Address.create(branch: Branch.last, address1: "7 Avenue de la République", zipcode: "94205", city: "Ivry-sur-Seine" , country: "France" )
-Foreman.create(first_name: prenoms.sample, last_name: noms.sample, branch: Branch.last, phone: "06 47 05 11 44")
-
-vinci = Company.create(name: "Vinci",photo_url: "http://res.cloudinary.com/zanzibar/image/upload/v1513346869/dwb3llvaztsfnag9xbkn.jpg")
-Branch.create(company: vinci, name: "Vinci Roubaix")
-Address.create(branch: Branch.last, address1: "106 Quai de Boulogne", zipcode: "59100", city: "Roubaix" , country: "France" )
-Foreman.create(first_name: prenoms.sample, last_name: noms.sample, branch: Branch.last, phone: "06 47 05 11 44")
-Branch.create(company: vinci, name: "Vinci Energies Nord")
-Address.create(branch: Branch.last, address1: "41 Avenue de l'Harmonie", zipcode: "59650", city: "Villeneuve-d'Ascq" , country: "France" )
-Foreman.create(first_name: prenoms.sample, last_name: noms.sample, branch: Branch.last, phone: "06 47 05 11 44")
-
-
-puts "#{Company.all.count} entreprises crées avec un total de #{Branch.count} branches soit #{Address.count}."
+foreman = Foreman.create! do |f|
+                            f.first_name =  "Richard"
+                            f.last_name =   "Du Chantier"
+                            f.phone =       "06 47 05 11 44"
+                            f.service_provider = service_provider
+                            # [SHOULD BE] f.construction_company = construction_company
+                          end
+puts "Foreman créé"
 
 #USERS
 
-# particulier = User.create!(email: "particulier@led.fr", password: "123soleil", first_name: "Sarah", last_name: "Particulier", phone:"06 11 22 33 44", role:0, company: Company.where(name: "Particulier").first, branch: Branch.where(name: "Particulier").first)
-pro = User.create!(email: "pro@led.fr", password: "123soleil", first_name: "Marcel", last_name: "Pro", phone:"06 11 22 33 44", role:1, company: Company.where(name: "Colas").first, branch: Company.where(name: "Colas").first.branches.first)
-pro2 = User.create!(email: "pro2@led.fr", password: "123soleil", first_name: "Alexandra", last_name: "Pro", phone:"06 11 22 33 44", role:1, company: Company.where(name: "EDF").first, branch: Company.where(name: "EDF").first.branches.first)
-pro3 = User.create!(email: "pro3@led.fr", password: "123soleil", first_name: "Ivan", last_name: "Pro", phone:"06 11 22 33 44", role:1, company: Company.where(name: "Vinci").first, branch: Company.where(name: "Vinci").first.branches.first)
-technician = User.create!(email: "tech@led.fr", password: "123soleil", first_name: "Marie", last_name: "Tech", phone:"06 11 22 33 44", role:2, company: Company.where(name: "JFM Conseils").first, branch: Company.where(name: "JFM Conseils").first.branches.first)
-technician2 = User.create!(email: "tech2@led.fr", password: "123soleil", first_name: "Tom", last_name: "Tech", phone:"06 11 22 33 44", role:2, company: Company.where(name: "JFM Conseils").first, branch: Company.where(name: "JFM Conseils").first.branches.first)
-manager = User.create!(email: "manager@led.fr", password: "123soleil", first_name: "Fabrice", last_name: "Manager", phone:"06 11 22 33 44", role:3, company: Company.where(name: "JFM Conseils").first, branch: Company.where(name: "JFM Conseils").first.branches.first)
-nopimanager = User.create!(email: "nopimanager@led.fr", password: "123soleil", first_name: "Manager", last_name: "DeNopi", phone:"06 11 22 33 44", role:3, company: Company.where(name: "JFM Conseils").first, branch: Company.where(name: "JFM Conseils").first.branches.second)
-nopitech = User.create!(email: "nopitech@led.fr", password: "123soleil", first_name: "Nopi", last_name: "Tech", phone:"06 11 22 33 44", role:2, company: Company.where(name: "JFM Conseils").first, branch: Company.where(name: "JFM Conseils").first.branches.second)
-admin = User.create!(email: "admin@led.fr", password: "123soleil", first_name: "Ad", last_name: "Min", phone:"06 11 22 33 44", role:4, company: Company.last, branch: Branch.last)
-puts "#{User.all.size} Users créés."
+pro = User.create! do |p|
+        p.first_name =  "Marcel"
+        p.last_name =   "Pro"
+        p.email =       "prololo@led.fr"
+        p.password =    "123soleil"
+        p.phone =       "06 11 22 33 44"
+        p.company =     construction_company
+      end
+puts "Pro créé"
 
-#AVAILABILITIES
+tech = Technician.create! do |t|
+        t.first_name =       "Marie"
+        t.last_name =        "Tech"
+        t.email =            "tech@led.fr"
+        # t.password =         "123soleil" Le technician n'a pas encore de model Devise j'imagine ?
+        # t.phone =            "06 11 22 33 44" Rajouter une colonne phone pour le Technician
+        t.service_provider = service_provider
+        t.address = Address.create! do |a|
+                      a.address1 =      "108 Avenue de la Dimancherie"
+                      a.zipcode =       "91440"
+                      a.city =          "Bures sur Yvette"
+                      a.country =       "France"
+         end
+       end
+puts "Tech créé"
 
-next_90 = (-2..90).to_a
-next_90.each do |numero|
-  User.all.where(role: 2).each do |user|
-    date = numero.business_days.from_now
-    Availability.find_or_create_by(user: user, date: Date.new(date.year, date.month, date.day), half: "matin" )
-    Availability.find_or_create_by(user: user, date: Date.new(date.year, date.month, date.day), half: "aprem" )
-  end
+manager = Manager.create! do |m|
+            m.first_name =        "Nadège"
+            m.last_name =         "Genestie"
+            m.email =             "manager@led.fr"
+            m.password =          "123soleil"
+            # m.phone =             "06 11 22 33 44" Le manager doit également avoir un colonne phone
+            m.service_provider =  service_provider
+          end
+puts "Manager créé"
+
+#PRODUCT MP
+
+product_mp = Product.create! do |p|
+  p.label = "Marquage-Piquetage"
 end
-puts "#{Availability.all.size} Availabilities créées."
+Rails.logger.info product_mp.inspect
 
-#PRODUCTS
+  product_mp_product_option_1 = ProductOption.create! do |po|
+    po.product = product_mp
+      po.option = Option.create! do |o|
+        o.label = "Longueur (en m)"
+        o.custom_value = true
+      end
+  end
 
-produits = ["Marquage-Piquetage", "Sécurisation de sondages", "Récolement de réseaux"]
-produits.each do |produit|
-  prod = Product.create(label: produit)
-  if prod.label == "Marquage-Piquetage"
-    option1 = Option.create(label: "Types de réseaux", custom_value: false)
-    ProductOption.create(product: prod, option: option1)
-    types_reseaux = ["Tous (sauf assainissement)", "Electricité", "Eclairage", "Signalisation routière", "Gaz", "Hydrocarbures", "Produits chimiques", "Eau potable", "Chauffage/Clim", "Télécommunications", "Indéterminé"]
+  product_mp_product_option_2 = ProductOption.create! do |po|
+                                  po.product = product_mp
+                                  po.option = Option.create! do |o|
+                                    o.label = "Types de réseaux"
+                                    o.custom_value = false
+                                  end
+                                end
+  zones_mp = ['Trottoir (2m)', '1 trottoir + 1 chaussée (6m)', '2 trottoirs + 2 chaussées (12m)', 'Boulevard (20m)']
+  zones_mp.each do |label|
+    OptionValue.create! do |ov|
+                          ov.option = product_mp_product_option_2.option
+                          ov.label = label
+                          ov.active = true
+    end
+  end
+
+  product_mp_product_option_3 = ProductOption.create! do |po|
+                                  po.product = product_mp
+                                  po.option = Option.create! do |o|
+                                    o.label = "Types de réseaux"
+                                    o.custom_value = false
+                                  end
+                                end
+    types_reseaux = ['Tous réseaux', 'Tous sauf assainissement', 'Réseaux sensibles']
     types_reseaux.each do |label|
-      OptionValue.create(option: option1, label: label, active: true)
+      OptionValue.create! do |ov|
+                            ov.option = product_mp_product_option_3.option
+                            ov.label = label
+                            ov.active = true
+      end
     end
-    option2 = Option.create(label: "Longueur de voirie (en ml)", custom_value: true )
-    ProductOption.create(product: prod, option: option2)
-    option3 = Option.create(label: "Surface (en m2)", custom_value: true )
-    ProductOption.create(product: prod, option: option3)
-    option4 = Option.create(label: "Date de début des travaux", custom_value: true)
-    ProductOption.create(product: prod, option: option2)
+puts "Product MP & ses options créé"
 
-  elsif prod.label == "Sécurisation de sondages"
-    option5 = Option.create(label: "Localisation", custom_value: false)
-    ProductOption.create(product: prod, option: option5)
-    reponses5 = ["Zone privée", "Zone publique"]
-    reponses5.each do |label|
-      OptionValue.create(option: option5, label: label, active: true)
-    end
-    option6 = Option.create(label: "Nombre de points de sondage", custom_value: true)
-    ProductOption.create(product: prod, option: option6)
+#PRODUCT SECURISATION DES SONDAGES
 
-  elsif prod.label == "Récolement de réseaux"
-    option7 = Option.create(label: "Longueur de réseau à récoler (en ml)", custom_value: true )
-    ProductOption.create(product: prod, option: option7)
-  end
-
+product_sondages = Product.create! do |p|
+  p.label == "Sécurisation de sondages"
 end
-puts "#{Product.all.size} produits créés"
-puts "#{OptionValue.all.size} OptionValues créées"
-puts "#{ProductOption.all.size} OptionValues créées"
+
+  product_sondages_product_option_1 = ProductOption.create! do |po|
+                                        po.product = product_sondages
+                                        po.option = Option.create! do |o|
+                                          o.label = "Nombre de sondages"
+                                          o.custom_value = true
+                                        end
+                                      end
+
+  product_sondages_product_option_2 = ProductOption.create! do |po|
+                                        po.product = product_sondages
+                                        po.option = Option.create! do |o|
+                                          o.label = "Environnement"
+                                          o.custom_value = false
+                                        end
+                                      end
+    zones_sondages = ['Zone Urbaine', 'Zone non-urbaine']
+    types_reseaux.each do |label|
+      OptionValue.create! do |ov|
+                            ov.option = product_sondages_product_option_2.option
+                            ov.label = label
+                            ov.active = true
+      end
+    end
+puts "Product Sondage & ses options créé"
+
 
 #COMPANY_PRODUCTS
 
-Company.where(name: "JFM Conseils").each do |company|
-  Product.all.each do |product|
-    CompanyProduct.create(product_id: product.id, company_id: company.id)
-  end
-end
+#ServiceCompany.each do |company|
+#  Product.all.each do |product|
+#    CompanyProduct.create! do |cp|
+#      cp.product_id = product.id
+#      cp.company_id = company.id
+#    end
+#  end
+#end
 puts "#{CompanyProduct.all.size} CompanyProducts créés"
 
 #BOOKINGS
 
-clients = [pro, pro2, pro3]
-dates =[Date.today, Date.today + 1, Date.today + 4,Date.today + 5, Date.today + 7, Date.today + 12 ]
+# dates =[Date.today, Date.today + 1, Date.today + 4,Date.today + 5, Date.today + 7, Date.today + 12 ]
 
-Booking.create(user_id: clients.sample.id, confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.to_come.where(status: "free").first(rand(2..5)).to_a, product_id: Product.all.sample.id)
-Address.create(address1: "108 avenue de la Dimancherie", zipcode: "91440", city: "Bures sur Yvette", country: "FR", booking: Booking.last)
-Booking.create(user_id: clients.sample.id, confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.to_come.where(status: "free").first(rand(2..5)).to_a, product_id: Product.all.sample.id)
-Address.create(address1: "5 avenue de la Dimancherie", zipcode: "91440", city: "Bures sur Yvette", country: "FR", booking: Booking.last)
-Booking.create(user_id: clients.sample.id, confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.to_come.where(status: "free").first(rand(2..5)).to_a, product_id: Product.all.sample.id)
-Address.create(address1: "10 avenue de la Dimancherie", zipcode: "91440", city: "Bures sur Yvette", country: "FR", booking: Booking.last)
-Booking.create(user_id: clients.sample.id, confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.to_come.where(status: "free").first(rand(2..5)).to_a, product_id: Product.all.sample.id)
-Address.create(address1: "166 avenue de Suffren", zipcode: "75015", city: "Paris", country: "FR", booking: Booking.last)
-Booking.create(user_id: clients.sample.id, confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.to_come.where(status: "free").first(rand(2..5)).to_a, product_id: Product.all.sample.id)
-Address.create(address1: "55 avenue de Suffren", zipcode: "75015", city: "Paris", country: "FR", booking: Booking.last)
-Booking.create(user_id: clients.sample.id, confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.to_come.where(status: "free").first(rand(2..5)).to_a, product_id: Product.all.sample.id)
-Address.create(address1: "11 avenue de Suffren", zipcode: "75015", city: "Paris", country: "FR", booking: Booking.last)
-Booking.create(user_id: clients.sample.id, confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.to_come.where(status: "free").first(rand(2..5)).to_a, product_id: Product.all.sample.id)
-Address.create(address1: "16 villa gaudelet", zipcode: "75011", city: "Paris", country: "FR", booking: Booking.last)
-Booking.create(user_id: clients.sample.id, confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.to_come.where(status: "free").first(rand(2..5)).to_a, product_id: Product.all.sample.id)
-Address.create(address1: "1 villa gaudelet", zipcode: "75011", city: "Paris", country: "FR", booking: Booking.last)
+# Booking.create(user_id: clients.sample.id, confirmed_at: dates.sample, comment: "lorem pisumentaire", surface: "225", foreman_id: Foreman.all.to_a.sample.id, availabilities: Availability.to_come.where(status: "free").first(rand(2..5)).to_a, product_id: Product.all.sample.id)
+# Address.create(address1: "108 avenue de la Dimancherie", zipcode: "91440", city: "Bures sur Yvette", country: "FR", booking: Booking.last)
+# puts "#{Booking.all.size} Bookings crées pour un total de #{Availability.where.not(booking_id: nil).count} Availabilities. (avec #{Report.all.size} report et #{Address.all.size} adresses.)"
 
-puts "#{Booking.all.size} Bookings crées pour un total de #{Availability.where.not(booking_id: nil).count} Availabilities. (avec #{Report.all.size} report et #{Address.all.size} adresses.)"
-
-Availability.where.not(booking_id: nil).where(status: "free").update(status: "booked")
-Booking.all.each do |booking|
-  booking.availabilities.empty?
-  Availability.where(booking_id: nil).first(3).each do |availability|
-    availability.update(booking: booking, status: "booked")
-  end
-end
 
 #BOOKED_PRODUCT_OPTIONS
 
-Booking.all.each do |booking|
-    booking.product.options.each do |option|
-    if option.custom_value?
-      BookedProductOption.create(booking: booking, option: option, value: (100..5000).to_a.sample)
-    else
-      BookedProductOption.create(booking: booking, option: option, option_value: OptionValue.where(option: option).first)
-    end
-  end
-end
+# Booking.all.each do |booking|
+#     booking.product.options.each do |option|
+#     if option.custom_value?
+#       BookedProductOption.create(booking: booking, option: option, value: (100..5000).to_a.sample)
+#     else
+#       BookedProductOption.create(booking: booking, option: option, option_value: OptionValue.where(option: option).first)
+#     end
+#   end
+# end
 
-puts "#{BookedProductOption.all.size} BookedProductOption créées"
+# puts "#{BookedProductOption.all.size} BookedProductOption créées"
 
 #SECTIONS
 
@@ -303,6 +335,3 @@ Product.all.each do |product|
 end
 
 puts "ProductQuestions: #{ProductQuestion.count}"
-
-
-# SEPARATION DEV/PROD
