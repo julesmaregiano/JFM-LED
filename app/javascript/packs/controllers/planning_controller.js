@@ -17,4 +17,10 @@ export default class PlanningController extends Controller {
       this.menuTarget.classList.add('hide');
     }
   }
+
+  statuer(event) {
+    event.preventDefault();
+    this.formTarget.setAttribute('action', event.target.getAttribute('data-url'));
+    this.formTarget.submit();
+  }
 }
