@@ -15,7 +15,7 @@
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
               <li><a href="#" data-action='planning#statuer' data-target='planning.conges-btn' data-url='<%= vacation_manager_availabilities_path %>'>Congés</a></li>
               <li role="separator" class="divider"></li>
-              <li><a href="#" data-action='planning#statuer'>Formation</a></li>
+              <li><a href="#" data-action='planning#statuer'data-url='<%= training_manager_availabilities_path %>'>Formation</a></li>
               <li role="separator" class="divider"></li>
               <li><a href="#" data-action='planning#statuer'>Indisponible</a></li>
             </ul>
@@ -54,6 +54,8 @@
                             <td class='danger'> <%= item.booking.company.name %> </td>
                           <% elsif item.vacation?%>
                             <td class='danger'>en vacances </td>
+                          <% elsif item.training? %>
+                            <td class='danger'>en formation</td>
                           <% else %>
                             <% opts = { data: {action: 'planning#select'} } %>
                             <td> <%= check_box_tag 'availability[ids][]', item.id, false, opts %> </td>
