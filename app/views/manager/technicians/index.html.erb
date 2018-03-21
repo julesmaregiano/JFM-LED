@@ -1,39 +1,34 @@
-<div class="dashboard-wrap">
-  <%= render "/shared/sidebar"%>
-  <div class="dashboard-content">
-    <div class="padding-box">
-      <div class="card-container">
-        <%= link_to 'Créer', new_manager_technician_path, class: 'btn' %>
-        <table id="table" class="table table-hover hidden-xs">
-          <thead>
-            <h4 class="hidden-xs"><strong>Liste de vos techniciens</strong></h4>
-            <tr>
-              <th scope="col">Nom</th>
-              <th scope="col">Prénom</th>
-              <th scope="col">Email</th>
-              <th scope="col">Crée le </th>
-              <th scope="col">Modifié le</th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @technicians.each do |tech| %>
-              <tr>
-                <td scope="col"><%= tech.last_name  %></td>
-                <td scope="col"><%= tech.first_name %></td>
-                <td scope="col"><%= tech.email      %></td>
-                <td scope="col"><%= l tech.created_at, format: :short %></td>
-                <td scope="col"><%= l tech.updated_at, format: :short %></td>
-                <td scope="col">
-                 <%= link_to 'Modifier', edit_manager_technician_path(tech) %>
-                 <%= link_to 'Détails',  manager_technician_path(tech)      %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
+<div class="main-container">
+  <div class="card-container">
+    <%= link_to 'Créer', new_manager_technician_path, class: 'btn' %>
+    <table id="table" class="table table-hover hidden-xs">
+      <thead>
+        <h4 class="hidden-xs"><strong>Liste de vos techniciens</strong></h4>
+        <tr>
+          <th scope="col">Nom</th>
+          <th scope="col">Prénom</th>
+          <th scope="col">Email</th>
+          <th scope="col">Crée le </th>
+          <th scope="col">Modifié le</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @technicians.each do |tech| %>
+          <tr>
+            <td scope="col"><%= tech.last_name  %></td>
+            <td scope="col"><%= tech.first_name %></td>
+            <td scope="col"><%= tech.email      %></td>
+            <td scope="col"><%= l tech.created_at, format: :short %></td>
+            <td scope="col"><%= l tech.updated_at, format: :short %></td>
+            <td scope="col">
+             <%= link_to 'Modifier', edit_manager_technician_path(tech) %>
+             <%= link_to 'Détails',  manager_technician_path(tech)      %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>
 <%= content_for :after_js do %>
