@@ -33,7 +33,7 @@ class Manager::AvailabilitiesController < Manager::ApplicationController
   end
 
   def vacation
-    render json: {params: params, referer: request.referrer}
+    redirect_to request.referrer, notice: 'Vos disponibilités on été mises à jour'
   end
 
   private
