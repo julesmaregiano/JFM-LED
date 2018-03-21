@@ -1,4 +1,5 @@
-<form method='PUT' url='#' data-controller='planning' data-target='planning.form'>
+<%= form_with url: '#!', method: :post, data: {controller: 'planning', target: 'planning.form'} do %>
+  <%= hidden_field_tag '_method', 'PUT' %>
   <div class="padding-box">
     <div class='container'>
       <ul class="nav nav-tabs">
@@ -12,11 +13,11 @@
               Modifier
             </a>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li><a href="#">Congés</a></li>
+              <li><a href="#" data-action='planning#statuer' data-target='planning.conges-btn' data-url='<%= vacation_manager_availabilities_path %>'>Congés</a></li>
               <li role="separator" class="divider"></li>
-              <li><a href="#">Formation</a></li>
+              <li><a href="#" data-action='planning#statuer'>Formation</a></li>
               <li role="separator" class="divider"></li>
-              <li><a href="#">Indisponible</a></li>
+              <li><a href="#" data-action='planning#statuer'>Indisponible</a></li>
             </ul>
           </li>
         </ul>
@@ -82,4 +83,4 @@
         </div>
       </div>
     </div>
-  </form>
+  <% end %>
