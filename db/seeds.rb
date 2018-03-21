@@ -48,13 +48,13 @@ puts "BookedProductOption destroyed"
 
 
 service_provider = ServiceProvider.create! do |sp|
-                     sp.name =       "JFM Conseils",
-                     sp.siret =      "43540466000027",
-                     sp.photo_url =  "http://res.cloudinary.com/zanzibar/image/upload/v1513872039/vcekpepvnrcjqtqfmgno.png",
-                     sp.address = Address.create! do |a|
-                       a.address1 =      "1 rue de la Terre de Feu",
-                       a.zipcode =       "91",
-                       a.city =          "Les Ulis",
+                     sp.name =       "JFM Conseils"
+                     sp.siret =      "43540466000027"
+                     sp.photo_url =  "http://res.cloudinary.com/zanzibar/image/upload/v1513872039/vcekpepvnrcjqtqfmgno.png"
+                     sp.address = Address.new do |a|
+                       a.address1 =      "1 rue de la Terre de Feu"
+                       a.zipcode =       "91"
+                       a.city =          "Les Ulis"
                        a.country =       "France"
                      end
                    end
@@ -62,13 +62,13 @@ puts "ServiceProvider créé"
 
 # [SHOULD BE] construction_company = ConstructioCompany.create! do |cc|
 construction_company = Company.create! do |cc|
-                         cc.name =       "Colas Aulnay-Sous-Boisn",
-                         cc.siret =      "43512466000027",
-                         cc.photo_url =  "http://res.cloudinary.com/zanzibar/image/upload/v1513872034/cfvrnbtt3vsxmsrowdo3.jpg",
-                         cc.address = Address.create! do |a|
-                           a.address1 =      "10 r Nicolas Robert",
-                           a.zipcode =       "93600",
-                           a.city =          "Aulnay-Sous-Bois",
+                         cc.name =       "Colas Aulnay-Sous-Bois"
+                         cc.siret =      "43512466000027"
+                         cc.photo_url =  "http://res.cloudinary.com/zanzibar/image/upload/v1513872034/cfvrnbtt3vsxmsrowdo3.jpg"
+                         cc.address = Address.new do |a|
+                           a.address1 =      "10 r Nicolas Robert"
+                           a.zipcode =       "93600"
+                           a.city =          "Aulnay-Sous-Bois"
                            a.country =       "France"
                          end
                        end
@@ -76,8 +76,8 @@ construction_company = Company.create! do |cc|
 puts "ConstructionCompany créée"
 
 foreman = Foreman.create! do |f|
-                            f.first_name =  "Richard",
-                            f.last_name =   "Du Chantier",
+                            f.first_name =  "Richard"
+                            f.last_name =   "Du Chantier"
                             f.phone =       "06 47 05 11 44"
                             f.service_provider = service_provider
                             # [SHOULD BE] f.construction_company = construction_company
@@ -87,37 +87,37 @@ puts "Foreman créé"
 #USERS
 
 pro = User.create! do |p|
-        p.first_name =  "Marcel",
-        p.last_name =   "Pro",
-        p.email =       "prololo@led.fr",
-        p.password =    "123soleil",
-        p.phone =       "06 11 22 33 44",
+        p.first_name =  "Marcel"
+        p.last_name =   "Pro"
+        p.email =       "prololo@led.fr"
+        p.password =    "123soleil"
+        p.phone =       "06 11 22 33 44"
         p.company =     construction_company
       end
 puts "Pro créé"
 
 tech = Technician.create! do |t|
-        t.first_name =       "Marie",
-        t.last_name =        "Tech",
-        t.email =            "tech@led.fr",
-        # t.password =         "123soleil", Le technician n'a pas encore de model Devise j'imagine ?
-        # t.phone =            "06 11 22 33 44", Rajouter une colonne phone pour le Technician
+        t.first_name =       "Marie"
+        t.last_name =        "Tech"
+        t.email =            "tech@led.fr"
+        # t.password =         "123soleil" Le technician n'a pas encore de model Devise j'imagine ?
+        # t.phone =            "06 11 22 33 44" Rajouter une colonne phone pour le Technician
         t.service_provider = service_provider
         t.address = Address.create! do |a|
-                      a.address1 =      "108 Avenue de la Dimancherie",
-                      a.zipcode =       "91440",
-                      a.city =          "Bures sur Yvette",
+                      a.address1 =      "108 Avenue de la Dimancherie"
+                      a.zipcode =       "91440"
+                      a.city =          "Bures sur Yvette"
                       a.country =       "France"
          end
        end
 puts "Tech créé"
 
 manager = Manager.create! do |m|
-            m.first_name =        "Nadège",
-            m.last_name =         "Genestie",
-            m.email =             "manager@led.fr",
-            m.password =          "123soleil",
-            # m.phone =             "06 11 22 33 44", Le manager doit également avoir un colonne phone
+            m.first_name =        "Nadège"
+            m.last_name =         "Genestie"
+            m.email =             "manager@led.fr"
+            m.password =          "123soleil"
+            # m.phone =             "06 11 22 33 44" Le manager doit également avoir un colonne phone
             m.service_provider =  service_provider
           end
 puts "Manager créé"
