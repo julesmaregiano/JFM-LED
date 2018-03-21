@@ -3,8 +3,8 @@ class Manager::BookingsController < Manager::ApplicationController
   before_action :load_availabilities, only: [:new, :create, :edit]
 
   def index
-    @user = current_user
-    @bookings = Booking.all.sort_by(&:created_at).map do |b| b if b.availabilities.first.user.branch == @user.branch end.compact
+    @user = current_manager
+    @bookings = @user.service_provider.bookings
   end
 
   # GET /manager/bookings/news

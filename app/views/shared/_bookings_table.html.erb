@@ -6,7 +6,6 @@
         <th scope="col">Numéro d'affaire</th>
         <th scope="col">Commandé le</th>
         <th scope="col">Entreprise</th>
-        <th scope="col">Client</th>
         <th scope="col">Adresse</th>
         <th scope="col">Durée</th>
         <th scope="col">Date</th>
@@ -18,17 +17,16 @@
       <% unless bookings.nil? %>
         <% bookings.each do |booking| %>
           <tr>
-            <th scope="row"><%= link_to [@user.role, booking] do %>
+            <th scope="row"><%= link_to [@user, booking] do %>
                 #<%= booking.reference %>
               <% end %>
             </th>
             <td><%= booking.created_at.strftime("%d/%m/%y") %></td>
-            <td><%= booking.user.company.name %></td>
-            <td><%= booking.user.first_name + ' ' + booking.user.last_name %></td>
+            <td><%= booking.company.name %></td>
             <td><%= booking.address.full_address %></td>
             <td><%= booking.availabilities.size.odd? ? "#{booking.availabilities.size} ½j" : "#{booking.availabilities.size / 2} j" %></td>
             <td>
-              <% if @user.manager? && booking.availabilities.first.pending? %>
+              <% if current_manager && booking.availabilities.first.pending? %>
                 <%= link_to "Valider dates", manager_planning_path %>
               <% else %>
                 <% booking.availabilities.map do |availability| availability.date end.uniq.sort.each do |date| %>
@@ -48,10 +46,10 @@
             <td class= 'flexbox'>
               <% if booking.report.signed? %>
                 <p style='display: none;'>ok</p>
-                <%= link_to(content_tag(:i, nil, class: 'fa fa-file-text-o card-icon'), [@user.role, booking.report])%>
+                <%= link_to(content_tag(:i, nil, class: 'fa fa-file-text-o card-icon'), [@user, booking.report])%>
               <% else %>
                 <p style='display: none;'>empty</p>
-                <%= link_to(content_tag(:i, nil, class: 'fa fa-file-text-o card-icon', style:'color: gray'), [@user.role, booking.report])%>
+                <%= link_to(content_tag(:i, nil, class: 'fa fa-file-text-o card-icon', style:'color: gray'), [@user, booking.report])%>
               <% end %>
             </td>
           </tr>
@@ -73,9 +71,9 @@
       <% unless bookings.nil? %>
         <% bookings.each do |booking| %>
           <tr>
-            <td><strong><%= booking.user.company.name %></strong> <br> <%= booking.reference %> <br> <%= booking.created_at.strftime("%d/%m/%y") %> </td>
+            <td><strong><%= booking.company.name %></strong> <br> <%= booking.reference %> <br> <%= booking.created_at.strftime("%d/%m/%y") %> </td>
             <td><%= booking.product.label %> <br> <%= booking.address.city %></td>
-            <td class='text-center'><%= link_to [@user.role, booking] do %>
+            <td class='text-center'><%= link_to [@user, booking] do %>
                 <i class="fa fa-eye"></i>
               <% end %></td>
           </tr>
