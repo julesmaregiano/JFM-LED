@@ -15,7 +15,7 @@ class Availability < ApplicationRecord
   scope :of_last_week, -> { where("date >= ?", Date.current - 7)}
   scope :oldest_to_new,-> { order(created_at: :asc)}
 
-  enum status: [:free, :pending, :leave, :booked]
+  enum status: [:free, :pending, :leave, :booked, :vacation, :training, :unavailable]
   enum half:   [:matin, :aprem]
 
   def self.of_the_week_for(user)

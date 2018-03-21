@@ -7,47 +7,53 @@
       <li class="<%= tech.id.eql?(@tech.id) ? 'active' : '' %>">
         <%= link_to tech.name, manager_technician_planning_path(tech.id, date: @next_date - 1.weeks) %>
       </li>
-    <% end %>
-  </ul>
-  <div class="text-center">
-    <ul class='pagination'>
-      <li> <%= link_to 'précédent', manager_technician_planning_url(@tech.id, date: @next_date - 2.weeks) %> </li>
-      <li class='active'> <%=link_to l(@next_date - 1.week, format: '%B %Y'), '#!' %> </li>
-      <li> <%= link_to 'suivant',   manager_technician_planning_url(@tech.id, date: @next_date) %> </li>
-    </ul>
-  </div>
-  <% @weeks.each do |week| %>
-    <table class='table tableAvailabilities'>
-      <% if week[:headers] %>
-        <thead>
-          <tr>
-            <% week[:headers].each do |date| %>
-              <th><%= l date, format: '%a %d %b %Y' %></th>
-            <% end %>
-          </tr>
-        </thead>
+      <% current_manager.technicians.each do |tech| %>
+        <li class="<%= tech.id.eql?(@tech.id) ? 'active' : '' %>">
+          <%= link_to tech.name, manager_technician_planning_path(tech.id, date: @current_date) %>
+        </li>
       <% end %>
-      <tbody>
-        <% week[:items].each do |days| %>
-          <tr>
-            <% days.each do |item| %>
-              <% if item.booking %>
-                <td class='danger'> <%= item.booking.company.name %> </td>
-              <% else %>
-                <td> <%= check_box_tag 'booking[availability_ids][]', item.id, false %> </td>
+    </ul>
+    <br />
+    <% @weeks.each do |week| %>
+      <table class='table tableAvailabilities'>
+        <% if week[:headers] %>
+          <thead>
+            <tr>
+              <% week[:headers].each do |date| %>
+                <th><%= l date, format: '%a %d %b %Y' %></th>
               <% end %>
             <% end %>
           </tr>
         <% end %>
-        <% if @availabilities.length.zero? %>
-          <tr>
-            <td>
-              <div class='alert alert-info'>Vous n'avez pas d'availabilities pour cette semaine.</div>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  <% end %>
+        <tbody>
+          <% week[:items].each do |days| %>
+            <tr>
+              <% days.each do |item| %>
+                <% if item.booking %>
+                  <td class='danger'> <%= item.booking.company.name %> </td>
+                <% else %>
+                  <td> <%= check_box_tag 'booking[availability_ids][]', item.id, false %> </td>
+                <% end %>
+              <% end %>
+            </tr>
+          <% end %>
+          <% if @weeks.length.zero? %>
+            <tr>
+              <td>
+                <div class='alert alert-info'>Vous n'avez pas d'availabilities pour cette semaine.</div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+    <div class="text-center">
+      <ul class='pagination'>
+        <li> <%= link_to 'précédent', manager_technician_planning_url(@tech.id, date: @current_date - 1.month) %> </li>
+        <li class='active'> <%=link_to l(@current_date, format: '%B %Y'), '#!' %> </li>
+        <li> <%= link_to 'suivant',   manager_technician_planning_url(@tech.id, date: @current_date + 1.month) %> </li>
+      </ul>
+    </div>
+  </div>
 </div>
 
