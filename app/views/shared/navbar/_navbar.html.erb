@@ -8,11 +8,11 @@
         <%= render "shared/navbar/navbar_tab", text: "Tableau de bord", icon: "eye", link: [:manager, :dashboard] %>
         <%= render "shared/navbar/navbar_tab", text: "Bookings", icon: "list", link: [:manager, :bookings] %>
         <%= render "shared/navbar/navbar_tab", text: "Planning", icon: "calendar-check-o", link: manager_planning_path %>
-        <%= link_to "Réserver", new_pro_booking_path, class: "btn-slim flexbox" %>
     <% end %>
   </div>
 
   <div class="navbar-right">
+    <%= link_to "Réserver", new_pro_booking_path, class: "btn" %>
     <% if current_manager %>
         <%= cl_image_tag current_manager.service_provider.photo.path, class: "avatar dropdown-toggle hidden-xs hidden-sm", id: "navbar-menu", 'data-toggle': "dropdown", height: 65, width: 65, crop: :pad %>
         <p>Bonjour, Joana</p>

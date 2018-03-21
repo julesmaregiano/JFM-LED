@@ -1,8 +1,8 @@
-<div class="dashboard-wrap">
-  <%= render "/shared/sidebar"%>
-  <div class="dashboard-content">
-    <div class="padding-box">
-      <div class="row">
+
+
+
+    <div class="main-container">
+
 
         <div class="col-xs-12 col-md-6 col-lg-4">
           <div class="card-container" id="map" style="width: 100%; height: calc(100vh - 110px);"></div>
@@ -19,22 +19,24 @@
           </div>
         </div>
 
-        <div class="col-xs-12 col-md-6 col-lg-4 card-container">
-          <%= link_to manager_planning_path do %>
-          <h4 class="no-decoration"><strong>Demandes d'intervention (<%= @pending_bookings.count %>)</strong></h4>
-          <% end %>
-          <% if @pending_bookings.empty? %>
-          <p>Aucune demande en attente</p>
-          <% else %>
-          <% @pending_bookings.each do |booking| %>
-          <%#= render "shared/booking_card", booking: booking %>
-          <% end %>
-          <% end %>
+        <div class="col-xs-12 col-md-6 col-lg-4">
+          <div class="card-container">
+            <%= link_to manager_planning_path do %>
+              <h4 class="no-decoration"><strong>Demandes d'intervention (<%= @pending_bookings.count %>)</strong></h4>
+            <% end %>
+            <% if @pending_bookings.empty? %>
+              <p>Aucune demande en attente</p>
+            <% else %>
+              <% @pending_bookings.each do |booking| %>
+              <%#= render "shared/booking_card", booking: booking %>
+              <% end %>
+            <% end %>
+          </div>
         </div>
 
-      </div>
+
     </div>
-  </div>
-</div>
+
+
 
 <%= render "shared/map", markers: @markers %>
