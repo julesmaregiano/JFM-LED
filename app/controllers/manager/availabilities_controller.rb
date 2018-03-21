@@ -32,6 +32,10 @@ class Manager::AvailabilitiesController < Manager::ApplicationController
     end
   end
 
+  def vacation
+    render json: {params: params, referer: request.referrer}
+  end
+
   private
 
   def params_availability
