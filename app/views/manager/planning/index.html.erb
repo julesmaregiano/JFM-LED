@@ -1,7 +1,7 @@
 <%= form_with url: '#!', method: :post, data: {controller: 'planning', target: 'planning.form'} do %>
   <%= hidden_field_tag '_method', 'PUT' %>
-  <div class="padding-box">
-    <div class='container'>
+  <div class="main-container">
+    <div class='container card-container'>
       <ul class="nav nav-tabs">
         <li class="active"><a data-toggle='tab' href="#vueGenerale">Vue générale</a></li>
         <% current_manager.technicians.each do |tech| %>
@@ -28,7 +28,7 @@
                 <li> <%= link_to 'précédent', manager_planning_url(date: @next_date - 2.weeks) %> </li>
                 <li> <%= link_to 'suivant',   manager_planning_url(date: @next_date) %> </li>
               </ul>
-            </div>z
+            </div>
             <table class='table tableAvailabilities'>
               <% if @headers %>
                 <thead>

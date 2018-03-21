@@ -1,98 +1,92 @@
-<div class="dashboard-wrap">
-  <%= render "shared/sidebar"%>
-  <div class="dashboard-content">
-    <div class="padding-box">
-      <div class= "col-xs-12 col-md-6">
-        <div class= "card-container">
-          <div class='row'>
-            <div class='col-md-6'>
-              <p> Réservation #123 </p>
-              <p>Prix: <%= number_to_currency(1999) %></p>
-              <p>Dates: </p>
-            </div>
-            <div class='col-md-6 text-right'>
-              <p>Marquage Piquetage</p>
-              <p>Statut: <span class='label label-danger'>PENDING</span> </p>
-              <p><%= link_to 'Modifier', '#' %></p>
-            </div>
-          </div>
+<div class="main-container">
+  <div class= "col-xs-12 col-md-6">
+    <div class= "card-container">
+      <div class='row'>
+        <div class='col-md-6'>
+          <p> Réservation #123 </p>
+          <p>Prix: <%= number_to_currency(1999) %></p>
+          <p>Dates: </p>
         </div>
-        <div class= "card-container">
-          <div id="map" style="height: calc(100vh - 40vh);"></div>
+        <div class='col-md-6 text-right'>
+          <p>Marquage Piquetage</p>
+          <p>Statut: <span class='label label-danger'>PENDING</span> </p>
+          <p><%= link_to 'Modifier', '#' %></p>
         </div>
       </div>
-      <div class="col-xs-12 col-md-6">
+    </div>
+    <div class= "card-container">
+      <div id="map" style="height: calc(100vh - 40vh);"></div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-md-6">
+    <div class= "card-container">
+      <div class='row'>
+        <div class='col-md-3 text-center'>IMG</div>
+        <div class='col-md-5'>
+          <p>Entreprise A</p>
+          <p>Nom du contact</p>
+          <small>Adresse de l'entreprise</small>
+        </div>
+        <div class='col-md-4'>
+          <p><i class='fa fa-map-marker'></i> 22km</p>
+          <p><i class='fa fa-star'></i> 4.2</p>
+        </div>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-md-6'>
         <div class= "card-container">
-          <div class='row'>
-            <div class='col-md-3 text-center'>IMG</div>
-            <div class='col-md-5'>
-              <p>Entreprise A</p>
-              <p>Nom du contact</p>
-              <small>Adresse de l'entreprise</small>
-            </div>
-            <div class='col-md-4'>
-              <p><i class='fa fa-map-marker'></i> 22km</p>
-              <p><i class='fa fa-star'></i> 4.2</p>
-            </div>
-          </div>
+          <h6>Intervention</h6>
+          <p><i class='fa fa-map-marker'></i> 1 rue de l'intervention</p>
+          <p><i class='fa fa-user'></i> Michel ChefChantier</p>
+          <p><i class='fa fa-phone'></i> 00 22 08 98 99</p>
         </div>
-        <div class='row'>
-          <div class='col-md-6'>
-            <div class= "card-container">
-              <h6>Intervention</h6>
-              <p><i class='fa fa-map-marker'></i> 1 rue de l'intervention</p>
-              <p><i class='fa fa-user'></i> Michel ChefChantier</p>
-              <p><i class='fa fa-phone'></i> 00 22 08 98 99</p>
-            </div>
-          </div>
-          <div class='col-md-6'>
-            <div class= "card-container">
-              <h6>Détails</h6>
-              <p>Longueur: 400m</p>
-              <p>Largeur:  900m</p>
-            </div>
-          </div>
+      </div>
+      <div class='col-md-6'>
+        <div class= "card-container">
+          <h6>Détails</h6>
+          <p>Longueur: 400m</p>
+          <p>Largeur:  900m</p>
         </div>
-        <div class='row'>
-          <div class='col-md-6'>
-            <div class= "card-container">
-              <h6>Documents</h6>
-              <p><i class='fa fa-file'></i>  <%= link_to 'Bon de commande', '#'%></p>
-              <p><i class='fa fa-file'></i>  <%= link_to 'Plans', '#'%></p>
-            </div>
-          </div>
-          <div class='col-md-6'>
-            <div class= "card-container">
-              <h6>Techniciens</h6>
-              <p><i class='fa fa-user'></i> Pathé TECH</p>
-              <p><i class='fa fa-phone'></i> 00 22 08 98 99</p>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-md-6'>
+        <div class= "card-container">
+          <h6>Documents</h6>
+          <p><i class='fa fa-file'></i>  <%= link_to 'Bon de commande', '#'%></p>
+          <p><i class='fa fa-file'></i>  <%= link_to 'Plans', '#'%></p>
+        </div>
+      </div>
+      <div class='col-md-6'>
+        <div class= "card-container">
+          <h6>Techniciens</h6>
+          <p><i class='fa fa-user'></i> Pathé TECH</p>
+          <p><i class='fa fa-phone'></i> 00 22 08 98 99</p>
 
-              <p><i class='fa fa-user'></i> Jules TECH</p>
-              <p><i class='fa fa-phone'></i> 00 22 08 98 99</p>
-            </div>
-          </div>
+          <p><i class='fa fa-user'></i> Jules TECH</p>
+          <p><i class='fa fa-phone'></i> 00 22 08 98 99</p>
         </div>
-        <div class= "card-container">
-          <h6>Messagerie</h6>
-          <section>
-            <p><i class='fa fa-user'></i>Le chef de chantier sera à la base vie au 1er étage. </p>
-            <small>il y a<%= time_ago_in_words Time.now - 10.minutes %></small>
-          </section>
-          <section class='text-right'>
-            <p>D'accord c'est noté <i class='fa fa-user'></i></p>
-            <small>il y a<%= time_ago_in_words Time.now - 10.minutes %></small>
-          </section>
-          <hr />
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Votre message ici">
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button">Envoyer</button>
-            </span>
-          </div>
-        </div>
+      </div>
+    </div>
+    <div class= "card-container">
+      <h6>Messagerie</h6>
+      <section>
+        <p><i class='fa fa-user'></i>Le chef de chantier sera à la base vie au 1er étage. </p>
+        <small>il y a<%= time_ago_in_words Time.now - 10.minutes %></small>
+      </section>
+      <section class='text-right'>
+        <p>D'accord c'est noté <i class='fa fa-user'></i></p>
+        <small>il y a<%= time_ago_in_words Time.now - 10.minutes %></small>
+      </section>
+      <hr />
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Votre message ici">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">Envoyer</button>
+        </span>
       </div>
     </div>
   </div>
 </div>
-
 <%= render "shared/map", markers: @markers %>

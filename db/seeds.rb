@@ -111,6 +111,9 @@ tech = Technician.create! do |t|
          end
        end
 puts "Tech créé"
+AvailabilitiesCreatorJob.perform_now(tech.id, Date.today.beginning_of_month, Date.today.end_of_month)
+puts "Availabilities to the end of the month pour #{tech.first_name}"
+
 
 manager = Manager.create! do |m|
             m.first_name =        "Nadège"
