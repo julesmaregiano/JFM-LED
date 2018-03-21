@@ -48,7 +48,13 @@ Rails.application.routes.draw do
     resources :branches,       only: [:create, :update]
     resources :companies,      only: [:create, :update]
     resources :technicians
-    resources :availabilities, only: [:index, :show, :update, :create]
+    resources :availabilities, only: [:index, :show, :update, :create] do
+      collection do
+        put :unavailable
+        put :training
+        put :vacation
+      end
+    end
   end
 
   resources :answers, only: [:show]
