@@ -38,6 +38,12 @@ class Manager::AvailabilitiesController < Manager::ApplicationController
     redirect_to request.referrer, notice: 'Vos disponibilités on été mises à jour'
   end
 
+  def training
+    availabilities = Availability.free.where("id IN (?)", collection_params)
+    availabilities.update_all(status: :training)
+    redirect_to request.referrer, notice: 'Vos disponibilités on été mises à jour'
+  end
+
   private
 
   def collection_params
