@@ -33,10 +33,16 @@ class Manager::AvailabilitiesController < Manager::ApplicationController
   end
 
   def vacation
+    availabilities = Availability.free.where("id IN (?)", collection_params)
+    availabilities.update_all(status: :vacation)
     redirect_to request.referrer, notice: 'Vos disponibilités on été mises à jour'
   end
 
   private
+
+  def collection_params
+    params.require(:availability).permit(ids: [])[:ids]
+  end
 
   def params_availability
     params.require(:availability).permit(:status, :user_id, :date, :half)
