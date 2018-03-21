@@ -1,42 +1,33 @@
+<div class="main-container">
+  <div class="col-xs-12 col-md-6 col-lg-4">
+    <div class="card-container" id="map" style="width: 100%; height: calc(100vh - 110px);"></div>
+  </div>
 
-
-
-    <div class="main-container">
-
-
-        <div class="col-xs-12 col-md-6 col-lg-4">
-          <div class="card-container" id="map" style="width: 100%; height: calc(100vh - 110px);"></div>
-        </div>
-
-        <div class="col-xs-12 col-md-6 col-lg-4">
-          <div class="card-container">
-            <h4><strong>Détections du jour</strong></h4>
-            <% unless @todays_bookings.nil? %>
-            <% @todays_bookings.each do |booking| %>
-            <%#= render "shared/booking_card", booking: booking %>
-            <% end %>
-            <% end %>
-          </div>
-        </div>
-
-        <div class="col-xs-12 col-md-6 col-lg-4">
-          <div class="card-container">
-            <%= link_to manager_planning_path do %>
-              <h4 class="no-decoration"><strong>Demandes d'intervention (<%= @pending_bookings.count %>)</strong></h4>
-            <% end %>
-            <% if @pending_bookings.empty? %>
-              <p>Aucune demande en attente</p>
-            <% else %>
-              <% @pending_bookings.each do |booking| %>
-              <%#= render "shared/booking_card", booking: booking %>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
-
-
+  <div class="col-xs-12 col-md-6 col-lg-4">
+    <div class="card-container">
+      <h4><strong>Détections du jour</strong></h4>
+      <% unless @todays_bookings.nil? %>
+      <% @todays_bookings.each do |booking| %>
+      <%#= render "shared/booking_card", booking: booking %>
+      <% end %>
+      <% end %>
     </div>
+  </div>
 
-
+  <div class="col-xs-12 col-md-6 col-lg-4">
+    <div class="card-container">
+      <%= link_to manager_planning_path do %>
+        <h4 class="no-decoration"><strong>Demandes d'intervention (<%= @pending_bookings.count %>)</strong></h4>
+      <% end %>
+      <% if @pending_bookings.empty? %>
+        <p>Aucune demande en attente</p>
+      <% else %>
+        <% @pending_bookings.each do |booking| %>
+        <%#= render "shared/booking_card", booking: booking %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
 
 <%= render "shared/map", markers: @markers %>
