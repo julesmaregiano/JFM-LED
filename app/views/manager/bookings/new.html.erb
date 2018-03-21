@@ -1,108 +1,110 @@
 <div class='main-container'>
-  <div class='text-center'>
-    <h1>Créer une réservation</h1>
-  </div>
-  <%= @booking.errors.inspect %>
-  <%= simple_form_for [:manager, @booking] do |f| %>
-    <div class='row'>
-      <div class='col-md-6'>
-        <%= f.fields_for :address_attributes do |ff| %>
-          <div data-controller='address'>
-            <%= ff.input :address1, label: "Adresse", input_html: {data: {'action': "keyup->address#search", target: 'address.search'}} %>
-            <%= ff.input :latitude, as: :hidden,input_html: {data: {target: 'address.latitude'}} %>
-          </div>
-        <% end %>
-        <%= f.input :product_id, label: "Produit", collection: @products.to_a, label_method: lambda { |product| "#{product.label}" } %>
-      </div>
-      <div class='col-md-6'>
-        <%= f.input :reference,  label: "Numéro d'affaire" %>
-        <div>
-          <%= f.input :company_id, label: "Client",           collection: Company.all %>
-          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalClientAttributes"> Nouveau</button>
-        </div>
-        <div>
-        <%= f.input :foreman_id, label: "Chef de chantier", collection: Foreman.all %>
-        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalForemanAttributes">Nouveau</button>
-        </div>
-        <%= f.input :pdf, label: "Bon de commande", as: :attachinary %>
-      </div>
+  <div class="card-container">
+    <div>
+      <h1 class='text-center'>Créer une réservation</h1>
     </div>
-    <table class='table tableAvailabilities'>
-      <thead>
-        <tr>
-          <th></th>
-          <% @headers.each do |date| %>
-            <th><%= l date, format: :long %></th>
+    <%= @booking.errors.inspect %>
+    <%= simple_form_for [:manager, @booking] do |f| %>
+      <div class='row'>
+        <div class='col-md-6'>
+          <%= f.fields_for :address_attributes do |ff| %>
+            <div data-controller='address'>
+              <%= ff.input :address1, label: "Adresse", input_html: {data: {'action': "keyup->address#search", target: 'address.search'}} %>
+              <%= ff.input :latitude, as: :hidden,input_html: {data: {target: 'address.latitude'}} %>
+            </div>
           <% end %>
-        </tr>
-      </thead>
-      <tbody>
-        <% @availabilities.each do |days| %>
-          <% days.each_with_index do |day_items, day_item_index| %>
-            <tr>
-            <% day_items.each_with_index do |item, item_index| %>
-               <% if day_item_index.even? && item_index.zero? %>
-                <td rowspan='2' class='tech'><%= item.first_name %></td>
-               <% else %>
-                 <% if item.booking %>
-                   <td class='danger'> <%= item.booking.company.name %> </td>
-                 <% else %>
-                   <td> <%= check_box_tag 'booking[availability_ids][]', item.id, false %> </td>
-                 <% end %>
-               <% end %>
+          <%= f.input :product_id, label: "Produit", collection: @products.to_a, label_method: lambda { |product| "#{product.label}" } %>
+        </div>
+        <div class='col-md-6'>
+          <%= f.input :reference,  label: "Numéro d'affaire" %>
+          <div>
+            <%= f.input :company_id, label: "Client",           collection: Company.all %>
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalClientAttributes"> Nouveau</button>
+          </div>
+          <div>
+          <%= f.input :foreman_id, label: "Chef de chantier", collection: Foreman.all %>
+          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalForemanAttributes">Nouveau</button>
+          </div>
+          <%= f.input :pdf, label: "Bon de commande", as: :attachinary %>
+        </div>
+      </div>
+      <table class='table tableAvailabilities'>
+        <thead>
+          <tr>
+            <th></th>
+            <% @headers.each do |date| %>
+              <th><%= l date, format: :long %></th>
             <% end %>
           </tr>
+        </thead>
+        <tbody>
+          <% @availabilities.each do |days| %>
+            <% days.each_with_index do |day_items, day_item_index| %>
+              <tr>
+              <% day_items.each_with_index do |item, item_index| %>
+                 <% if day_item_index.even? && item_index.zero? %>
+                  <td rowspan='2' class='tech'><%= item.first_name %></td>
+                 <% else %>
+                   <% if item.booking %>
+                     <td class='danger'> <%= item.booking.company.name %> </td>
+                   <% else %>
+                     <td> <%= check_box_tag 'booking[availability_ids][]', item.id, false %> </td>
+                   <% end %>
+                 <% end %>
+              <% end %>
+            </tr>
+            <% end %>
           <% end %>
-        <% end %>
-      </tbody>
-    </table>
-    <div class='text-center'>
-      <%= f.input :send_confirmation_email, label: "Envoyer mail de confirmation", as: :boolean %>
-      <%= f.submit 'Enregistrer la réservation' %>
-    </div>
-    <div class="modal fade" id="modalClientAttributes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Créer un nouveau client</h4>
-          </div>
-          <div class="modal-body">
-            <%= f.fields_for :company_attributes do |ff| %>
-              <div data-controller='address'>
-                <%= ff.input :name, label: "Nom du client" %>
-                <%= ff.input :siret  %>
-              </div>
-            <% end %>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Terminé</button>
+        </tbody>
+      </table>
+      <div class='text-center'>
+        <%= f.input :send_confirmation_email, label: "Envoyer mail de confirmation", as: :boolean %>
+        <%= f.submit 'Enregistrer la réservation' %>
+      </div>
+      <div class="modal fade" id="modalClientAttributes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Créer un nouveau client</h4>
+            </div>
+            <div class="modal-body">
+              <%= f.fields_for :company_attributes do |ff| %>
+                <div data-controller='address'>
+                  <%= ff.input :name, label: "Nom du client" %>
+                  <%= ff.input :siret  %>
+                </div>
+              <% end %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Terminé</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="modal fade" id="modalForemanAttributes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Créer un nouveau chef de chantier</h4>
-          </div>
-          <div class="modal-body">
-            <%= f.fields_for :foreman_attributes do |ff| %>
-              <div data-controller='address'>
-                <%= ff.input :first_name, label: "Prénom" %>
-                <%= ff.input :last_name,  label: "Nom" %>
-                <%= ff.input :phone,      label: "Téléphone" %>
-                <%= ff.input :service_provider_id, as: :hidden, input_html: {value: current_manager.service_provider_id } %>
-              </div>
-            <% end %>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Terminé</button>
+      <div class="modal fade" id="modalForemanAttributes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Créer un nouveau chef de chantier</h4>
+            </div>
+            <div class="modal-body">
+              <%= f.fields_for :foreman_attributes do |ff| %>
+                <div data-controller='address'>
+                  <%= ff.input :first_name, label: "Prénom" %>
+                  <%= ff.input :last_name,  label: "Nom" %>
+                  <%= ff.input :phone,      label: "Téléphone" %>
+                  <%= ff.input :service_provider_id, as: :hidden, input_html: {value: current_manager.service_provider_id } %>
+                </div>
+              <% end %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Terminé</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>

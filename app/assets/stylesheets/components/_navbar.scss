@@ -55,6 +55,7 @@
   justify-content: center;
   color: $medium-gray;
   border-bottom: 8px solid white;
+  padding-top: 20px;
   & i {
     font-size: 35px;
   }
@@ -62,15 +63,16 @@
     font-size: 13px;
   }
   &:hover {
-    color: $dark-gray;
+    color: $medium-gray;
+    background-color: white;
   }
 }
 
 .tab-active {
-  border-bottom: 8px solid $anis;
+  border-bottom: 8px solid $yellow;
   background-color: white;
   & i, p {
-    color: $anis;
+    color: $dark-gray;
   }
 }
 
