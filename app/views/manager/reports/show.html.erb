@@ -1,10 +1,4 @@
-<div class="dashboard-wrap">
-  <%= render "shared/sidebar"%>
-
-  <div class="dashboard-content with_right_sidebar">
-    <div class="padding-box">
-      <%= render "shared/report_manager_commands", report: @report, booking: @booking %>
-      <%= render "shared/report", booking: @booking, client: @client, tech: @tech %>
-    </div>
-  </div>
+<div class="main-container">
+  <%= render "shared/report_manager_commands", report: @report, booking: @booking %>
+  <%= render "shared/report", booking: @booking, client: @client, tech: @tech %>
 </div>
