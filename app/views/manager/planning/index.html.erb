@@ -52,6 +52,8 @@
                         <% else %>
                           <% if item.booking %>
                             <td class='danger'> <%= item.booking.company.name %> </td>
+                          <% elsif item.vacation?%>
+                            <td class='danger'>en vacances </td>
                           <% else %>
                             <% opts = { data: {action: 'planning#select'} } %>
                             <td> <%= check_box_tag 'availability[ids][]', item.id, false, opts %> </td>
