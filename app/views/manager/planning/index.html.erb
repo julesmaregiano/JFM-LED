@@ -1,67 +1,66 @@
-<div class="padding-box">
-  <div class='container'>
-    <ul class="nav nav-tabs" data-controller='planning'>
-      <li class="active"><a data-toggle='tab' href="#vueGenerale">Vue générale</a></li>
-      <% current_manager.technicians.each do |tech| %>
-        <li><%= link_to tech.name, manager_technician_planning_path(tech.id) %></li>
-      <% end %>
-    </ul>
-    <div class='tab-content'>
-      <div id="vueGenerale"  role="tabpanel"  class="tab-pane fade in active planning">
-        <div class="text-center">
-          <ul class='pagination'>
-            <li> <%= link_to 'précédent', manager_planning_url(date: @next_date - 2.weeks) %> </li>
-            <li> <%= link_to 'suivant',   manager_planning_url(date: @next_date) %> </li>
-          </ul>
-        </div>
-        <table class='table tableAvailabilities'>
-          <% if @headers %>
-            <thead>
+
+<div class='main-container'>
+  <ul class="nav nav-tabs" data-controller='planning'>
+    <li class="active"><a data-toggle='tab' href="#vueGenerale">Vue générale</a></li>
+    <% current_manager.technicians.each do |tech| %>
+      <li><%= link_to tech.name, manager_technician_planning_path(tech.id) %></li>
+    <% end %>
+  </ul>
+  <div class='tab-content'>
+    <div id="vueGenerale"  role="tabpanel"  class="tab-pane fade in active planning">
+      <div class="text-center">
+        <ul class='pagination'>
+          <li> <%= link_to 'précédent', manager_planning_url(date: @next_date - 2.weeks) %> </li>
+          <li> <%= link_to 'suivant',   manager_planning_url(date: @next_date) %> </li>
+        </ul>
+      </div>
+      <table class='table tableAvailabilities'>
+        <% if @headers %>
+          <thead>
+            <tr>
+              <th></th>
+              <% @headers.each do |date| %>
+                <th><%= l date, format: :long %></th>
+              <% end %>
+            </tr>
+          </thead>
+        <% end %>
+        <tbody>
+          <% @availabilities.each do |days| %>
+            <% days.each_with_index do |day_items, day_item_index| %>
               <tr>
-                <th></th>
-                <% @headers.each do |date| %>
-                  <th><%= l date, format: :long %></th>
-                <% end %>
-              </tr>
-            </thead>
-          <% end %>
-          <tbody>
-            <% @availabilities.each do |days| %>
-              <% days.each_with_index do |day_items, day_item_index| %>
-                <tr>
-                  <% day_items.each_with_index do |item, item_index| %>
-                    <% if day_item_index.even? && item_index.zero? %>
-                      <td rowspan='2' class='tech'><%= item.first_name %></td>
+                <% day_items.each_with_index do |item, item_index| %>
+                  <% if day_item_index.even? && item_index.zero? %>
+                    <td rowspan='2' class='tech'><%= item.first_name %></td>
+                  <% else %>
+                    <% if item.booking %>
+                      <td class='danger'> <%= item.booking.company.name %> </td>
                     <% else %>
-                      <% if item.booking %>
-                        <td class='danger'> <%= item.booking.company.name %> </td>
-                      <% else %>
-                        <td> <%= check_box_tag 'booking[availability_ids][]', item.id, false %> </td>
-                      <% end %>
+                      <td> <%= check_box_tag 'booking[availability_ids][]', item.id, false %> </td>
                     <% end %>
                   <% end %>
-                </tr>
-              <% end %>
-            <% end %>
-            <% if @availabilities.length.zero? %>
-              <tr>
-                <td>
-                  <div class='alert alert-info'>Vous n'avez pas d'availabilities pour cette semaine.</div>
-                </td>
+                <% end %>
               </tr>
             <% end %>
-          </tbody>
-        </table>
-        <div class="text-center">
-          <ul class='pagination'>
-            <li> <%= link_to 'précédent', manager_planning_url(date: @next_date - 2.weeks) %> </li>
-            <li> <%= link_to 'suivant',   manager_planning_url(date: @next_date) %> </li>
-          </ul>
-        </div>
+          <% end %>
+          <% if @availabilities.length.zero? %>
+            <tr>
+              <td>
+                <div class='alert alert-info'>Vous n'avez pas d'availabilities pour cette semaine.</div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="text-center">
+        <ul class='pagination'>
+          <li> <%= link_to 'précédent', manager_planning_url(date: @next_date - 2.weeks) %> </li>
+          <li> <%= link_to 'suivant',   manager_planning_url(date: @next_date) %> </li>
+        </ul>
       </div>
-      <div id="techniciens"  role="tabpanel"  class="tab-pane fade in">
-        <h3>Technicien</h3>
-      </div>
+    </div>
+    <div id="techniciens"  role="tabpanel"  class="tab-pane fade in">
+      <h3>Technicien</h3>
     </div>
   </div>
 </div>
