@@ -54,7 +54,7 @@
                             <td class='danger'> <%= item.booking.company.name %> </td>
                           <% else %>
                             <% opts = { data: {action: 'planning#select'} } %>
-                            <td> <%= check_box_tag 'booking[availability_ids][]', item.id, false, opts %> </td>
+                            <td> <%= check_box_tag 'availability[ids][]', item.id, false, opts %> </td>
                           <% end %>
                         <% end %>
                       <% end %>
