@@ -4,10 +4,6 @@ Rails.application.routes.draw do
   devise_for :managers
 
   root to: 'pages#home'
-  get '/eligibility', to: 'pages#eligibility'
-  get '/detection', to: 'pages#detection'
-  get '/diagnostic', to: 'pages#diagnostic'
-  get '/societe', to: 'pages#societe'
 
   mount Attachinary::Engine => "/attachinary"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -20,13 +16,6 @@ Rails.application.routes.draw do
     resources :availabilities, only: [:show]
     resources :foremen, only: [:create]
     resources :report, only: [:show]
-  end
-
-  namespace :particulier do
-    get '/dashboard', to: "dashboards#show"
-    resources :users, only: [:show]
-    resources :bookings
-    get '/infos', to: "pages#informations"
   end
 
   namespace :technician do

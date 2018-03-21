@@ -17,7 +17,7 @@
       <% unless bookings.nil? %>
         <% bookings.each do |booking| %>
           <tr>
-            <th scope="row"><%= link_to [@user, booking] do %>
+            <th scope="row"><%= link_to [@use,r booking] do %>
                 #<%= booking.reference %>
               <% end %>
             </th>
